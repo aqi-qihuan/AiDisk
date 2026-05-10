@@ -1,0 +1,341 @@
+<template>
+  <Teleport to="body">
+    <Transition name="ds-dialog">
+      <div v-if="modelValue" class="ds-dialog-overlay" @click.self="handleOverlayClick">
+        <div
+          :class="[
+            'ds-dialog',
+            `ds-dialog-${size}`,
+            {
+              'ds-dialog-fullscreen': fullscreen,
+              'ds-dialog-centered': centered,
+            }
+          ]"
+          :style="dialogStyle"
+        >
+          <!-- Header -->
+          <div v-if="showHeader" class="ds-dialog-header">
+            <slot name="header">
+              <h3 class="ds-dialog-title">{{ title }}</h3>
+            </slot>
+            <button v-if="showClose" class="ds-dialog-close" @click="handleClose">
+              <svg viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Body -->
+          <div class="ds-dialog-body" :style="bodyStyle">
+            <slot></slot>
+          </div>
+
+          <!-- Footer -->
+          <div v-if="showFooter" class="ds-dialog-footer">
+            <slot name="footer">
+              <DSButton variant="secondary" @click="handleCancel">
+                {{ cancelText }}
+              </DSButton>
+              <DSButton variant="primary" @click="handleConfirm" :loading="confirmLoading">
+                {{ confirmText }}
+              </DSButton>
+            </slot>
+          </div>
+        </div>
+      </div>
+    </Transition>
+  </Teleport>
+</template>
+
+<script setup lang="ts">
+import { computed, watch } from 'vue';
+import DSButton from './DSButton.vue';
+
+interface Props {
+  modelValue: boolean;
+  title?: string;
+  size?: 'small' | 'medium' | 'large' | 'fullscreen';
+  width?: string | number;
+  fullscreen?: boolean;
+  showClose?: boolean;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  closeOnClickOverlay?: boolean;
+  closeOnPressEscape?: boolean;
+  confirmText?: string;
+  cancelText?: string;
+  confirmLoading?: boolean;
+  centered?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  title: '',
+  size: 'medium',
+  width: '',
+  fullscreen: false,
+  showClose: true,
+  showHeader: true,
+  showFooter: false,
+  closeOnClickOverlay: true,
+  closeOnPressEscape: true,
+  confirmText: '确定',
+  cancelText: '取消',
+  confirmLoading: false,
+  centered: false,
+});
+
+const emit = defineEmits<{
+  'update:modelValue': [value: boolean];
+  'close': [];
+  'confirm': [];
+  'cancel': [];
+}>();
+
+const dialogStyle = computed(() => {
+  if (props.fullscreen) return {};
+  if (props.width) {
+    const width = typeof props.width === 'number' ? `${props.width}px` : props.width;
+    return { width, maxWidth: '90vw' };
+  }
+  return {};
+});
+
+const bodyStyle = computed(() => {
+  if (props.fullscreen) {
+    return { maxHeight: 'calc(100vh - 120px)', overflow: 'auto' };
+  }
+  return {};
+});
+
+const handleClose = () => {
+  emit('update:modelValue', false);
+  emit('close');
+};
+
+const handleOverlayClick = () => {
+  if (props.closeOnClickOverlay) {
+    handleClose();
+  }
+};
+
+const handleConfirm = () => {
+  emit('confirm');
+};
+
+const handleCancel = () => {
+  emit('update:modelValue', false);
+  emit('cancel');
+};
+
+// ESC key handler
+watch(() => props.modelValue, (val) => {
+  if (val && props.closeOnPressEscape) {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleClose();
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }
+});
+
+// Lock body scroll when dialog is open
+watch(() => props.modelValue, (val) => {
+  if (val) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+});
+</script>
+
+<style scoped>
+.ds-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10vh 20px 20px;
+  z-index: 2000;
+  overflow: auto;
+}
+
+.ds-dialog-overlay.ds-dialog-centered {
+  align-items: center;
+  padding: 20px;
+}
+
+.ds-dialog {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  animation: ds-dialog-enter 0.3s ease;
+}
+
+@keyframes ds-dialog-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Sizes */
+.ds-dialog-small {
+  width: 400px;
+  max-width: 90vw;
+}
+
+.ds-dialog-medium {
+  width: 560px;
+  max-width: 90vw;
+}
+
+.ds-dialog-large {
+  width: 720px;
+  max-width: 90vw;
+}
+
+.ds-dialog-fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+}
+
+/* Header */
+.ds-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #E2E8F0;
+  flex-shrink: 0;
+}
+
+.ds-dialog-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1E1B4B;
+  line-height: 1.4;
+}
+
+.ds-dialog-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #64748B;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.ds-dialog-close:hover {
+  background-color: #F5F3FF;
+  color: #6366F1;
+}
+
+/* Body */
+.ds-dialog-body {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* Footer */
+.ds-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #E2E8F0;
+  background-color: #F8F8FF;
+  border-radius: 0 0 16px 16px;
+  flex-shrink: 0;
+}
+
+.ds-dialog-fullscreen .ds-dialog-footer {
+  border-radius: 0;
+}
+
+/* Transition */
+.ds-dialog-enter-active,
+.ds-dialog-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.ds-dialog-enter-active .ds-dialog,
+.ds-dialog-leave-active .ds-dialog {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.ds-dialog-enter-from,
+.ds-dialog-leave-to {
+  opacity: 0;
+}
+
+.ds-dialog-enter-from .ds-dialog,
+.ds-dialog-leave-to .ds-dialog {
+  opacity: 0;
+  transform: scale(0.9) translateY(-20px);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .ds-dialog-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .ds-dialog {
+    width: 100% !important;
+    max-width: 100%;
+    border-radius: 16px 16px 0 0;
+    max-height: 85vh;
+  }
+
+  .ds-dialog.ds-dialog-centered {
+    margin: auto;
+    align-self: center;
+    border-radius: 16px;
+  }
+
+  .ds-dialog-header {
+    padding: 16px 20px;
+  }
+
+  .ds-dialog-body {
+    padding: 20px;
+  }
+
+  .ds-dialog-footer {
+    padding: 12px 20px;
+    flex-wrap: wrap;
+  }
+
+  .ds-dialog-footer :deep(.ds-btn) {
+    flex: 1;
+    min-width: 120px;
+  }
+}
+</style>

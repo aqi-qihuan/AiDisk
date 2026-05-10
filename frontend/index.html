@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" />
+  <title>AI Pan 智能云盘</title>
+
+  <!-- Google Fonts - Poppins & Open Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- SVG Icons -->
+  <link rel="preload" href="/icons.svg" as="image" type="image/svg+xml">
+</head>
+
+<body>
+  <!-- SVG Icon Sprite -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <!-- AI图标 -->
+    <symbol id="icon-ai" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z"/>
+    </symbol>
+
+    <!-- 火箭图标 -->
+    <symbol id="icon-rocket" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M9.19 21.18l-1.06-1.06 1.41-1.41-1.41-1.42 1.06-1.06 1.41 1.41 1.42-1.41 1.06 1.06-1.41 1.42 1.41 1.41-1.06 1.06-1.42-1.41-1.41 1.41zM4.5 13.5l1.41-1.41 1.42 1.41 1.41-1.41-1.41-1.42 1.41-1.41 1.42 1.41 1.41-1.41-1.41-1.42 1.41-1.41 1.42 1.41 1.41-1.41-1.41-1.42L13.5 5l1.42 1.41L16.33 5l1.42 1.41-1.42 1.42 1.42 1.41-1.42 1.42 1.42 1.41-1.42 1.42 1.42 1.41-1.42 1.42 1.42 1.41-1.42 1.42 1.42 1.41-1.42 1.42L14.92 18l-1.41 1.41-1.42-1.41-1.41 1.41-1.42-1.41-1.41 1.41-1.42-1.41-1.41 1.41-1.42-1.41L4.5 13.5z"/>
+    </symbol>
+
+    <!-- 信息图标 -->
+    <symbol id="icon-info" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+    </symbol>
+
+    <!-- 大脑/智能图标 -->
+    <symbol id="icon-brain" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M13 3c.65 0 1.26.09 1.83.26-.51.51-.83 1.22-.83 2 0 1.66 1.34 3 3 3 .78 0 1.49-.32 2-.83.17.57.26 1.18.26 1.83 0 3.59-2.91 6.5-6.5 6.5S6.5 12.59 6.5 9 9.41 2.5 13 2.5V3zm0-1C8.58 2 5 5.58 5 10c0 2.17.85 4.14 2.23 5.59L5 17.82l1.41 1.41 2.23-2.23C10.09 18.05 12.06 19 14.23 19 18.65 19 22 15.42 22 11c0-4.42-3.58-8-8-8l-1-1z"/>
+    </symbol>
+
+    <!-- 文档图标 -->
+    <symbol id="icon-document" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+    </symbol>
+
+    <!-- 聊天图标 -->
+    <symbol id="icon-chat" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+    </symbol>
+
+    <!-- 搜索图标 -->
+    <symbol id="icon-search" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    </symbol>
+
+    <!-- 用户图标 -->
+    <symbol id="icon-user" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+    </symbol>
+
+    <!-- 检查圆圈图标 -->
+    <symbol id="icon-check-circle" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+    </symbol>
+
+    <!-- 文件夹图标 -->
+    <symbol id="icon-files" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+    </symbol>
+
+    <!-- 时钟图标 -->
+    <symbol id="icon-clock" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+    </symbol>
+
+    <!-- 用户添加图标 -->
+    <symbol id="icon-user-add" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+    </symbol>
+
+    <!-- 登录图标 -->
+    <symbol id="icon-login" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/>
+    </symbol>
+
+    <!-- 云AI图标 -->
+    <symbol id="icon-cloud-ai" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4s1.79-4 4-4h.71C7.37 7.69 9.48 6 12 6c3.04 0 5.5 2.46 5.5 5.5v.5H19c1.66 0 3 1.34 3 3s-1.34 3-3 3z"/>
+    </symbol>
+  </svg>
+
+  <noscript>
+    <strong>AI Pan 智能云盘 需要启用 JavaScript 才能正常运行。</strong>
+  </noscript>
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

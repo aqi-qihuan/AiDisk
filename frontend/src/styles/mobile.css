@@ -1,0 +1,316 @@
+/**
+ * 全局移动端适配样式
+ * 包含触控优化、字体适配、布局适配等
+ */
+
+/* ========== 触控优化 ========== */
+
+/* 按钮触控优化 - iOS推荐最小触控区域44px */
+button,
+.el-button,
+.clickable {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 12px 20px;
+  transition: all 0.2s ease;
+}
+
+/* 添加:active状态提供触控反馈 */
+button:active,
+.el-button:active,
+.clickable:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* 移除hover效果(移动端无效) */
+@media (hover: none) {
+  button:hover,
+  .el-button:hover,
+  .clickable:hover {
+    background-color: initial;
+    transform: none;
+  }
+}
+
+/* 文件列表项触控优化 */
+.file-list-item,
+.el-table__row,
+.el-select-dropdown__item {
+  padding: 12px 16px;
+  min-height: 48px;
+}
+
+.file-list-item:active,
+.el-table__row:active {
+  background-color: #e6e8eb;
+  transform: scale(0.99);
+}
+
+/* ========== 字体和间距适配 ========== */
+
+@media (max-width: 768px) {
+  /* 标题字体 */
+  h1 {
+    font-size: 24px;
+    line-height: 1.4;
+  }
+
+  h2 {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  h3 {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  /* 正文字体 */
+  p, span, div, li, td, th {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Element Plus组件字体 */
+  .el-button {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+
+  .el-input__inner,
+  .el-textarea__inner {
+    font-size: 14px;
+  }
+
+  .el-select .el-input__inner {
+    font-size: 14px;
+  }
+
+  /* Dialog适配 */
+  .el-dialog {
+    width: 90% !important;
+    margin-top: 5vh !important;
+  }
+
+  .el-dialog__header {
+    padding: 16px;
+  }
+
+  .el-dialog__title {
+    font-size: 18px;
+  }
+
+  .el-dialog__body {
+    padding: 16px;
+  }
+
+  /* Form适配 */
+  .el-form-item {
+    margin-bottom: 16px;
+  }
+
+  .el-form-item__label {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .el-input__wrapper {
+    height: 44px;
+  }
+
+  /* Table适配 */
+  .el-table {
+    font-size: 13px;
+  }
+
+  .el-table th,
+  .el-table td {
+    padding: 8px 0;
+  }
+
+  /* Pagination适配 */
+  .el-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .el-pagination__sizes,
+  .el-pagination__jump {
+    display: none;
+  }
+
+  .el-pager li {
+    min-width: 32px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 13px;
+  }
+
+  .el-pagination button {
+    min-width: 32px;
+    height: 32px;
+  }
+
+  /* Card适配 */
+  .el-card {
+    border-radius: 8px;
+  }
+
+  .el-card__header {
+    padding: 12px 16px;
+  }
+
+  .el-card__body {
+    padding: 12px 16px;
+  }
+
+  /* Menu适配 */
+  .el-menu-item,
+  .el-submenu__title {
+    height: 48px;
+    line-height: 48px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* 更小屏幕进一步优化 */
+  p, span, div, li, td, th {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .el-button {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+
+  .el-input__inner,
+  .el-textarea__inner {
+    font-size: 13px;
+  }
+
+  .el-dialog__title {
+    font-size: 16px;
+  }
+
+  .el-form-item__label {
+    font-size: 13px;
+  }
+
+  .el-table {
+    font-size: 12px;
+  }
+}
+
+/* ========== 布局适配 ========== */
+
+@media (max-width: 768px) {
+  /* Flex布局优化 */
+  .flex-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .flex-col {
+    gap: 12px;
+  }
+
+  /* Grid布局优化 */
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 间距优化 */
+  .container {
+    padding: 12px;
+  }
+
+  .section {
+    margin-bottom: 16px;
+  }
+
+  /* 按钮组优化 */
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .button-group .el-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  /* 更小屏幕单列布局 */
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 8px;
+  }
+}
+
+/* ========== 图片和媒体适配 ========== */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.responsive-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+/* ========== 滚动优化 ========== */
+@media (max-width: 768px) {
+  /* 平滑滚动 */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 隐藏滚动条但保持功能 */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ========== 安全区域适配（iPhone X+） ========== */
+@supports (padding: env(safe-area-inset-top)) {
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
+  }
+}
