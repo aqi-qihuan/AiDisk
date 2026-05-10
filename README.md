@@ -6,10 +6,10 @@ AI-powered cloud drive platform with intelligent agent capabilities.
 
 ```
 AiDisk/
-├── backend-agent/       # Agent management backend (Go + Gin)
-├── backend-ai/          # AI agent backend (Go + LLM integration)
-├── frontend/            # Web UI (Vue 3 + Vite)
-├── bin/                 # Build output directory
+├── AqiCloud-Agent/    # Agent management backend (Go + Gin)
+├── AqiCloud-AI/       # AI agent backend (Go + LLM integration)
+├── AqiCloud-Web/      # Web UI (Vue 3 + Vite)
+├── bin/               # Build output directory
 ├── Makefile             # Root build commands
 └── deploy.sh            # Build & package script
 ```
@@ -42,9 +42,9 @@ make build-frontend # Web UI
 Each service can be run independently:
 
 ```bash
-cd backend-agent && go run ./cmd/server
-cd backend-ai && go run ./cmd/agent
-cd frontend && npm run dev
+cd AqiCloud-Agent && go run ./cmd/server
+cd AqiCloud-AI && go run ./cmd/agent
+cd AqiCloud-Web && npm run dev
 ```
 
 ### Deployment

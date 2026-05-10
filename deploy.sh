@@ -17,7 +17,7 @@ echo "Packaging: $OUTPUT"
 tar czf "$OUTPUT" \
   "$BIN_DIR"/agentpan-server \
   "$BIN_DIR"/ai-agent \
-  frontend/dist/ \
+  AqiCloud-Web/dist/ \
   docker-compose.yml \
   .env.example \
   nginx*.conf 2>/dev/null || true

@@ -6,15 +6,15 @@ build-all: build-agent build-ai build-frontend
 
 build-agent:
 	@echo "Building AgentPan backend..."
-	cd backend-agent && go build -o ../$(BIN_DIR)/agentpan-server ./cmd/server
+	cd AqiCloud-Agent && go build -o ../$(BIN_DIR)/agentpan-server ./cmd/server
 
 build-ai:
 	@echo "Building AI backend..."
-	cd backend-ai && go build -o ../$(BIN_DIR)/ai-agent ./cmd/agent
+	cd AqiCloud-AI && go build -o ../$(BIN_DIR)/ai-agent ./cmd/agent
 
 build-frontend:
 	@echo "Building frontend..."
-	cd frontend && npm run build
+	cd AqiCloud-Web && npm run build
 
 deps:
 	@echo "Installing dependencies..."
