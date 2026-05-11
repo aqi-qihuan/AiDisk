@@ -28,15 +28,13 @@
                 <el-icon :size="32"><Cpu /></el-icon>
               </div>
             </div>
-            <h3 class="welcome-title">AI 网盘智答</h3>
-            <p class="welcome-subtitle">您的智能文件管理助手</p>
+            <h3 class="welcome-title">{{ t('ai.assistantTitle') }}</h3>
+            <p class="welcome-subtitle">{{ t('ai.assistantSubtitle') }}</p>
           </div>
           
           <div class="welcome-divider"></div>
           
-          <p class="welcome-description">
-            问我关于您的文件任何问题，我可以帮您：
-          </p>
+          <p class="welcome-description">{{ t('ai.welcomeDesc') }}</p>
           
           <div class="suggestions">
             <div
@@ -64,7 +62,7 @@
               <span class="dot"></span>
               <span class="dot"></span>
             </div>
-            <span class="footer-text">随时为您服务</span>
+            <span class="footer-text">{{ t('ai.alwaysReady') }}</span>
           </div>
         </div>
       </div>
@@ -75,7 +73,7 @@
       <div class="input-wrapper ds-card">
         <textarea
           v-model="inputMessage"
-          placeholder="发消息，请输入... (Enter 发送)"
+          :placeholder="t('ai.inputPlaceholder')"
           @keyup.enter.exact.prevent="sendMessage"
           @keydown.enter.shift.prevent="inputMessage += '\n'"
           rows="1"
@@ -115,6 +113,7 @@
 <script lang="ts">
 import { useLoginUserStore } from '@/store/user';
 import { defineComponent, ref, onMounted, nextTick, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import LoadingDots from '@/components/common/LoadingDots.vue';
 import DSButton from '@/components/design-system/DSButton.vue';
 import DSTag from '@/components/design-system/DSTag.vue';
@@ -171,6 +170,7 @@ export default defineComponent({
     Files
   },
   setup() {
+    const { t } = useI18n();
     const messages = ref<Array<{ isUser: boolean; content: string }>>([]);
     const inputMessage = ref('');
     const messageList = ref<HTMLElement | null>(null);
@@ -178,9 +178,9 @@ export default defineComponent({
     const isLoading = ref(false);
 
     const suggestions = ref([
-      { icon: 'FolderOpened', text: '存储空间', desc: '查看使用情况' },
-      { icon: 'Document', text: '最近文件', desc: '浏览最新上传' },
-      { icon: 'DataAnalysis', text: '文件统计', desc: '类型分布分析' }
+      { icon: 'FolderOpened', text: t('ai.storageSpace'), desc: t('ai.viewUsage') },
+      { icon: 'Document', text: t('ai.recentFiles'), desc: t('ai.browseLatest') },
+      { icon: 'DataAnalysis', text: t('ai.fileStats'), desc: t('ai.typeAnalysis') }
     ]);
 
     const scrollToBottom = () => {
@@ -448,6 +448,7 @@ export default defineComponent({
     };
 
     return {
+      t,
       messages,
       inputMessage,
       messageList,

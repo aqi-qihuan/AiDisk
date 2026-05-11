@@ -10,9 +10,9 @@
     <div class="page-header">
       <div class="header-title">
         <el-icon class="title-icon"><Share /></el-icon>
-        <h1>我的分享</h1>
+        <h1>{{ t('file.myShares') }}</h1>
       </div>
-      <p class="header-desc">管理您创建的所有文件分享链接</p>
+      <p class="header-desc">{{ t('file.manageShareDesc') }}</p>
     </div>
 
     <!-- 分享统计卡片 -->
@@ -23,7 +23,7 @@
         </div>
         <div class="stat-info">
           <span class="stat-value">{{ publicShareCount }}</span>
-          <span class="stat-label">公开分享</span>
+          <span class="stat-label">{{ t('file.publicShares') }}</span>
         </div>
       </div>
       <div class="stat-card">
@@ -32,7 +32,7 @@
         </div>
         <div class="stat-info">
           <span class="stat-value">{{ privateShareCount }}</span>
-          <span class="stat-label">私密分享</span>
+          <span class="stat-label">{{ t('file.privateShares') }}</span>
         </div>
       </div>
       <div class="stat-card">
@@ -41,7 +41,7 @@
         </div>
         <div class="stat-info">
           <span class="stat-value">{{ shareList.length }}</span>
-          <span class="stat-label">分享总数</span>
+          <span class="stat-label">{{ t('file.totalShares') }}</span>
         </div>
       </div>
     </div>
@@ -52,8 +52,8 @@
         <div class="empty-icon">
           <el-icon><Share /></el-icon>
         </div>
-        <p class="empty-title">暂无分享</p>
-        <p class="empty-desc">您还没有创建任何文件分享</p>
+        <p class="empty-title">{{ t('file.noShares') }}</p>
+        <p class="empty-desc">{{ t('file.noSharesDesc') }}</p>
       </div>
 
       <div v-else class="share-cards">
@@ -120,6 +120,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from "vue";
+import { useI18n } from 'vue-i18n';
 import { ElMessage, ElMessageBox } from "element-plus";
 import { 
   Share, 
@@ -135,6 +136,7 @@ import {
 import { getShareUrl, cancel } from "@/api/share";
 import { useLoginUserStore } from "@/store/user";
 
+const { t } = useI18n();
 const { loginUser } = useLoginUserStore();
 const accountId = loginUser.id;
 

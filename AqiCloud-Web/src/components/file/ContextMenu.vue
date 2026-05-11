@@ -3,32 +3,32 @@
     <div v-if="visible" class="context-menu" :style="menuStyle" @click.stop>
       <div class="context-menu-item" @click="handleAction('view')">
         <el-icon><View /></el-icon>
-        <span>查看</span>
+        <span>{{ t('file.view') }}</span>
       </div>
       <div class="context-menu-item" @click="handleAction('copy')">
         <el-icon><DocumentCopy /></el-icon>
-        <span>复制</span>
+        <span>{{ t('file.copy') }}</span>
       </div>
       <div class="context-menu-item" @click="handleAction('move')">
         <el-icon><Position /></el-icon>
-        <span>移动</span>
+        <span>{{ t('file.move') }}</span>
       </div>
       <div class="context-menu-item" @click="handleAction('share')">
         <el-icon><Share /></el-icon>
-        <span>分享</span>
+        <span>{{ t('file.share') }}</span>
       </div>
       <div class="context-menu-item" @click="handleAction('rename')">
         <el-icon><Edit /></el-icon>
-        <span>重命名</span>
+        <span>{{ t('file.rename') }}</span>
       </div>
       <div class="context-menu-item" @click="handleAction('info')">
         <el-icon><InfoFilled /></el-icon>
-        <span>详情</span>
+        <span>{{ t('file.info') }}</span>
       </div>
       <div class="context-menu-divider"></div>
       <div class="context-menu-item delete" @click="handleAction('delete')">
         <el-icon><Delete /></el-icon>
-        <span>删除</span>
+        <span>{{ t('file.delete') }}</span>
       </div>
     </div>
   </teleport>
@@ -45,6 +45,9 @@ import {
   Delete,
 } from "@element-plus/icons-vue";
 import { computed, onMounted, onUnmounted } from "vue";
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 /**
  * ContextMenu 组件 - 右键菜单组件

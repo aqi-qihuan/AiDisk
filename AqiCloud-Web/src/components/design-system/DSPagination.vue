@@ -2,14 +2,14 @@
   <div class="ds-pagination">
     <!-- Total Info -->
     <span v-if="showTotal" class="ds-pagination-total">
-      共 {{ total }} 条
+      {{ t('common.total', { count: total }) }}
     </span>
 
     <!-- Page Size Selector -->
     <div v-if="showSizeChanger" class="ds-pagination-size-changer">
       <select :value="pageSize" @change="handleSizeChange">
         <option v-for="size in pageSizes" :key="size" :value="size">
-          {{ size }} 条/页
+          {{ t('common.perPage', { size }) }}
         </option>
       </select>
     </div>
@@ -63,7 +63,7 @@
 
     <!-- Jumper -->
     <div v-if="showJumper" class="ds-pagination-jumper">
-      <span>前往</span>
+      <span>{{ t('common.goTo') }}</span>
       <input
         type="number"
         :value="currentPage"
@@ -71,13 +71,16 @@
         :max="pageCount"
         @keyup.enter="handleJumperChange"
       />
-      <span>页</span>
+      <span>{{ t('common.page') }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 interface Props {
   total: number;

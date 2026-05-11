@@ -8,7 +8,7 @@
       class="file-table"
     >
       <el-table-column type="selection" width="55" class-name="selection-col" />
-      <el-table-column prop="fileName" label="文件名" min-width="200">
+      <el-table-column prop="fileName" :label="t('file.name')" min-width="200">
         <template #default="scope">
           <div
             class="file-name"
@@ -24,19 +24,19 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="fileType" label="类型" width="100" class-name="type-col">
+      <el-table-column prop="fileType" :label="t('file.type')" width="100" class-name="type-col">
         <template #default="scope">
           {{ getFileTypeName(scope.row.fileType) }}
         </template>
       </el-table-column>
-      <el-table-column prop="fileSize" label="大小" width="100" align="right" class-name="size-col">
+      <el-table-column prop="fileSize" :label="t('file.size')" width="100" align="right" class-name="size-col">
         <template #default="scope">
           {{ formatFileSize(scope.row.fileSize) }}
         </template>
       </el-table-column>
       <el-table-column
         prop="gmtModified"
-        label="修改日期"
+        :label="t('file.updateTime')"
         width="160"
         align="right"
         class-name="date-col"
@@ -58,9 +58,12 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useI18n } from 'vue-i18n';
 import { DSFileIcon } from "@/components/design-system";
 import { formatFileSize, formatDateTime, getFileTypeName } from "@/utils/format";
 import ContextMenu from "./ContextMenu.vue";
+
+const { t } = useI18n();
 
 /**
  * FileTable 组件
@@ -176,7 +179,7 @@ const tableRowClassName = (): string => {
 
 .file-name:hover .file-name-text {
   text-decoration: underline;
-  color: aqua;
+  color: var(--color-primary, #DB2777);
 }
 
 .file-icon {
@@ -188,10 +191,61 @@ const tableRowClassName = (): string => {
 
 .file-name-text {
   font-size: 18px;
-  color: black;
+  color: var(--color-text-primary, #F8FAFC);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+/* ===== 自定义暗色复选框 (HOK设计) ===== */
+::v-deep(.el-checkbox) {
+  --el-checkbox-input-width: 18px;
+  --el-checkbox-input-height: 18px;
+}
+
+::v-deep(.el-checkbox__inner) {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.2s ease;
+}
+
+::v-deep(.el-checkbox__inner:hover) {
+  border-color: rgba(219, 39, 119, 0.4);
+  box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.08);
+}
+
+::v-deep(.el-checkbox.is-checked .el-checkbox__inner) {
+  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(219, 39, 119, 0.3);
+}
+
+::v-deep(.el-checkbox.is-checked .el-checkbox__inner::after) {
+  border-color: white;
+  border-width: 2px;
+  height: 9px;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+}
+
+::v-deep(.el-checkbox__input.is-indeterminate .el-checkbox__inner) {
+  background: rgba(219, 39, 119, 0.3);
+  border-color: rgba(219, 39, 119, 0.5);
+}
+
+/* Selection column background */
+::v-deep(.selection-col) {
+  background: transparent !important;
+}
+
+::v-deep(.el-table .cell) {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 ::v-deep(.custom-row) {

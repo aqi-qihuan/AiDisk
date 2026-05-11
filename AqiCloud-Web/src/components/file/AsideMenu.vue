@@ -14,7 +14,7 @@
             <div class="ai-icon-sparkle sparkle-1">✦</div>
             <div class="ai-icon-sparkle sparkle-2">✦</div>
           </div>
-          <span v-if="!isCollapse" class="menu-text ai-text">人工智能</span>
+          <span v-if="!isCollapse" class="menu-text ai-text">{{ t('ai.title') }}</span>
           <el-icon v-if="!isCollapse" class="arrow-icon ai-arrow"><ArrowDown /></el-icon>
         </div>
         <div v-show="isAiMenuOpen || isCollapse" class="sub-menu-items ai-items">
@@ -29,7 +29,7 @@
                 <el-icon><Document /></el-icon>
               </div>
             </template>
-            AI网盘智答
+            {{ t('ai.answer') }}
           </DSMenuItem>
           <DSMenuItem
             index="/Chat"
@@ -42,7 +42,7 @@
                 <el-icon><ChatDotRound /></el-icon>
               </div>
             </template>
-            AI聊天智能助理
+            {{ t('ai.chat') }}
           </DSMenuItem>
           <DSMenuItem
             index="/Document"
@@ -55,7 +55,7 @@
                 <el-icon><Edit /></el-icon>
               </div>
             </template>
-            AI在线文档助手
+            {{ t('ai.document') }}
           </DSMenuItem>
         </div>
       </div>
@@ -71,7 +71,7 @@
         <template #icon>
           <el-icon><FolderOpened /></el-icon>
         </template>
-        我的文件
+        {{ t('nav.files') }}
       </DSMenuItem>
 
       <DSMenuItem
@@ -83,7 +83,7 @@
         <template #icon>
           <el-icon><Share /></el-icon>
         </template>
-        我的分享
+        {{ t('nav.share') }}
       </DSMenuItem>
 
       <DSMenuItem
@@ -95,7 +95,7 @@
         <template #icon>
           <el-icon><Delete /></el-icon>
         </template>
-        回收站
+        {{ t('nav.recycle') }}
       </DSMenuItem>
     </DSMenu>
 
@@ -119,9 +119,12 @@ import {
   Star,
 } from "@element-plus/icons-vue";
 import { ref, watch } from "vue";
+import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from "vue-router";
 import CapacityProcess from "@/components/storage/CapacityProcess.vue";
 import { DSMenu, DSMenuItem } from "@/components/design-system";
+
+const { t } = useI18n();
 
 /**
  * AsideMenu 组件 - 侧边栏菜单组件

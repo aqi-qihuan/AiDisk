@@ -1,114 +1,102 @@
 <template>
-  <div class="register-page">
-    <!-- 浮动背景装饰 -->
-    <div class="bg-decoration">
-      <div class="bg-orb bg-orb-1"></div>
-      <div class="bg-orb bg-orb-2"></div>
-      <div class="bg-orb bg-orb-3"></div>
-    </div>
-    <!-- 注册表单区域 -->
-    <div class="register-form-section">
-      <div class="form-container">
-        <div class="form-header">
-          <h2 class="form-title">{{ t('register.title') }}</h2>
-          <p class="form-subtitle">{{ t('register.subtitle') }}</p>
+  <div class="auth-hok">
+    <!-- 光晕装饰 (HOK设计) -->
+    <div class="hok-glow-orb pink"></div>
+    <div class="hok-glow-orb gold"></div>
+    <div class="hok-glow-orb purple"></div>
+
+    <div class="auth-card-hok">
+      <div class="auth-card-header-hok">
+        <div class="auth-logo-hok">A</div>
+        <h2 class="auth-title-hok">{{ t('register.title') }}</h2>
+        <p class="auth-subtitle-hok">{{ t('register.subtitle') }}</p>
+      </div>
+
+      <div class="auth-body">
+        <!-- 头像上传 -->
+        <div class="avatar-row">
+          <div class="avatar-wrapper">
+            <ImageUpload v-model="avatarUrl" />
+          </div>
+          <span class="avatar-hint">{{ t('register.avatarHint') }}</span>
         </div>
 
-        <div class="form-body">
-          <!-- 头像上传 -->
-          <div class="avatar-row">
-            <div class="avatar-wrapper">
-              <ImageUpload v-model="avatarUrl" />
-            </div>
-            <span class="avatar-hint">{{ t('register.avatarHint') }}</span>
-          </div>
-
-          <!-- 用户名 -->
-          <div class="input-row">
-            <label class="input-label">{{ t('register.username') }} <span class="required">*</span></label>
-            <div class="input-wrapper">
-              <el-icon class="input-prefix"><User /></el-icon>
-              <input
-                v-model="registerForm.phone"
-                type="text"
-                :placeholder="t('register.usernamePlaceholder')"
-                class="custom-input"
-                @focus="clearError('phone')"
-              />
-            </div>
-            <span v-if="errors.phone" class="error-text">{{ errors.phone }}</span>
-          </div>
-
-          <!-- 密码 -->
-          <div class="input-row">
-            <label class="input-label">{{ t('register.password') }} <span class="required">*</span></label>
-            <div class="input-wrapper">
-              <el-icon class="input-prefix"><Lock /></el-icon>
-              <input
-                v-model="registerForm.password"
-                type="password"
-                :placeholder="t('register.passwordPlaceholder')"
-                class="custom-input"
-                @focus="clearError('password')"
-              />
-            </div>
-            <span class="hint-text">{{ t('register.passwordHint') }}</span>
-            <span v-if="errors.password" class="error-text">{{ errors.password }}</span>
-          </div>
-
-          <!-- 确认密码 -->
-          <div class="input-row">
-            <label class="input-label">{{ t('register.confirmPassword') }} <span class="required">*</span></label>
-            <div class="input-wrapper">
-              <el-icon class="input-prefix"><Lock /></el-icon>
-              <input
-                v-model="registerForm.confirmPassword"
-                type="password"
-                :placeholder="t('register.confirmPasswordPlaceholder')"
-                class="custom-input"
-                @focus="clearError('confirmPassword')"
-              />
-            </div>
-            <span v-if="errors.confirmPassword" class="error-text">{{ errors.confirmPassword }}</span>
-          </div>
-
-          <!-- 注册按钮 -->
-          <button
-            class="register-btn"
-            :class="{ 'loading': loading }"
-            :disabled="loading"
-            @click="handleRegister"
-          >
-            <span v-if="!loading">{{ t('register.submit') }}</span>
-            <span v-else class="loading-spinner"></span>
-          </button>
-
-          <!-- 登录链接 -->
-          <div class="login-link-row">
-            <span>{{ t('register.hasAccount') }}</span>
-            <router-link to="/user/login" class="login-link">{{ t('register.loginLink') }}</router-link>
-          </div>
+        <!-- 用户名 -->
+        <div class="auth-input-hok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="auth-input-icon-hok">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <input
+            v-model="registerForm.phone"
+            type="text"
+            :placeholder="t('register.usernamePlaceholder')"
+            @focus="clearError('phone')"
+          />
         </div>
+        <span v-if="errors.phone" class="error-text">{{ errors.phone }}</span>
+
+        <!-- 密码 -->
+        <div class="auth-input-hok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="auth-input-icon-hok">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+          </svg>
+          <input
+            v-model="registerForm.password"
+            type="password"
+            :placeholder="t('register.passwordPlaceholder')"
+            @focus="clearError('password')"
+          />
+        </div>
+        <span class="hint-text">{{ t('register.passwordHint') }}</span>
+        <span v-if="errors.password" class="error-text">{{ errors.password }}</span>
+
+        <!-- 确认密码 -->
+        <div class="auth-input-hok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="auth-input-icon-hok">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+          </svg>
+          <input
+            v-model="registerForm.confirmPassword"
+            type="password"
+            :placeholder="t('register.confirmPasswordPlaceholder')"
+            @focus="clearError('confirmPassword')"
+          />
+        </div>
+        <span v-if="errors.confirmPassword" class="error-text">{{ errors.confirmPassword }}</span>
+
+        <!-- 注册按钮 -->
+        <button class="auth-btn-hok" :disabled="loading" @click="handleRegister">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M13 12H3"/>
+          </svg>
+          {{ loading ? t('common.loading') : t('register.submit') }}
+        </button>
+
+        <!-- 登录链接 -->
+        <p class="auth-footer-text">
+          {{ t('register.hasAccount') }}
+          <router-link to="/user/login" class="auth-link">{{ t('register.loginLink') }} →</router-link>
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch } from "vue";
+import { ref, reactive } from "vue";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
-import { User, Lock, Check } from "@element-plus/icons-vue";
-import { userRegister } from "@/api/user";
-import ImageUpload from "@/components/common/ImageUpload.vue";
 import { useI18n } from 'vue-i18n';
+import ImageUpload from "@/components/common/ImageUpload.vue";
+import DSButton from "@/components/design-system/DSButton.vue";
+import { userRegister } from "@/api/user";
 
 const { t } = useI18n();
-const avatarUrl = ref("");
 const router = useRouter();
 const loading = ref(false);
+const avatarUrl = ref("");
 
-// 错误信息
 const errors = reactive({
   phone: "",
   password: "",
@@ -117,83 +105,60 @@ const errors = reactive({
 
 const registerForm = reactive({
   phone: "",
-  username: "",
   password: "",
   confirmPassword: "",
-  avatarUrl: "",
-} as API.UserRegisterRequest);
+});
 
-// 监听头像URL变化
-watch(avatarUrl, (newVal) => {
-  registerForm.avatarUrl = newVal;
-}, { immediate: true });
-
-// 从本地存储获取头像URL
-if (localStorage.getItem("avatarUrl")) {
-  avatarUrl.value = localStorage.getItem("avatarUrl")!;
-}
-
-// 清除错误
 const clearError = (field: keyof typeof errors) => {
   errors[field] = "";
 };
 
 const handleRegister = async () => {
-  // 清空错误信息
   Object.keys(errors).forEach(key => {
     errors[key as keyof typeof errors] = "";
   });
 
-  // 验证表单
   if (!registerForm.phone) {
     errors.phone = t('register.usernameRequired');
-    ElMessage.error(t('register.usernameRequired'));
     return;
   }
 
   if (!registerForm.password) {
     errors.password = t('register.passwordRequired');
-    ElMessage.error(t('register.passwordRequired'));
     return;
   }
 
   if (registerForm.password.length < 6) {
-    errors.password = t('register.passwordMinLength');
-    ElMessage.error(t('register.passwordMinLength'));
+    errors.password = t('register.passwordTooShort');
     return;
   }
 
   if (!registerForm.confirmPassword) {
     errors.confirmPassword = t('register.confirmPasswordRequired');
-    ElMessage.error(t('register.confirmPasswordRequired'));
     return;
   }
 
-  if (registerForm.confirmPassword !== registerForm.password) {
-    errors.confirmPassword = t('register.confirmPasswordMismatch');
-    ElMessage.error(t('register.confirmPasswordMismatch'));
+  if (registerForm.password !== registerForm.confirmPassword) {
+    errors.confirmPassword = t('register.passwordMismatch');
     return;
   }
 
-  if (!registerForm.avatarUrl) {
-    ElMessage.error(t('register.avatarRequired'));
-    return;
-  }
-
+  loading.value = true;
   try {
-    loading.value = true;
-    const res = await userRegister(registerForm);
-
+    const res = await userRegister({
+      phone: registerForm.phone,
+      password: registerForm.password,
+      avatarUrl: avatarUrl.value,
+    });
     if (res.data.code === 0) {
       ElMessage.success(t('register.success'));
-      router.push("/user/login");
-      localStorage.removeItem("avatarUrl");
+      router.push('/user/login');
     } else {
-      ElMessage.error(`${t('register.errorTitle')}：${res.data.msg}`);
+      ElMessage.error(res.data.msg || t('register.error'));
     }
   } catch (error) {
-    console.error(t('register.errorTitle'), error);
-    ElMessage.error(t('register.errorMessage'));
+    console.error('注册失败:', error);
+    ElMessage.error(t('register.error'));
   } finally {
     loading.value = false;
   }
@@ -201,351 +166,236 @@ const handleRegister = async () => {
 </script>
 
 <style scoped>
-.register-page {
-  display: flex;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #FDF2F8 0%, #F5F3FF 50%, #FCE7F3 100%);
+/* ===== HOK 暗色注册卡片 ===== */
+.auth-hok {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
   overflow: hidden;
 }
 
-/* 注册表单区域 - 全屏居中 */
-.register-form-section {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 48px 60px;
+.hok-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.hok-glow-orb.pink {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -50px;
+  background: radial-gradient(circle, #DB2777, transparent);
+}
+
+.hok-glow-orb.gold {
+  width: 300px;
+  height: 300px;
+  bottom: -50px;
+  left: -50px;
+  background: radial-gradient(circle, #D97706, transparent);
+}
+
+.hok-glow-orb.purple {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #7C3AED, transparent);
+  opacity: 0.15;
+}
+
+.auth-card-hok {
   position: relative;
   z-index: 1;
-  box-sizing: border-box;
-}
-
-.form-container {
   width: 100%;
-  max-width: 400px;
-  background: rgba(255,255,255,0.65);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 24px;
-  padding: 40px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255,255,255,0.5) inset;
-  animation: fadeInUp 0.6s ease-out;
+  max-width: 420px;
+  padding: 40px 36px;
+  background: rgba(26, 26, 36, 0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.form-header {
+.auth-card-header-hok {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
-.form-title {
+.auth-logo-hok {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Plus Jakarta Sans', 'Fira Code', sans-serif;
   font-size: 28px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 0 0 8px 0;
+  font-weight: 800;
+  color: #0B0B10;
+  background: linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #FBBF24 100%);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(217, 119, 6, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.form-subtitle {
+.auth-title-hok {
+  font-family: 'Plus Jakarta Sans', 'Fira Code', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #F8FAFC;
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.auth-subtitle-hok {
   font-size: 14px;
-  color: #64748B;
+  color: #94A3B8;
   margin: 0;
 }
 
-.form-body {
+.auth-body {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
-/* 头像上传 */
+/* 头像 */
 .avatar-row {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .avatar-wrapper {
-  width: 80px;
-  height: 80px;
-}
-
-.avatar-wrapper :deep(.avatar-uploader) {
-  width: 80px;
-  height: 80px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  border: 2px dashed #E2E8F0;
-  background: #F8FAFC;
+  overflow: hidden;
+  border: 2px solid rgba(219, 39, 119, 0.3);
+  transition: border-color 0.2s ease;
 }
 
-.avatar-wrapper :deep(.avatar-uploader:hover) {
-  border-color: #A855F7;
-  background: #F5F3FF;
-}
-
-.avatar-wrapper :deep(.avatar-uploader-icon) {
-  font-size: 24px;
+.avatar-wrapper:hover {
+  border-color: #DB2777;
 }
 
 .avatar-hint {
   font-size: 12px;
-  color: #94A3B8;
+  color: #64748B;
 }
 
-/* 输入框 */
-.input-row {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.input-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #1E1B4B;
-}
-
-.required {
-  color: #EF4444;
-}
-
-.input-wrapper {
-  position: relative;
+/* 输入框 - HOK 暗色玻璃风格 */
+.auth-input-hok {
   display: flex;
   align-items: center;
-}
-
-.input-prefix {
-  position: absolute;
-  left: 14px;
-  font-size: 18px;
-  color: #94A3B8;
-  z-index: 1;
-}
-
-.custom-input {
-  width: 100%;
-  height: 44px;
-  padding: 0 14px 0 42px;
-  border: 1px solid #E2E8F0;
-  border-radius: 10px;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Fira Sans', 'Plus Jakarta Sans', -apple-system, sans-serif;
   font-size: 14px;
-  color: #1E1B4B;
-  background: #FFFFFF;
-  transition: all 0.2s ease;
+}
+
+.auth-input-hok:focus-within {
+  border-color: rgba(219, 39, 119, 0.3);
+  box-shadow: 0 0 12px rgba(219, 39, 119, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.auth-input-icon-hok {
+  color: #64748B;
+  flex-shrink: 0;
+}
+
+.auth-input-hok input {
+  border: none;
   outline: none;
+  flex: 1;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: #F8FAFC;
+  height: 32px;
 }
 
-.custom-input:focus {
-  border-color: #A855F7;
-  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
-}
-
-.custom-input::placeholder {
-  color: #94A3B8;
+.auth-input-hok input::placeholder {
+  color: #64748B;
 }
 
 .hint-text {
   font-size: 12px;
-  color: #94A3B8;
+  color: #64748B;
+  margin-top: -8px;
 }
 
 .error-text {
   font-size: 12px;
   color: #EF4444;
+  margin-top: -8px;
 }
 
-/* 注册按钮 */
-.register-btn {
-  width: 100%;
-  height: 48px;
-  margin-top: 8px;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
+/* 注册按钮 - 金色渐变 */
+.auth-btn-hok {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #D97706, #F59E0B, #FBBF24);
+  color: #0B0B10;
+  font-family: 'Plus Jakarta Sans', 'Fira Code', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(217, 119, 6, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.02em;
 }
 
-.register-btn:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(219, 39, 119, 0.4);
+.auth-btn-hok:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(217, 119, 6, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.register-btn:disabled {
-  opacity: 0.7;
+.auth-btn-hok:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.auth-btn-hok:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
-.loading-spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(255,255,255,0.3);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* 背景装饰 */
-.bg-decoration {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.bg-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-}
-
-.bg-orb-1 {
-  width: 300px;
-  height: 300px;
-  background: rgba(244,114,182,0.2);
-  top: 15%;
-  right: 10%;
-  animation: floatOrb 8s ease-in-out infinite;
-}
-
-.bg-orb-2 {
-  width: 400px;
-  height: 400px;
-  background: rgba(192,132,252,0.2);
-  bottom: 20%;
-  left: 5%;
-  animation: floatOrb 10s ease-in-out infinite 2s;
-}
-
-.bg-orb-3 {
-  width: 200px;
-  height: 200px;
-  background: rgba(251,146,60,0.15);
-  top: 50%;
-  right: 30%;
-  animation: floatOrb 7s ease-in-out infinite 4s;
-}
-
-@keyframes floatOrb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 15px) scale(0.95); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* 登录链接 */
-.login-link-row {
+.auth-footer-text {
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
   color: #64748B;
-  margin-top: 8px;
+  margin: 0;
 }
 
-.login-link {
-  color: #A855F7;
+.auth-link {
+  color: #FBBF24;
   font-weight: 600;
   text-decoration: none;
-  margin-left: 4px;
+  transition: color 0.2s ease;
 }
 
-.login-link:hover {
-  text-decoration: underline;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .register-page {
-    flex-direction: column;
-  }
-
-  .register-form-section {
-    flex: 1;
-    padding: 40px 24px;
-    background: #ffffff;
-  }
-
-  .form-container {
-    width: 100%;
-    max-width: 100%;
-    padding: 40px 32px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-  }
-
-  .form-header {
-    margin-bottom: 32px;
-  }
-
-  .form-title {
-    font-size: 26px;
-  }
-
-  .form-body {
-    gap: 20px;
-  }
-
-  .custom-input {
-    height: 48px;
-  }
-
-  .register-btn {
-    height: 50px;
-    margin-top: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .register-form-section {
-    padding: 24px 16px;
-    min-height: 100vh;
-  }
-
-  .form-container {
-    width: 100%;
-    max-width: 100%;
-    padding: 32px 20px;
-    box-shadow: none;
-    border-radius: 12px;
-    background: transparent;
-  }
-
-  .form-title {
-    font-size: 24px;
-  }
-
-  .form-subtitle {
-    font-size: 13px;
-  }
-
-  .custom-input {
-    height: 50px;
-    font-size: 15px;
-  }
-
-  .register-btn {
-    height: 50px;
-    font-size: 16px;
-  }
+.auth-link:hover {
+  color: #FDE68A;
 }
 </style>

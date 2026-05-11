@@ -1,119 +1,80 @@
 <template>
-  <div
-    :class="[
-      'ds-card',
-      {
-        'ds-card-hoverable': hoverable,
-        'ds-card-bordered': bordered,
-        'ds-card-shadow': shadow,
-      }
-    ]"
-  >
-    <div v-if="$slots.header || title" class="ds-card-header">
-      <slot name="header">
-        <h3 v-if="title" class="ds-card-title">{{ title }}</h3>
-      </slot>
-      <div v-if="$slots.extra" class="ds-card-extra">
-        <slot name="extra"></slot>
-      </div>
-    </div>
-    <div :class="['ds-card-body', { 'ds-card-body-padding': !noPadding }]">
-      <slot></slot>
-    </div>
-    <div v-if="$slots.footer" class="ds-card-footer">
-      <slot name="footer"></slot>
-    </div>
+  <div :class="['ds-card', `ds-card--${variant}`]">
+    <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
-
 interface Props {
-  title?: string;
-  hoverable?: boolean;
-  bordered?: boolean;
-  shadow?: boolean;
-  noPadding?: boolean;
+  variant?: 'default' | 'hoverable' | 'glass';
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  title: '',
-  hoverable: false,
-  bordered: true,
-  shadow: false,
-  noPadding: false,
+withDefaults(defineProps<Props>(), {
+  variant: 'default'
 });
 </script>
 
 <style scoped>
 .ds-card {
-  background-color: #FFFFFF;
-  border-radius: 12px;
+  background: var(--color-bg-card, #1A1A24);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: all var(--transition-base);
+  position: relative;
   overflow: hidden;
-  transition: all 0.2s ease;
 }
 
-/* Bordered */
-.ds-card-bordered {
-  border: 1px solid #E2E8F0;
-}
-
-/* Shadow */
-.ds-card-shadow {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-/* Hoverable */
-.ds-card-hoverable {
+.ds-card--hoverable {
   cursor: pointer;
 }
 
-.ds-card-hoverable:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+.ds-card--hoverable:hover {
+  border-color: rgba(219, 39, 119, 0.3);
+  box-shadow: var(--shadow-md), var(--glow-pink);
+  transform: translateY(-4px);
+}
+
+.ds-card--hoverable:active {
   transform: translateY(-2px);
 }
 
-/* Header */
-.ds-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 24px;
-  border-bottom: 1px solid #E2E8F0;
-  background-color: #F8F8FF;
+/* Glassmorphism Card - Dark Variant */
+.ds-card--glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
 }
 
-.ds-card-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #1E1B4B;
-  margin: 0;
+.ds-card--glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
 }
 
-.ds-card-extra {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.ds-card--glass:hover {
+  background: var(--glass-bg-hover);
+  border: var(--glass-border-hover);
+  box-shadow: var(--shadow-lg), var(--glow-pink);
+  transform: translateY(-4px);
 }
 
-/* Body */
-.ds-card-body {
-  padding: 24px;
+.ds-card--glass:hover::before {
+  opacity: 1;
 }
 
-.ds-card-body-padding {
-  padding: 0;
-}
-
-/* Footer */
-.ds-card-footer {
-  padding: 16px 24px;
-  border-top: 1px solid #E2E8F0;
-  background-color: #F5F3FF;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
+@media (prefers-reduced-motion: reduce) {
+  .ds-card--hoverable:hover,
+  .ds-card--glass:hover {
+    transform: none;
+  }
 }
 </style>

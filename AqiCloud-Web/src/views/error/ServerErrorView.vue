@@ -1,75 +1,183 @@
 <template>
-  <div class="error-page">
-    <div class="error-content">
-      <el-image
-        src="https://gw.alipayobjects.com/zos/rmsportal/RVRUAYdCGeYNBWoKiIwB.svg"
-        class="error-image"
-      />
-      <h1>500</h1>
-      <h2>抱歉，服务器出错了</h2>
-      <p>请稍后再试或联系技术支持</p>
-      <div class="button-group">
-        <el-button @click="handleRetry">重试</el-button>
-        <el-button type="primary" @click="$router.push('/')"
-          >返回首页</el-button
-        >
+  <div class="error-page server-error">
+    <div class="error-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+    <div class="error-content glass-card">
+      <!-- 500 SVG Illustration -->
+      <div class="error-illustration">
+        <svg width="180" height="140" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="90" cy="70" r="60" stroke="rgba(219,39,119,0.2)" stroke-width="2" fill="none"/>
+          <circle cx="90" cy="70" r="40" stroke="rgba(251,191,36,0.15)" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+          <text x="90" y="82" text-anchor="middle" font-size="52" font-weight="800" font-family="'Plus Jakarta Sans', sans-serif" fill="url(#pinkGold)">500</text>
+          <defs>
+            <linearGradient id="pinkGold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#DB2777"/>
+              <stop offset="100%" stop-color="#FBBF24"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <h1 class="error-code">500</h1>
+      <h2 class="error-title">{{ $t('error.500.message') }}</h2>
+      <p class="error-desc">{{ $t('error.500.description') }}</p>
+
+      <div class="error-actions">
+        <DSButton variant="primary" @click="$router.push('/')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          {{ $t('error.backHome') }}
+        </DSButton>
+        <DSButton variant="ghost" @click="$router.go(0)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+          {{ $t('error.retry') }}
+        </DSButton>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-
-const router = useRouter();
-
-const handleRetry = () => {
-  // 返回上一页并刷新
-  router.go(0);
-};
+import DSButton from '@/components/design-system/DSButton.vue';
 </script>
 
 <style scoped>
 .error-page {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background: #0B0B10;
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.error-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.2;
+}
+
+.orb-1 {
+  width: 400px;
+  height: 400px;
+  background: #D97706;
+  top: -150px;
+  right: -100px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 300px;
+  height: 300px;
+  background: #DB2777;
+  bottom: -100px;
+  left: -80px;
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -30px); }
 }
 
 .error-content {
+  position: relative;
+  z-index: 1;
   text-align: center;
-  padding: 40px;
+  padding: 48px;
+  max-width: 480px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
 }
 
-.error-image {
-  width: 250px;
-  margin-bottom: 24px;
+.error-illustration {
+  margin-bottom: 16px;
 }
 
-h1 {
-  font-size: 72px;
-  font-weight: 600;
-  color: var(--el-color-primary);
-  margin: 0 0 16px;
+.error-code {
+  font-size: 0;
+  margin: 0;
 }
 
-h2 {
-  font-size: 24px;
-  color: #1d2129;
-  margin: 0 0 16px;
+.error-title {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #F8FAFC;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
 }
 
-p {
+.error-desc {
   font-size: 16px;
-  color: #86909c;
+  color: #94A3B8;
   margin: 0 0 32px;
+  line-height: 1.6;
 }
 
-.button-group {
+.error-actions {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .error-content {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+
+  .error-illustration svg {
+    width: 140px;
+    height: 110px;
+  }
+
+  .error-title {
+    font-size: 22px;
+  }
+
+  .error-desc {
+    font-size: 14px;
+  }
+
+  .error-actions {
+    flex-direction: column;
+  }
+
+  .error-actions :deep(.ds-btn) {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .error-content {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .error-title {
+    font-size: 20px;
+  }
 }
 </style>

@@ -11,6 +11,7 @@ import App from "./App.vue";
 import router from "./router";
 import i18n from "./locales";
 import { getStoredLocale, type Locale } from "./locales";
+import { useThemeStore } from "@/store/theme";
 import "@/styles/global-reset.css"; // 全局样式重置
 import "@/styles/design-system.css"; // 设计系统CSS变量
 import "@/styles/mobile.css"; // 移动端样式
@@ -45,5 +46,10 @@ app.use(ElementPlus, {
 
 app.use(pinia);
 app.use(i18n);
+
+// 初始化主题（暗色模式为默认）
+const themeStore = useThemeStore();
+themeStore.initTheme();
+themeStore.watchSystemTheme();
 
 app.mount("#app");

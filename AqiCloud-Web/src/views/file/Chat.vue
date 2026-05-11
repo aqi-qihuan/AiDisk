@@ -38,14 +38,14 @@
                 <el-icon :size="36"><ChatDotRound /></el-icon>
               </div>
             </div>
-            <h3 class="welcome-title">AI 助手</h3>
-            <p class="welcome-subtitle">有什么可以帮助您的吗？</p>
+            <h3 class="welcome-title">{{ t('ai.chatAssistantTitle') }}</h3>
+            <p class="welcome-subtitle">{{ t('ai.chatAssistantSubtitle') }}</p>
           </div>
           
           <div class="welcome-divider"></div>
           
           <p class="welcome-description">
-            我可以帮您解答问题、提供建议、总结内容等
+            {{ t('ai.chatWelcomeDesc') }}
           </p>
           
           <div class="suggestions">
@@ -73,7 +73,7 @@
               <span class="dot"></span>
               <span class="dot"></span>
             </div>
-            <span class="footer-text">随时为您服务</span>
+            <span class="footer-text">{{ t('ai.alwaysReady') }}</span>
           </div>
         </div>
       </div>
@@ -84,7 +84,7 @@
       <div class="input-wrapper">
         <textarea
           v-model="inputMessage"
-          placeholder="发消息，请输入... (Enter 发送)"
+          :placeholder="t('ai.inputPlaceholder')"
           @keyup.enter.exact.prevent="sendMessage"
           @keydown.enter.shift.prevent="inputMessage += '\n'"
           rows="1"
@@ -93,8 +93,8 @@
 
         <div class="input-actions">
           <div class="input-tips">
-            <span class="tip-badge">Enter 发送</span>
-            <span class="tip-badge">Shift+Enter 换行</span>
+            <span class="tip-badge">{{ t('ai.enterSend') }}</span>
+            <span class="tip-badge">{{ t('ai.shiftEnterNewline') }}</span>
           </div>
 
           <div
@@ -120,9 +120,9 @@
     </div>
   </div>
 </template>
-
 <script lang="ts">
 import { defineComponent, ref, onMounted, nextTick, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import LoadingDots from '@/components/common/LoadingDots.vue';
 import { useLoginUserStore } from '@/store/user';
 import { getApiUrl, API_PATHS } from '@/config/api';
@@ -145,6 +145,7 @@ export default defineComponent({
     MagicStick
   },
   setup() {
+    const { t } = useI18n();
     const messages = ref<Array<{ isUser: boolean; content: string; isLoading?: boolean; timestamp?: number }>>([]);
 
     const inputMessage = ref('');
@@ -154,9 +155,9 @@ export default defineComponent({
 
     // 建议问题
     const suggestions = ref([
-      { icon: 'EditPen', text: '请帮我总结一下今天的工作' },
-      { icon: 'Promotion', text: '如何提高工作效率？' },
-      { icon: 'MagicStick', text: '给我一些建议' },
+      { icon: 'EditPen', text: t('ai.summarizeWork') },
+      { icon: 'Promotion', text: t('ai.improveEfficiency') },
+      { icon: 'MagicStick', text: t('ai.giveAdvice') },
     ]);
 
     const scrollToBottom = () => {
@@ -291,6 +292,7 @@ export default defineComponent({
     });
 
     return {
+      t,
       messages,
       inputMessage,
       messageList,
@@ -311,7 +313,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--color-bg-surface, #14141C);
   position: relative;
   overflow: hidden;
 }
@@ -385,38 +387,40 @@ export default defineComponent({
   transition: all 0.3s ease;
 }
 
-/* 用户消息 - 紫色渐变气泡 */
+/* 用户消息 - 金色渐变气泡（HOK设计） */
 .message-item.user-message .message-content {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #FBBF24 100%);
+  color: #0B0B10;
+  font-weight: 500;
   box-shadow: 
-    0 8px 24px rgba(219, 39, 119, 0.3),
+    0 8px 24px rgba(217, 119, 6, 0.3),
     0 2px 4px rgba(0, 0, 0, 0.1);
   border-bottom-right-radius: 6px;
 }
 
 .message-item.user-message .message-content:hover {
   box-shadow: 
-    0 12px 32px rgba(219, 39, 119, 0.4),
+    0 12px 32px rgba(217, 119, 6, 0.4),
     0 4px 8px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
 }
 
-/* AI 消息 - 白色毛玻璃气泡 */
+/* AI 消息 - 粉色毛玻璃气泡（HOK设计） */
 .message-item.assistant-message .message-content {
-  background: rgba(255, 255, 255, 0.95);
-  color: #1e293b;
+  background: rgba(219, 39, 119, 0.08);
+  color: var(--color-text-primary, #F8FAFC);
   box-shadow: 
-    0 4px 16px rgba(0, 0, 0, 0.08),
-    0 1px 3px rgba(0, 0, 0, 0.05);
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.1);
   border-bottom-left-radius: 6px;
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(219, 39, 119, 0.15);
 }
 
 .message-item.assistant-message .message-content:hover {
   box-shadow: 
-    0 8px 24px rgba(0, 0, 0, 0.12),
-    0 2px 6px rgba(0, 0, 0, 0.08);
+    0 8px 24px rgba(219, 39, 119, 0.3),
+    0 2px 6px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
 }
 
@@ -434,10 +438,10 @@ export default defineComponent({
 }
 
 .message-item.assistant-message .message-time {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.3);
 }
 
-/* 欢迎消息 - 全新设计 */
+/* 欢迎消息 - 暗色设计 */
 .welcome-message {
   display: flex;
   align-items: center;
@@ -448,15 +452,15 @@ export default defineComponent({
 }
 
 .welcome-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px);
   border-radius: 24px;
   padding: var(--ds-spacing-8);
   max-width: 480px;
   width: 100%;
   box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
   animation: slideUp 0.6s ease-out;
 }
 
@@ -485,14 +489,14 @@ export default defineComponent({
   position: absolute;
   inset: 3px;
   border-radius: 50%;
-  background: white;
+  background: var(--color-bg-card, #1A1A24);
 }
 
 .avatar-inner {
   position: absolute;
   inset: 6px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -503,7 +507,7 @@ export default defineComponent({
 .welcome-title {
   font-size: 28px;
   font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #DB2777 0%, #FBBF24 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -511,20 +515,20 @@ export default defineComponent({
 }
 
 .welcome-subtitle {
-  font-size: var(--ds-text-size-base);
-  color: var(--ds-color-text-secondary);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary, #94A3B8);
   font-weight: 500;
 }
 
 .welcome-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--ds-color-border), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
   margin: var(--ds-spacing-6) 0;
 }
 
 .welcome-description {
-  font-size: var(--ds-text-size-base);
-  color: var(--ds-color-text-secondary);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary, #94A3B8);
   text-align: center;
   margin-bottom: var(--ds-spacing-5);
   font-weight: 500;
@@ -542,31 +546,31 @@ export default defineComponent({
   align-items: center;
   gap: var(--ds-spacing-4);
   padding: var(--ds-spacing-4);
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 16px;
-  border: 1px solid rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .suggestion-card:hover {
-  background: white;
-  border-color: rgba(102, 126, 234, 0.3);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(219, 39, 119, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }
 
 .suggestion-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
 }
 
 .suggestion-content {
@@ -577,26 +581,26 @@ export default defineComponent({
 }
 
 .suggestion-text {
-  font-size: var(--ds-text-size-base);
+  font-size: var(--text-base);
   font-weight: 600;
-  color: var(--ds-color-text-primary);
+  color: var(--color-text-primary, #F8FAFC);
 }
 
 .suggestion-arrow {
   width: 32px;
   height: 32px;
-  background: rgba(102, 126, 234, 0.1);
+  background: rgba(219, 39, 119, 0.1);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--ds-color-primary);
+  color: var(--color-primary, #DB2777);
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .suggestion-card:hover .suggestion-arrow {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
   color: white;
   transform: translateX(4px);
 }
@@ -607,7 +611,7 @@ export default defineComponent({
   justify-content: center;
   gap: var(--ds-spacing-3);
   padding-top: var(--ds-spacing-4);
-  border-top: 1px solid var(--ds-color-border);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .typing-indicator {
@@ -653,35 +657,25 @@ export default defineComponent({
   position: relative;
   max-width: 900px;
   margin: 0 auto;
-  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-  border-radius: 20px;
-  border: 1px solid rgba(219, 39, 119, 0.15);
-  padding: var(--ds-spacing-4) var(--ds-spacing-16) var(--ds-spacing-4) var(--ds-spacing-5);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: var(--ds-spacing-3) var(--ds-spacing-16) var(--ds-spacing-3) var(--ds-spacing-5);
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   gap: var(--ds-spacing-3);
-  box-shadow: 
-    0 4px 20px rgba(0, 0, 0, 0.05),
-    0 1px 3px rgba(0, 0, 0, 0.02),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .input-wrapper:hover {
-  border-color: rgba(219, 39, 119, 0.25);
-  box-shadow: 
-    0 8px 30px rgba(219, 39, 119, 0.1),
-    0 2px 8px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .input-wrapper:focus-within {
-  border-color: rgba(219, 39, 119, 0.4);
-  box-shadow: 
-    0 0 0 4px rgba(219, 39, 119, 0.08),
-    0 8px 30px rgba(219, 39, 119, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  transform: translateY(-1px);
+  border-color: rgba(219, 39, 119, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 12px rgba(219, 39, 119, 0.08);
 }
 
 .input-wrapper textarea {
@@ -696,11 +690,11 @@ export default defineComponent({
   min-height: 24px;
   overflow-y: auto;
   font-family: inherit;
-  color: var(--ds-color-text-primary);
+  color: var(--color-text-primary, #F8FAFC);
 }
 
 .input-wrapper textarea::placeholder {
-  color: var(--ds-color-text-tertiary);
+  color: var(--color-text-tertiary, #64748B);
   font-size: 14px;
 }
 
@@ -717,9 +711,9 @@ export default defineComponent({
 
 .tip-badge {
   font-size: 11px;
-  color: var(--ds-color-primary);
-  background: rgba(219, 39, 119, 0.08);
-  border: 1px solid rgba(219, 39, 119, 0.15);
+  color: var(--color-primary, #DB2777);
+  background: rgba(219, 39, 119, 0.1);
+  border: 1px solid rgba(219, 39, 119, 0.2);
   padding: 3px 10px;
   border-radius: 6px;
   font-weight: 500;
@@ -727,11 +721,11 @@ export default defineComponent({
 }
 
 .tip-badge:hover {
-  background: rgba(219, 39, 119, 0.15);
+  background: rgba(219, 39, 119, 0.18);
   transform: translateY(-1px);
 }
 
-/* 发送按钮 - 全新设计 */
+/* 发送按钮 - 暗色设计 */
 .send-btn {
   position: absolute;
   right: 12px;
@@ -743,24 +737,24 @@ export default defineComponent({
   justify-content: center;
   cursor: pointer;
   border-radius: 12px;
-  background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%);
-  border: 1px solid rgba(102, 126, 234, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .send-btn svg {
   width: 18px;
   height: 18px;
-  fill: #94a3b8;
+  fill: #64748B;
   transition: all 0.3s ease;
 }
 
 .send-btn.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #D97706 0%, #FBBF24 100%);
   border-color: transparent;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
 }
 
 .send-btn.active svg {
@@ -774,7 +768,7 @@ export default defineComponent({
 
 .send-btn.active:hover:not(.loading) {
   transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.5);
 }
 
 .send-btn:active:not(.loading) {
@@ -864,6 +858,7 @@ export default defineComponent({
 
 /* 响应式 */
 @media (max-width: 768px) {
+
   .message-item {
     max-width: 90%;
   }

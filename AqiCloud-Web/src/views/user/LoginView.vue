@@ -1,80 +1,73 @@
 <template>
-  <div class="login-page">
-    <!-- 浮动背景装饰 -->
-    <div class="bg-decoration">
-      <div class="bg-orb bg-orb-1"></div>
-      <div class="bg-orb bg-orb-2"></div>
-      <div class="bg-orb bg-orb-3"></div>
-    </div>
-    <!-- 登录表单区域 -->
-    <div class="login-form-section">
-      <div class="form-container">
-        <div class="form-header">
-          <h2 class="form-title">{{ t('login.title') }}</h2>
-          <p class="form-subtitle">{{ t('login.subtitle') }}</p>
+  <div class="auth-hok">
+    <!-- 光晕装饰 (HOK设计) -->
+    <div class="hok-glow-orb pink"></div>
+    <div class="hok-glow-orb gold"></div>
+    <div class="hok-glow-orb purple"></div>
+
+    <div class="auth-card-hok">
+      <div class="auth-card-header-hok">
+        <div class="auth-logo-hok">A</div>
+        <h2 class="auth-title-hok">{{ t('login.title') }}</h2>
+        <p class="auth-subtitle-hok">{{ t('login.subtitle') }}</p>
+      </div>
+
+      <div class="auth-body">
+        <!-- 用户名 -->
+        <div class="auth-input-hok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="auth-input-icon-hok">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <input
+            v-model="loginForm.phone"
+            type="text"
+            :placeholder="t('login.usernamePlaceholder')"
+            @focus="clearError('phone')"
+            @keyup.enter="handleSubmit"
+          />
+        </div>
+        <span v-if="errors.phone" class="error-text">{{ errors.phone }}</span>
+
+        <!-- 密码 -->
+        <div class="auth-input-hok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="auth-input-icon-hok">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+          </svg>
+          <input
+            v-model="loginForm.password"
+            type="password"
+            :placeholder="t('login.passwordPlaceholder')"
+            @focus="clearError('password')"
+            @keyup.enter="handleSubmit"
+          />
+        </div>
+        <span v-if="errors.password" class="error-text">{{ errors.password }}</span>
+
+        <!-- 记住我 + 忘记密码 -->
+        <div class="auth-options">
+          <label class="auth-remember">
+            <div class="checkbox-hok">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span>{{ t('login.rememberMe') }}</span>
+          </label>
+          <span class="auth-forgot">{{ t('auth.forgotPassword') }}</span>
         </div>
 
-        <div class="form-body">
-          <!-- 用户名 -->
-          <div class="input-row">
-            <label class="input-label">{{ t('login.username') }} <span class="required">*</span></label>
-            <div class="input-wrapper">
-              <el-icon class="input-prefix"><User /></el-icon>
-              <input
-                v-model="loginForm.phone"
-                type="text"
-                :placeholder="t('login.usernamePlaceholder')"
-                class="custom-input"
-                @focus="clearError('phone')"
-                @keyup.enter="handleSubmit"
-              />
-            </div>
-            <span v-if="errors.phone" class="error-text">{{ errors.phone }}</span>
-          </div>
+        <!-- 登录按钮 -->
+        <button class="auth-btn-hok" :disabled="loading" @click="handleSubmit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M13 12H3"/>
+          </svg>
+          {{ loading ? t('common.loading') : t('login.submit') }}
+        </button>
 
-          <!-- 密码 -->
-          <div class="input-row">
-            <label class="input-label">{{ t('login.password') }} <span class="required">*</span></label>
-            <div class="input-wrapper">
-              <el-icon class="input-prefix"><Lock /></el-icon>
-              <input
-                v-model="loginForm.password"
-                type="password"
-                :placeholder="t('login.passwordPlaceholder')"
-                class="custom-input"
-                @focus="clearError('password')"
-                @keyup.enter="handleSubmit"
-              />
-            </div>
-            <span v-if="errors.password" class="error-text">{{ errors.password }}</span>
-          </div>
-
-          <!-- 记住我 -->
-          <div class="remember-row">
-            <label class="checkbox-wrapper">
-              <input type="checkbox" v-model="rememberMe" class="checkbox-input" />
-              <span class="checkbox-custom"></span>
-              <span class="checkbox-text">{{ t('login.rememberMe') }}</span>
-            </label>
-          </div>
-
-          <!-- 登录按钮 -->
-          <button
-            class="login-btn"
-            :class="{ 'loading': loading }"
-            :disabled="loading"
-            @click="handleSubmit"
-          >
-            <span v-if="!loading">{{ t('login.submit') }}</span>
-            <span v-else class="loading-spinner"></span>
-          </button>
-
-          <!-- 注册链接 -->
-          <div class="register-link-row">
-            <span>{{ t('login.noAccount') }}</span>
-            <router-link to="/user/register" class="register-link">{{ t('login.registerLink') }}</router-link>
-          </div>
-        </div>
+        <!-- 注册链接 -->
+        <p class="auth-footer-text">
+          {{ t('login.noAccount') }}
+          <router-link to="/user/register" class="auth-link">{{ t('login.registerLink') }} →</router-link>
+        </p>
       </div>
     </div>
   </div>
@@ -84,18 +77,16 @@
 import { ref, reactive } from "vue";
 import { useLoginUserStore } from "@/store/user";
 import { ElMessage } from "element-plus";
-import { User, Lock } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 import { useI18n } from 'vue-i18n';
+import DSButton from "@/components/design-system/DSButton.vue";
 
 const { t } = useI18n();
 const loading = ref(false);
-const rememberMe = ref(false);
 const router = useRouter();
 
 const { login } = useLoginUserStore();
 
-// 错误信息
 const errors = reactive({
   phone: "",
   password: "",
@@ -106,18 +97,15 @@ const loginForm = reactive({
   password: "",
 } as API.UserLoginRequest);
 
-// 清除错误
 const clearError = (field: keyof typeof errors) => {
   errors[field] = "";
 };
 
 const handleSubmit = async () => {
-  // 清空错误信息
   Object.keys(errors).forEach(key => {
     errors[key as keyof typeof errors] = "";
   });
 
-  // 验证表单
   if (!loginForm.phone) {
     errors.phone = t('login.usernameRequired');
     ElMessage.error(t('login.usernameRequired'));
@@ -143,369 +131,239 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-.login-page {
-  display: flex;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #FDF2F8 0%, #F5F3FF 50%, #FCE7F3 100%);
+/* ===== HOK 暗色登录卡片 ===== */
+.auth-hok {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
   overflow: hidden;
 }
 
-/* 登录表单区域 - 全屏居中 */
-.login-form-section {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 48px 60px;
+.hok-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.hok-glow-orb.pink {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -50px;
+  background: radial-gradient(circle, #DB2777, transparent);
+}
+
+.hok-glow-orb.gold {
+  width: 300px;
+  height: 300px;
+  bottom: -50px;
+  left: -50px;
+  background: radial-gradient(circle, #D97706, transparent);
+}
+
+.hok-glow-orb.purple {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #7C3AED, transparent);
+  opacity: 0.15;
+}
+
+.auth-card-hok {
   position: relative;
   z-index: 1;
-  box-sizing: border-box;
-}
-
-.form-container {
   width: 100%;
   max-width: 420px;
-  background: rgba(255,255,255,0.65);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 24px;
-  padding: 48px 40px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255,255,255,0.5) inset;
-  animation: fadeInUp 0.6s ease-out;
+  padding: 40px 36px;
+  background: rgba(26, 26, 36, 0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.form-header {
+.auth-card-header-hok {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
-.form-title {
+.auth-logo-hok {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Plus Jakarta Sans', 'Fira Code', sans-serif;
   font-size: 28px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 0 0 8px 0;
+  font-weight: 800;
+  color: #0B0B10;
+  background: linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #FBBF24 100%);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(217, 119, 6, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.form-subtitle {
+.auth-title-hok {
+  font-family: 'Plus Jakarta Sans', 'Fira Code', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #F8FAFC;
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.auth-subtitle-hok {
   font-size: 14px;
-  color: #64748B;
+  color: #94A3B8;
   margin: 0;
 }
 
-.form-body {
+.auth-body {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
-/* 输入框 */
-.input-row {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.input-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #1E1B4B;
-}
-
-.required {
-  color: #EF4444;
-}
-
-.input-wrapper {
-  position: relative;
+/* 输入框 - HOK 暗色玻璃风格 */
+.auth-input-hok {
   display: flex;
   align-items: center;
-}
-
-.input-prefix {
-  position: absolute;
-  left: 14px;
-  font-size: 18px;
-  color: #94A3B8;
-  z-index: 1;
-}
-
-.custom-input {
-  width: 100%;
-  height: 44px;
-  padding: 0 14px 0 42px;
-  border: 1px solid #E2E8F0;
-  border-radius: 10px;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Fira Sans', 'Plus Jakarta Sans', -apple-system, sans-serif;
   font-size: 14px;
-  color: #1E1B4B;
-  background: #FFFFFF;
-  transition: all 0.2s ease;
+}
+
+.auth-input-hok:focus-within {
+  border-color: rgba(219, 39, 119, 0.3);
+  box-shadow: 0 0 12px rgba(219, 39, 119, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.auth-input-icon-hok {
+  color: #64748B;
+  flex-shrink: 0;
+}
+
+.auth-input-hok input {
+  border: none;
   outline: none;
+  flex: 1;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: #F8FAFC;
+  height: 32px;
 }
 
-.custom-input:focus {
-  border-color: #A855F7;
-  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
-}
-
-.custom-input::placeholder {
-  color: #94A3B8;
+.auth-input-hok input::placeholder {
+  color: #64748B;
 }
 
 .error-text {
   font-size: 12px;
   color: #EF4444;
+  margin-top: -8px;
 }
 
-/* 记住我 */
-.remember-row {
+/* 选项行 */
+.auth-options {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.checkbox-wrapper {
+.auth-remember {
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  user-select: none;
+  font-size: 13px;
+  color: #94A3B8;
 }
 
-.checkbox-input {
-  display: none;
-}
-
-.checkbox-custom {
-  width: 18px;
-  height: 18px;
-  border: 2px solid #E2E8F0;
+.checkbox-hok {
+  width: 16px;
+  height: 16px;
   border-radius: 4px;
-  position: relative;
-  transition: all 0.2s ease;
-}
-
-.checkbox-input:checked + .checkbox-custom {
-  background: #A855F7;
-  border-color: #A855F7;
-}
-
-.checkbox-input:checked + .checkbox-custom::after {
-  content: '';
-  position: absolute;
-  left: 5px;
-  top: 2px;
-  width: 4px;
-  height: 8px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-.checkbox-text {
-  font-size: 14px;
-  color: #64748B;
-}
-
-/* 登录按钮 */
-.login-btn {
-  width: 100%;
-  height: 48px;
-  margin-top: 8px;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  background: rgba(219, 39, 119, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.login-btn:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(219, 39, 119, 0.4);
+.auth-forgot {
+  font-size: 13px;
+  color: #FBBF24;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-.login-btn:disabled {
-  opacity: 0.7;
+.auth-forgot:hover {
+  color: #FDE68A;
+}
+
+/* 登录按钮 - 金色渐变 */
+.auth-btn-hok {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #D97706, #F59E0B, #FBBF24);
+  color: #0B0B10;
+  font-family: 'Plus Jakarta Sans', 'Fira Code', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(217, 119, 6, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.02em;
+}
+
+.auth-btn-hok:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(217, 119, 6, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.auth-btn-hok:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.auth-btn-hok:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
-.loading-spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(255,255,255,0.3);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* 背景装饰 */
-.bg-decoration {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.bg-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-}
-
-.bg-orb-1 {
-  width: 300px;
-  height: 300px;
-  background: rgba(244,114,182,0.2);
-  top: 15%;
-  right: 10%;
-  animation: floatOrb 8s ease-in-out infinite;
-}
-
-.bg-orb-2 {
-  width: 400px;
-  height: 400px;
-  background: rgba(192,132,252,0.2);
-  bottom: 20%;
-  left: 5%;
-  animation: floatOrb 10s ease-in-out infinite 2s;
-}
-
-.bg-orb-3 {
-  width: 200px;
-  height: 200px;
-  background: rgba(251,146,60,0.15);
-  top: 50%;
-  right: 30%;
-  animation: floatOrb 7s ease-in-out infinite 4s;
-}
-
-@keyframes floatOrb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 15px) scale(0.95); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* 注册链接 */
-.register-link-row {
+.auth-footer-text {
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
   color: #64748B;
-  margin-top: 8px;
+  margin: 0;
 }
 
-.register-link {
-  color: #A855F7;
+.auth-link {
+  color: #FBBF24;
   font-weight: 600;
   text-decoration: none;
-  margin-left: 4px;
+  transition: color 0.2s ease;
 }
 
-.register-link:hover {
-  text-decoration: underline;
-}
-
-/* 响应式设计 - 移动端优先 */
-@media (max-width: 768px) {
-  .login-page {
-    flex-direction: column;
-  }
-
-  /* 移动端表单区域背景也改为白色 */
-  .login-form-section {
-    flex: 1;
-    width: 100%;
-    padding: 40px 24px;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .form-container {
-    width: 100%;
-    max-width: 420px;
-    padding: 40px 32px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-  }
-
-  .form-header {
-    margin-bottom: 32px;
-  }
-
-  .form-title {
-    font-size: 26px;
-  }
-
-  .form-subtitle {
-    font-size: 14px;
-  }
-
-  .form-body {
-    gap: 20px;
-  }
-
-  .custom-input {
-    height: 48px;
-  }
-
-  .login-btn {
-    height: 50px;
-    margin-top: 8px;
-  }
-}
-
-/* 超小屏幕进一步优化 */
-@media (max-width: 480px) {
-  .login-form-section {
-    padding: 24px 16px;
-    min-height: 100vh;
-  }
-
-  .form-container {
-    width: 100%;
-    max-width: 100%;
-    padding: 32px 20px;
-    box-shadow: none;
-    border-radius: 12px;
-    background: transparent;
-  }
-
-  .form-title {
-    font-size: 24px;
-  }
-
-  .form-subtitle {
-    font-size: 13px;
-  }
-
-  .custom-input {
-    height: 50px;
-    font-size: 15px;
-  }
-
-  .login-btn {
-    height: 50px;
-    font-size: 16px;
-  }
+.auth-link:hover {
+  color: #FDE68A;
 }
 </style>

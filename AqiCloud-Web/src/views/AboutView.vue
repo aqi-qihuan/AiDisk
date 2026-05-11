@@ -11,8 +11,8 @@
         <div class="icon-wrapper">
           <el-icon :size="48"><InfoFilled /></el-icon>
         </div>
-        <h1 class="page-title">关于我们</h1>
-        <p class="page-subtitle">了解小七云盘智能文件管理系统</p>
+        <h1 class="page-title">{{ t('page.about.title') }}</h1>
+        <p class="page-subtitle">{{ t('page.about.subtitle') }}</p>
       </div>
     </div>
 
@@ -25,11 +25,11 @@
             <div class="section-icon">
               <el-icon><Document /></el-icon>
             </div>
-            <h2>项目介绍</h2>
+            <h2>{{ t('page.about.projectTitle') }}</h2>
           </div>
           <div class="intro-content">
             <p class="intro-text">
-              小七云盘是一款基于 <span class="highlight">MinIO</span> 对象存储构建的现代云存储解决方案，提供安全、高效的文件管理服务。
+              {{ t('page.about.projectDesc') }}
             </p>
           </div>
         </section>
@@ -40,7 +40,7 @@
             <div class="section-icon gradient">
               <el-icon><Lightning /></el-icon>
             </div>
-            <h2>产品亮点</h2>
+            <h2>{{ t('page.about.highlightsTitle') }}</h2>
           </div>
           <div class="highlights-list">
             <div class="highlight-card glass-card">
@@ -48,8 +48,8 @@
                 <el-icon><Box /></el-icon>
               </div>
               <div class="highlight-content">
-                <h3>云端存储</h3>
-                <p>10GB 免费空间</p>
+                <h3>{{ t('page.about.highlightCloud') }}</h3>
+                <p>{{ t('page.about.highlightCloudDesc') }}</p>
               </div>
               <div class="highlight-tags">
                 <span class="highlight-tag">
@@ -67,8 +67,8 @@
                 <el-icon><Lightning /></el-icon>
               </div>
               <div class="highlight-content">
-                <h3>极速传输</h3>
-                <p>秒级上传下载</p>
+                <h3>{{ t('page.about.highlightSpeed') }}</h3>
+                <p>{{ t('page.about.highlightSpeedDesc') }}</p>
               </div>
             </div>
             <div class="highlight-card glass-card">
@@ -76,8 +76,8 @@
                 <el-icon><Connection /></el-icon>
               </div>
               <div class="highlight-content">
-                <h3>多端同步</h3>
-                <p>实时数据同步</p>
+                <h3>{{ t('page.about.highlightSync') }}</h3>
+                <p>{{ t('page.about.highlightSyncDesc') }}</p>
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@
             <div class="section-icon purple">
               <el-icon><Star /></el-icon>
             </div>
-            <h2>核心功能</h2>
+            <h2>{{ t('page.about.featuresTitle') }}</h2>
           </div>
           <div class="features-grid">
             <div class="feature-card glass-card">
@@ -98,8 +98,8 @@
                   <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
                 </svg>
               </div>
-              <h3>文件管理</h3>
-              <p>上传、下载、预览、分享一站式解决</p>
+              <h3>{{ t('page.about.featureFile') }}</h3>
+              <p>{{ t('page.about.featureFileDesc') }}</p>
             </div>
             <div class="feature-card glass-card">
               <div class="feature-icon-wrapper">
@@ -108,8 +108,8 @@
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
               </div>
-              <h3>智能搜索</h3>
-              <p>快速定位文件，支持全文检索</p>
+              <h3>{{ t('page.about.featureSearch') }}</h3>
+              <p>{{ t('page.about.featureSearchDesc') }}</p>
             </div>
             <div class="feature-card glass-card">
               <div class="feature-icon-wrapper">
@@ -120,8 +120,8 @@
                   <line x1="14" y1="11" x2="14" y2="17"></line>
                 </svg>
               </div>
-              <h3>回收站</h3>
-              <p>文件删除与恢复，数据更安全</p>
+              <h3>{{ t('page.about.featureRecycle') }}</h3>
+              <p>{{ t('page.about.featureRecycleDesc') }}</p>
             </div>
             <div class="feature-card glass-card">
               <div class="feature-icon-wrapper">
@@ -130,8 +130,8 @@
                   <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                 </svg>
               </div>
-              <h3>文件分享</h3>
-              <p>生成分享链接，权限可控</p>
+              <h3>{{ t('page.about.featureShare') }}</h3>
+              <p>{{ t('page.about.featureShareDesc') }}</p>
             </div>
             <div class="feature-card glass-card">
               <div class="feature-icon-wrapper">
@@ -142,8 +142,8 @@
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
               </div>
-              <h3>多用户支持</h3>
-              <p>用户注册与管理，权限隔离</p>
+              <h3>{{ t('page.about.featureMultiUser') }}</h3>
+              <p>{{ t('page.about.featureMultiUserDesc') }}</p>
             </div>
           </div>
         </section>
@@ -154,30 +154,30 @@
             <div class="section-icon green">
               <el-icon><Upload /></el-icon>
             </div>
-            <h2>快速开始</h2>
+            <h2>{{ t('page.about.quickstartTitle') }}</h2>
           </div>
           <div class="steps-container">
             <div class="step-card glass-card">
               <div class="step-number">1</div>
               <div class="step-content">
-                <h3>数据库配置</h3>
-                <p>运行 SQL 脚本，创建数据库</p>
+                <h3>{{ t('page.about.step1Title') }}</h3>
+                <p>{{ t('page.about.step1Desc') }}</p>
               </div>
               <div class="step-arrow">→</div>
             </div>
             <div class="step-card glass-card">
               <div class="step-number">2</div>
               <div class="step-content">
-                <h3>服务配置</h3>
-                <p>配置数据库和 MinIO 连接信息</p>
+                <h3>{{ t('page.about.step2Title') }}</h3>
+                <p>{{ t('page.about.step2Desc') }}</p>
               </div>
               <div class="step-arrow">→</div>
             </div>
             <div class="step-card glass-card">
               <div class="step-number">3</div>
               <div class="step-content">
-                <h3>启动项目</h3>
-                <p>运行项目，开始体验</p>
+                <h3>{{ t('page.about.step3Title') }}</h3>
+                <p>{{ t('page.about.step3Desc') }}</p>
               </div>
             </div>
           </div>
@@ -189,7 +189,7 @@
             <div class="section-icon orange">
               <el-icon><Cpu /></el-icon>
             </div>
-            <h2>开发进度</h2>
+            <h2>{{ t('page.about.progressTitle') }}</h2>
           </div>
           <div class="progress-grid">
             <div class="progress-card glass-card">
@@ -197,8 +197,8 @@
                 <div class="progress-icon completed">
                   <el-icon><Check /></el-icon>
                 </div>
-                <h3>用户模块</h3>
-                <span class="status-badge completed">已完成</span>
+                <h3>{{ t('page.about.progressUser') }}</h3>
+                <span class="status-badge completed">{{ t('page.about.completed') }}</span>
               </div>
               <div class="progress-tags">
                 <span class="tag">用户注册</span>
@@ -211,8 +211,8 @@
                 <div class="progress-icon completed">
                   <el-icon><Check /></el-icon>
                 </div>
-                <h3>文件模块</h3>
-                <span class="status-badge completed">已完成</span>
+                <h3>{{ t('page.about.progressFile') }}</h3>
+                <span class="status-badge completed">{{ t('page.about.completed') }}</span>
               </div>
               <div class="progress-tags">
                 <span class="tag">文件上传</span>
@@ -226,8 +226,8 @@
                 <div class="progress-icon completed">
                   <el-icon><Check /></el-icon>
                 </div>
-                <h3>分享模块</h3>
-                <span class="status-badge completed">已完成</span>
+                <h3>{{ t('page.about.progressShare') }}</h3>
+                <span class="status-badge completed">{{ t('page.about.completed') }}</span>
               </div>
               <div class="progress-tags">
                 <span class="tag">创建分享</span>
@@ -244,7 +244,7 @@
             <div class="section-icon blue">
               <el-icon><Cpu /></el-icon>
             </div>
-            <h2>技术栈</h2>
+            <h2>{{ t('page.about.techTitle') }}</h2>
           </div>
           <div class="tech-grid">
             <div class="tech-card glass-card">
@@ -256,8 +256,8 @@
                 </svg>
               </div>
               <div class="tech-info">
-                <h4>前端技术</h4>
-                <p>Vue 3 + TypeScript + Vite</p>
+                <h4>{{ t('page.about.techFrontend') }}</h4>
+                <p>{{ t('page.about.techFrontendDesc') }}</p>
               </div>
             </div>
             <div class="tech-card glass-card">
@@ -268,8 +268,8 @@
                 </svg>
               </div>
               <div class="tech-info">
-                <h4>UI框架</h4>
-                <p>Element Plus + 自定义设计系统</p>
+                <h4>{{ t('page.about.techUI') }}</h4>
+                <p>{{ t('page.about.techUIDesc') }}</p>
               </div>
             </div>
             <div class="tech-card glass-card">
@@ -282,8 +282,8 @@
                 </svg>
               </div>
               <div class="tech-info">
-                <h4>后端服务</h4>
-                <p>Go (Gin) + MySQL + Redis + GORM</p>
+                <h4>{{ t('page.about.techBackend') }}</h4>
+                <p>{{ t('page.about.techBackendDesc') }}</p>
               </div>
             </div>
             <div class="tech-card glass-card">
@@ -298,8 +298,8 @@
                 </svg>
               </div>
               <div class="tech-info">
-                <h4>AI能力</h4>
-                <p>Cloudwego Eino + GPT集成 + 智能文档处理</p>
+                <h4>{{ t('page.about.techAI') }}</h4>
+                <p>{{ t('page.about.techAIDesc') }}</p>
               </div>
             </div>
           </div>
@@ -311,20 +311,20 @@
             <div class="section-icon pink">
               <el-icon><Message /></el-icon>
             </div>
-            <h2>联系我们</h2>
+            <h2>{{ t('page.about.contactTitle') }}</h2>
           </div>
           <div class="contact-grid">
             <div class="contact-item glass-card">
               <el-icon><Message /></el-icon>
-              <span>support@aipan.com</span>
+              <span>{{ t('page.about.email') }}</span>
             </div>
             <div class="contact-item glass-card">
               <el-icon><Link /></el-icon>
-              <span>www.aipan.com</span>
+              <span>{{ t('page.about.website') }}</span>
             </div>
             <div class="contact-item glass-card">
               <el-icon><Location /></el-icon>
-              <span>中国 · 广州</span>
+              <span>{{ t('page.about.location') }}</span>
             </div>
           </div>
         </section>
@@ -335,8 +335,8 @@
     <div class="footer-section">
       <div class="footer-content">
         <div class="footer-info">
-          <p class="copyright">© {{ new Date().getFullYear() }} 小七云盘. All rights reserved.</p>
-          <p class="tech-stack">Made with ❤️ using Vue 3 + TypeScript</p>
+          <p class="copyright">{{ t('page.about.copyright', { year: new Date().getFullYear() }) }}</p>
+          <p class="tech-stack">{{ t('page.about.techStack') }}</p>
         </div>
       </div>
     </div>
@@ -344,6 +344,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 import {
   InfoFilled,
   Document,
@@ -362,14 +364,29 @@ import {
 } from '@element-plus/icons-vue';
 </script>
 
-<style scoped>
+<style>
 /* 引入 Inter 字体 */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* CSS 变量定义 */
-::root {
+/* CSS 变量定义 (全局) */
+:root {
   --primary: #DB2777;
   --secondary: #F472B6;
+  --cta: #CA8A04;
+  --background: #FDF2F8;
+  --text-primary: #831843;
+  --text-secondary: #475569;
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Glassmorphism 变量 */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --glass-backdrop: blur(20px) saturate(180%);
+}
+</style>
+<style scoped>
+.about-view {
   --cta: #CA8A04;
   --background: #FDF2F8;
   --text-primary: #831843;

@@ -162,6 +162,7 @@ const mobileMenuOpen = ref(false);
  */
 const routeNameMap: Record<string, string> = {
   '主页': 'nav.home',
+  '文件': 'nav.files',
   '我的分享': 'nav.share',
   '回收站': 'nav.recycle',
   'AI网盘智答': 'ai.answer',
@@ -292,14 +293,14 @@ const getDefaultAvatar = (userId?: number): string => {
 /* 引入 Inter 字体 */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* CSS变量定义 */
+/* CSS变量定义 - HOK Dark Theme */
 :root {
   --header-primary: #DB2777;
   --header-secondary: #F472B6;
-  --header-cta: #CA8A04;
-  --header-bg: #FDF2F8;
-  --header-text: #831843;
-  --header-font: 'Inter', 'Poppins', 'Open Sans', sans-serif;
+  --header-cta: #D97706;
+  --header-bg: rgba(20, 20, 28, 0.85);
+  --header-text: #F8FAFC;
+  --header-font: var(--font-primary);
 }
 
 .global-header {
@@ -308,12 +309,12 @@ const getDefaultAvatar = (userId?: number): string => {
   align-items: center;
   padding: 12px 32px;
   height: 68px;
-  /* Glassmorphism 效果 */
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  /* Dark Glassmorphism */
+  background: rgba(20, 20, 28, 0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -377,7 +378,7 @@ const getDefaultAvatar = (userId?: number): string => {
   font-size: 0.9375rem;
   font-weight: 500;
   font-family: var(--header-font);
-  color: #475569;
+  color: var(--color-text-secondary, #94A3B8);
   background: transparent;
   border: none;
   border-radius: 12px;
@@ -395,7 +396,7 @@ const getDefaultAvatar = (userId?: number): string => {
   left: 50%;
   width: 0;
   height: 0;
-  background: radial-gradient(circle, rgba(219, 39, 119, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(219, 39, 119, 0.15) 0%, transparent 70%);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.4s ease;
@@ -408,14 +409,14 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .nav-item:hover {
-  color: #DB2777;
+  color: #F472B6;
   transform: translateY(-1px);
-  background: rgba(219, 39, 119, 0.04);
+  background: rgba(219, 39, 119, 0.06);
 }
 
 .nav-item.active {
-  color: #DB2777;
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.08) 0%, rgba(202, 138, 4, 0.08) 100%);
+  color: #FFFFFF;
+  background: linear-gradient(135deg, rgba(219, 39, 119, 0.12) 0%, rgba(217, 119, 6, 0.08) 100%);
   font-weight: 600;
 }
 
@@ -427,7 +428,7 @@ const getDefaultAvatar = (userId?: number): string => {
   transform: translateX(-50%);
   width: 24px;
   height: 3px;
-  background: linear-gradient(90deg, #DB2777 0%, #CA8A04 100%);
+  background: linear-gradient(90deg, #DB2777 0%, #D97706 100%);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(219, 39, 119, 0.4);
 }
@@ -448,38 +449,38 @@ const getDefaultAvatar = (userId?: number): string => {
   border-radius: 24px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: rgba(255, 255, 255, 0.6);
-  border: 1.5px solid rgba(219, 39, 119, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(219, 39, 119, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .user-profile:hover {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(219, 39, 119, 0.35);
-  box-shadow: 0 6px 16px rgba(219, 39, 119, 0.18);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(219, 39, 119, 0.4);
+  box-shadow: 0 6px 20px rgba(219, 39, 119, 0.25);
   transform: translateY(-2px);
 }
 
 .user-avatar {
   border: 2px solid transparent;
-  background: linear-gradient(white, white) padding-box,
-              linear-gradient(135deg, #DB2777 0%, #CA8A04 100%) border-box;
+  background: linear-gradient(#1A1A24, #1A1A24) padding-box,
+              linear-gradient(135deg, #DB2777 0%, #D97706 100%) border-box;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .user-profile:hover .user-avatar {
   transform: scale(1.05) rotate(5deg);
-  box-shadow: 0 4px 12px rgba(219, 39, 119, 0.25);
+  box-shadow: 0 4px 16px rgba(219, 39, 119, 0.35);
 }
 
 .username {
   font-size: 0.9375rem;
   font-weight: 600;
   font-family: var(--header-font);
-  color: #475569;
+  color: var(--color-text-primary, #F8FAFC);
   max-width: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -488,9 +489,8 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .user-profile:hover .username {
-  color: #831843;
+  color: #F8FAFC;
 }
-
 /* ==================== Dropdown Styles ==================== */
 :deep(.el-dropdown) {
   color: inherit;
@@ -592,11 +592,11 @@ const getDefaultAvatar = (userId?: number): string => {
   top: 100%;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  background: rgba(20, 20, 28, 0.97);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   padding: 12px 16px;
   z-index: 99;
   max-height: calc(100vh - 60px);
@@ -610,7 +610,7 @@ const getDefaultAvatar = (userId?: number): string => {
   font-size: 1rem;
   font-weight: 500;
   font-family: var(--header-font);
-  color: #475569;
+  color: var(--color-text-secondary, #94A3B8);
   background: transparent;
   border: none;
   border-radius: 12px;
@@ -630,7 +630,7 @@ const getDefaultAvatar = (userId?: number): string => {
   transform: translateY(-50%);
   width: 0;
   height: 70%;
-  background: linear-gradient(135deg, #DB2777 0%, #CA8A04 100%);
+  background: linear-gradient(135deg, #DB2777 0%, #D97706 100%);
   border-radius: 0 6px 6px 0;
   transition: width 0.3s ease;
 }
@@ -640,8 +640,8 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .mobile-nav-item:hover {
-  color: #DB2777;
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.06) 0%, rgba(202, 138, 4, 0.06) 100%);
+  color: #F472B6;
+  background: linear-gradient(135deg, rgba(219, 39, 119, 0.08) 0%, rgba(217, 119, 6, 0.06) 100%);
   transform: translateX(4px);
   padding-left: 24px;
 }
@@ -651,8 +651,8 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .mobile-nav-item.active {
-  color: #DB2777;
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.1) 0%, rgba(202, 138, 4, 0.1) 100%);
+  color: #FFFFFF;
+  background: linear-gradient(135deg, rgba(219, 39, 119, 0.12) 0%, rgba(217, 119, 6, 0.08) 100%);
   font-weight: 600;
   padding-left: 24px;
 }

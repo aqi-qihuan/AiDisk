@@ -49,7 +49,11 @@
 
       <!-- Main Content -->
       <main class="layout-main">
-        <router-view :fileType="fileType" />
+        <router-view v-slot="{ Component }">
+          <transition name="page" mode="out-in">
+            <component :is="Component" :fileType="fileType" />
+          </transition>
+        </router-view>
       </main>
     </div>
   </div>
@@ -481,5 +485,21 @@ onMounted(() => {
 /* Main Content Animation */
 .layout-main {
   animation: fadeIn var(--transition-slow) ease-out;
+}
+
+/* ==================== Page Transitions ==================== */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-12px);
 }
 </style>

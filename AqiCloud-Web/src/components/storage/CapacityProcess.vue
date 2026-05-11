@@ -4,11 +4,12 @@
       <!-- 圆形进度条 -->
       <div class="circle-container">
         <el-tooltip
-          :content="`已使用: ${formatStorage(
-            usedStorage
-          )}\n总容量: ${formatStorage(totalStorage)}`"
           placement="right"
         >
+          <template #content>
+            {{ t('user.used') }}: {{ formatStorage(usedStorage) }}<br />
+            {{ t('user.totalCapacity') }}: {{ formatStorage(totalStorage) }}
+          </template>
           <div class="progress-wrapper">
             <el-progress
               type="circle"
@@ -28,7 +29,7 @@
     </template>
     <template v-else>
       <!-- 条形进度条 -->
-      <div class="storage-title">存储空间</div>
+      <div class="storage-title">{{ t('user.storage') }}</div>
       <el-progress
         :percentage="usagePercentage"
         :status="progressStatus"
@@ -37,12 +38,12 @@
       />
       <div class="storage-info">
         <div class="used-info">
-          <span class="label">已使用</span>
+          <span class="label">{{ t('user.used') }}</span>
           <span class="value">{{ formatStorage(usedStorage) }}</span>
         </div>
         <div class="total-info">
           <span class="value">{{ formatStorage(totalStorage) }}</span>
-          <span class="label">总容量</span>
+          <span class="label">{{ t('user.totalCapacity') }}</span>
         </div>
       </div>
     </template>
@@ -51,7 +52,10 @@
 
 <script setup lang="ts">
 import { onMounted, computed } from "vue";
+import { useI18n } from 'vue-i18n';
 import { useStorageStore } from "@/store/storage";
+
+const { t } = useI18n();
 
 // 接收父组件传递的折叠状态
 const props = defineProps({

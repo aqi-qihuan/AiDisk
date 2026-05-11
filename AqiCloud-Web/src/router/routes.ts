@@ -187,32 +187,32 @@ export const routes: Array<RouteRecordRaw> = [
       isAuth: true
     },
   },
-  // {
-  //   path: "/403",
-  //   name: "403",
-  //   component: NoAuthView,
-  //   meta: {
-  //     hideInMenu: true,
-  //   },
-  // },
-  // {
-  //   path: "/404",
-  //   name: "404",
-  //   component: NotFoundView,
-  //   meta: {
-  //     hideInMenu: true,
-  //   },
-  // },
-  // {
-  //   path: "/500",
-  //   name: "500",
-  //   component: ServerErrorView,
-  //   meta: {
-  //     hideInMenu: true,
-  //   },
-  // },
-  // {
-  //   path: "/:pathMatch(.*)",
-  //   redirect: "/404",
-  // },
+  {
+    path: "/403",
+    name: "403",
+    component: NoAuthView,
+    meta: {
+      hideInMenu: true,
+    },
+  },
+  {
+    path: "/404",
+    name: "404",
+    component: NotFoundView,
+    meta: {
+      hideInMenu: true,
+    },
+  },
+  {
+    path: "/500",
+    name: "500",
+    component: ServerErrorView,
+    meta: {
+      hideInMenu: true,
+    },
+  },
+  {
+    path: "/:pathMatch(.*)",
+    redirect: "/404",
+  },
 ];

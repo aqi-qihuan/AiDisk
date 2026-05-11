@@ -17,7 +17,7 @@
           :loading="restoring"
         >
           <RefreshLeft />
-          还原 {{ selectedFiles.length ? `(${selectedFiles.length}个文件)` : '' }}
+          {{ t('file.restoreRecycle') }}<template v-if="selectedFiles.length"> ({{ selectedFiles.length }})</template>
         </DSButton>
 
         <DSButton
@@ -28,15 +28,15 @@
           :loading="deleting"
         >
           <Delete />
-          彻底删除 {{ selectedFiles.length ? `(${selectedFiles.length}个文件)` : '' }}
+          {{ t('file.deletePermanentlyRecycle') }}<template v-if="selectedFiles.length"> ({{ selectedFiles.length }})</template>
         </DSButton>
 
         <div class="info-tags">
           <DSTag color="info">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="vertical-align:-3px;margin-right:4px"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5"/></svg>总共 {{ fileList.length }} 个文件
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="vertical-align:-3px;margin-right:4px"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5"/></svg>{{ t('file.totalFiles', { count: fileList.length }) }}
           </DSTag>
           <DSTag color="warning" v-if="selectedFiles.length > 0">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="vertical-align:-3px;margin-right:4px"><polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>已选择 {{ selectedFiles.length }} 个
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="vertical-align:-3px;margin-right:4px"><polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ t('file.selectedFiles', { count: selectedFiles.length }) }}
           </DSTag>
         </div>
       </div>
@@ -54,7 +54,7 @@
               :loading="row.restoring"
             >
               <RefreshLeft />
-              还原
+              {{ t('file.restoreRecycle') }}
             </DSButton>
             <DSButton
               variant="danger"
@@ -63,7 +63,7 @@
               :loading="row.deleting"
             >
               <Delete />
-              删除
+              {{ t('file.delete') }}
             </DSButton>
           </div>
         </template>
@@ -106,7 +106,7 @@
             <path d="M77 35l5 5 10-10" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </svg>
         </div>
-        <p class="empty-title">回收站是空的</p>
+        <p class="empty-title">{{ t('file.recycleEmpty') }}</p>
         <p class="empty-description">删除的文件会在这里保留30天</p>
       </div>
     </div>
@@ -115,6 +115,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, RefreshLeft } from '@element-plus/icons-vue';
 import { listRecycleFiles, batchRestore, batchDelete } from '@/api/recycle';
@@ -122,6 +123,8 @@ import FileTable from '@/components/file/FileTable.vue';
 import { useStorageStore } from '@/store/storage';
 import DSButton from '@/components/design-system/DSButton.vue';
 import DSTag from '@/components/design-system/DSTag.vue';
+
+const { t } = useI18n();
 
 const fileList = ref<API.FileDTO[]>([]);
 const selectedFiles = ref<API.FileDTO[]>([]);

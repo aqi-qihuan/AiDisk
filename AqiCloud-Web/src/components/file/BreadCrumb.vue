@@ -1,6 +1,6 @@
 <template>
   <div class="breadcrumb-wrapper">
-    <div class="title">当前位置：</div>
+    <div class="title">{{ t('file.currentPath') }}</div>
     <div class="breadcrumb-box" :class="{ 'able-input': isAllFiles }">
       <el-breadcrumb separator=">">
         <el-breadcrumb-item v-if="!isAllFiles">
@@ -8,7 +8,7 @@
         </el-breadcrumb-item>
         <template v-else>
           <el-breadcrumb-item @click="handleRootClick">
-            全部文件夹
+            {{ t('file.rootDirectory') }}
           </el-breadcrumb-item>
           <el-breadcrumb-item
             v-for="(item, index) in pathParts"
@@ -25,8 +25,11 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from "vue";
+import { useI18n } from 'vue-i18n';
 import { useFileStores } from "@/store/filePath";
 import { useLoginUserStore } from "@/store/user";
+
+const { t } = useI18n();
 
 /**
  * BreadCrumb 组件 - 面包屑导航组件

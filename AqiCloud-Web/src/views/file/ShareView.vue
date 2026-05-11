@@ -124,7 +124,7 @@
           <div class="pagination-container">
             <div class="pagination-wrapper">
               <DSTag variant="info" class="total-info">
-                共 {{ pagination.total }} 条
+                {{ t('common.total', { count: pagination.total }) }}
               </DSTag>
               <el-pagination
                 v-model:current-page="pagination.current"
@@ -196,6 +196,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 import {
   checkShareCode,
   getShareDetail,
@@ -212,6 +213,7 @@ import { useRoute } from "vue-router";
 import { useLoginUserStore } from "@/store/user";
 import { DSCard, DSInput, DSButton, DSTag } from "@/components/design-system";
 
+const { t } = useI18n();
 const { loginUser, token } = useLoginUserStore();
 const accountId = loginUser?.id || "";
 
@@ -501,7 +503,7 @@ const handleSaveClick = () => {
   }
 
   if (!token) {
-    ElMessageBox.confirm("保存文件需要登录，是否前往登录？", "提示", {
+    ElMessageBox.confirm(t('common.loginRequired'), t('common.info'), {
       confirmButtonText: "去登录",
       cancelButtonText: "取消",
       type: "warning",

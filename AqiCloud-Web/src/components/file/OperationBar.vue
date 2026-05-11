@@ -2,17 +2,21 @@
   <div class="operation-bar">
     <!-- 常规操作按钮 -->
     <div v-if="isAllFiles && !isSelectionMode" class="normal-actions">
-      <DSButton variant="primary" size="medium" @click="openUploadDialog">
+      <DSButton variant="golden" size="medium" @click="openCreateFolderDialog">
         <template #icon>
-          <el-icon><Upload /></el-icon>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
         </template>
-        上传文件
+        {{ t('file.newFolder') }}
       </DSButton>
-      <DSButton variant="secondary" size="medium" @click="openCreateFolderDialog">
+      <DSButton variant="secondary" size="medium" @click="openUploadDialog">
         <template #icon>
-          <el-icon><Folder /></el-icon>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+          </svg>
         </template>
-        新建文件夹
+        {{ t('file.uploadFile') }}
       </DSButton>
     </div>
 
@@ -20,23 +24,23 @@
     <div v-if="isSelectionMode && selectedFiles.length > 0" class="batch-actions">
       <DSButton variant="primary" size="small" @click="handleBatchDownload">
         <template #icon><el-icon><Download /></el-icon></template>
-        下载
+        {{ t('common.download') }}
       </DSButton>
       <DSButton variant="danger" size="small" @click="handleBatchDelete">
         <template #icon><el-icon><Delete /></el-icon></template>
-        删除
+        {{ t('common.delete') }}
       </DSButton>
       <DSButton variant="secondary" size="small" @click="handleMove">
         <template #icon><el-icon><Position /></el-icon></template>
-        移动
+        {{ t('file.move') }}
       </DSButton>
       <DSButton variant="secondary" size="small" @click="handleCopy">
         <template #icon><el-icon><DocumentCopy /></el-icon></template>
-        复制
+        {{ t('file.copy') }}
       </DSButton>
       <DSButton variant="cta" size="small" @click="handleShare">
         <template #icon><el-icon><Share /></el-icon></template>
-        分享
+        {{ t('file.share') }}
       </DSButton>
     </div>
 
@@ -46,7 +50,7 @@
       <div class="search-container">
         <DSInput
           v-model="searchQuery"
-          placeholder="搜索文件"
+          :placeholder="t('file.searchPlaceholder')"
           size="medium"
           clearable
           @input="handleSearch"
@@ -59,7 +63,7 @@
 
       <!-- 视图和操作按钮 -->
       <div class="right-actions">
-        <el-tooltip content="刷新" placement="top">
+        <el-tooltip :content="t('file.refresh')" placement="top">
           <DSButton variant="ghost" size="small" @click="$emit('refresh')">
             <el-icon><Refresh /></el-icon>
           </DSButton>
@@ -67,7 +71,7 @@
 
         <el-tooltip
           v-if="viewMode === 'grid'"
-          content="选择模式"
+          :content="t('file.selectionMode')"
           placement="top"
         >
           <DSButton
@@ -81,7 +85,7 @@
 
         <div class="divider"></div>
 
-        <el-tooltip content="列表视图" placement="top">
+        <el-tooltip :content="t('file.listView')" placement="top">
           <DSButton
             variant="ghost"
             size="small"
@@ -91,7 +95,7 @@
           </DSButton>
         </el-tooltip>
 
-        <el-tooltip content="网格视图" placement="top">
+        <el-tooltip :content="t('file.gridView')" placement="top">
           <DSButton
             variant="ghost"
             size="small"
@@ -122,9 +126,12 @@ import {
 } from "@element-plus/icons-vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { computed, ref } from "vue";
+import { useI18n } from 'vue-i18n';
 import { getFileTree } from "@/api/file";
 import type { FileDTO } from "@/api/types";
 import { DSButton, DSInput } from "@/components/design-system";
+
+const { t } = useI18n();
 
 /**
  * OperationBar 组件 - 操作栏组件

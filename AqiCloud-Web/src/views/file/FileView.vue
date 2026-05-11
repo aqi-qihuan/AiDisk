@@ -1249,8 +1249,6 @@ const openFileInfo = (file: API.FileDTO) => {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 /* ===== 主容器 ===== */
 .file-view {
   height: 100%;
@@ -1258,8 +1256,8 @@ const openFileInfo = (file: API.FileDTO) => {
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 30%, #EEF2FF 60%, #F0FDF4 100%);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #F8FAFC;
+  font-family: var(--font-primary);
 }
 
 /* ===== 背景装饰 ===== */
@@ -1278,13 +1276,13 @@ const openFileInfo = (file: API.FileDTO) => {
   position: absolute;
   border-radius: 50%;
   filter: blur(120px);
-  opacity: 0.35;
+  opacity: 0.04;
 }
 
 .bg-orb-1 {
   width: 500px;
   height: 500px;
-  background: linear-gradient(135deg, #F9A8D4 0%, #C084FC 100%);
+  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
   top: -200px;
   right: -100px;
   animation: floatOrb 30s ease-in-out infinite;
@@ -1293,24 +1291,21 @@ const openFileInfo = (file: API.FileDTO) => {
 .bg-orb-2 {
   width: 400px;
   height: 400px;
-  background: linear-gradient(135deg, #67E8F9 0%, #A78BFA 100%);
+  background: linear-gradient(135deg, #D97706 0%, #FBBF24 100%);
   bottom: -150px;
   left: -100px;
   animation: floatOrb 25s ease-in-out infinite reverse;
 }
 
-/* ===== Glass 面板 ===== */
+/* ===== Light Panel ===== */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: #FFFFFF;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 20px;
   margin: var(--spacing-md);
-  box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.04),
-    0 1px 3px rgba(0, 0, 0, 0.02),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 32px rgba(0, 0, 0, 0.03);
   animation: fadeInUp 0.5s ease-out;
   position: relative;
   z-index: 1;
@@ -1319,10 +1314,7 @@ const openFileInfo = (file: API.FileDTO) => {
 }
 
 .glass-panel:hover {
-  box-shadow:
-    0 8px 32px rgba(219, 39, 119, 0.08),
-    0 2px 8px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 12px 48px rgba(0, 0, 0, 0.04);
 }
 
 /* ===== 文件列表容器 ===== */
@@ -1342,23 +1334,21 @@ const openFileInfo = (file: API.FileDTO) => {
 }
 
 .file-list-container::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #F9A8D4 0%, #C084FC 100%);
+  background: linear-gradient(180deg, rgba(219,39,119,0.15) 0%, rgba(219,39,119,0.05) 100%);
   border-radius: 3px;
 }
 
 .file-list-container::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #F472B6 0%, #A855F7 100%);
+  background: linear-gradient(180deg, rgba(219,39,119,0.3) 0%, rgba(219,39,119,0.1) 100%);
 }
 
-/* ===== 分页容器 Glass Bar ===== */
+/* ===== 分页容器 Light Bar ===== */
 .glass-bar {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow:
-    0 -4px 24px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  background: #FFFFFF;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
   padding: 16px 24px;
   position: relative;
   z-index: 1;
@@ -1377,7 +1367,7 @@ const openFileInfo = (file: API.FileDTO) => {
   flex-wrap: wrap;
 }
 
-/* ===== 表单样式增强 ===== */
+/* ===== 表单样式增强 (Dark) ===== */
 .form-item {
   margin-bottom: 20px;
   animation: fadeInUp 0.3s ease-out backwards;
@@ -1391,7 +1381,7 @@ const openFileInfo = (file: API.FileDTO) => {
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: #1E1B4B;
+  color: var(--color-text-primary, #1A1A2E);
   margin-bottom: 8px;
   letter-spacing: -0.01em;
 }
@@ -1473,27 +1463,30 @@ const openFileInfo = (file: API.FileDTO) => {
     0 8px 32px rgba(219, 39, 119, 0.08);
 }
 
-/* ===== Element Plus 表格穿透 ===== */
+/* ===== Element Plus 表格穿透 (Light) ===== */
 :deep(.el-table) {
   --el-table-bg-color: transparent;
   --el-table-tr-bg-color: transparent;
-  --el-table-header-bg-color: rgba(253, 242, 248, 0.6);
-  --el-table-row-hover-bg-color: rgba(219, 39, 119, 0.04);
-  font-family: 'Inter', sans-serif;
+  --el-table-header-bg-color: rgba(219, 39, 119, 0.04);
+  --el-table-row-hover-bg-color: rgba(219, 39, 119, 0.03);
+  --el-table-text-color: var(--color-text-primary, #1A1A2E);
+  --el-table-header-text-color: var(--color-text-primary, #1A1A2E);
+  --el-table-border-color: rgba(0, 0, 0, 0.05);
+  font-family: var(--font-primary);
   border-radius: 12px;
 }
 
 :deep(.el-table th.el-table__cell) {
-  background: rgba(253, 242, 248, 0.5) !important;
+  background: rgba(219, 39, 119, 0.04) !important;
   font-weight: 600;
-  color: #1E1B4B;
+  color: var(--color-text-primary, #1A1A2E);
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
 
 :deep(.el-table td.el-table__cell) {
-  color: #475569;
+  color: var(--color-text-secondary, #475569);
   font-size: 14px;
   border-bottom-color: rgba(0, 0, 0, 0.04);
 }
@@ -1503,7 +1496,12 @@ const openFileInfo = (file: API.FileDTO) => {
 }
 
 :deep(.el-table .el-table__row:hover > td) {
-  background: rgba(219, 39, 119, 0.03) !important;
+  background: rgba(219, 39, 119, 0.04) !important;
+}
+
+:deep(.el-table .el-table__row.current-row > td) {
+  background: rgba(219, 39, 119, 0.06) !important;
+  border-left: 3px solid #DB2777;
 }
 
 /* ===== Element Plus 分页穿透 ===== */

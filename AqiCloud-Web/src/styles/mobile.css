@@ -43,7 +43,7 @@ button:active,
 
 .file-list-item:active,
 .el-table__row:active {
-  background-color: #e6e8eb;
+  background-color: rgba(219, 39, 119, 0.08);
   transform: scale(0.99);
 }
 

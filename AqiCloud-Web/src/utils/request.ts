@@ -13,7 +13,7 @@ axios.defaults.transformResponse = [];
 // 创建自定义 Axios 实例
 const myAxios = axios.create({
   // 使用相对路径，由Nginx代理到正确的后端服务
-  baseURL: "https://pan.aqi125.cn/api",
+  baseURL: "http://127.0.0.1:8080/api",
   timeout: 10000,
   withCredentials: false,
   // 直接在创建时设置 transformResponse

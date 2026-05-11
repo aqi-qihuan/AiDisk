@@ -1,280 +1,122 @@
 <template>
-  <div :class="['ds-input-wrapper', { 'ds-input-wrapper-disabled': disabled, 'ds-input-wrapper-error': error }]">
-    <label v-if="label" :class="['ds-input-label', { 'ds-input-label-required': required }]">
-      {{ label }}
-    </label>
-    <div class="ds-input-container">
-      <span v-if="$slots.prefix" class="ds-input__prefix">
-        <slot name="prefix"></slot>
-      </span>
-      <input
-        ref="inputRef"
-        :type="type"
-        :value="modelValue"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        :readonly="readonly"
-        :maxlength="maxlength"
-        :class="[
-          'ds-input',
-          `ds-input-${size}`,
-          {
-            'ds-input-disabled': disabled,
-            'ds-input-error': error,
-            'ds-input-with-prefix': $slots.prefix,
-            'ds-input-with-suffix': $slots.suffix,
-          }
-        ]"
-        @input="handleInput"
-        @change="handleChange"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @keyup.enter="handleEnter"
-      />
-      <span v-if="$slots.suffix" class="ds-input__suffix">
-        <slot name="suffix"></slot>
-      </span>
-      <span v-if="showClear && modelValue" class="ds-input__clear" @click="handleClear">
-        ×
-      </span>
-      <span v-if="clearable && modelValue" class="ds-input__clear" @click="handleClear">
-        ×
-      </span>
-    </div>
-    <div v-if="error || hint" :class="['ds-input-message', { 'ds-input-message-error': error }]">
-      {{ error || hint }}
-    </div>
-  </div>
+  <input
+    :type="type"
+    :value="modelValue"
+    :placeholder="placeholder"
+    :disabled="disabled"
+    :class="['ds-input', `ds-input--${size}`, { 'ds-input--error': error }]"
+    @input="onInput"
+    @focus="onFocus"
+    @blur="onBlur"
+  />
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, defineEmits, defineExpose } from 'vue';
+import { computed } from 'vue';
 
 interface Props {
-  modelValue?: string | number;
-  label?: string;
-  type?: string;
+  modelValue?: string;
+  type?: 'text' | 'email' | 'password' | 'number';
   placeholder?: string;
+  size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
-  readonly?: boolean;
-  maxlength?: number;
-  clearable?: boolean;
-  showClear?: boolean;
-  required?: boolean;
-  error?: string;
-  hint?: string;
-  size?: 'small' | 'medium' | 'large';
+  error?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
   type: 'text',
   placeholder: '',
+  size: 'md',
   disabled: false,
-  readonly: false,
-  clearable: false,
-  showClear: false,
-  required: false,
-  error: '',
-  hint: '',
-  size: 'medium',
+  error: false,
 });
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string | number): void;
-  (e: 'change', value: string | number): void;
-  (e: 'focus', event: FocusEvent): void;
-  (e: 'blur', event: FocusEvent): void;
-  (e: 'enter', value: string | number): void;
-  (e: 'clear'): void;
+  'update:modelValue': [value: string];
+  focus: [event: FocusEvent];
+  blur: [event: FocusEvent];
 }>();
 
-const inputRef = ref<HTMLInputElement>();
-
-const handleInput = (event: Event) => {
+const onInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
   emit('update:modelValue', target.value);
 };
 
-const handleChange = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  emit('change', target.value);
-};
-
-const handleFocus = (event: FocusEvent) => {
+const onFocus = (event: FocusEvent) => {
   emit('focus', event);
 };
 
-const handleBlur = (event: FocusEvent) => {
+const onBlur = (event: FocusEvent) => {
   emit('blur', event);
 };
-
-const handleEnter = () => {
-  emit('enter', props.modelValue);
-};
-
-const handleClear = () => {
-  emit('update:modelValue', '');
-  emit('clear');
-};
-
-const focus = () => {
-  inputRef.value?.focus();
-};
-
-const blur = () => {
-  inputRef.value?.blur();
-};
-
-defineExpose({
-  focus,
-  blur,
-});
 </script>
 
 <style scoped>
-.ds-input-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-}
-
-.ds-input-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #1E1B4B;
-  line-height: 1.5;
-}
-
-.ds-input-label-required::after {
-  content: ' *';
-  color: #EF4444;
-}
-
-.ds-input-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
 .ds-input {
-  flex: 1;
   width: 100%;
-  padding: 0 16px;
-  border: 1px solid #E2E8F0;
-  border-radius: 8px;
-  font-size: 16px;
-  color: #1E1B4B;
-  background-color: #FFFFFF;
-  transition: all 0.2s ease;
-  outline: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-primary);
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
   box-sizing: border-box;
 }
 
-/* Sizes */
-.ds-input-small {
-  height: 32px;
-  font-size: 14px;
-  padding: 0 12px;
-}
-
-.ds-input-medium {
-  height: 40px;
-  font-size: 16px;
-  padding: 0 16px;
-}
-
-.ds-input-large {
-  height: 48px;
-  font-size: 18px;
-  padding: 0 20px;
-}
-
-/* States */
-.ds-input:hover:not(.ds-input-disabled) {
-  border-color: #6366F1;
-}
-
 .ds-input:focus {
-  border-color: #6366F1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
 }
 
-.ds-input-disabled {
-  background-color: #F5F3FF;
+.ds-input:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-text-secondary);
+}
+
+.ds-input:disabled {
+  background: var(--color-bg);
+  color: var(--color-text-tertiary);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.ds-input-error {
-  border-color: #EF4444;
+.ds-input--error {
+  border-color: var(--color-error);
 }
 
-.ds-input-error:focus {
+.ds-input--error:focus {
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
-/* Prefix & Suffix */
-.ds-input-with-prefix {
-  padding-left: 40px;
+/* Sizes */
+.ds-input--sm {
+  padding: 6px 10px;
+  font-size: var(--text-sm);
 }
 
-.ds-input-with-suffix {
-  padding-right: 40px;
+.ds-input--md {
+  padding: 8px 12px;
+  font-size: var(--text-base);
 }
 
-.ds-input__prefix,
-.ds-input__suffix {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  color: #64748B;
-  pointer-events: none;
+.ds-input--lg {
+  padding: 12px 16px;
+  font-size: var(--text-lg);
 }
 
-.ds-input__prefix {
-  left: 12px;
+/* Responsive */
+@media (max-width: 768px) {
+  .ds-input--lg {
+    font-size: var(--text-base);
+    padding: 10px 14px;
+  }
 }
 
-.ds-input__suffix {
-  right: 12px;
-}
-
-/* Clear Button */
-.ds-input__clear {
-  position: absolute;
-  right: 36px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: #94A3B8;
-  cursor: pointer;
-  transition: color 0.2s ease;
-  line-height: 1;
-}
-
-.ds-input__clear:hover {
-  color: #64748B;
-}
-
-/* Message */
-.ds-input-message {
-  font-size: 12px;
-  color: #64748B;
-  line-height: 1.5;
-  min-height: 18px;
-}
-
-.ds-input-message-error {
-  color: #EF4444;
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .ds-input {
+    transition: none;
+  }
 }
 </style>

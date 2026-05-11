@@ -4,7 +4,7 @@
  * 用于: AI聊天、文档助手、网盘智答等功能
  */
 // API配置
-export const API_BASE_URL = 'https://127.0.0.1:8000/api'
+export const API_BASE_URL = 'http://127.0.0.1:8000/api'
 
 // API路径配置
 export const API_PATHS = {

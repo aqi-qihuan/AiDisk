@@ -157,7 +157,9 @@ watch(() => props.modelValue, (val) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -172,13 +174,14 @@ watch(() => props.modelValue, (val) => {
 }
 
 .ds-dialog {
-  background-color: #FFFFFF;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  background: var(--color-bg-card, #1A1A24);
+  border-radius: var(--radius-xl, 16px);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  animation: ds-dialog-enter 0.3s ease;
+  animation: ds-dialog-enter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes ds-dialog-enter {
@@ -216,22 +219,41 @@ watch(() => props.modelValue, (val) => {
   border-radius: 0;
 }
 
-/* Header */
+/* Header - Pink Gradient */
 .ds-dialog-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px 24px;
-  border-bottom: 1px solid #E2E8F0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   flex-shrink: 0;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--pink-300) 100%);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.ds-dialog-header::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
 }
 
 .ds-dialog-title {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #1E1B4B;
+  color: #FFFFFF;
   line-height: 1.4;
+  position: relative;
+  z-index: 1;
 }
 
 .ds-dialog-close {
@@ -242,16 +264,20 @@ watch(() => props.modelValue, (val) => {
   height: 32px;
   padding: 0;
   border: none;
-  background: transparent;
-  color: #64748B;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(4px);
 }
 
 .ds-dialog-close:hover {
-  background-color: #F5F3FF;
-  color: #6366F1;
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  transform: rotate(90deg);
 }
 
 /* Body */
@@ -259,6 +285,7 @@ watch(() => props.modelValue, (val) => {
   flex: 1;
   padding: 24px;
   overflow-y: auto;
+  color: var(--color-text-primary);
 }
 
 /* Footer */
@@ -268,9 +295,9 @@ watch(() => props.modelValue, (val) => {
   justify-content: flex-end;
   gap: 12px;
   padding: 16px 24px;
-  border-top: 1px solid #E2E8F0;
-  background-color: #F8F8FF;
-  border-radius: 0 0 16px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--color-bg-elevated, #22222E);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
   flex-shrink: 0;
 }
 
@@ -310,18 +337,19 @@ watch(() => props.modelValue, (val) => {
   .ds-dialog {
     width: 100% !important;
     max-width: 100%;
-    border-radius: 16px 16px 0 0;
+    border-radius: var(--radius-2xl, 24px) var(--radius-2xl, 24px) 0 0;
     max-height: 85vh;
   }
 
   .ds-dialog.ds-dialog-centered {
     margin: auto;
     align-self: center;
-    border-radius: 16px;
+    border-radius: var(--radius-xl, 16px);
   }
 
   .ds-dialog-header {
     padding: 16px 20px;
+    border-radius: var(--radius-2xl, 24px) var(--radius-2xl, 24px) 0 0;
   }
 
   .ds-dialog-body {
@@ -331,11 +359,27 @@ watch(() => props.modelValue, (val) => {
   .ds-dialog-footer {
     padding: 12px 20px;
     flex-wrap: wrap;
+    border-radius: 0;
   }
 
   .ds-dialog-footer :deep(.ds-btn) {
     flex: 1;
     min-width: 120px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 576px) {
+  .ds-dialog-body {
+    padding: 16px;
+  }
+
+  .ds-dialog-header {
+    padding: 14px 16px;
+  }
+
+  .ds-dialog-title {
+    font-size: 16px;
   }
 }
 </style>

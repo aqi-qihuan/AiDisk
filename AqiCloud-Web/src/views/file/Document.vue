@@ -10,8 +10,8 @@
               <el-icon :size="32"><EditPen /></el-icon>
             </div>
           </div>
-          <span class="loading-text">AI 正在为您生成文档概要...</span>
-          <span class="loading-subtext">请稍候，这通常需要几秒钟</span>
+          <span class="loading-text">{{ t('ai.generatingDoc') }}</span>
+          <span class="loading-subtext">{{ t('ai.pleaseWait') }}</span>
         </div>
       </template>
       <div v-else-if="generatedContent" class="generated-content" v-html="generatedContent"></div>
@@ -25,8 +25,8 @@
                   <el-icon :size="48"><Document /></el-icon>
                 </div>
               </div>
-              <h3 class="welcome-title">AI 文档助手</h3>
-              <p class="welcome-subtitle">智能文档分析与概要生成</p>
+              <h3 class="welcome-title">{{ t('ai.docAssistantTitle') }}</h3>
+              <p class="welcome-subtitle">{{ t('ai.docAssistantSubtitle') }}</p>
             </div>
 
             <div class="welcome-divider"></div>
@@ -37,8 +37,8 @@
                   <el-icon><Stopwatch /></el-icon>
                 </div>
                 <div class="feature-text">
-                  <span class="feature-title">快速生成</span>
-                  <span class="feature-desc">秒级文档概要</span>
+                  <span class="feature-title">{{ t('ai.quickGenerate') }}</span>
+                  <span class="feature-desc">{{ t('ai.docQuickGenerateDesc') }}</span>
                 </div>
               </div>
               <div class="feature-item">
@@ -46,8 +46,8 @@
                   <el-icon><Aim /></el-icon>
                 </div>
                 <div class="feature-text">
-                  <span class="feature-title">精准提取</span>
-                  <span class="feature-desc">核心内容识别</span>
+                  <span class="feature-title">{{ t('ai.preciseExtraction') }}</span>
+                  <span class="feature-desc">{{ t('ai.coreContentRecognition') }}</span>
                 </div>
               </div>
               <div class="feature-item">
@@ -59,8 +59,8 @@
                   </svg>
                 </div>
                 <div class="feature-text">
-                  <span class="feature-title">多语言</span>
-                  <span class="feature-desc">支持多种语言</span>
+                  <span class="feature-title">{{ t('ai.multiLanguage') }}</span>
+                  <span class="feature-desc">{{ t('ai.multiLanguageDesc') }}</span>
                 </div>
               </div>
               <div class="feature-item">
@@ -68,8 +68,8 @@
                   <el-icon><MagicStick /></el-icon>
                 </div>
                 <div class="feature-text">
-                  <span class="feature-title">自定义</span>
-                  <span class="feature-desc">灵活配置参数</span>
+                  <span class="feature-title">{{ t('ai.customization') }}</span>
+                  <span class="feature-desc">{{ t('ai.flexibleConfigDesc') }}</span>
                 </div>
               </div>
             </div>
@@ -80,7 +80,7 @@
                 <span class="dot"></span>
                 <span class="dot"></span>
               </div>
-              <span class="footer-text">选择文档开始体验</span>
+              <span class="footer-text">{{ t('ai.selectDocToStart') }}</span>
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@
       <div class="doc-select-area">
         <label class="section-label">
           <el-icon class="label-icon" :size="18"><Paperclip /></el-icon>
-          <span class="label-text">选择文档</span>
+          <span class="label-text">{{ t('ai.selectDocument') }}</span>
         </label>
         <div class="url-input-container">
           <div class="input-wrapper">
@@ -110,7 +110,7 @@
           </div>
           <button class="select-file-btn" @click="openFileDialog">
             <el-icon class="btn-icon" :size="18"><FolderOpened /></el-icon>
-            <span class="btn-text">选择文件</span>
+            <span class="btn-text">{{ t('ai.selectDocument') }}</span>
           </button>
         </div>
       </div>
@@ -196,16 +196,16 @@
     <!-- 文件选择弹窗 -->
     <el-dialog
       v-model="fileDialogVisible"
-      title="选择文件"
+      :title="t('ai.selectDocument')"
       width="600px"
       custom-class="ds-dialog"
     >
       <div class="file-browser">
         <!-- 面包屑导航 -->
         <div class="breadcrumb" v-if="currentPath.length > 0">
-          <DSTag color="primary" class="breadcrumb-home" @click="navigateTo(-1)">
+            <DSTag color="primary" class="breadcrumb-home" @click="navigateTo(-1)">
             <el-icon :size="16"><HomeFilled /></el-icon>
-            根目录
+            {{ t('ai.rootDirectory') }}
           </DSTag>
           <span
             v-for="(item, index) in currentPath"
@@ -248,7 +248,7 @@
           <div class="empty-icon">
             <el-icon :size="48"><FolderRemove /></el-icon>
           </div>
-          <p class="empty-text">文件夹为空</p>
+          <p class="empty-text">{{ t('ai.emptyFolder') }}</p>
         </div>
       </div>
 
@@ -272,6 +272,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { ElMessage } from 'element-plus';
 import { listFiles, downloadUrlParam } from '@/api/file';
 import { useLoginUserStore } from '@/store/user';
@@ -294,6 +295,7 @@ import { getApiUrl, API_PATHS } from '@/config/api';
 import DSButton from '@/components/design-system/DSButton.vue';
 import DSTag from '@/components/design-system/DSTag.vue';
 
+const { t } = useI18n();
 const { loginUser } = useLoginUserStore();
 const generatedContent = ref('');
 const isGenerating = ref(false);
