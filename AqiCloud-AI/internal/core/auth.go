@@ -37,8 +37,16 @@ func ParseJWT(tokenStr string) (*UserClaims, error) {
 		return nil, ErrTokenEmpty
 	}
 
+	// 获取 JWT 密钥（优先使用 JWT_SECRET，与 AqiCloud-Agent 统一）
+	cfg := GetConfig()
+	jwtSecret := cfg.JWTSecret
+	if jwtSecret == "" {
+		jwtSecret = cfg.JWTSecretKey // 兼容旧配置
+	}
+	log.Printf("[ParseJWT] using secret length: %d", len(jwtSecret))
+
 	token, err := jwt.ParseWithClaims(tokenStr, &UserClaims{}, func(t *jwt.Token) (interface{}, error) {
-		return []byte(GetConfig().JWTSecretKey), nil
+		return []byte(jwtSecret), nil
 	})
 	if err != nil {
 		log.Printf("[ParseJWT] jwt.ParseWithClaims error: %v", err)

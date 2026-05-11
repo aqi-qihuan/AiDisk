@@ -41,11 +41,11 @@ func GenerateLoginToken(accountID int64, username string) string {
 		Username:  username,
 		RegisteredClaims: jwt.RegisteredClaims{
 			Subject:   cfg.JWTLoginSubject,
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(7 * 24 * time.Hour)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(config.GetTokenExpireDuration())),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
 		},
 	}
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	token := jwt.NewWithClaims(config.GetSigningMethod(), claims)
 	s, _ := token.SignedString([]byte(cfg.JWTSecret))
 	return cfg.JWTLoginSubject + s
 }
@@ -120,7 +120,7 @@ func GenerateShareToken(shareID int64) string {
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
 		},
 	}
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	token := jwt.NewWithClaims(config.GetSigningMethod(), claims)
 	s, _ := token.SignedString([]byte(cfg.JWTSecret))
 	return s
 }

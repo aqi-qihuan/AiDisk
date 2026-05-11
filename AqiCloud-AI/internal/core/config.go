@@ -25,6 +25,7 @@ type Config struct {
 
 	// JWT
 	JWTSecretKey           string
+	JWTSecret              string // 兼容 AqiCloud-Agent 的字段名
 	JWTAlgorithm           string
 	JWTAccessExpireMinutes int
 	JWTLoginSubject        string
@@ -75,6 +76,7 @@ func GetConfig() *Config {
 			MySQLDatabase: getEnv("MYSQL_DATABASE", "aqi-cloud-pan"),
 
 			JWTSecretKey:           getEnv("JWT_SECRET_KEY", ""),
+			JWTSecret:              getEnv("JWT_SECRET", ""), // 优先使用 JWT_SECRET（与 AqiCloud-Agent 统一）
 			JWTAlgorithm:           getEnv("JWT_ALGORITHM", "HS256"),
 			JWTAccessExpireMinutes: getEnvInt("JWT_ACCESS_TOKEN_EXPIRE_MINUTES", 30),
 			JWTLoginSubject:        getEnv("JWT_LOGIN_SUBJECT", "AQI"),
