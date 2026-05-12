@@ -11,20 +11,26 @@
       :file-list="fileList"
     >
       <el-icon class="upload-icon"><UploadFilled /></el-icon>
-      <div class="upload-text">
-        请拖拽文件到此处或 <em>点击此处上传</em>
-      </div>
+      <div class="upload-text">请拖拽文件到此处或 <em>点击此处上传</em></div>
       <template #tip>
-        <div class="upload-tip">
-          支持单个或批量上传，建议单文件不超过 100MB
-        </div>
+        <div class="upload-tip">支持单个或批量上传，建议单文件不超过 100MB</div>
       </template>
     </el-upload>
     <div class="upload-actions">
-      <DSButton variant="primary" size="large" @click="startUpload" :loading="isUploading">
-        {{ isUploading ? '上传中...' : '开始上传' }}
+      <DSButton
+        variant="primary"
+        size="large"
+        @click="startUpload"
+        :loading="isUploading"
+      >
+        {{ isUploading ? "上传中..." : "开始上传" }}
       </DSButton>
-      <DSButton variant="secondary" size="large" @click="clearFiles" :disabled="fileList.length === 0">
+      <DSButton
+        variant="secondary"
+        size="large"
+        @click="clearFiles"
+        :disabled="fileList.length === 0"
+      >
         清空列表
       </DSButton>
     </div>
@@ -108,8 +114,8 @@ const fileUploadChunkQueue = ref<Record<string, any>>({});
 const isUploading = ref(false);
 
 // 计算属性：是否有文件正在上传
-const hasUploadingFiles = computed(() => 
-  fileList.value.some(file => file.status === "uploading")
+const hasUploadingFiles = computed(() =>
+  fileList.value.some((file) => file.status === "uploading"),
 );
 
 /**
@@ -117,7 +123,7 @@ const hasUploadingFiles = computed(() =>
  */
 onBeforeUnmount(() => {
   fileList.value = [];
-  Object.values(fileUploadChunkQueue.value).forEach(queue => {
+  Object.values(fileUploadChunkQueue.value).forEach((queue) => {
     if (queue?.stop) queue.stop();
   });
 });
@@ -142,7 +148,7 @@ const getTaskInfo = async (file: File): Promise<UploadTask | null> => {
   // 小于5MB的文件直接上传
   if (file.size <= 5 * 1024 * 1024) {
     const uploadResult = await handleSmallFileUpload(file, identifier);
-    return uploadResult.success ? { isDirectUpload: true } as any : null;
+    return uploadResult.success ? ({ isDirectUpload: true } as any) : null;
   }
 
   try {
@@ -206,7 +212,7 @@ const getTaskInfo = async (file: File): Promise<UploadTask | null> => {
  */
 const handleSmallFileUpload = async (
   file: File,
-  identifier: string
+  identifier: string,
 ): Promise<{ success: boolean; error?: string }> => {
   try {
     const response = await uploadFiles({
@@ -226,7 +232,7 @@ const handleSmallFileUpload = async (
       });
 
       // 从列表中移除已上传文件
-      fileList.value = fileList.value.filter(f => f.raw !== file);
+      fileList.value = fileList.value.filter((f) => f.raw !== file);
       return { success: true };
     } else {
       throw new Error(response.data.msg || "上传文件失败");
@@ -256,14 +262,17 @@ const uploadNext = async (
   fileIdentifier: string,
   chunkSize: number,
   onProgress: (progress: { percent: number }) => void,
-  retryCount = 0
+  retryCount = 0,
 ): Promise<void> => {
   try {
     const start = chunkSize * (partNumber - 1);
     const end = Math.min(start + chunkSize, file.size);
     const blob = file.slice(start, end);
 
-    const res = await preSignUploadUrl({ identifier: fileIdentifier, partNumber });
+    const res = await preSignUploadUrl({
+      identifier: fileIdentifier,
+      partNumber,
+    });
 
     if (res.data.code === 0 && res.data.data) {
       // 使用 fetch 替代 axios，减少依赖
@@ -283,7 +292,14 @@ const uploadNext = async (
     }
   } catch (error: any) {
     if (retryCount < 3) {
-      return uploadNext(partNumber, file, fileIdentifier, chunkSize, onProgress, retryCount + 1);
+      return uploadNext(
+        partNumber,
+        file,
+        fileIdentifier,
+        chunkSize,
+        onProgress,
+        retryCount + 1,
+      );
     }
     throw error;
   }
@@ -298,20 +314,30 @@ const uploadNext = async (
 const handleUpload = async (
   file: File,
   taskRecord: UploadTask["taskRecord"],
-  options: { onProgress: (progress: { percent: number }) => void }
+  options: { onProgress: (progress: { percent: number }) => void },
 ): Promise<void> => {
   let lastUploadedSize = 0;
   const totalSize = file.size;
   const { exitPartList, chunkSize, chunkNum, fileIdentifier } = taskRecord;
 
   for (let partNumber = 1; partNumber <= chunkNum; partNumber++) {
-    const exitPart = exitPartList?.find(part => part.partNumber === partNumber);
+    const exitPart = exitPartList?.find(
+      (part) => part.partNumber === partNumber,
+    );
 
     if (!exitPart) {
-      await uploadNext(partNumber, file, fileIdentifier, chunkSize, options.onProgress);
+      await uploadNext(
+        partNumber,
+        file,
+        fileIdentifier,
+        chunkSize,
+        options.onProgress,
+      );
     } else {
       lastUploadedSize += Number(exitPart.size);
-      options.onProgress({ percent: Math.ceil((lastUploadedSize / totalSize) * 100) });
+      options.onProgress({
+        percent: Math.ceil((lastUploadedSize / totalSize) * 100),
+      });
     }
   }
 };
@@ -321,7 +347,10 @@ const handleUpload = async (
  * @param file - 新增的文件
  * @param uploadFileList - 文件列表
  */
-const handleFileChange = (file: UploadFile, uploadFileList: UploadFile[]): void => {
+const handleFileChange = (
+  file: UploadFile,
+  uploadFileList: UploadFile[],
+): void => {
   file.percentage = 0;
   file.status = "ready";
   fileList.value = uploadFileList;
@@ -339,7 +368,7 @@ const handleSingleFileUpload = async (file: UploadFile): Promise<void> => {
 
   try {
     const identifier = await calculateIdentifier(file.raw);
-    
+
     // 尝试秒传
     const res = await secUpload({
       identifier,
@@ -354,7 +383,7 @@ const handleSingleFileUpload = async (file: UploadFile): Promise<void> => {
         title: "秒传成功",
         message: `文件 ${file.name} 已存在，秒传成功`,
       });
-      fileList.value = fileList.value.filter(f => f.uid !== file.uid);
+      fileList.value = fileList.value.filter((f) => f.uid !== file.uid);
       return;
     }
 
@@ -367,7 +396,7 @@ const handleSingleFileUpload = async (file: UploadFile): Promise<void> => {
     }
 
     // 检查文件是否还在列表中
-    if (!fileList.value.find(f => f.uid === file.uid)) {
+    if (!fileList.value.find((f) => f.uid === file.uid)) {
       return;
     }
 
@@ -381,12 +410,15 @@ const handleSingleFileUpload = async (file: UploadFile): Promise<void> => {
     }
 
     if (task.finished) {
-      emit("upload-success", { file, path: `${props.currentPath}${file.name}` });
+      emit("upload-success", {
+        file,
+        path: `${props.currentPath}${file.name}`,
+      });
       ElNotification.success({
         title: "上传成功",
         message: `文件 ${file.name} 已上传完成`,
       });
-      fileList.value = fileList.value.filter(f => f.uid !== file.uid);
+      fileList.value = fileList.value.filter((f) => f.uid !== file.uid);
       return;
     }
 
@@ -408,12 +440,15 @@ const handleSingleFileUpload = async (file: UploadFile): Promise<void> => {
     if (mergeRes.data.code === 0) {
       file.status = "success";
       file.percentage = 100;
-      emit("upload-success", { file, path: `${props.currentPath}${file.name}` });
+      emit("upload-success", {
+        file,
+        path: `${props.currentPath}${file.name}`,
+      });
       ElNotification.success({
         title: "上传成功",
         message: `文件 ${file.name} 上传成功`,
       });
-      fileList.value = fileList.value.filter(f => f.uid !== file.uid);
+      fileList.value = fileList.value.filter((f) => f.uid !== file.uid);
     } else {
       throw new Error(mergeRes.data.msg || "文件合并失败");
     }
@@ -485,7 +520,7 @@ const handleRemoveFile = (file: UploadFile): void => {
     fileUploadChunkQueue.value[file.uid] = undefined;
   }
 
-  fileList.value = fileList.value.filter(f => f.uid !== file.uid);
+  fileList.value = fileList.value.filter((f) => f.uid !== file.uid);
 };
 </script>
 

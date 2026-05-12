@@ -11,7 +11,10 @@
           aria-valuemin="0"
           aria-valuemax="100"
         >
-          <span v-if="showInfo && textInside" class="ds-progress-line-text-inside">
+          <span
+            v-if="showInfo && textInside"
+            class="ds-progress-line-text-inside"
+          >
             {{ formatPercent }}
           </span>
         </div>
@@ -22,8 +25,15 @@
     </div>
 
     <!-- 环形进度条 -->
-    <div v-else-if="type === 'circle' || type === 'dashboard'" class="ds-progress-circle">
-      <svg :width="circleSize" :height="circleSize" :viewBox="`0 0 ${circleSize} ${circleSize}`">
+    <div
+      v-else-if="type === 'circle' || type === 'dashboard'"
+      class="ds-progress-circle"
+    >
+      <svg
+        :width="circleSize"
+        :height="circleSize"
+        :viewBox="`0 0 ${circleSize} ${circleSize}`"
+      >
         <!-- 背景圆 -->
         <circle
           :cx="circleSize / 2"
@@ -59,16 +69,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from "vue";
 
 interface Props {
   percent?: number;
-  type?: 'line' | 'circle' | 'dashboard';
-  size?: 'sm' | 'md' | 'lg';
+  type?: "line" | "circle" | "dashboard";
+  size?: "sm" | "md" | "lg";
   strokeWidth?: number;
   showInfo?: boolean;
   textInside?: boolean;
-  status?: 'normal' | 'success' | 'exception' | 'active';
+  status?: "normal" | "success" | "exception" | "active";
   color?: string;
   trackColor?: string;
   format?: (percent: number) => string;
@@ -76,14 +86,14 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   percent: 0,
-  type: 'line',
-  size: 'md',
+  type: "line",
+  size: "md",
   strokeWidth: 6,
   showInfo: true,
   textInside: false,
-  status: 'normal',
-  color: '',
-  trackColor: '#E5E7EB',
+  status: "normal",
+  color: "",
+  trackColor: "#E5E7EB",
   format: (percent: number) => `${percent}%`,
 });
 
@@ -130,22 +140,22 @@ const dashOffset = computed(() => {
 
 const circleStyle = computed(() => {
   return {
-    transition: 'stroke-dashoffset 0.3s ease',
+    transition: "stroke-dashoffset 0.3s ease",
   };
 });
 
 // 进度条颜色
 const strokeColor = computed(() => {
   if (props.color) return props.color;
-  
-  if (props.status === 'success') return 'var(--color-success)';
-  if (props.status === 'exception') return 'var(--color-error)';
-  if (props.status === 'active') return 'var(--color-primary)';
-  
+
+  if (props.status === "success") return "var(--color-success)";
+  if (props.status === "exception") return "var(--color-error)";
+  if (props.status === "active") return "var(--color-primary)";
+
   // 根据百分比渐变
-  if (clampedPercent.value < 30) return 'var(--color-error)';
-  if (clampedPercent.value < 70) return 'var(--color-warning)';
-  return 'var(--color-success)';
+  if (clampedPercent.value < 30) return "var(--color-error)";
+  if (clampedPercent.value < 70) return "var(--color-warning)";
+  return "var(--color-success)";
 });
 </script>
 
@@ -180,7 +190,9 @@ const strokeColor = computed(() => {
 .ds-progress-line-fill {
   height: 100%;
   border-radius: 4px;
-  transition: width 0.3s ease, background 0.3s ease;
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
   position: relative;
   display: flex;
   align-items: center;
@@ -262,11 +274,11 @@ const strokeColor = computed(() => {
   .ds-progress-circle-text {
     font-size: 12px;
   }
-  
+
   .ds-progress-sm .ds-progress-circle-text {
     font-size: 10px;
   }
-  
+
   .ds-progress-lg .ds-progress-circle-text {
     font-size: 14px;
   }
@@ -278,7 +290,7 @@ const strokeColor = computed(() => {
   .ds-progress circle {
     transition: none !important;
   }
-  
+
   .ds-progress-active .ds-progress-line-fill {
     animation: none;
   }

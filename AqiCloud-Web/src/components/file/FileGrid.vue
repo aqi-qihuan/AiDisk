@@ -17,11 +17,7 @@
           @contextmenu.prevent="handleContextMenu($event, file)"
         >
           <div v-if="isSelectionMode" class="file-checkbox">
-            <el-checkbox 
-              v-model="selectedFileIds" 
-              :label="file.id"
-              @click.stop
-            >
+            <el-checkbox v-model="selectedFileIds" :label="file.id" @click.stop>
               <!-- 空的标签内容，不显示任何文本 -->
             </el-checkbox>
           </div>
@@ -127,8 +123,10 @@ const handleContextMenuAction = (action: string): void => {
 
   const actions: Record<string, () => void> = {
     view: () => emit("fileClick", selectedFile.value!),
-    copy: () => emit("copyFile", [selectedFile.value!], props.currentPath || "/"),
-    move: () => emit("moveFile", [selectedFile.value!], props.currentPath || "/"),
+    copy: () =>
+      emit("copyFile", [selectedFile.value!], props.currentPath || "/"),
+    move: () =>
+      emit("moveFile", [selectedFile.value!], props.currentPath || "/"),
     share: () => emit("shareFiles", [selectedFile.value!]),
     rename: () => emit("openRenameDialog", selectedFile.value!),
     info: () => emit("openFileInfo", selectedFile.value!),
@@ -145,7 +143,7 @@ const handleContextMenuAction = (action: string): void => {
  */
 const updateSelection = (): void => {
   const selectedFileObjects = props.fileList.filter((file) =>
-    selectedFileIds.value.includes(file.id)
+    selectedFileIds.value.includes(file.id),
   );
   emit("selectionChange", selectedFileObjects);
 };
@@ -158,7 +156,7 @@ watch(
   () => {
     updateSelection();
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 /**
@@ -172,7 +170,7 @@ watch(
       selectedFileIds.value = [];
       updateSelection();
     }
-  }
+  },
 );
 </script>
 
@@ -268,7 +266,7 @@ watch(
     width: 60px;
     height: 60px;
   }
-  
+
   .file-name {
     font-size: 11px;
   }

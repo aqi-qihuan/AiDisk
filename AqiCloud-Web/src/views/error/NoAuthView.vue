@@ -7,33 +7,71 @@
     <div class="error-content glass-card">
       <!-- 403 SVG Illustration -->
       <div class="error-illustration">
-        <svg width="180" height="140" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="90" cy="70" r="60" stroke="rgba(219,39,119,0.2)" stroke-width="2" fill="none"/>
-          <circle cx="90" cy="70" r="40" stroke="rgba(239,68,68,0.15)" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
-          <text x="90" y="82" text-anchor="middle" font-size="52" font-weight="800" font-family="'Plus Jakarta Sans', sans-serif" fill="url(#pinkRed)">403</text>
+        <svg
+          width="180"
+          height="140"
+          viewBox="0 0 180 140"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx="90"
+            cy="70"
+            r="60"
+            stroke="rgba(219,39,119,0.2)"
+            stroke-width="2"
+            fill="none"
+          />
+          <circle
+            cx="90"
+            cy="70"
+            r="40"
+            stroke="rgba(239,68,68,0.15)"
+            stroke-width="2"
+            fill="none"
+            stroke-dasharray="6 4"
+          />
+          <text
+            x="90"
+            y="82"
+            text-anchor="middle"
+            font-size="52"
+            font-weight="800"
+            font-family="'Plus Jakarta Sans', sans-serif"
+            fill="url(#pinkRed)"
+          >
+            403
+          </text>
           <defs>
             <linearGradient id="pinkRed" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#DB2777"/>
-              <stop offset="100%" stop-color="#EF4444"/>
+              <stop offset="0%" stop-color="#DB2777" />
+              <stop offset="100%" stop-color="#EF4444" />
             </linearGradient>
           </defs>
         </svg>
       </div>
 
       <h1 class="error-code">403</h1>
-      <h2 class="error-title">{{ $t('error.403.message') }}</h2>
-      <p class="error-desc">{{ $t('error.403.description') }}</p>
+      <h2 class="error-title">{{ $t("error.403.message") }}</h2>
+      <p class="error-desc">{{ $t("error.403.description") }}</p>
 
       <div class="error-actions">
         <DSButton variant="primary" @click="$router.push('/')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
           </svg>
-          {{ $t('error.backHome') }}
+          {{ $t("error.backHome") }}
         </DSButton>
         <DSButton variant="secondary" @click="$router.back()">
-          {{ $t('error.goBack') }}
+          {{ $t("error.goBack") }}
         </DSButton>
       </div>
     </div>
@@ -41,7 +79,7 @@
 </template>
 
 <script setup lang="ts">
-import DSButton from '@/components/design-system/DSButton.vue';
+import DSButton from "@/components/design-system/DSButton.vue";
 </script>
 
 <style scoped>
@@ -50,7 +88,7 @@ import DSButton from '@/components/design-system/DSButton.vue';
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0B0B10;
+  background: #0b0b10;
   position: relative;
   overflow: hidden;
   padding: 24px;
@@ -72,7 +110,7 @@ import DSButton from '@/components/design-system/DSButton.vue';
 .orb-1 {
   width: 400px;
   height: 400px;
-  background: #DB2777;
+  background: #db2777;
   top: -150px;
   left: -100px;
   animation: float 20s ease-in-out infinite;
@@ -81,15 +119,20 @@ import DSButton from '@/components/design-system/DSButton.vue';
 .orb-2 {
   width: 300px;
   height: 300px;
-  background: #EF4444;
+  background: #ef4444;
   bottom: -100px;
   right: -80px;
   animation: float 25s ease-in-out infinite reverse;
 }
 
 @keyframes float {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(30px, -30px); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, -30px);
+  }
 }
 
 .error-content {
@@ -119,15 +162,15 @@ import DSButton from '@/components/design-system/DSButton.vue';
 .error-title {
   font-size: 28px;
   font-weight: 700;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  color: #F8FAFC;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: #f8fafc;
   margin: 0 0 12px;
   letter-spacing: -0.02em;
 }
 
 .error-desc {
   font-size: 16px;
-  color: #94A3B8;
+  color: #94a3b8;
   margin: 0 0 32px;
   line-height: 1.6;
 }

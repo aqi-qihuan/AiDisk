@@ -10,7 +10,7 @@
         'ds-btn-block': block,
         'ds-btn-ghost': ghost,
         'ds-btn-rounded': rounded,
-      }
+      },
     ]"
     :disabled="disabled || loading"
     @click="handleClick"
@@ -28,37 +28,44 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits } from "vue";
 
 interface Props {
-  variant?: 'primary' | 'secondary' | 'cta' | 'golden' | 'danger' | 'ghost' | 'success';
-  size?: 'small' | 'medium' | 'large';
+  variant?:
+    | "primary"
+    | "secondary"
+    | "cta"
+    | "golden"
+    | "danger"
+    | "ghost"
+    | "success";
+  size?: "small" | "medium" | "large";
   disabled?: boolean;
   loading?: boolean;
   block?: boolean;
   ghost?: boolean;
   rounded?: boolean;
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  variant: 'primary',
-  size: 'medium',
+  variant: "primary",
+  size: "medium",
   disabled: false,
   loading: false,
   block: false,
   ghost: false,
   rounded: false,
-  type: 'button',
+  type: "button",
 });
 
 const emit = defineEmits<{
-  (e: 'click', event: MouseEvent): void;
+  (e: "click", event: MouseEvent): void;
 }>();
 
 const handleClick = (event: MouseEvent) => {
   if (!props.disabled && !props.loading) {
-    emit('click', event);
+    emit("click", event);
   }
 };
 </script>
@@ -110,8 +117,12 @@ const handleClick = (event: MouseEvent) => {
 
 /* Primary - Pink Gradient + Glow */
 .ds-btn-primary {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-  color: #FFFFFF;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
+  color: #ffffff;
   box-shadow: var(--glow-primary-btn);
 }
 
@@ -145,8 +156,13 @@ const handleClick = (event: MouseEvent) => {
 
 /* CTA - Gold Gradient + Glow */
 .ds-btn-cta {
-  background: linear-gradient(135deg, var(--color-cta) 0%, var(--color-cta-light) 50%, var(--color-gold) 100%);
-  color: #1A1A24;
+  background: linear-gradient(
+    135deg,
+    var(--color-cta) 0%,
+    var(--color-cta-light) 50%,
+    var(--color-gold) 100%
+  );
+  color: #1a1a24;
   font-weight: 600;
   box-shadow: var(--glow-cta-btn);
 }
@@ -163,8 +179,12 @@ const handleClick = (event: MouseEvent) => {
 
 /* Golden - Gold bg, dark text */
 .ds-btn-golden {
-  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-cta-light) 100%);
-  color: #0B0B10;
+  background: linear-gradient(
+    135deg,
+    var(--color-gold) 0%,
+    var(--color-cta-light) 100%
+  );
+  color: #0b0b10;
   font-weight: 600;
   box-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);
 }
@@ -180,8 +200,8 @@ const handleClick = (event: MouseEvent) => {
 
 /* Danger */
 .ds-btn-danger {
-  background: linear-gradient(135deg, var(--color-error) 0%, #F87171 100%);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, var(--color-error) 0%, #f87171 100%);
+  color: #ffffff;
   box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
 }
 
@@ -213,8 +233,8 @@ const handleClick = (event: MouseEvent) => {
 
 /* Success */
 .ds-btn-success {
-  background: linear-gradient(135deg, var(--color-success) 0%, #34D399 100%);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, var(--color-success) 0%, #34d399 100%);
+  color: #ffffff;
   box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
 }
 

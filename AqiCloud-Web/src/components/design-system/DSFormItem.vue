@@ -1,6 +1,10 @@
 <template>
   <div class="ds-form-item">
-    <label v-if="label" class="form-item-label" :class="{ 'is-required': required }">
+    <label
+      v-if="label"
+      class="form-item-label"
+      :class="{ 'is-required': required }"
+    >
       {{ label }}
     </label>
     <div class="form-item-content">

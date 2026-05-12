@@ -5,11 +5,17 @@
       <div
         v-for="(message, index) in messages"
         :key="index"
-        :class="['message-item', message.isUser ? 'user-message' : 'assistant-message']"
+        :class="[
+          'message-item',
+          message.isUser ? 'user-message' : 'assistant-message',
+        ]"
       >
         <!-- 头像 -->
         <div class="avatar">
-          <img :src="message.isUser ? userAvatar : assistantAvatar" alt="avatar" />
+          <img
+            :src="message.isUser ? userAvatar : assistantAvatar"
+            alt="avatar"
+          />
         </div>
 
         <!-- 消息内容 -->
@@ -22,7 +28,10 @@
           </div>
 
           <!-- 时间戳 -->
-          <div class="message-time" v-if="!message.isLoading && message.content">
+          <div
+            class="message-time"
+            v-if="!message.isLoading && message.content"
+          >
             {{ formatTime(message.timestamp) }}
           </div>
         </div>
@@ -38,22 +47,25 @@
                 <el-icon :size="36"><ChatDotRound /></el-icon>
               </div>
             </div>
-            <h3 class="welcome-title">{{ t('ai.chatAssistantTitle') }}</h3>
-            <p class="welcome-subtitle">{{ t('ai.chatAssistantSubtitle') }}</p>
+            <h3 class="welcome-title">{{ t("ai.chatAssistantTitle") }}</h3>
+            <p class="welcome-subtitle">{{ t("ai.chatAssistantSubtitle") }}</p>
           </div>
-          
+
           <div class="welcome-divider"></div>
-          
+
           <p class="welcome-description">
-            {{ t('ai.chatWelcomeDesc') }}
+            {{ t("ai.chatWelcomeDesc") }}
           </p>
-          
+
           <div class="suggestions">
             <div
               v-for="(suggestion, idx) in suggestions"
               :key="idx"
               class="suggestion-card"
-              @click="inputMessage = suggestion.text; sendMessage()"
+              @click="
+                inputMessage = suggestion.text;
+                sendMessage();
+              "
             >
               <div class="suggestion-icon">
                 <el-icon :size="24">
@@ -66,14 +78,14 @@
               <div class="suggestion-arrow">→</div>
             </div>
           </div>
-          
+
           <div class="welcome-footer">
             <div class="typing-indicator">
               <span class="dot"></span>
               <span class="dot"></span>
               <span class="dot"></span>
             </div>
-            <span class="footer-text">{{ t('ai.alwaysReady') }}</span>
+            <span class="footer-text">{{ t("ai.alwaysReady") }}</span>
           </div>
         </div>
       </div>
@@ -93,14 +105,14 @@
 
         <div class="input-actions">
           <div class="input-tips">
-            <span class="tip-badge">{{ t('ai.enterSend') }}</span>
-            <span class="tip-badge">{{ t('ai.shiftEnterNewline') }}</span>
+            <span class="tip-badge">{{ t("ai.enterSend") }}</span>
+            <span class="tip-badge">{{ t("ai.shiftEnterNewline") }}</span>
           </div>
 
           <div
             class="send-btn"
             @click="sendMessage"
-            :class="{ 'active': inputMessage.trim(), 'loading': isSending }"
+            :class="{ active: inputMessage.trim(), loading: isSending }"
           >
             <svg
               v-if="!isSending"
@@ -121,43 +133,50 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, onMounted, nextTick, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-import LoadingDots from '@/components/common/LoadingDots.vue';
-import { useLoginUserStore } from '@/store/user';
-import { getApiUrl, API_PATHS } from '@/config/api';
-import userAvatar from '@/assets/assistant-avatar.png';
-import assistantAvatar from '@/assets/user-avatar.png';
+import { defineComponent, ref, onMounted, nextTick, watch } from "vue";
+import { useI18n } from "vue-i18n";
+import LoadingDots from "@/components/common/LoadingDots.vue";
+import { useLoginUserStore } from "@/store/user";
+import { getApiUrl, API_PATHS } from "@/config/api";
+import userAvatar from "@/assets/assistant-avatar.png";
+import assistantAvatar from "@/assets/user-avatar.png";
 import {
   ChatDotRound,
   EditPen,
   Promotion,
-  MagicStick
-} from '@element-plus/icons-vue';
+  MagicStick,
+} from "@element-plus/icons-vue";
 
 export default defineComponent({
-  name: 'Chat',
+  name: "Chat",
   components: {
     LoadingDots,
     ChatDotRound,
     EditPen,
     Promotion,
-    MagicStick
+    MagicStick,
   },
   setup() {
     const { t } = useI18n();
-    const messages = ref<Array<{ isUser: boolean; content: string; isLoading?: boolean; timestamp?: number }>>([]);
+    const messages = ref<
+      Array<{
+        isUser: boolean;
+        content: string;
+        isLoading?: boolean;
+        timestamp?: number;
+      }>
+    >([]);
 
-    const inputMessage = ref('');
+    const inputMessage = ref("");
     const messageList = ref<HTMLElement | null>(null);
     const textareaRef = ref<HTMLTextAreaElement | null>(null);
     const isSending = ref(false);
 
     // 建议问题
     const suggestions = ref([
-      { icon: 'EditPen', text: t('ai.summarizeWork') },
-      { icon: 'Promotion', text: t('ai.improveEfficiency') },
-      { icon: 'MagicStick', text: t('ai.giveAdvice') },
+      { icon: "EditPen", text: t("ai.summarizeWork") },
+      { icon: "Promotion", text: t("ai.improveEfficiency") },
+      { icon: "MagicStick", text: t("ai.giveAdvice") },
     ]);
 
     const scrollToBottom = () => {
@@ -168,18 +187,19 @@ export default defineComponent({
 
     // 格式化时间
     const formatTime = (timestamp?: number) => {
-      if (!timestamp) return '';
+      if (!timestamp) return "";
       const date = new Date(timestamp);
-      const hours = date.getHours().toString().padStart(2, '0');
-      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const hours = date.getHours().toString().padStart(2, "0");
+      const minutes = date.getMinutes().toString().padStart(2, "0");
       return `${hours}:${minutes}`;
     };
 
     // 自动调整文本框高度
     watch(inputMessage, () => {
       if (textareaRef.value) {
-        textareaRef.value.style.height = 'auto';
-        textareaRef.value.style.height = Math.min(textareaRef.value.scrollHeight, 120) + 'px';
+        textareaRef.value.style.height = "auto";
+        textareaRef.value.style.height =
+          Math.min(textareaRef.value.scrollHeight, 120) + "px";
       }
     });
 
@@ -196,13 +216,13 @@ export default defineComponent({
           if (done) break;
 
           const chunk = decoder.decode(value, { stream: true });
-          const lines = chunk.split('\n');
+          const lines = chunk.split("\n");
 
           for (const line of lines) {
-            if (line.trim() === '' || line.trim() === 'data: [DONE]') continue;
+            if (line.trim() === "" || line.trim() === "data: [DONE]") continue;
 
             try {
-              const jsonStr = line.replace(/^data: /, '').trim();
+              const jsonStr = line.replace(/^data: /, "").trim();
               if (!jsonStr) continue;
 
               const jsonData = JSON.parse(jsonStr);
@@ -215,13 +235,13 @@ export default defineComponent({
                 });
               }
             } catch (e) {
-              console.error('Error parsing JSON:', e);
+              console.error("Error parsing JSON:", e);
             }
           }
         }
       } catch (error) {
-        console.error('Stream reading error:', error);
-        messages.value[currentMessageIndex].content = '[读取数据时发生错误]';
+        console.error("Stream reading error:", error);
+        messages.value[currentMessageIndex].content = "[读取数据时发生错误]";
       } finally {
         messages.value[currentMessageIndex].isLoading = false;
         messages.value[currentMessageIndex].timestamp = Date.now();
@@ -234,18 +254,22 @@ export default defineComponent({
       if (!inputMessage.value.trim() || isSending.value) return;
 
       const userMessage = inputMessage.value;
-      messages.value.push({ isUser: true, content: userMessage, timestamp: Date.now() });
+      messages.value.push({
+        isUser: true,
+        content: userMessage,
+        timestamp: Date.now(),
+      });
       messages.value.push({
         isUser: false,
-        content: '',
+        content: "",
         isLoading: true,
         timestamp: Date.now(),
       });
-      inputMessage.value = '';
+      inputMessage.value = "";
 
       // 重置文本框高度
       if (textareaRef.value) {
-        textareaRef.value.style.height = 'auto';
+        textareaRef.value.style.height = "auto";
       }
 
       scrollToBottom();
@@ -253,10 +277,10 @@ export default defineComponent({
       try {
         isSending.value = true;
         const response = await fetch(getApiUrl(API_PATHS.CHAT), {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
-            token: useLoginUserStore().token || '',
+            "Content-Type": "application/json",
+            token: useLoginUserStore().token || "",
           },
           body: JSON.stringify({
             message: userMessage,
@@ -265,16 +289,18 @@ export default defineComponent({
 
         if (!response.ok) {
           const errorText = await response.text();
-          throw new Error(`Server responded with ${response.status}: ${errorText}`);
+          throw new Error(
+            `Server responded with ${response.status}: ${errorText}`,
+          );
         }
 
         await processStreamResponse(response);
       } catch (error) {
-        console.error('Send message error:', error);
+        console.error("Send message error:", error);
         messages.value.pop();
         messages.value.push({
           isUser: false,
-          content: '抱歉，发生了错误，请稍后重试。',
+          content: "抱歉，发生了错误，请稍后重试。",
           isLoading: false,
           timestamp: Date.now(),
         });
@@ -313,7 +339,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--color-bg-surface, #14141C);
+  background: var(--color-bg-surface, #14141c);
   position: relative;
   overflow: hidden;
 }
@@ -389,17 +415,17 @@ export default defineComponent({
 
 /* 用户消息 - 金色渐变气泡（HOK设计） */
 .message-item.user-message .message-content {
-  background: linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #FBBF24 100%);
-  color: #0B0B10;
+  background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
+  color: #0b0b10;
   font-weight: 500;
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(217, 119, 6, 0.3),
     0 2px 4px rgba(0, 0, 0, 0.1);
   border-bottom-right-radius: 6px;
 }
 
 .message-item.user-message .message-content:hover {
-  box-shadow: 
+  box-shadow:
     0 12px 32px rgba(217, 119, 6, 0.4),
     0 4px 8px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
@@ -408,8 +434,8 @@ export default defineComponent({
 /* AI 消息 - 粉色毛玻璃气泡（HOK设计） */
 .message-item.assistant-message .message-content {
   background: rgba(219, 39, 119, 0.08);
-  color: var(--color-text-primary, #F8FAFC);
-  box-shadow: 
+  color: var(--color-text-primary, #f8fafc);
+  box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.2),
     0 1px 3px rgba(0, 0, 0, 0.1);
   border-bottom-left-radius: 6px;
@@ -418,7 +444,7 @@ export default defineComponent({
 }
 
 .message-item.assistant-message .message-content:hover {
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(219, 39, 119, 0.3),
     0 2px 6px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
@@ -458,7 +484,7 @@ export default defineComponent({
   padding: var(--ds-spacing-8);
   max-width: 480px;
   width: 100%;
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.3),
     0 0 0 1px rgba(255, 255, 255, 0.06);
   animation: slideUp 0.6s ease-out;
@@ -480,23 +506,23 @@ export default defineComponent({
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 50%, #F472B6 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 50%, #f472b6 100%);
   animation: rotate 3s linear infinite;
 }
 
 .avatar-ring::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 3px;
   border-radius: 50%;
-  background: var(--color-bg-card, #1A1A24);
+  background: var(--color-bg-card, #1a1a24);
 }
 
 .avatar-inner {
   position: absolute;
   inset: 6px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -507,7 +533,7 @@ export default defineComponent({
 .welcome-title {
   font-size: 28px;
   font-weight: 700;
-  background: linear-gradient(135deg, #DB2777 0%, #FBBF24 100%);
+  background: linear-gradient(135deg, #db2777 0%, #fbbf24 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -516,19 +542,24 @@ export default defineComponent({
 
 .welcome-subtitle {
   font-size: var(--text-base);
-  color: var(--color-text-secondary, #94A3B8);
+  color: var(--color-text-secondary, #94a3b8);
   font-weight: 500;
 }
 
 .welcome-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
   margin: var(--ds-spacing-6) 0;
 }
 
 .welcome-description {
   font-size: var(--text-base);
-  color: var(--color-text-secondary, #94A3B8);
+  color: var(--color-text-secondary, #94a3b8);
   text-align: center;
   margin-bottom: var(--ds-spacing-5);
   font-weight: 500;
@@ -563,7 +594,7 @@ export default defineComponent({
 .suggestion-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -583,7 +614,7 @@ export default defineComponent({
 .suggestion-text {
   font-size: var(--text-base);
   font-weight: 600;
-  color: var(--color-text-primary, #F8FAFC);
+  color: var(--color-text-primary, #f8fafc);
 }
 
 .suggestion-arrow {
@@ -594,13 +625,13 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-primary, #DB2777);
+  color: var(--color-primary, #db2777);
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .suggestion-card:hover .suggestion-arrow {
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
   color: white;
   transform: translateX(4px);
 }
@@ -627,9 +658,15 @@ export default defineComponent({
   animation: typing 1.4s ease-in-out infinite;
 }
 
-.typing-indicator .dot:nth-child(1) { animation-delay: 0s; }
-.typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
-.typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+.typing-indicator .dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.typing-indicator .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-indicator .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
 
 .footer-text {
   font-size: var(--ds-text-size-sm);
@@ -639,18 +676,28 @@ export default defineComponent({
 /* 输入区域 - 全新设计 */
 .input-area {
   padding: var(--ds-spacing-4) var(--ds-spacing-6);
-  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 20%, white 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.9) 20%,
+    white 100%
+  );
   position: relative;
 }
 
 .input-area::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(102, 126, 234, 0.2),
+    transparent
+  );
 }
 
 .input-wrapper {
@@ -660,7 +707,8 @@ export default defineComponent({
   background: rgba(255, 255, 255, 0.03);
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: var(--ds-spacing-3) var(--ds-spacing-16) var(--ds-spacing-3) var(--ds-spacing-5);
+  padding: var(--ds-spacing-3) var(--ds-spacing-16) var(--ds-spacing-3)
+    var(--ds-spacing-5);
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
@@ -690,11 +738,11 @@ export default defineComponent({
   min-height: 24px;
   overflow-y: auto;
   font-family: inherit;
-  color: var(--color-text-primary, #F8FAFC);
+  color: var(--color-text-primary, #f8fafc);
 }
 
 .input-wrapper textarea::placeholder {
-  color: var(--color-text-tertiary, #64748B);
+  color: var(--color-text-tertiary, #64748b);
   font-size: 14px;
 }
 
@@ -711,7 +759,7 @@ export default defineComponent({
 
 .tip-badge {
   font-size: 11px;
-  color: var(--color-primary, #DB2777);
+  color: var(--color-primary, #db2777);
   background: rgba(219, 39, 119, 0.1);
   border: 1px solid rgba(219, 39, 119, 0.2);
   padding: 3px 10px;
@@ -747,12 +795,12 @@ export default defineComponent({
 .send-btn svg {
   width: 18px;
   height: 18px;
-  fill: #64748B;
+  fill: #64748b;
   transition: all 0.3s ease;
 }
 
 .send-btn.active {
-  background: linear-gradient(135deg, #D97706 0%, #FBBF24 100%);
+  background: linear-gradient(135deg, #d97706 0%, #fbbf24 100%);
   border-color: transparent;
   box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
 }
@@ -822,7 +870,8 @@ export default defineComponent({
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -840,7 +889,9 @@ export default defineComponent({
 }
 
 @keyframes typing {
-  0%, 60%, 100% {
+  0%,
+  60%,
+  100% {
     transform: translateY(0);
     opacity: 1;
   }
@@ -858,7 +909,6 @@ export default defineComponent({
 
 /* 响应式 */
 @media (max-width: 768px) {
-
   .message-item {
     max-width: 90%;
   }

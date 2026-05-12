@@ -4,8 +4,17 @@
     <div class="chat-header">
       <h1 class="page-title">AI 聊天助手</h1>
       <DSButton variant="ghost" size="sm" @click="clearChat">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4V4a2 2 0 00-2-2h-.586a1 1 0 01-.707-.293l-1-1A1 1 0 003.586 2H8a2 2 0 012 2v2m5 4h.01M12 12h.01"/>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4V4a2 2 0 00-2-2h-.586a1 1 0 01-.707-.293l-1-1A1 1 0 003.586 2H8a2 2 0 012 2v2m5 4h.01M12 12h.01"
+          />
         </svg>
         清空对话
       </DSButton>
@@ -13,18 +22,20 @@
 
     <!-- Chat Messages -->
     <div class="chat-messages" ref="messagesContainer">
-      <div 
-        v-for="(msg, index) in messages" 
+      <div
+        v-for="(msg, index) in messages"
         :key="index"
         :class="['message', msg.role]"
       >
         <div class="message-avatar">
           <div :class="['avatar', msg.role]">
-            {{ msg.role === 'user' ? '我' : 'AI' }}
+            {{ msg.role === "user" ? "我" : "AI" }}
           </div>
         </div>
         <div class="message-content">
-          <div class="message-role">{{ msg.role === 'user' ? '我' : 'AI 助手' }}</div>
+          <div class="message-role">
+            {{ msg.role === "user" ? "我" : "AI 助手" }}
+          </div>
           <div class="message-text">{{ msg.content }}</div>
           <div class="message-time">{{ msg.time }}</div>
         </div>
@@ -48,7 +59,7 @@
     <!-- Input Area -->
     <div class="chat-input-area">
       <div class="input-wrapper">
-        <textarea 
+        <textarea
           v-model="userInput"
           placeholder="输入消息，Enter 发送，Shift+Enter 换行..."
           class="chat-input"
@@ -56,15 +67,22 @@
           @keydown="handleKeydown"
           @input="autoResize"
         ></textarea>
-        <DSButton 
-          variant="primary" 
+        <DSButton
+          variant="primary"
           size="md"
           :disabled="!userInput.trim() || isLoading"
           @click="sendMessage"
           class="send-button"
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
           </svg>
         </DSButton>
       </div>
@@ -74,11 +92,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick } from 'vue';
-import DSButton from '@/components/design-system/DSButton.vue';
+import { ref, nextTick } from "vue";
+import DSButton from "@/components/design-system/DSButton.vue";
 
 interface Message {
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
   time: string;
 }
@@ -86,13 +104,14 @@ interface Message {
 // Mock data
 const messages = ref<Message[]>([
   {
-    role: 'assistant',
-    content: '你好！我是 AI 助手，可以帮你查询文件、整理资料、回答问题。有什么可以帮你的吗？',
-    time: '14:30'
-  }
+    role: "assistant",
+    content:
+      "你好！我是 AI 助手，可以帮你查询文件、整理资料、回答问题。有什么可以帮你的吗？",
+    time: "14:30",
+  },
 ]);
 
-const userInput = ref('');
+const userInput = ref("");
 const isLoading = ref(false);
 const messagesContainer = ref<HTMLElement | null>(null);
 
@@ -101,13 +120,16 @@ const sendMessage = async () => {
 
   // Add user message
   messages.value.push({
-    role: 'user',
+    role: "user",
     content: userInput.value,
-    time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+    time: new Date().toLocaleTimeString("zh-CN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
   });
 
   const input = userInput.value;
-  userInput.value = '';
+  userInput.value = "";
   isLoading.value = true;
 
   // Scroll to bottom
@@ -117,12 +139,15 @@ const sendMessage = async () => {
   // Simulate AI response
   setTimeout(() => {
     messages.value.push({
-      role: 'assistant',
+      role: "assistant",
       content: `我理解你的问题："${input}"。作为 AI 助手，我会帮你分析并给出建议。`,
-      time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+      time: new Date().toLocaleTimeString("zh-CN", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
     });
     isLoading.value = false;
-    
+
     nextTick(() => {
       scrollToBottom();
     });
@@ -134,7 +159,7 @@ const clearChat = () => {
 };
 
 const handleKeydown = (event: KeyboardEvent) => {
-  if (event.key === 'Enter' && !event.shiftKey) {
+  if (event.key === "Enter" && !event.shiftKey) {
     event.preventDefault();
     sendMessage();
   }
@@ -142,8 +167,8 @@ const handleKeydown = (event: KeyboardEvent) => {
 
 const autoResize = (event: Event) => {
   const textarea = event.target as HTMLTextAreaElement;
-  textarea.style.height = 'auto';
-  textarea.style.height = Math.min(textarea.scrollHeight, 200) + 'px';
+  textarea.style.height = "auto";
+  textarea.style.height = Math.min(textarea.scrollHeight, 200) + "px";
 };
 
 const scrollToBottom = () => {
@@ -158,7 +183,7 @@ const scrollToBottom = () => {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: var(--color-gray-50, #F9FAFB);
+  background: var(--color-gray-50, #f9fafb);
 }
 
 /* Header */
@@ -168,7 +193,7 @@ const scrollToBottom = () => {
   align-items: center;
   padding: 20px 32px;
   background: white;
-  border-bottom: 1px solid var(--color-gray-200, #E5E7EB);
+  border-bottom: 1px solid var(--color-gray-200, #e5e7eb);
 }
 
 .page-title {
@@ -215,14 +240,14 @@ const scrollToBottom = () => {
 }
 
 .avatar.user {
-  background: var(--color-primary, #3B82F6);
+  background: var(--color-primary, #3b82f6);
   color: white;
 }
 
 .avatar.assistant {
-  background: var(--color-gray-100, #F3F4F6);
+  background: var(--color-gray-100, #f3f4f6);
   color: var(--color-gray-700, #374151);
-  border: 1px solid var(--color-gray-200, #E5E7EB);
+  border: 1px solid var(--color-gray-200, #e5e7eb);
 }
 
 .message-content {
@@ -236,7 +261,7 @@ const scrollToBottom = () => {
 .message-role {
   font-size: 12px;
   font-weight: 500;
-  color: var(--color-gray-500, #6B7280);
+  color: var(--color-gray-500, #6b7280);
   margin-bottom: 4px;
 }
 
@@ -248,7 +273,7 @@ const scrollToBottom = () => {
 }
 
 .message.user .message-text {
-  background: var(--color-primary, #3B82F6);
+  background: var(--color-primary, #3b82f6);
   color: white;
   border-bottom-right-radius: 4px;
 }
@@ -256,13 +281,13 @@ const scrollToBottom = () => {
 .message.assistant .message-text {
   background: white;
   color: var(--color-gray-900, #111827);
-  border: 1px solid var(--color-gray-200, #E5E7EB);
+  border: 1px solid var(--color-gray-200, #e5e7eb);
   border-bottom-left-radius: 4px;
 }
 
 .message-time {
   font-size: 11px;
-  color: var(--color-gray-400, #9CA3AF);
+  color: var(--color-gray-400, #9ca3af);
   margin-top: 4px;
 }
 
@@ -272,7 +297,7 @@ const scrollToBottom = () => {
   gap: 4px;
   padding: 12px 16px;
   background: white;
-  border: 1px solid var(--color-gray-200, #E5E7EB);
+  border: 1px solid var(--color-gray-200, #e5e7eb);
   border-radius: 12px;
   border-bottom-left-radius: 4px;
 }
@@ -281,23 +306,35 @@ const scrollToBottom = () => {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--color-gray-400, #9CA3AF);
+  background: var(--color-gray-400, #9ca3af);
   animation: bounce 1.4s infinite ease-in-out both;
 }
 
-.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
-.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
 
 @keyframes bounce {
-  0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
-  40% { transform: scale(1); opacity: 1; }
+  0%,
+  80%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* Input Area */
 .chat-input-area {
   padding: 20px 32px;
   background: white;
-  border-top: 1px solid var(--color-gray-200, #E5E7EB);
+  border-top: 1px solid var(--color-gray-200, #e5e7eb);
 }
 
 .input-wrapper {
@@ -309,10 +346,10 @@ const scrollToBottom = () => {
 .chat-input {
   flex: 1;
   padding: 12px 16px;
-  border: 1px solid var(--color-gray-200, #E5E7EB);
+  border: 1px solid var(--color-gray-200, #e5e7eb);
   border-radius: 8px;
   font-size: 14px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 1.5;
   resize: none;
   overflow-y: auto;
@@ -323,7 +360,7 @@ const scrollToBottom = () => {
 
 .chat-input:focus {
   outline: none;
-  border-color: var(--color-primary, #3B82F6);
+  border-color: var(--color-primary, #3b82f6);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
@@ -333,7 +370,7 @@ const scrollToBottom = () => {
 
 .input-hint {
   font-size: 12px;
-  color: var(--color-gray-400, #9CA3AF);
+  color: var(--color-gray-400, #9ca3af);
   margin-top: 8px;
 }
 

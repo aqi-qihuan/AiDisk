@@ -11,7 +11,7 @@ export const useStorageStore = defineStore("storage", () => {
     try {
       const res = await currentUser();
       if (res.data?.code === 0 && res.data.data) {
-        console.log("存储信息:",res.data.data)
+        console.log("存储信息:", res.data.data);
         const { usedSize, totalSize } = res.data.data.storageDTO;
         storageSize.value = String(usedSize);
         totalStorageSize.value = String(totalSize);

@@ -18,9 +18,7 @@
         </div>
       </div>
       <div class="header-actions">
-        <DSTag variant="info" class="stats-tag">
-          共 {{ total }} 张图片
-        </DSTag>
+        <DSTag variant="info" class="stats-tag"> 共 {{ total }} 张图片 </DSTag>
         <DSButton
           variant="primary"
           size="sm"
@@ -49,17 +47,22 @@
             <el-button @click="handleSearch" :icon="Search">搜索</el-button>
           </template>
         </el-input>
-        
+
         <div class="filter-group">
           <span class="filter-label">排序:</span>
-          <el-select v-model="sortBy" placeholder="排序方式" class="sort-select" @change="handleSort">
+          <el-select
+            v-model="sortBy"
+            placeholder="排序方式"
+            class="sort-select"
+            @change="handleSort"
+          >
             <el-option label="按名称" value="name" />
             <el-option label="按大小" value="size" />
             <el-option label="按日期" value="date" />
           </el-select>
         </div>
       </div>
-      
+
       <div class="right-tools">
         <div class="view-mode-group">
           <el-tooltip content="网格视图" placement="top">
@@ -128,8 +131,12 @@
             {{ picture.fileName }}
           </div>
           <div class="picture-meta">
-            <span class="picture-size">{{ formatFileSize(picture.fileSize) }}</span>
-            <span class="picture-date">{{ formatDate(picture.updateTime) }}</span>
+            <span class="picture-size">{{
+              formatFileSize(picture.fileSize)
+            }}</span>
+            <span class="picture-date">{{
+              formatDate(picture.updateTime)
+            }}</span>
           </div>
         </div>
       </div>
@@ -233,9 +240,7 @@
 
     <!-- 分页 -->
     <div v-if="total > 0" class="pagination-container">
-      <DSTag variant="info" class="total-info">
-        共 {{ total }} 张图片
-      </DSTag>
+      <DSTag variant="info" class="total-info"> 共 {{ total }} 张图片 </DSTag>
       <el-pagination
         v-model:current-page="currentPage"
         v-model:page-size="pageSize"
@@ -282,8 +287,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import { ref, onMounted, onUnmounted, computed } from "vue";
+import { ElMessage, ElMessageBox } from "element-plus";
 import {
   Picture,
   Upload,
@@ -292,22 +297,22 @@ import {
   View,
   Search,
   Grid,
-  List
-} from '@element-plus/icons-vue';
-import { useFileStore } from '@/store/file';
-import DSButton from '@/components/design-system/DSButton.vue';
-import DSTag from '@/components/design-system/DSTag.vue';
-import FileUpload from '@/components/file/FileUpload.vue';
-import request from '@/utils/request';
+  List,
+} from "@element-plus/icons-vue";
+import { useFileStore } from "@/store/file";
+import DSButton from "@/components/design-system/DSButton.vue";
+import DSTag from "@/components/design-system/DSTag.vue";
+import FileUpload from "@/components/file/FileUpload.vue";
+import request from "@/utils/request";
 
 const fileStore = useFileStore();
 
 // 响应式数据
 const pictureList = ref<API.FileDTO[]>([]);
 const loading = ref(false);
-const searchKeyword = ref('');
-const sortBy = ref('date');
-const viewMode = ref<'grid' | 'list'>('grid');
+const searchKeyword = ref("");
+const sortBy = ref("date");
+const viewMode = ref<"grid" | "list">("grid");
 const currentPage = ref(1);
 const pageSize = ref(20);
 const total = ref(0);
@@ -327,47 +332,49 @@ const getFileUrl = (file: API.FileDTO): string => {
     return imageBlobUrls.value.get(file.id)!;
   }
   loadBlobUrl(file);
-  return '';
+  return "";
 };
 
 const loadBlobUrl = async (file: API.FileDTO) => {
   try {
     const response = await request(`/file/v1/preview`, {
-      method: 'GET',
+      method: "GET",
       params: { fileId: file.id },
-      responseType: 'blob',
+      responseType: "blob",
     });
-    const mimeType = response.headers['content-type'] || 'image/jpeg';
-    const url = URL.createObjectURL(new Blob([response.data], { type: mimeType }));
+    const mimeType = response.headers["content-type"] || "image/jpeg";
+    const url = URL.createObjectURL(
+      new Blob([response.data], { type: mimeType }),
+    );
     imageBlobUrls.value.set(file.id, url);
   } catch (error) {
-    console.error('获取图片预览失败:', error);
+    console.error("获取图片预览失败:", error);
   }
 };
 
 const cleanupBlobUrls = () => {
-  imageBlobUrls.value.forEach(url => URL.revokeObjectURL(url));
+  imageBlobUrls.value.forEach((url) => URL.revokeObjectURL(url));
   imageBlobUrls.value.clear();
 };
 
 // 格式化文件大小
 const formatFileSize = (bytes: number) => {
-  if (bytes === 0) return '0 B';
+  if (bytes === 0) return "0 B";
   const k = 1024;
-  const sizes = ['B', 'KB', 'MB', 'GB'];
+  const sizes = ["B", "KB", "MB", "GB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
 };
 
 // 格式化日期
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString('zh-CN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit'
+  return date.toLocaleDateString("zh-CN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
   });
 };
 
@@ -380,9 +387,9 @@ const fetchPictures = async () => {
     const response = await fileStore.getFileList({
       current: currentPage.value,
       size: pageSize.value,
-      path: '/',
+      path: "/",
       keyword: searchKeyword.value,
-      fileType: 'image' // 图片类型
+      fileType: "image", // 图片类型
     });
 
     if (response.data.data) {
@@ -390,8 +397,8 @@ const fetchPictures = async () => {
       total.value = response.data.data.length || 0;
     }
   } catch (error) {
-    console.error('获取图片列表失败:', error);
-    ElMessage.error('获取图片列表失败');
+    console.error("获取图片列表失败:", error);
+    ElMessage.error("获取图片列表失败");
   } finally {
     loading.value = false;
   }
@@ -407,19 +414,22 @@ const handleSearch = () => {
 const handleSort = () => {
   // 根据排序方式对列表进行排序
   const list = [...pictureList.value];
-  
+
   switch (sortBy.value) {
-    case 'name':
+    case "name":
       list.sort((a, b) => a.fileName.localeCompare(b.fileName));
       break;
-    case 'size':
+    case "size":
       list.sort((a, b) => b.fileSize - a.fileSize);
       break;
-    case 'date':
-      list.sort((a, b) => new Date(b.updateTime).getTime() - new Date(a.updateTime).getTime());
+    case "date":
+      list.sort(
+        (a, b) =>
+          new Date(b.updateTime).getTime() - new Date(a.updateTime).getTime(),
+      );
       break;
   }
-  
+
   pictureList.value = list;
 };
 
@@ -439,21 +449,21 @@ const handlePreview = (picture: API.FileDTO) => {
 const handleDownload = async (picture: API.FileDTO) => {
   try {
     const response = await request(`/file/v1/preview`, {
-      method: 'GET',
+      method: "GET",
       params: { fileId: picture.id },
-      responseType: 'blob',
+      responseType: "blob",
     });
     const blob = new Blob([response.data]);
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
     link.download = picture.fileName;
     link.click();
     URL.revokeObjectURL(url);
-    ElMessage.success('开始下载');
+    ElMessage.success("开始下载");
   } catch (error) {
-    console.error('下载失败:', error);
-    ElMessage.error('下载失败');
+    console.error("下载失败:", error);
+    ElMessage.error("下载失败");
   }
 };
 
@@ -462,22 +472,22 @@ const handleDelete = async (picture: API.FileDTO) => {
   try {
     await ElMessageBox.confirm(
       `确定要删除图片 "${picture.fileName}" 吗?`,
-      '删除确认',
+      "删除确认",
       {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      },
     );
 
     // 调用删除API
     await fileStore.deleteFile(picture.id);
-    ElMessage.success('删除成功');
+    ElMessage.success("删除成功");
     fetchPictures();
   } catch (error) {
-    if (error !== 'cancel') {
-      console.error('删除失败:', error);
-      ElMessage.error('删除失败');
+    if (error !== "cancel") {
+      console.error("删除失败:", error);
+      ElMessage.error("删除失败");
     }
   }
 };
@@ -485,7 +495,7 @@ const handleDelete = async (picture: API.FileDTO) => {
 // 图片加载错误处理
 const handleImageError = (e: Event) => {
   const target = e.target as HTMLImageElement;
-  target.src = '/image/default-image.png';
+  target.src = "/image/default-image.png";
 };
 
 // 打开上传对话框
@@ -496,7 +506,7 @@ const openUploadDialog = () => {
 // 上传成功处理
 const handleUploadSuccess = () => {
   uploadDialogVisible.value = false;
-  ElMessage.success('上传成功');
+  ElMessage.success("上传成功");
   fetchPictures();
 };
 
@@ -525,7 +535,7 @@ onUnmounted(() => {
 .picture-view {
   min-height: 100vh;
   padding: var(--ds-spacing-lg);
-  background: linear-gradient(135deg, #FDF2F8 0%, #F5F3FF 50%, #FCE7F3 100%);
+  background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 50%, #fce7f3 100%);
   position: relative;
   overflow: hidden;
 }
@@ -550,7 +560,11 @@ onUnmounted(() => {
 .bg-orb-1 {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(219, 39, 119, 0.4) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(219, 39, 119, 0.4) 0%,
+    transparent 70%
+  );
   top: -100px;
   right: -50px;
   animation-delay: 0s;
@@ -559,7 +573,11 @@ onUnmounted(() => {
 .bg-orb-2 {
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.3) 0%,
+    transparent 70%
+  );
   bottom: -80px;
   left: -60px;
   animation-delay: -7s;
@@ -568,7 +586,11 @@ onUnmounted(() => {
 .bg-orb-3 {
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.3) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(244, 114, 182, 0.3) 0%,
+    transparent 70%
+  );
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -576,9 +598,16 @@ onUnmounted(() => {
 }
 
 @keyframes floatOrb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 15px) scale(0.95); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 15px) scale(0.95);
+  }
 }
 
 /* 页面标题 */
@@ -609,7 +638,7 @@ onUnmounted(() => {
   justify-content: center;
   width: 64px;
   height: 64px;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   border-radius: var(--ds-radius-lg);
   color: white;
   animation: bounce 2s infinite;
@@ -905,7 +934,8 @@ onUnmounted(() => {
 
 /* 动画 */
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -914,7 +944,8 @@ onUnmounted(() => {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -927,7 +958,7 @@ onUnmounted(() => {
   .picture-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
-  
+
   .search-input {
     width: 200px;
   }
@@ -937,63 +968,63 @@ onUnmounted(() => {
   .picture-view {
     padding: var(--ds-spacing-md);
   }
-  
+
   .page-header {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--ds-spacing-md);
   }
-  
+
   .header-actions {
     width: 100%;
     justify-content: space-between;
   }
-  
+
   .toolbar {
     flex-direction: column;
     gap: var(--ds-spacing-md);
   }
-  
+
   .left-tools {
     width: 100%;
     flex-direction: column;
   }
-  
+
   .search-input {
     width: 100%;
   }
-  
+
   .filter-group {
     width: 100%;
   }
-  
+
   .sort-select {
     flex: 1;
   }
-  
+
   .right-tools {
     width: 100%;
     justify-content: center;
   }
-  
+
   .picture-grid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: var(--ds-spacing-md);
   }
-  
+
   .picture-thumbnail {
     height: 140px;
   }
-  
+
   .icon-wrapper {
     width: 48px;
     height: 48px;
   }
-  
+
   .icon-wrapper :deep(.el-icon) {
     font-size: 24px;
   }
-  
+
   .title-wrapper h1 {
     font-size: var(--ds-text-size-xl);
   }

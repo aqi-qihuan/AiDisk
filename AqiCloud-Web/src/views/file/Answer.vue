@@ -5,11 +5,17 @@
       <div
         v-for="(message, index) in messages"
         :key="index"
-        :class="['message-item', message.isUser ? 'user-message' : 'assistant-message']"
+        :class="[
+          'message-item',
+          message.isUser ? 'user-message' : 'assistant-message',
+        ]"
       >
         <!-- 头像 -->
         <div class="avatar">
-          <img :src="message.isUser ? userAvatar : assistantAvatar" alt="avatar" />
+          <img
+            :src="message.isUser ? userAvatar : assistantAvatar"
+            alt="avatar"
+          />
         </div>
 
         <!-- 消息内容 -->
@@ -28,14 +34,14 @@
                 <el-icon :size="32"><Cpu /></el-icon>
               </div>
             </div>
-            <h3 class="welcome-title">{{ t('ai.assistantTitle') }}</h3>
-            <p class="welcome-subtitle">{{ t('ai.assistantSubtitle') }}</p>
+            <h3 class="welcome-title">{{ t("ai.assistantTitle") }}</h3>
+            <p class="welcome-subtitle">{{ t("ai.assistantSubtitle") }}</p>
           </div>
-          
+
           <div class="welcome-divider"></div>
-          
-          <p class="welcome-description">{{ t('ai.welcomeDesc') }}</p>
-          
+
+          <p class="welcome-description">{{ t("ai.welcomeDesc") }}</p>
+
           <div class="suggestions">
             <div
               v-for="(suggestion, idx) in suggestions"
@@ -43,7 +49,7 @@
               class="suggestion-card"
               @click="inputMessage = suggestion.text + suggestion.desc"
             >
-                <div class="suggestion-icon">
+              <div class="suggestion-icon">
                 <el-icon :size="24">
                   <component :is="suggestion.icon" />
                 </el-icon>
@@ -55,14 +61,14 @@
               <div class="suggestion-arrow">→</div>
             </div>
           </div>
-          
+
           <div class="welcome-footer">
             <div class="typing-indicator">
               <span class="dot"></span>
               <span class="dot"></span>
               <span class="dot"></span>
             </div>
-            <span class="footer-text">{{ t('ai.alwaysReady') }}</span>
+            <span class="footer-text">{{ t("ai.alwaysReady") }}</span>
           </div>
         </div>
       </div>
@@ -89,7 +95,7 @@
           <div
             class="send-button"
             @click="sendMessage"
-            :class="{ 'active': inputMessage.trim(), 'loading': isLoading }"
+            :class="{ active: inputMessage.trim(), loading: isLoading }"
           >
             <svg
               v-if="!isLoading"
@@ -111,18 +117,18 @@
 </template>
 
 <script lang="ts">
-import { useLoginUserStore } from '@/store/user';
-import { defineComponent, ref, onMounted, nextTick, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-import LoadingDots from '@/components/common/LoadingDots.vue';
-import DSButton from '@/components/design-system/DSButton.vue';
-import DSTag from '@/components/design-system/DSTag.vue';
-import { getApiUrl, API_PATHS } from '@/config/api';
-import { ElMessage } from 'element-plus';
-import { downloadUrlParam } from '@/api/file';
-import JSONBIG from 'json-bigint';
-import userAvatar from '@/assets/user-avatar.png';
-import assistantAvatar from '@/assets/assistant-avatar.png';
+import { useLoginUserStore } from "@/store/user";
+import { defineComponent, ref, onMounted, nextTick, watch } from "vue";
+import { useI18n } from "vue-i18n";
+import LoadingDots from "@/components/common/LoadingDots.vue";
+import DSButton from "@/components/design-system/DSButton.vue";
+import DSTag from "@/components/design-system/DSTag.vue";
+import { getApiUrl, API_PATHS } from "@/config/api";
+import { ElMessage } from "element-plus";
+import { downloadUrlParam } from "@/api/file";
+import JSONBIG from "json-bigint";
+import userAvatar from "@/assets/user-avatar.png";
+import assistantAvatar from "@/assets/assistant-avatar.png";
 import {
   Cpu,
   FolderOpened,
@@ -131,15 +137,19 @@ import {
   Headset,
   Picture,
   DataAnalysis,
-  Files
-} from '@element-plus/icons-vue';
+  Files,
+} from "@element-plus/icons-vue";
 
 const jsonParser = JSONBIG({ storeAsString: true });
 
 // 扩展 Window 接口
 declare global {
   interface Window {
-    handleFileDownload: (fileId: string, fileName: string, isFolder: boolean) => Promise<void>;
+    handleFileDownload: (
+      fileId: string,
+      fileName: string,
+      isFolder: boolean,
+    ) => Promise<void>;
   }
 }
 
@@ -155,7 +165,7 @@ interface FileItem {
 }
 
 export default defineComponent({
-  name: 'Answer',
+  name: "Answer",
   components: {
     LoadingDots,
     DSButton,
@@ -167,20 +177,32 @@ export default defineComponent({
     Headset,
     Picture,
     DataAnalysis,
-    Files
+    Files,
   },
   setup() {
     const { t } = useI18n();
     const messages = ref<Array<{ isUser: boolean; content: string }>>([]);
-    const inputMessage = ref('');
+    const inputMessage = ref("");
     const messageList = ref<HTMLElement | null>(null);
     const textareaRef = ref<HTMLTextAreaElement | null>(null);
     const isLoading = ref(false);
 
     const suggestions = ref([
-      { icon: 'FolderOpened', text: t('ai.storageSpace'), desc: t('ai.viewUsage') },
-      { icon: 'Document', text: t('ai.recentFiles'), desc: t('ai.browseLatest') },
-      { icon: 'DataAnalysis', text: t('ai.fileStats'), desc: t('ai.typeAnalysis') }
+      {
+        icon: "FolderOpened",
+        text: t("ai.storageSpace"),
+        desc: t("ai.viewUsage"),
+      },
+      {
+        icon: "Document",
+        text: t("ai.recentFiles"),
+        desc: t("ai.browseLatest"),
+      },
+      {
+        icon: "DataAnalysis",
+        text: t("ai.fileStats"),
+        desc: t("ai.typeAnalysis"),
+      },
     ]);
 
     const scrollToBottom = () => {
@@ -193,15 +215,16 @@ export default defineComponent({
 
     watch(inputMessage, () => {
       if (textareaRef.value) {
-        textareaRef.value.style.height = 'auto';
-        textareaRef.value.style.height = Math.min(textareaRef.value.scrollHeight, 120) + 'px';
+        textareaRef.value.style.height = "auto";
+        textareaRef.value.style.height =
+          Math.min(textareaRef.value.scrollHeight, 120) + "px";
       }
     });
 
     // 格式化文件大小
     const formatFileSize = (size: number) => {
-      if (!size) return '-';
-      const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+      if (!size) return "-";
+      const units = ["B", "KB", "MB", "GB", "TB"];
       let index = 0;
       let fileSize = size;
 
@@ -216,21 +239,21 @@ export default defineComponent({
     // 获取文件图标组件
     const getFileIcon = (fileType: string) => {
       switch (fileType?.toUpperCase()) {
-        case 'IMG':
-          return 'Picture';
-        case 'DOC':
-        case 'DOCX':
-          return 'Document';
-        case 'PDF':
-          return 'Files';
-        case 'VIDEO':
-          return 'VideoCamera';
-        case 'AUDIO':
-          return 'Headset';
-        case '文件夹':
-          return 'FolderOpened';
+        case "IMG":
+          return "Picture";
+        case "DOC":
+        case "DOCX":
+          return "Document";
+        case "PDF":
+          return "Files";
+        case "VIDEO":
+          return "VideoCamera";
+        case "AUDIO":
+          return "Headset";
+        case "文件夹":
+          return "FolderOpened";
         default:
-          return 'Document';
+          return "Document";
       }
     };
 
@@ -239,11 +262,14 @@ export default defineComponent({
 
       const userMessage = inputMessage.value;
       messages.value.push({ isUser: true, content: userMessage });
-      messages.value.push({ isUser: false, content: '<div class="loading-dots">思考中...</div>' });
-      inputMessage.value = '';
+      messages.value.push({
+        isUser: false,
+        content: '<div class="loading-dots">思考中...</div>',
+      });
+      inputMessage.value = "";
 
       if (textareaRef.value) {
-        textareaRef.value.style.height = 'auto';
+        textareaRef.value.style.height = "auto";
       }
 
       scrollToBottom();
@@ -251,33 +277,33 @@ export default defineComponent({
 
       try {
         const response = await fetch(getApiUrl(API_PATHS.PAN_QUERY), {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
-            token: useLoginUserStore().token || ''
+            "Content-Type": "application/json",
+            token: useLoginUserStore().token || "",
           },
           body: JSON.stringify({
-            account_id: '0',
-            query: userMessage
-          })
+            account_id: "0",
+            query: userMessage,
+          }),
         });
 
         if (!response.ok) {
-          throw new Error('请求失败: ' + response.status);
+          throw new Error("请求失败: " + response.status);
         }
 
         const text = await response.text();
         const responseData = jsonParser.parse(text);
 
         if (responseData.code === 0) {
-          if (responseData.data && responseData.data.type === 'storage_info') {
+          if (responseData.data && responseData.data.type === "storage_info") {
             const storageData = responseData.data.data;
 
             if (storageData) {
               const storageInfo = {
                 used_size: Number(storageData.used_size) || 0,
                 total_size: Number(storageData.total_size) || 10485760,
-                used_percentage: Number(storageData.used_percentage) || 0
+                used_percentage: Number(storageData.used_percentage) || 0,
               };
 
               const usedSize = formatFileSize(storageInfo.used_size);
@@ -306,44 +332,58 @@ export default defineComponent({
                   </div>
                 </div>
               `;
-              messages.value[messages.value.length - 1].content = formattedContent;
+              messages.value[messages.value.length - 1].content =
+                formattedContent;
             }
-          } else if (responseData.type === 'text' && responseData.data.type === undefined) {
-            messages.value[messages.value.length - 1].content = responseData.data.content || '';
-          } else if (responseData.data && responseData.data.type === 'file_list') {
+          } else if (
+            responseData.type === "text" &&
+            responseData.data.type === undefined
+          ) {
+            messages.value[messages.value.length - 1].content =
+              responseData.data.content || "";
+          } else if (
+            responseData.data &&
+            responseData.data.type === "file_list"
+          ) {
             const fileList = responseData.data.data as FileItem[];
             let formattedContent = '<div class="file-list">\n';
 
             fileList.forEach((file: FileItem) => {
               const isFolder = file.file_size === null;
-              const fileType = file.file_type || (isFolder ? '文件夹' : '文件');
+              const fileType = file.file_type || (isFolder ? "文件夹" : "文件");
               const fileName = file.file_name;
               const fileId = String(file.id);
 
               formattedContent += `
                 <div class="file-item">
                   <span class="file-icon" data-icon="${getFileIcon(fileType)}"></span>
-                  ${isFolder
-                    ? `<span class="file-name">${fileName}</span>`
-                    : `<span class="file-name file-link" onclick="handleFileDownload('${String(fileId)}', '${fileName}', false)">${fileName}</span>`
+                  ${
+                    isFolder
+                      ? `<span class="file-name">${fileName}</span>`
+                      : `<span class="file-name file-link" onclick="handleFileDownload('${String(fileId)}', '${fileName}', false)">${fileName}</span>`
                   }
                 </div>
               `;
             });
 
-            formattedContent += '</div>';
-            messages.value[messages.value.length - 1].content = formattedContent;
+            formattedContent += "</div>";
+            messages.value[messages.value.length - 1].content =
+              formattedContent;
 
-            window.handleFileDownload = async (fileId: string, fileName: string, isFolder: boolean) => {
+            window.handleFileDownload = async (
+              fileId: string,
+              fileName: string,
+              isFolder: boolean,
+            ) => {
               try {
                 if (isFolder) {
-                  ElMessage.warning('文件夹不支持下载');
+                  ElMessage.warning("文件夹不支持下载");
                   return;
                 }
 
                 const fileIds = [fileId];
                 const response = await downloadUrlParam({
-                  fileIds
+                  fileIds,
                 });
 
                 if (response.data && response.data.success) {
@@ -352,7 +392,7 @@ export default defineComponent({
                   for (const downloadInfo of downloadUrls) {
                     const response = await fetch(downloadInfo.downloadUrl);
                     const blob = await response.blob();
-                    const link = document.createElement('a');
+                    const link = document.createElement("a");
                     const url = URL.createObjectURL(blob);
                     link.href = url;
                     link.download = downloadInfo.fileName;
@@ -362,40 +402,48 @@ export default defineComponent({
                     document.body.removeChild(link);
                   }
 
-                  ElMessage.success('开始下载文件');
+                  ElMessage.success("开始下载文件");
                 } else {
-                  ElMessage.error(response.data?.msg || '获取下载链接失败');
+                  ElMessage.error(response.data?.msg || "获取下载链接失败");
                 }
               } catch (error) {
-                console.error('下载文件出错:', error);
-                ElMessage.error('下载文件失败');
+                console.error("下载文件出错:", error);
+                ElMessage.error("下载文件失败");
               }
             };
-          } else if (responseData.data && responseData.data.type === 'file_statistics') {
+          } else if (
+            responseData.data &&
+            responseData.data.type === "file_statistics"
+          ) {
             const stats = responseData.data.data;
-            const fileTypeMap: { [key: string]: { icon: string; name: string } } = {
-              IMG: { icon: 'Picture', name: '图片' },
-              DOC: { icon: 'Document', name: '文档' },
-              VIDEO: { icon: 'VideoCamera', name: '视频' },
-              AUDIO: { icon: 'Headset', name: '音频' },
-              PDF: { icon: 'Files', name: 'PDF' },
-              other: { icon: 'FolderOpened', name: '其他' }
+            const fileTypeMap: {
+              [key: string]: { icon: string; name: string };
+            } = {
+              IMG: { icon: "Picture", name: "图片" },
+              DOC: { icon: "Document", name: "文档" },
+              VIDEO: { icon: "VideoCamera", name: "视频" },
+              AUDIO: { icon: "Headset", name: "音频" },
+              PDF: { icon: "Files", name: "PDF" },
+              other: { icon: "FolderOpened", name: "其他" },
             };
 
-            let typeStatsHtml = '';
+            let typeStatsHtml = "";
             if (stats && stats.file_types) {
               // 处理数组格式的 file_types
               if (Array.isArray(stats.file_types)) {
                 stats.file_types.forEach((item: any) => {
-                  const suffix = item.suffix?.toUpperCase() || 'other';
-                  const typeInfo = fileTypeMap[suffix] || { icon: '📁', name: item.suffix || '其他' };
-                  const sizeStr = item.size ? formatFileSize(item.size) : '';
+                  const suffix = item.suffix?.toUpperCase() || "other";
+                  const typeInfo = fileTypeMap[suffix] || {
+                    icon: "📁",
+                    name: item.suffix || "其他",
+                  };
+                  const sizeStr = item.size ? formatFileSize(item.size) : "";
                   typeStatsHtml += `
                     <div class="file-type-item">
                       <span class="type-icon" data-icon="${typeInfo.icon}"></span>
                       <div class="type-info">
                         <span class="type-name">${typeInfo.name}</span>
-                        <span class="type-count">${item.count} 个文件 ${sizeStr ? '(' + sizeStr + ')' : ''}</span>
+                        <span class="type-count">${item.count} 个文件 ${sizeStr ? "(" + sizeStr + ")" : ""}</span>
                       </div>
                     </div>
                   `;
@@ -403,7 +451,10 @@ export default defineComponent({
               } else {
                 // 兼容对象格式
                 Object.entries(stats.file_types).forEach(([type, count]) => {
-                  const typeInfo = fileTypeMap[type] || { icon: '📁', name: type };
+                  const typeInfo = fileTypeMap[type] || {
+                    icon: "📁",
+                    name: type,
+                  };
                   typeStatsHtml += `
                     <div class="file-type-item">
                       <span class="type-icon" data-icon="${typeInfo.icon}"></span>
@@ -426,20 +477,24 @@ export default defineComponent({
                     <span class="total-label">总文件数</span>
                   </div>
                 </div>
-                ${typeStatsHtml ? `<div class="file-types">${typeStatsHtml}</div>` : ''}
+                ${typeStatsHtml ? `<div class="file-types">${typeStatsHtml}</div>` : ""}
               </div>
             `;
-            messages.value[messages.value.length - 1].content = formattedContent;
+            messages.value[messages.value.length - 1].content =
+              formattedContent;
           } else {
-            messages.value[messages.value.length - 1].content = '未知的响应类型';
+            messages.value[messages.value.length - 1].content =
+              "未知的响应类型";
           }
         } else {
-          messages.value[messages.value.length - 1].content = responseData.msg || '请求失败';
+          messages.value[messages.value.length - 1].content =
+            responseData.msg || "请求失败";
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
         messages.value[messages.value.length - 1].content =
-          '抱歉，发生了错误：' + (error instanceof Error ? error.message : '未知错误');
+          "抱歉，发生了错误：" +
+          (error instanceof Error ? error.message : "未知错误");
       } finally {
         isLoading.value = false;
       }
@@ -457,9 +512,9 @@ export default defineComponent({
       userAvatar,
       assistantAvatar,
       isLoading,
-      suggestions
+      suggestions,
     };
-  }
+  },
 });
 </script>
 
@@ -468,7 +523,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   position: relative;
   overflow: hidden;
 }
@@ -545,16 +600,16 @@ export default defineComponent({
 
 /* 用户消息 - 粉紫色渐变气泡 */
 .message-item.user-message .message-content {
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   color: white;
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(219, 39, 119, 0.3),
     0 2px 4px rgba(0, 0, 0, 0.1);
   border-bottom-right-radius: 6px;
 }
 
 .message-item.user-message .message-content:hover {
-  box-shadow: 
+  box-shadow:
     0 12px 32px rgba(219, 39, 119, 0.4),
     0 4px 8px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
@@ -564,7 +619,7 @@ export default defineComponent({
 .message-item.assistant-message .message-content {
   background: rgba(255, 255, 255, 0.95);
   color: #1e293b;
-  box-shadow: 
+  box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.08),
     0 1px 3px rgba(0, 0, 0, 0.05);
   border-bottom-left-radius: 6px;
@@ -572,7 +627,7 @@ export default defineComponent({
 }
 
 .message-item.assistant-message .message-content:hover {
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.12),
     0 2px 6px rgba(0, 0, 0, 0.08);
   transform: translateY(-1px);
@@ -595,7 +650,7 @@ export default defineComponent({
   padding: var(--ds-spacing-8);
   max-width: 480px;
   width: 100%;
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.15),
     0 0 0 1px rgba(255, 255, 255, 0.2) inset;
   animation: slideUp 0.6s ease-out;
@@ -617,12 +672,12 @@ export default defineComponent({
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 50%, #F472B6 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 50%, #f472b6 100%);
   animation: rotate 3s linear infinite;
 }
 
 .avatar-ring::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 3px;
   border-radius: 50%;
@@ -633,7 +688,7 @@ export default defineComponent({
   position: absolute;
   inset: 6px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -644,7 +699,7 @@ export default defineComponent({
 .welcome-title {
   font-size: 28px;
   font-weight: 700;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -659,7 +714,12 @@ export default defineComponent({
 
 .welcome-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--ds-color-border), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--ds-color-border),
+    transparent
+  );
   margin: var(--ds-spacing-6) 0;
 }
 
@@ -700,7 +760,7 @@ export default defineComponent({
 .suggestion-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -742,7 +802,7 @@ export default defineComponent({
 }
 
 .suggestion-card:hover .suggestion-arrow {
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   color: white;
   transform: translateX(4px);
 }
@@ -764,14 +824,20 @@ export default defineComponent({
 .typing-indicator .dot {
   width: 6px;
   height: 6px;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   border-radius: 50%;
   animation: typing 1.4s ease-in-out infinite;
 }
 
-.typing-indicator .dot:nth-child(1) { animation-delay: 0s; }
-.typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
-.typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+.typing-indicator .dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.typing-indicator .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-indicator .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
 
 .footer-text {
   font-size: var(--ds-text-size-sm);
@@ -781,18 +847,28 @@ export default defineComponent({
 /* 输入区域 - 全新设计 */
 .input-area {
   padding: var(--ds-spacing-4) var(--ds-spacing-6);
-  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 20%, white 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.9) 20%,
+    white 100%
+  );
   position: relative;
 }
 
 .input-area::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(219, 39, 119, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(219, 39, 119, 0.2),
+    transparent
+  );
 }
 
 .input-wrapper {
@@ -802,12 +878,13 @@ export default defineComponent({
   background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
   border-radius: 20px;
   border: 1px solid rgba(219, 39, 119, 0.15);
-  padding: var(--ds-spacing-4) var(--ds-spacing-16) var(--ds-spacing-4) var(--ds-spacing-5);
+  padding: var(--ds-spacing-4) var(--ds-spacing-16) var(--ds-spacing-4)
+    var(--ds-spacing-5);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   gap: var(--ds-spacing-3);
-  box-shadow: 
+  box-shadow:
     0 4px 20px rgba(0, 0, 0, 0.05),
     0 1px 3px rgba(0, 0, 0, 0.02),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -815,7 +892,7 @@ export default defineComponent({
 
 .input-wrapper:hover {
   border-color: rgba(219, 39, 119, 0.25);
-  box-shadow: 
+  box-shadow:
     0 8px 30px rgba(219, 39, 119, 0.1),
     0 2px 8px rgba(0, 0, 0, 0.04),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -823,7 +900,7 @@ export default defineComponent({
 
 .input-wrapper:focus-within {
   border-color: rgba(219, 39, 119, 0.4);
-  box-shadow: 
+  box-shadow:
     0 0 0 4px rgba(219, 39, 119, 0.08),
     0 8px 30px rgba(219, 39, 119, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -904,7 +981,7 @@ export default defineComponent({
 }
 
 .send-button.active {
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   border-color: transparent;
   box-shadow: 0 4px 15px rgba(219, 39, 119, 0.4);
 }
@@ -929,7 +1006,7 @@ export default defineComponent({
 
 .send-button.loading {
   cursor: wait;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
 }
 
 .loading-spinner {
@@ -966,7 +1043,7 @@ export default defineComponent({
 }
 
 .storage-icon::before {
-  content: '';
+  content: "";
   width: 24px;
   height: 24px;
   background-size: contain;
@@ -1002,7 +1079,7 @@ export default defineComponent({
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(90deg, #db2777 0%, #a855f7 100%);
   border-radius: 4px;
   transition: width 0.3s ease;
 }
@@ -1061,7 +1138,7 @@ export default defineComponent({
 }
 
 .file-icon::before {
-  content: '';
+  content: "";
   width: 20px;
   height: 20px;
   background-size: contain;
@@ -1138,7 +1215,7 @@ export default defineComponent({
 }
 
 .total-icon::before {
-  content: '';
+  content: "";
   width: 32px;
   height: 32px;
   background-size: contain;
@@ -1161,7 +1238,7 @@ export default defineComponent({
 }
 
 .type-icon::before {
-  content: '';
+  content: "";
   width: 24px;
   height: 24px;
   background-size: contain;
@@ -1286,7 +1363,8 @@ export default defineComponent({
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -1304,7 +1382,9 @@ export default defineComponent({
 }
 
 @keyframes typing {
-  0%, 60%, 100% {
+  0%,
+  60%,
+  100% {
     transform: translateY(0);
     opacity: 1;
   }
@@ -1351,7 +1431,8 @@ export default defineComponent({
   }
 
   .input-wrapper {
-    padding: var(--ds-spacing-3) var(--ds-spacing-12) var(--ds-spacing-3) var(--ds-spacing-4);
+    padding: var(--ds-spacing-3) var(--ds-spacing-12) var(--ds-spacing-3)
+      var(--ds-spacing-4);
     border-radius: 16px;
   }
 
@@ -1478,7 +1559,8 @@ export default defineComponent({
   }
 
   .input-wrapper {
-    padding: var(--ds-spacing-3) var(--ds-spacing-10) var(--ds-spacing-3) var(--ds-spacing-3);
+    padding: var(--ds-spacing-3) var(--ds-spacing-10) var(--ds-spacing-3)
+      var(--ds-spacing-3);
     border-radius: 14px;
   }
 

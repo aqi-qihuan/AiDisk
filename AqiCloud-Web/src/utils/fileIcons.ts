@@ -60,7 +60,7 @@ const fileImgMap = {
   jpeg: require("@/assets/images/file/file_image.png"),
   bmp: require("@/assets/images/file/file_image.png"),
   rpm: require("@/assets/images/file/file_rpm.png"),
-  unknown: require("@/assets/images/file/file_unknown.png")
+  unknown: require("@/assets/images/file/file_unknown.png"),
 };
 
 /**
@@ -74,10 +74,12 @@ export function getFileIcon(fileSuffix: string, isFolder?: boolean): string {
   if (isFolder) {
     return fileImgMap.folder;
   }
-  
+
   // 处理后缀名
-  fileSuffix = (fileSuffix || '').toLowerCase();
-  
+  fileSuffix = (fileSuffix || "").toLowerCase();
+
   // 返回对应图标或未知文件图标
-  return fileImgMap[fileSuffix as keyof typeof fileImgMap] || fileImgMap.unknown;
+  return (
+    fileImgMap[fileSuffix as keyof typeof fileImgMap] || fileImgMap.unknown
+  );
 }

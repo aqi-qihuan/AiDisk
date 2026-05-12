@@ -10,9 +10,9 @@
     <div class="page-header">
       <div class="header-title">
         <el-icon class="title-icon"><Share /></el-icon>
-        <h1>{{ t('file.myShares') }}</h1>
+        <h1>{{ t("file.myShares") }}</h1>
       </div>
-      <p class="header-desc">{{ t('file.manageShareDesc') }}</p>
+      <p class="header-desc">{{ t("file.manageShareDesc") }}</p>
     </div>
 
     <!-- 分享统计卡片 -->
@@ -23,7 +23,7 @@
         </div>
         <div class="stat-info">
           <span class="stat-value">{{ publicShareCount }}</span>
-          <span class="stat-label">{{ t('file.publicShares') }}</span>
+          <span class="stat-label">{{ t("file.publicShares") }}</span>
         </div>
       </div>
       <div class="stat-card">
@@ -32,7 +32,7 @@
         </div>
         <div class="stat-info">
           <span class="stat-value">{{ privateShareCount }}</span>
-          <span class="stat-label">{{ t('file.privateShares') }}</span>
+          <span class="stat-label">{{ t("file.privateShares") }}</span>
         </div>
       </div>
       <div class="stat-card">
@@ -41,7 +41,7 @@
         </div>
         <div class="stat-info">
           <span class="stat-value">{{ shareList.length }}</span>
-          <span class="stat-label">{{ t('file.totalShares') }}</span>
+          <span class="stat-label">{{ t("file.totalShares") }}</span>
         </div>
       </div>
     </div>
@@ -52,8 +52,8 @@
         <div class="empty-icon">
           <el-icon><Share /></el-icon>
         </div>
-        <p class="empty-title">{{ t('file.noShares') }}</p>
-        <p class="empty-desc">{{ t('file.noSharesDesc') }}</p>
+        <p class="empty-title">{{ t("file.noShares") }}</p>
+        <p class="empty-desc">{{ t("file.noSharesDesc") }}</p>
       </div>
 
       <div v-else class="share-cards">
@@ -61,32 +61,47 @@
           v-for="share in shareList"
           :key="share.id"
           class="share-card"
-          :class="{ 'expired': isExpired(share.shareEndTime, share.shareDayType) }"
+          :class="{
+            expired: isExpired(share.shareEndTime, share.shareDayType),
+          }"
         >
           <!-- 卡片头部 -->
           <div class="card-header">
             <div class="share-icon">
               <el-icon><Link /></el-icon>
             </div>
-            <div class="share-type-badge" :class="share.shareType?.toLowerCase()">
-              <el-icon v-if="share.shareType?.toLowerCase() === 'no_code'"><Unlock /></el-icon>
+            <div
+              class="share-type-badge"
+              :class="share.shareType?.toLowerCase()"
+            >
+              <el-icon v-if="share.shareType?.toLowerCase() === 'no_code'"
+                ><Unlock
+              /></el-icon>
               <el-icon v-else><Lock /></el-icon>
-              <span>{{ share.shareType?.toLowerCase() === 'no_code' ? '公开' : '私密' }}</span>
+              <span>{{
+                share.shareType?.toLowerCase() === "no_code" ? "公开" : "私密"
+              }}</span>
             </div>
           </div>
 
           <!-- 卡片内容 -->
           <div class="card-body">
-            <h3 class="share-name" :title="share.shareName">{{ share.shareName }}</h3>
-            
+            <h3 class="share-name" :title="share.shareName">
+              {{ share.shareName }}
+            </h3>
+
             <div class="share-meta">
               <div class="meta-item">
                 <el-icon><Clock /></el-icon>
-                <span>{{ formatShareEndTime(share.shareEndTime, share.shareDayType) }}</span>
+                <span>{{
+                  formatShareEndTime(share.shareEndTime, share.shareDayType)
+                }}</span>
               </div>
               <div class="meta-item">
                 <el-icon><Calendar /></el-icon>
-                <span>{{ formatDate(share.gmtCreate || share.createTime) }}</span>
+                <span>{{
+                  formatDate(share.gmtCreate || share.createTime)
+                }}</span>
               </div>
             </div>
 
@@ -102,12 +117,20 @@
             <button
               class="action-btn copy"
               @click="copyShareInfo(share)"
-              :title="share.shareType?.toLowerCase() === 'need_code' ? '复制链接和提取码' : '复制链接'"
+              :title="
+                share.shareType?.toLowerCase() === 'need_code'
+                  ? '复制链接和提取码'
+                  : '复制链接'
+              "
             >
               <el-icon><DocumentCopy /></el-icon>
               <span>复制</span>
             </button>
-            <button class="action-btn delete" @click="handleCancelShare(share)" title="取消分享">
+            <button
+              class="action-btn delete"
+              @click="handleCancelShare(share)"
+              title="取消分享"
+            >
               <el-icon><Delete /></el-icon>
               <span>取消</span>
             </button>
@@ -120,18 +143,18 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from "vue";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 import { ElMessage, ElMessageBox } from "element-plus";
-import { 
-  Share, 
-  DocumentCopy, 
-  Delete, 
-  Link, 
-  Clock, 
+import {
+  Share,
+  DocumentCopy,
+  Delete,
+  Link,
+  Clock,
   Calendar,
   Unlock,
   Lock,
-  Document
+  Document,
 } from "@element-plus/icons-vue";
 import { getShareUrl, cancel } from "@/api/share";
 import { useLoginUserStore } from "@/store/user";
@@ -144,16 +167,22 @@ const shareList = ref<API.ShareDTO[]>([]);
 
 // 计算属性：公开分享数量
 const publicShareCount = computed(() => {
-  return shareList.value.filter(s => s.shareType?.toLowerCase() === 'no_code').length;
+  return shareList.value.filter((s) => s.shareType?.toLowerCase() === "no_code")
+    .length;
 });
 
 // 计算属性：私密分享数量
 const privateShareCount = computed(() => {
-  return shareList.value.filter(s => s.shareType?.toLowerCase() === 'need_code').length;
+  return shareList.value.filter(
+    (s) => s.shareType?.toLowerCase() === "need_code",
+  ).length;
 });
 
 // 检查是否过期
-const isExpired = (endTime: string | undefined, dayType: number | undefined) => {
+const isExpired = (
+  endTime: string | undefined,
+  dayType: number | undefined,
+) => {
   if (!endTime || dayType === 0) return false;
   return new Date(endTime) < new Date();
 };
@@ -163,10 +192,10 @@ const formatDate = (dateStr: string | undefined) => {
   if (!dateStr) return "-";
   try {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('zh-CN', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
+    return date.toLocaleDateString("zh-CN", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
     });
   } catch (error) {
     return dateStr;
@@ -176,7 +205,7 @@ const formatDate = (dateStr: string | undefined) => {
 // 格式化有效期
 const formatShareEndTime = (
   endTime: string | undefined,
-  dayType: number | undefined
+  dayType: number | undefined,
 ) => {
   if (!endTime) return "-";
   if (dayType === 0) {
@@ -187,7 +216,9 @@ const formatShareEndTime = (
   if (end < now) {
     return "已过期";
   }
-  const diffDays = Math.ceil((end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+  const diffDays = Math.ceil(
+    (end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24),
+  );
   return `剩余 ${diffDays} 天`;
 };
 
@@ -220,7 +251,9 @@ const copyShareInfo = (share: API.ShareDTO) => {
     try {
       document.execCommand("copy");
       ElMessage.success(
-        share.shareType?.toLowerCase() === 'need_code' ? "链接和提取码已复制" : "链接已复制"
+        share.shareType?.toLowerCase() === "need_code"
+          ? "链接和提取码已复制"
+          : "链接已复制",
       );
     } catch (err) {
       ElMessage.error("复制失败，请手动复制");
@@ -233,7 +266,9 @@ const copyShareInfo = (share: API.ShareDTO) => {
     .writeText(shareInfo)
     .then(() => {
       ElMessage.success(
-        share.shareType?.toLowerCase() === 'need_code' ? "链接和提取码已复制" : "链接已复制"
+        share.shareType?.toLowerCase() === "need_code"
+          ? "链接和提取码已复制"
+          : "链接已复制",
       );
     })
     .catch(() => {
@@ -257,7 +292,7 @@ const handleCancelShare = async (share: API.ShareDTO) => {
 
     const response = await cancel({
       shareIds: [share.id],
-      accountId: accountId
+      accountId: accountId,
     });
 
     if (response.data?.code === 0) {
@@ -285,7 +320,7 @@ onMounted(() => {
   max-width: 1400px;
   margin: 0 auto;
   min-height: 100vh;
-  background: linear-gradient(135deg, #FDF2F8 0%, #F5F3FF 50%, #FCE7F3 100%);
+  background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 50%, #fce7f3 100%);
   position: relative;
   overflow: hidden;
 }
@@ -310,7 +345,11 @@ onMounted(() => {
 .bg-orb-1 {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(219, 39, 119, 0.4) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(219, 39, 119, 0.4) 0%,
+    transparent 70%
+  );
   top: -100px;
   right: -50px;
   animation-delay: 0s;
@@ -319,7 +358,11 @@ onMounted(() => {
 .bg-orb-2 {
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.3) 0%,
+    transparent 70%
+  );
   bottom: -80px;
   left: -60px;
   animation-delay: -7s;
@@ -328,7 +371,11 @@ onMounted(() => {
 .bg-orb-3 {
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.3) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(244, 114, 182, 0.3) 0%,
+    transparent 70%
+  );
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -336,9 +383,16 @@ onMounted(() => {
 }
 
 @keyframes floatOrb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 15px) scale(0.95); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 15px) scale(0.95);
+  }
 }
 
 /* 页面标题 */
@@ -355,8 +409,8 @@ onMounted(() => {
 
 .title-icon {
   font-size: 28px;
-  color: #DB2777;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  color: #db2777;
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -365,12 +419,12 @@ onMounted(() => {
 .header-title h1 {
   font-size: 24px;
   font-weight: 600;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0;
 }
 
 .header-desc {
-  color: #64748B;
+  color: #64748b;
   font-size: 14px;
   margin: 0;
   padding-left: 40px;
@@ -417,17 +471,17 @@ onMounted(() => {
 
 .stat-icon.public {
   background: rgba(16, 185, 129, 0.1);
-  color: #10B981;
+  color: #10b981;
 }
 
 .stat-icon.private {
   background: rgba(245, 158, 11, 0.1);
-  color: #F59E0B;
+  color: #f59e0b;
 }
 
 .stat-icon.total {
   background: rgba(99, 102, 241, 0.1);
-  color: #6366F1;
+  color: #6366f1;
 }
 
 .stat-info {
@@ -439,13 +493,13 @@ onMounted(() => {
 .stat-value {
   font-size: 24px;
   font-weight: 700;
-  color: #1E1B4B;
+  color: #1e1b4b;
   line-height: 1;
 }
 
 .stat-label {
   font-size: 13px;
-  color: #64748B;
+  color: #64748b;
 }
 
 /* 分享列表 */
@@ -469,25 +523,25 @@ onMounted(() => {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #FDF2F8 0%, #F5F3FF 100%);
+  background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 20px;
   font-size: 36px;
-  color: #DB2777;
+  color: #db2777;
 }
 
 .empty-title {
   font-size: 18px;
   font-weight: 600;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0 0 8px;
 }
 
 .empty-desc {
   font-size: 14px;
-  color: #64748B;
+  color: #64748b;
   margin: 0;
 }
 
@@ -538,7 +592,7 @@ onMounted(() => {
 
 .share-card.expired .share-name {
   text-decoration: line-through;
-  color: #94A3B8;
+  color: #94a3b8;
 }
 
 /* 卡片头部 */
@@ -553,12 +607,12 @@ onMounted(() => {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .share-type-badge {
@@ -573,12 +627,12 @@ onMounted(() => {
 
 .share-type-badge.no_code {
   background: rgba(16, 185, 129, 0.1);
-  color: #10B981;
+  color: #10b981;
 }
 
 .share-type-badge.need_code {
   background: rgba(245, 158, 11, 0.1);
-  color: #F59E0B;
+  color: #f59e0b;
 }
 
 /* 卡片内容 */
@@ -590,7 +644,7 @@ onMounted(() => {
 .share-name {
   font-size: 16px;
   font-weight: 600;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0 0 12px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -609,18 +663,18 @@ onMounted(() => {
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: #64748B;
+  color: #64748b;
 }
 
 .meta-item .el-icon {
   font-size: 14px;
-  color: #94A3B8;
+  color: #94a3b8;
 }
 
 .share-code {
   margin-top: 12px;
   padding: 10px 12px;
-  background: #F8FAFC;
+  background: #f8fafc;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -629,13 +683,13 @@ onMounted(() => {
 
 .code-label {
   font-size: 12px;
-  color: #64748B;
+  color: #64748b;
 }
 
 .code-value {
   font-size: 14px;
   font-weight: 600;
-  color: #DB2777;
+  color: #db2777;
   font-family: monospace;
   letter-spacing: 2px;
 }
@@ -664,22 +718,22 @@ onMounted(() => {
 
 .action-btn.copy {
   background: rgba(219, 39, 119, 0.1);
-  color: #DB2777;
+  color: #db2777;
 }
 
 .action-btn.copy:hover {
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
+  color: #ffffff;
 }
 
 .action-btn.delete {
   background: rgba(239, 68, 68, 0.1);
-  color: #EF4444;
+  color: #ef4444;
 }
 
 .action-btn.delete:hover {
-  background: #EF4444;
-  color: #FFFFFF;
+  background: #ef4444;
+  color: #ffffff;
 }
 
 /* 响应式适配 */

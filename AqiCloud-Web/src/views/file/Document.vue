@@ -10,11 +10,15 @@
               <el-icon :size="32"><EditPen /></el-icon>
             </div>
           </div>
-          <span class="loading-text">{{ t('ai.generatingDoc') }}</span>
-          <span class="loading-subtext">{{ t('ai.pleaseWait') }}</span>
+          <span class="loading-text">{{ t("ai.generatingDoc") }}</span>
+          <span class="loading-subtext">{{ t("ai.pleaseWait") }}</span>
         </div>
       </template>
-      <div v-else-if="generatedContent" class="generated-content" v-html="generatedContent"></div>
+      <div
+        v-else-if="generatedContent"
+        class="generated-content"
+        v-html="generatedContent"
+      ></div>
       <div v-else class="generated-content">
         <div class="welcome-section">
           <div class="welcome-card">
@@ -25,8 +29,8 @@
                   <el-icon :size="48"><Document /></el-icon>
                 </div>
               </div>
-              <h3 class="welcome-title">{{ t('ai.docAssistantTitle') }}</h3>
-              <p class="welcome-subtitle">{{ t('ai.docAssistantSubtitle') }}</p>
+              <h3 class="welcome-title">{{ t("ai.docAssistantTitle") }}</h3>
+              <p class="welcome-subtitle">{{ t("ai.docAssistantSubtitle") }}</p>
             </div>
 
             <div class="welcome-divider"></div>
@@ -37,8 +41,10 @@
                   <el-icon><Stopwatch /></el-icon>
                 </div>
                 <div class="feature-text">
-                  <span class="feature-title">{{ t('ai.quickGenerate') }}</span>
-                  <span class="feature-desc">{{ t('ai.docQuickGenerateDesc') }}</span>
+                  <span class="feature-title">{{ t("ai.quickGenerate") }}</span>
+                  <span class="feature-desc">{{
+                    t("ai.docQuickGenerateDesc")
+                  }}</span>
                 </div>
               </div>
               <div class="feature-item">
@@ -46,21 +52,39 @@
                   <el-icon><Aim /></el-icon>
                 </div>
                 <div class="feature-text">
-                  <span class="feature-title">{{ t('ai.preciseExtraction') }}</span>
-                  <span class="feature-desc">{{ t('ai.coreContentRecognition') }}</span>
+                  <span class="feature-title">{{
+                    t("ai.preciseExtraction")
+                  }}</span>
+                  <span class="feature-desc">{{
+                    t("ai.coreContentRecognition")
+                  }}</span>
                 </div>
               </div>
               <div class="feature-item">
                 <div class="feature-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <circle cx="12" cy="12" r="10"></circle>
                     <line x1="2" y1="12" x2="22" y2="12"></line>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    <path
+                      d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                    ></path>
                   </svg>
                 </div>
                 <div class="feature-text">
-                  <span class="feature-title">{{ t('ai.multiLanguage') }}</span>
-                  <span class="feature-desc">{{ t('ai.multiLanguageDesc') }}</span>
+                  <span class="feature-title">{{ t("ai.multiLanguage") }}</span>
+                  <span class="feature-desc">{{
+                    t("ai.multiLanguageDesc")
+                  }}</span>
                 </div>
               </div>
               <div class="feature-item">
@@ -68,8 +92,10 @@
                   <el-icon><MagicStick /></el-icon>
                 </div>
                 <div class="feature-text">
-                  <span class="feature-title">{{ t('ai.customization') }}</span>
-                  <span class="feature-desc">{{ t('ai.flexibleConfigDesc') }}</span>
+                  <span class="feature-title">{{ t("ai.customization") }}</span>
+                  <span class="feature-desc">{{
+                    t("ai.flexibleConfigDesc")
+                  }}</span>
                 </div>
               </div>
             </div>
@@ -80,7 +106,7 @@
                 <span class="dot"></span>
                 <span class="dot"></span>
               </div>
-              <span class="footer-text">{{ t('ai.selectDocToStart') }}</span>
+              <span class="footer-text">{{ t("ai.selectDocToStart") }}</span>
             </div>
           </div>
         </div>
@@ -93,7 +119,7 @@
       <div class="doc-select-area">
         <label class="section-label">
           <el-icon class="label-icon" :size="18"><Paperclip /></el-icon>
-          <span class="label-text">{{ t('ai.selectDocument') }}</span>
+          <span class="label-text">{{ t("ai.selectDocument") }}</span>
         </label>
         <div class="url-input-container">
           <div class="input-wrapper">
@@ -103,14 +129,14 @@
               placeholder="点击右侧按钮选择文档..."
               class="ds-input"
               readonly
-            >
+            />
             <span class="input-icon" v-if="formData.url">
               <el-icon :size="14"><Check /></el-icon>
             </span>
           </div>
           <button class="select-file-btn" @click="openFileDialog">
             <el-icon class="btn-icon" :size="18"><FolderOpened /></el-icon>
-            <span class="btn-text">{{ t('ai.selectDocument') }}</span>
+            <span class="btn-text">{{ t("ai.selectDocument") }}</span>
           </button>
         </div>
       </div>
@@ -124,7 +150,7 @@
         <div class="input-row">
           <div class="input-item">
             <label class="input-label">
-              <span class="label-dot" style="background: #667eea;"></span>
+              <span class="label-dot" style="background: #667eea"></span>
               概要长度
             </label>
             <input
@@ -132,11 +158,11 @@
               v-model="formData.length"
               placeholder="例如：200字"
               class="ds-input"
-            >
+            />
           </div>
           <div class="input-item">
             <label class="input-label">
-              <span class="label-dot" style="background: #764ba2;"></span>
+              <span class="label-dot" style="background: #764ba2"></span>
               输出语言
             </label>
             <input
@@ -144,11 +170,11 @@
               v-model="formData.language"
               placeholder="例如：中文"
               class="ds-input"
-            >
+            />
           </div>
           <div class="input-item">
             <label class="input-label">
-              <span class="label-dot" style="background: #f093fb;"></span>
+              <span class="label-dot" style="background: #f093fb"></span>
               生成风格
             </label>
             <input
@@ -156,11 +182,11 @@
               v-model="formData.summary_type"
               placeholder="例如：简洁"
               class="ds-input"
-            >
+            />
           </div>
           <div class="input-item">
             <label class="input-label">
-              <span class="label-dot" style="background: #f5576c;"></span>
+              <span class="label-dot" style="background: #f5576c"></span>
               附加要求
             </label>
             <input
@@ -168,7 +194,7 @@
               v-model="formData.additional_instructions"
               placeholder="其他自定义要求"
               class="ds-input"
-            >
+            />
           </div>
         </div>
       </div>
@@ -177,7 +203,7 @@
       <div class="button-area">
         <button
           class="generate-btn"
-          :class="{ 'loading': isGenerating, 'disabled': !formData.url }"
+          :class="{ loading: isGenerating, disabled: !formData.url }"
           @click="startGeneration"
           :disabled="!formData.url || isGenerating"
         >
@@ -203,9 +229,13 @@
       <div class="file-browser">
         <!-- 面包屑导航 -->
         <div class="breadcrumb" v-if="currentPath.length > 0">
-            <DSTag color="primary" class="breadcrumb-home" @click="navigateTo(-1)">
+          <DSTag
+            color="primary"
+            class="breadcrumb-home"
+            @click="navigateTo(-1)"
+          >
             <el-icon :size="16"><HomeFilled /></el-icon>
-            {{ t('ai.rootDirectory') }}
+            {{ t("ai.rootDirectory") }}
           </DSTag>
           <span
             v-for="(item, index) in currentPath"
@@ -231,14 +261,17 @@
             class="file-list-item"
             :class="{
               'is-folder': item.isDir === 1,
-              'is-selected': selectedFile?.id === item.id
+              'is-selected': selectedFile?.id === item.id,
             }"
             @click="handleItemClick(item)"
           >
-            <el-icon><Document v-if="item.isDir !== 1" /><Folder v-else /></el-icon>
+            <el-icon
+              ><Document v-if="item.isDir !== 1" /><Folder v-else
+            /></el-icon>
             <span class="file-name">{{ item.fileName }}</span>
             <span class="file-info" v-if="item.isDir !== 1">
-              {{ formatFileSize(item.fileSize) }} | {{ formatDate(item.updateTime) }}
+              {{ formatFileSize(item.fileSize) }} |
+              {{ formatDate(item.updateTime) }}
             </span>
           </div>
         </div>
@@ -248,7 +281,7 @@
           <div class="empty-icon">
             <el-icon :size="48"><FolderRemove /></el-icon>
           </div>
-          <p class="empty-text">{{ t('ai.emptyFolder') }}</p>
+          <p class="empty-text">{{ t("ai.emptyFolder") }}</p>
         </div>
       </div>
 
@@ -271,11 +304,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { ElMessage } from 'element-plus';
-import { listFiles, downloadUrlParam } from '@/api/file';
-import { useLoginUserStore } from '@/store/user';
+import { ref, reactive } from "vue";
+import { useI18n } from "vue-i18n";
+import { ElMessage } from "element-plus";
+import { listFiles, downloadUrlParam } from "@/api/file";
+import { useLoginUserStore } from "@/store/user";
 import {
   Document,
   Folder,
@@ -288,16 +321,16 @@ import {
   Setting,
   HomeFilled,
   FolderRemove,
-  Check
-} from '@element-plus/icons-vue';
-import LoadingDots from '@/components/common/LoadingDots.vue';
-import { getApiUrl, API_PATHS } from '@/config/api';
-import DSButton from '@/components/design-system/DSButton.vue';
-import DSTag from '@/components/design-system/DSTag.vue';
+  Check,
+} from "@element-plus/icons-vue";
+import LoadingDots from "@/components/common/LoadingDots.vue";
+import { getApiUrl, API_PATHS } from "@/config/api";
+import DSButton from "@/components/design-system/DSButton.vue";
+import DSTag from "@/components/design-system/DSTag.vue";
 
 const { t } = useI18n();
 const { loginUser } = useLoginUserStore();
-const generatedContent = ref('');
+const generatedContent = ref("");
 const isGenerating = ref(false);
 const fileDialogVisible = ref(false);
 const selectedFile = ref<API.FileDTO | null>(null);
@@ -305,11 +338,11 @@ const currentPath = ref<API.TreeNodeDTO[]>([]);
 const currentFiles = ref<API.FileDTO[]>([]);
 
 const formData = reactive({
-  url: '',
-  length: '',
-  language: '',
-  summary_type: '',
-  additional_instructions: ''
+  url: "",
+  length: "",
+  language: "",
+  summary_type: "",
+  additional_instructions: "",
 });
 
 // 处理文件或文件夹点击
@@ -317,18 +350,18 @@ const handleItemClick = async (item: API.FileDTO) => {
   if (item.isDir === 1) {
     try {
       const response = await listFiles({
-        parent_id: item.id
+        parent_id: item.id,
       });
       if (response.data?.success && response.data.data) {
         currentFiles.value = response.data.data;
         currentPath.value.push({
           id: item.id,
-          label: item.fileName
+          label: item.fileName,
         } as API.TreeNodeDTO);
       }
     } catch (error) {
-      console.error('获取文件列表失败:', error);
-      ElMessage.error('获取文件列表失败');
+      console.error("获取文件列表失败:", error);
+      ElMessage.error("获取文件列表失败");
     }
   } else {
     selectedFile.value = item;
@@ -342,14 +375,14 @@ const navigateTo = async (index: number) => {
     currentPath.value = [];
     try {
       const response = await listFiles({
-        parent_id: 0
+        parent_id: 0,
       });
       if (response.data?.success && response.data.data) {
         currentFiles.value = response.data.data;
       }
     } catch (error) {
-      console.error('获取文件列表失败:', error);
-      ElMessage.error('获取文件列表失败');
+      console.error("获取文件列表失败:", error);
+      ElMessage.error("获取文件列表失败");
     }
     return;
   }
@@ -361,14 +394,14 @@ const navigateTo = async (index: number) => {
 
   try {
     const response = await listFiles({
-      parent_id: targetFolder.id
+      parent_id: targetFolder.id,
     });
     if (response.data?.success && response.data.data) {
       currentFiles.value = response.data.data;
     }
   } catch (error) {
-    console.error('获取文件列表失败:', error);
-    ElMessage.error('获取文件列表失败');
+    console.error("获取文件列表失败:", error);
+    ElMessage.error("获取文件列表失败");
   }
 };
 
@@ -380,27 +413,27 @@ const openFileDialog = async () => {
 
   try {
     const response = await listFiles({
-      parent_id: 0
+      parent_id: 0,
     });
     if (response.data?.success && response.data.data) {
       currentFiles.value = response.data.data;
     }
   } catch (error) {
-    console.error('获取文件列表失败:', error);
-    ElMessage.error('获取文件列表失败');
+    console.error("获取文件列表失败:", error);
+    ElMessage.error("获取文件列表失败");
   }
 };
 
 // 确认选择
 const confirmSelection = async () => {
   if (!selectedFile.value || selectedFile.value.isDir === 1) {
-    ElMessage.warning('请选择一个文件');
+    ElMessage.warning("请选择一个文件");
     return;
   }
 
   try {
     const response = await downloadUrlParam({
-      fileIds: [String(selectedFile.value.id)]
+      fileIds: [String(selectedFile.value.id)],
     });
 
     if (response.data?.success && response.data.data) {
@@ -408,20 +441,20 @@ const confirmSelection = async () => {
       const downloadUrl = response.data.data[0].downloadUrl;
       formData.url = baseUrl ? `${baseUrl}${downloadUrl}` : downloadUrl;
       fileDialogVisible.value = false;
-      ElMessage.success('文件选择成功');
+      ElMessage.success("文件选择成功");
     } else {
-      ElMessage.error('获取文件下载地址失败');
+      ElMessage.error("获取文件下载地址失败");
     }
   } catch (error) {
-    console.error('获取文件下载地址失败:', error);
-    ElMessage.error('获取文件下载地址失败');
+    console.error("获取文件下载地址失败:", error);
+    ElMessage.error("获取文件下载地址失败");
   }
 };
 
 // 格式化文件大小
 const formatFileSize = (size: number) => {
-  if (!size) return '0 B';
-  const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+  if (!size) return "0 B";
+  const units = ["B", "KB", "MB", "GB", "TB"];
   let index = 0;
   let fileSize = size;
 
@@ -435,7 +468,7 @@ const formatFileSize = (size: number) => {
 
 // 格式化日期
 const formatDate = (timestamp: number) => {
-  if (!timestamp) return '-';
+  if (!timestamp) return "-";
   return new Date(timestamp).toLocaleString();
 };
 
@@ -444,7 +477,7 @@ const processStreamResponse = async (response: Response) => {
   const reader = response.body?.getReader();
   if (!reader) return;
 
-  generatedContent.value = '';
+  generatedContent.value = "";
   const decoder = new TextDecoder();
 
   try {
@@ -453,13 +486,13 @@ const processStreamResponse = async (response: Response) => {
       if (done) break;
 
       const chunk = decoder.decode(value, { stream: true });
-      const lines = chunk.split('\n');
+      const lines = chunk.split("\n");
 
       for (const line of lines) {
-        if (line.trim() === '' || line.trim() === 'data: [DONE]') continue;
+        if (line.trim() === "" || line.trim() === "data: [DONE]") continue;
 
         try {
-          const jsonStr = line.replace(/^data: /, '').trim();
+          const jsonStr = line.replace(/^data: /, "").trim();
           if (!jsonStr) continue;
 
           const jsonData = JSON.parse(jsonStr);
@@ -468,20 +501,20 @@ const processStreamResponse = async (response: Response) => {
             generatedContent.value += jsonData.data;
           }
         } catch (e) {
-          console.error('Error parsing JSON:', e);
+          console.error("Error parsing JSON:", e);
         }
       }
     }
 
     // 响应完成后清空输入框
-    formData.url = '';
-    formData.summary_type = '';
-    formData.language = '';
-    formData.length = '';
-    formData.additional_instructions = '';
+    formData.url = "";
+    formData.summary_type = "";
+    formData.language = "";
+    formData.length = "";
+    formData.additional_instructions = "";
   } catch (error) {
-    console.error('Stream reading error:', error);
-    generatedContent.value += '\n[读取数据时发生错误]';
+    console.error("Stream reading error:", error);
+    generatedContent.value += "\n[读取数据时发生错误]";
   } finally {
     isGenerating.value = false;
   }
@@ -490,34 +523,34 @@ const processStreamResponse = async (response: Response) => {
 // 开始生成
 const startGeneration = async () => {
   if (!formData.url) {
-    ElMessage.warning('请选择文档');
+    ElMessage.warning("请选择文档");
     return;
   }
 
   isGenerating.value = true;
   try {
     const response = await fetch(getApiUrl(API_PATHS.DOCUMENT), {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         url: formData.url,
         summary_type: formData.summary_type,
         language: formData.language,
         length: formData.length,
-        additional_instructions: formData.additional_instructions
-      })
+        additional_instructions: formData.additional_instructions,
+      }),
     });
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
 
     await processStreamResponse(response);
   } catch (error) {
-    console.error('Error:', error);
-    generatedContent.value = '生成过程中发生错误，请稍后重试';
+    console.error("Error:", error);
+    generatedContent.value = "生成过程中发生错误，请稍后重试";
     isGenerating.value = false;
   }
 };
@@ -547,7 +580,7 @@ const startGeneration = async () => {
 }
 
 .content-container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -599,7 +632,7 @@ const startGeneration = async () => {
 }
 
 .avatar-ring::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 3px;
   border-radius: 50%;
@@ -669,7 +702,7 @@ const startGeneration = async () => {
 .feature-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -722,9 +755,15 @@ const startGeneration = async () => {
   animation: typing 1.4s ease-in-out infinite;
 }
 
-.typing-indicator .dot:nth-child(1) { animation-delay: 0s; }
-.typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
-.typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+.typing-indicator .dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.typing-indicator .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-indicator .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
 
 .footer-text {
   font-size: 14px;
@@ -753,8 +792,8 @@ const startGeneration = async () => {
   inset: 0;
   border-radius: 50%;
   border: 3px solid transparent;
-  border-top-color: #DB2777;
-  border-right-color: #A855F7;
+  border-top-color: #db2777;
+  border-right-color: #a855f7;
   animation: spin 1s linear infinite;
 }
 
@@ -1026,7 +1065,7 @@ const startGeneration = async () => {
 
 .file-list-item.is-selected {
   background: rgba(219, 39, 119, 0.1);
-  border-color: #DB2777;
+  border-color: #db2777;
 }
 
 /* ========== 动画 ========== */
@@ -1042,32 +1081,62 @@ const startGeneration = async () => {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(0.95); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(0.95);
+  }
 }
 
 @keyframes typing {
-  0%, 60%, 100% { transform: translateY(0); opacity: 1; }
-  30% { transform: translateY(-6px); opacity: 0.5; }
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  30% {
+    transform: translateY(-6px);
+    opacity: 0.5;
+  }
 }
 
 /* ========== 响应式 ========== */

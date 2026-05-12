@@ -33,20 +33,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick } from "vue";
 
 interface Props {
   content: string;
-  placement?: 'top' | 'bottom' | 'left' | 'right';
-  trigger?: 'hover' | 'click' | 'focus';
+  placement?: "top" | "bottom" | "left" | "right";
+  trigger?: "hover" | "click" | "focus";
   offset?: number;
   delay?: number;
   disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  placement: 'top',
-  trigger: 'hover',
+  placement: "top",
+  trigger: "hover",
   offset: 8,
   delay: 200,
   disabled: false,
@@ -63,12 +63,12 @@ let hideTimer: number | null = null;
 // 显示工具提示
 const showTooltip = () => {
   if (props.disabled) return;
-  
+
   if (hideTimer) {
     clearTimeout(hideTimer);
     hideTimer = null;
   }
-  
+
   showTimer = window.setTimeout(() => {
     visible.value = true;
     nextTick(() => {
@@ -83,7 +83,7 @@ const hideTooltip = () => {
     clearTimeout(showTimer);
     showTimer = null;
   }
-  
+
   hideTimer = window.setTimeout(() => {
     visible.value = false;
   }, 100);
@@ -92,33 +92,33 @@ const hideTooltip = () => {
 // 更新位置
 const updatePosition = () => {
   if (!wrapperRef.value || !tooltipRef.value) return;
-  
+
   const wrapperRect = wrapperRef.value.getBoundingClientRect();
   const tooltipRect = tooltipRef.value.getBoundingClientRect();
-  
+
   const style: Record<string, string> = {};
   const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
   const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-  
+
   switch (props.placement) {
-    case 'top':
+    case "top":
       style.left = `${wrapperRect.left + wrapperRect.width / 2 - tooltipRect.width / 2 + scrollX}px`;
       style.top = `${wrapperRect.top - tooltipRect.height - props.offset + scrollY}px`;
       break;
-    case 'bottom':
+    case "bottom":
       style.left = `${wrapperRect.left + wrapperRect.width / 2 - tooltipRect.width / 2 + scrollX}px`;
       style.top = `${wrapperRect.bottom + props.offset + scrollY}px`;
       break;
-    case 'left':
+    case "left":
       style.left = `${wrapperRect.left - tooltipRect.width - props.offset + scrollX}px`;
       style.top = `${wrapperRect.top + wrapperRect.height / 2 - tooltipRect.height / 2 + scrollY}px`;
       break;
-    case 'right':
+    case "right":
       style.left = `${wrapperRect.right + props.offset + scrollX}px`;
       style.top = `${wrapperRect.top + wrapperRect.height / 2 - tooltipRect.height / 2 + scrollY}px`;
       break;
   }
-  
+
   tooltipStyle.value = style;
 };
 
@@ -130,14 +130,14 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll, true);
-  window.addEventListener('resize', handleScroll);
+  window.addEventListener("scroll", handleScroll, true);
+  window.addEventListener("resize", handleScroll);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll, true);
-  window.removeEventListener('resize', handleScroll);
-  
+  window.removeEventListener("scroll", handleScroll, true);
+  window.removeEventListener("resize", handleScroll);
+
   if (showTimer) clearTimeout(showTimer);
   if (hideTimer) clearTimeout(hideTimer);
 });

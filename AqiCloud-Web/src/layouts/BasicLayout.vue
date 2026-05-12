@@ -6,7 +6,10 @@
     </header>
 
     <!-- Main Container -->
-    <div class="layout-container" :class="{ 'sidebar-open': showSidebar && !isCollapse }">
+    <div
+      class="layout-container"
+      :class="{ 'sidebar-open': showSidebar && !isCollapse }"
+    >
       <!-- Mobile Overlay -->
       <div
         v-if="showSidebar && isMobile"
@@ -25,7 +28,11 @@
       </aside>
 
       <!-- Sidebar Toggle Button -->
-      <div v-if="showSidebar && !isMobile" class="sidebar-toggle" :style="{ left: toggleButtonLeft }">
+      <div
+        v-if="showSidebar && !isMobile"
+        class="sidebar-toggle"
+        :style="{ left: toggleButtonLeft }"
+      >
         <el-tooltip
           effect="dark"
           :content="isCollapse ? '展开侧边栏' : '收起侧边栏'"
@@ -41,7 +48,11 @@
       </div>
 
       <!-- Mobile Sidebar Toggle Button -->
-      <div v-if="showSidebar && isMobile" class="mobile-sidebar-toggle" :class="{ hidden: !isCollapse }">
+      <div
+        v-if="showSidebar && isMobile"
+        class="mobile-sidebar-toggle"
+        :class="{ hidden: !isCollapse }"
+      >
         <button class="mobile-toggle-button" @click="openSidebar">
           <el-icon :size="20"><Menu /></el-icon>
         </button>
@@ -62,7 +73,7 @@
 <script setup lang="ts">
 /**
  * BasicLayout - 统一布局组件
- * 
+ *
  * 特性：
  * - 使用设计系统 CSS 变量
  * - 响应式侧边栏
@@ -92,11 +103,11 @@ const handleResize = () => {
   }
 };
 
-window.addEventListener('resize', handleResize);
+window.addEventListener("resize", handleResize);
 
 // 组件卸载时移除监听
 onUnmounted(() => {
-  window.removeEventListener('resize', handleResize);
+  window.removeEventListener("resize", handleResize);
 });
 
 /**
@@ -107,9 +118,9 @@ const toggleButtonLeft = computed((): string => {
   // 桌面模式下侧边栏宽度为 240px，收起时为 64px
   const isTablet = windowWidth.value <= 1024;
   if (isCollapse.value) {
-    return isTablet ? '56px' : '64px';
+    return isTablet ? "56px" : "64px";
   }
-  return isTablet ? '200px' : '240px';
+  return isTablet ? "200px" : "240px";
 });
 
 /**
@@ -126,9 +137,11 @@ const showSidebar = computed((): boolean => {
     "/Answer",
     "/Chat",
     "/Document",
-    "/picture"
+    "/picture",
   ];
-  return sidebarRoutes.some(route => path.startsWith(route) || path === route);
+  return sidebarRoutes.some(
+    (route) => path.startsWith(route) || path === route,
+  );
 });
 
 /**
@@ -264,7 +277,12 @@ onMounted(() => {
   left: 0;
   width: 2px;
   height: 40px;
-  background: linear-gradient(180deg, transparent, var(--color-primary), transparent);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--color-primary),
+    transparent
+  );
   border-radius: 1px;
   transition: all var(--transition-base);
 }
@@ -284,7 +302,12 @@ onMounted(() => {
 
 .toggle-button:hover .toggle-line {
   height: 50px;
-  background: linear-gradient(180deg, transparent, var(--color-secondary), transparent);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--color-secondary),
+    transparent
+  );
 }
 
 .toggle-button:hover .toggle-arrow {
@@ -490,7 +513,9 @@ onMounted(() => {
 /* ==================== Page Transitions ==================== */
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 300ms ease, transform 300ms ease;
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
 }
 
 .page-enter-from {

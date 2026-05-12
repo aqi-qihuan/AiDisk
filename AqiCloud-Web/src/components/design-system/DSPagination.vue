@@ -2,14 +2,14 @@
   <div class="ds-pagination">
     <!-- Total Info -->
     <span v-if="showTotal" class="ds-pagination-total">
-      {{ t('common.total', { count: total }) }}
+      {{ t("common.total", { count: total }) }}
     </span>
 
     <!-- Page Size Selector -->
     <div v-if="showSizeChanger" class="ds-pagination-size-changer">
       <select :value="pageSize" @change="handleSizeChange">
         <option v-for="size in pageSizes" :key="size" :value="size">
-          {{ t('common.perPage', { size }) }}
+          {{ t("common.perPage", { size }) }}
         </option>
       </select>
     </div>
@@ -23,7 +23,10 @@
         @click="handlePrev"
       >
         <svg viewBox="0 0 24 24" width="16" height="16">
-          <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+          <path
+            fill="currentColor"
+            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+          />
         </svg>
       </button>
 
@@ -41,7 +44,7 @@
           :class="[
             'ds-pagination-btn',
             'ds-pagination-page',
-            { 'is-active': item === currentPage }
+            { 'is-active': item === currentPage },
           ]"
           @click="handlePageClick(item as number)"
         >
@@ -56,14 +59,17 @@
         @click="handleNext"
       >
         <svg viewBox="0 0 24 24" width="16" height="16">
-          <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+          <path
+            fill="currentColor"
+            d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+          />
         </svg>
       </button>
     </div>
 
     <!-- Jumper -->
     <div v-if="showJumper" class="ds-pagination-jumper">
-      <span>{{ t('common.goTo') }}</span>
+      <span>{{ t("common.goTo") }}</span>
       <input
         type="number"
         :value="currentPage"
@@ -71,14 +77,14 @@
         :max="pageCount"
         @keyup.enter="handleJumperChange"
       />
-      <span>{{ t('common.page') }}</span>
+      <span>{{ t("common.page") }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { computed, ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 
@@ -105,11 +111,11 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-  'update:currentPage': [page: number];
-  'update:pageSize': [size: number];
-  'change': [page: number, size: number];
-  'size-change': [size: number];
-  'current-change': [page: number];
+  "update:currentPage": [page: number];
+  "update:pageSize": [size: number];
+  change: [page: number, size: number];
+  "size-change": [size: number];
+  "current-change": [page: number];
 }>();
 
 const pageCount = computed(() => Math.ceil(props.total / props.pageSize));
@@ -136,7 +142,7 @@ const pagerList = computed(() => {
     if (start > 1) {
       pages.push(1);
       if (start > 2) {
-        pages.push('...');
+        pages.push("...");
       }
     }
 
@@ -146,7 +152,7 @@ const pagerList = computed(() => {
 
     if (end < total) {
       if (end < total - 1) {
-        pages.push('...');
+        pages.push("...");
       }
       pages.push(total);
     }
@@ -158,51 +164,51 @@ const pagerList = computed(() => {
 const handlePrev = () => {
   if (props.currentPage > 1) {
     const newPage = props.currentPage - 1;
-    emit('update:currentPage', newPage);
-    emit('current-change', newPage);
-    emit('change', newPage, props.pageSize);
+    emit("update:currentPage", newPage);
+    emit("current-change", newPage);
+    emit("change", newPage, props.pageSize);
   }
 };
 
 const handleNext = () => {
   if (props.currentPage < pageCount.value) {
     const newPage = props.currentPage + 1;
-    emit('update:currentPage', newPage);
-    emit('current-change', newPage);
-    emit('change', newPage, props.pageSize);
+    emit("update:currentPage", newPage);
+    emit("current-change", newPage);
+    emit("change", newPage, props.pageSize);
   }
 };
 
 const handlePageClick = (page: number) => {
   if (page !== props.currentPage) {
-    emit('update:currentPage', page);
-    emit('current-change', page);
-    emit('change', page, props.pageSize);
+    emit("update:currentPage", page);
+    emit("current-change", page);
+    emit("change", page, props.pageSize);
   }
 };
 
 const handleSizeChange = (e: Event) => {
   const target = e.target as HTMLSelectElement;
   const newSize = Number(target.value);
-  emit('update:pageSize', newSize);
-  emit('size-change', newSize);
-  
+  emit("update:pageSize", newSize);
+  emit("size-change", newSize);
+
   // Reset to page 1 when size changes
-  emit('update:currentPage', 1);
-  emit('change', 1, newSize);
+  emit("update:currentPage", 1);
+  emit("change", 1, newSize);
 };
 
 const handleJumperChange = (e: Event) => {
   const target = e.target as HTMLInputElement;
   let newPage = Number(target.value);
-  
+
   if (newPage < 1) newPage = 1;
   if (newPage > pageCount.value) newPage = pageCount.value;
-  
+
   if (newPage !== props.currentPage) {
-    emit('update:currentPage', newPage);
-    emit('current-change', newPage);
-    emit('change', newPage, props.pageSize);
+    emit("update:currentPage", newPage);
+    emit("current-change", newPage);
+    emit("change", newPage, props.pageSize);
   }
 };
 </script>
@@ -217,17 +223,17 @@ const handleJumperChange = (e: Event) => {
 
 .ds-pagination-total {
   font-size: 14px;
-  color: #64748B;
+  color: #64748b;
 }
 
 .ds-pagination-size-changer select {
   height: 32px;
   padding: 0 28px 0 12px;
-  border: 1px solid #E2E8F0;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   font-size: 14px;
-  color: #1E1B4B;
+  color: #1e1b4b;
   cursor: pointer;
   transition: all 0.2s ease;
   appearance: none;
@@ -238,7 +244,7 @@ const handleJumperChange = (e: Event) => {
 }
 
 .ds-pagination-size-changer select:hover {
-  border-color: #6366F1;
+  border-color: #6366f1;
 }
 
 .ds-pagination-pager {
@@ -254,19 +260,19 @@ const handleJumperChange = (e: Event) => {
   min-width: 32px;
   height: 32px;
   padding: 0 8px;
-  border: 1px solid #E2E8F0;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   font-size: 14px;
-  color: #1E1B4B;
+  color: #1e1b4b;
   cursor: pointer;
   transition: all 0.2s ease;
   user-select: none;
 }
 
 .ds-pagination-btn:hover:not(:disabled) {
-  border-color: #6366F1;
-  color: #6366F1;
+  border-color: #6366f1;
+  color: #6366f1;
 }
 
 .ds-pagination-btn:disabled {
@@ -275,9 +281,9 @@ const handleJumperChange = (e: Event) => {
 }
 
 .ds-pagination-btn.is-active {
-  background-color: #6366F1;
-  border-color: #6366F1;
-  color: #FFFFFF;
+  background-color: #6366f1;
+  border-color: #6366f1;
+  color: #ffffff;
 }
 
 .ds-pagination-ellipsis {
@@ -290,27 +296,27 @@ const handleJumperChange = (e: Event) => {
   align-items: center;
   gap: 8px;
   font-size: 14px;
-  color: #64748B;
+  color: #64748b;
 }
 
 .ds-pagination-jumper input {
   width: 50px;
   height: 32px;
   padding: 0 8px;
-  border: 1px solid #E2E8F0;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
   font-size: 14px;
   text-align: center;
-  color: #1E1B4B;
+  color: #1e1b4b;
   transition: all 0.2s ease;
 }
 
 .ds-pagination-jumper input:hover {
-  border-color: #6366F1;
+  border-color: #6366f1;
 }
 
 .ds-pagination-jumper input:focus {
-  border-color: #6366F1;
+  border-color: #6366f1;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
   outline: none;
 }

@@ -8,7 +8,7 @@
     </div>
 
     <!-- 页面头部 -->
-    <div class="page-header glass-card" style="animation-delay: 0s;">
+    <div class="page-header glass-card" style="animation-delay: 0s">
       <div class="header-content">
         <div class="icon-wrapper">
           <div class="icon-glow"></div>
@@ -29,7 +29,7 @@
 
     <!-- 搜索区域 -->
     <div class="search-section">
-      <div class="search-card glass-card" style="animation-delay: 0.1s;">
+      <div class="search-card glass-card" style="animation-delay: 0.1s">
         <div class="search-header">
           <div class="search-title">
             <el-icon><Filter /></el-icon>
@@ -83,7 +83,7 @@
 
     <!-- 数据表格 -->
     <div class="table-section">
-      <div class="table-card glass-card" style="animation-delay: 0.2s;">
+      <div class="table-card glass-card" style="animation-delay: 0.2s">
         <div class="table-header">
           <div class="table-title">
             <el-icon><User /></el-icon>
@@ -110,9 +110,13 @@
             label="序号"
             width="60"
             align="center"
-            :index="(index: number) =>
-              index + 1 +
-              ((searchParams.current ?? 1) - 1) * (searchParams.pageSize ?? 10)"
+            :index="
+              (index: number) =>
+                index +
+                1 +
+                ((searchParams.current ?? 1) - 1) *
+                  (searchParams.pageSize ?? 10)
+            "
           />
           <el-table-column label="用户信息" min-width="200">
             <template #default="{ row }">
@@ -124,7 +128,7 @@
                 />
                 <div class="user-details">
                   <div class="user-name">{{ row.username }}</div>
-                  <div class="user-email">{{ row.email || '未设置邮箱' }}</div>
+                  <div class="user-email">{{ row.email || "未设置邮箱" }}</div>
                 </div>
               </div>
             </template>
@@ -134,7 +138,10 @@
               <div class="storage-cell">
                 <div class="storage-header">
                   <span class="storage-title">存储空间</span>
-                  <span class="storage-percentage" :class="getStoragePercentageClass(row.storage)">
+                  <span
+                    class="storage-percentage"
+                    :class="getStoragePercentageClass(row.storage)"
+                  >
                     {{ calculateStoragePercentage(row.storage) }}%
                   </span>
                 </div>
@@ -149,11 +156,15 @@
                 <div class="storage-details">
                   <div class="storage-item">
                     <span class="storage-label">已使用</span>
-                    <span class="storage-value used">{{ formatUsedStorage(row.storage) }}</span>
+                    <span class="storage-value used">{{
+                      formatUsedStorage(row.storage)
+                    }}</span>
                   </div>
                   <div class="storage-item">
                     <span class="storage-label">总容量</span>
-                    <span class="storage-value total">{{ formatTotalStorage(row.storage) }}</span>
+                    <span class="storage-value total">{{
+                      formatTotalStorage(row.storage)
+                    }}</span>
                   </div>
                 </div>
               </div>
@@ -182,7 +193,12 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="操作" width="100" fixed="right" align="center">
+          <el-table-column
+            label="操作"
+            width="100"
+            fixed="right"
+            align="center"
+          >
             <template #default="{ row }">
               <DSButton
                 variant="primary"
@@ -195,23 +211,61 @@
             </template>
           </el-table-column>
         </el-table>
-        
+
         <!-- 空状态 -->
         <div v-if="dataList.length === 0 && !loading" class="empty-state">
           <div class="empty-icon-wrapper">
-            <svg class="empty-svg" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              class="empty-svg"
+              viewBox="0 0 96 96"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <defs>
-                <linearGradient id="emptyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#F472B6"/>
-                  <stop offset="100%" stop-color="#C084FC"/>
+                <linearGradient
+                  id="emptyGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#F472B6" />
+                  <stop offset="100%" stop-color="#C084FC" />
                 </linearGradient>
               </defs>
-              <circle cx="48" cy="36" r="20" stroke="url(#emptyGrad)" stroke-width="3" fill="none" opacity="0.6"/>
-              <circle cx="48" cy="34" r="8" fill="url(#emptyGrad)" opacity="0.3"/>
-              <path d="M24 72 C24 60 34 54 48 54 C62 54 72 60 72 72" stroke="url(#emptyGrad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
-              <circle cx="40" cy="32" r="2.5" fill="url(#emptyGrad)"/>
-              <circle cx="56" cy="32" r="2.5" fill="url(#emptyGrad)"/>
-              <path d="M42 40 Q48 44 54 40" stroke="url(#emptyGrad)" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <circle
+                cx="48"
+                cy="36"
+                r="20"
+                stroke="url(#emptyGrad)"
+                stroke-width="3"
+                fill="none"
+                opacity="0.6"
+              />
+              <circle
+                cx="48"
+                cy="34"
+                r="8"
+                fill="url(#emptyGrad)"
+                opacity="0.3"
+              />
+              <path
+                d="M24 72 C24 60 34 54 48 54 C62 54 72 60 72 72"
+                stroke="url(#emptyGrad)"
+                stroke-width="3"
+                fill="none"
+                stroke-linecap="round"
+                opacity="0.6"
+              />
+              <circle cx="40" cy="32" r="2.5" fill="url(#emptyGrad)" />
+              <circle cx="56" cy="32" r="2.5" fill="url(#emptyGrad)" />
+              <path
+                d="M42 40 Q48 44 54 40"
+                stroke="url(#emptyGrad)"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+              />
             </svg>
           </div>
           <p class="empty-text">暂无用户数据</p>
@@ -222,10 +276,15 @@
 
     <!-- 分页 -->
     <div class="pagination-section">
-      <div class="pagination-card glass-card" style="animation-delay: 0.3s;">
+      <div class="pagination-card glass-card" style="animation-delay: 0.3s">
         <div class="pagination-info">
-          <span class="pagination-total">共 <strong>{{ total }}</strong> 个用户</span>
-          <span class="pagination-pages">第 {{ searchParams.current }} / {{ Math.ceil(total / (searchParams.pageSize || 10)) || 1 }} 页</span>
+          <span class="pagination-total"
+            >共 <strong>{{ total }}</strong> 个用户</span
+          >
+          <span class="pagination-pages"
+            >第 {{ searchParams.current }} /
+            {{ Math.ceil(total / (searchParams.pageSize || 10)) || 1 }} 页</span
+          >
         </div>
         <el-pagination
           background
@@ -253,19 +312,22 @@
               <el-input v-model="editForm.userId" disabled />
             </el-form-item>
           </div>
-          
+
           <div class="form-row">
             <el-form-item label="用户名">
-              <el-input v-model="editForm.username" placeholder="请输入用户名" />
+              <el-input
+                v-model="editForm.username"
+                placeholder="请输入用户名"
+              />
             </el-form-item>
           </div>
-          
+
           <div class="form-row">
             <el-form-item label="邮箱">
               <el-input v-model="editForm.email" placeholder="请输入邮箱" />
             </el-form-item>
           </div>
-          
+
           <div class="form-row">
             <el-form-item label="容量 (MB)">
               <el-input-number
@@ -276,17 +338,21 @@
               />
             </el-form-item>
           </div>
-          
+
           <div class="form-row">
             <el-form-item label="角色">
-              <el-select v-model="editForm.role" placeholder="请选择角色" style="width: 100%">
+              <el-select
+                v-model="editForm.role"
+                placeholder="请选择角色"
+                style="width: 100%"
+              >
                 <el-option label="管理员" :value="1" />
                 <el-option label="普通用户" :value="0" />
                 <el-option label="封号" :value="-1" />
               </el-select>
             </el-form-item>
           </div>
-          
+
           <div class="form-row">
             <el-form-item label="头像">
               <div class="avatar-upload">
@@ -296,13 +362,17 @@
           </div>
         </el-form>
       </div>
-      
+
       <template #footer>
         <div class="dialog-footer">
           <DSButton variant="outline" @click="editDialogVisible = false">
             取消
           </DSButton>
-          <DSButton variant="primary" @click="updateUserInfo" :loading="updating">
+          <DSButton
+            variant="primary"
+            @click="updateUserInfo"
+            :loading="updating"
+          >
             保存
           </DSButton>
         </div>
@@ -326,10 +396,10 @@ import {
   Document,
   Folder,
   Clock,
-  Calendar
-} from '@element-plus/icons-vue';
-import DSButton from '@/components/design-system/DSButton.vue';
-import DSTag from '@/components/design-system/DSTag.vue';
+  Calendar,
+} from "@element-plus/icons-vue";
+import DSButton from "@/components/design-system/DSButton.vue";
+import DSTag from "@/components/design-system/DSTag.vue";
 
 const formSearchParams = ref<API.UserQueryRequest>({});
 const updating = ref(false);
@@ -604,7 +674,11 @@ watchEffect(() => {
   justify-content: center;
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
   border-radius: var(--radius-lg);
   color: white;
   overflow: hidden;
@@ -613,7 +687,11 @@ watchEffect(() => {
 .icon-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3) 0%, transparent 50%);
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 50%
+  );
   pointer-events: none;
 }
 
@@ -642,7 +720,11 @@ watchEffect(() => {
   flex-direction: column;
   align-items: center;
   padding: var(--spacing-sm) var(--spacing-lg);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
   border-radius: var(--radius-lg);
   color: white;
   min-width: 80px;
@@ -682,7 +764,11 @@ watchEffect(() => {
   display: flex;
   align-items: center;
   padding: var(--spacing-md) var(--spacing-lg);
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(129, 140, 248, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.05) 0%,
+    rgba(129, 140, 248, 0.05) 100%
+  );
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -735,7 +821,9 @@ watchEffect(() => {
 }
 
 .search-input :deep(.el-input__wrapper.is-focus) {
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2) inset, 0 0 0 1px var(--color-primary) inset;
+  box-shadow:
+    0 0 0 2px rgba(99, 102, 241, 0.2) inset,
+    0 0 0 1px var(--color-primary) inset;
 }
 
 .search-actions {
@@ -774,7 +862,11 @@ watchEffect(() => {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-md) var(--spacing-lg);
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(129, 140, 248, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.05) 0%,
+    rgba(129, 140, 248, 0.05) 100%
+  );
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -1054,7 +1146,11 @@ watchEffect(() => {
 }
 
 .custom-pagination :deep(.el-pager li.is-active) {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
   box-shadow: var(--shadow-sm);
 }
 
@@ -1086,7 +1182,9 @@ watchEffect(() => {
 
 .edit-form :deep(.el-input__wrapper.is-focus),
 .edit-form :deep(.el-input-number .el-input__wrapper.is-focus) {
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2) inset, 0 0 0 1px var(--color-primary) inset;
+  box-shadow:
+    0 0 0 2px rgba(99, 102, 241, 0.2) inset,
+    0 0 0 1px var(--color-primary) inset;
 }
 
 .edit-form :deep(.el-select .el-input__wrapper) {

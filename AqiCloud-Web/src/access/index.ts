@@ -8,7 +8,7 @@ router.beforeEach(async (to, from, next) => {
     if (loginStatus) {
       next();
     } else {
-      next('/user/login')
+      next("/user/login");
       ElMessage.error("请先登录！");
     }
   } else {

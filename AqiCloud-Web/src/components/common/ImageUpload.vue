@@ -38,7 +38,8 @@ const emit = defineEmits<{
 }>();
 
 // 初始化时清理URL，移除不必要的前缀
-const initialImageUrl = props.modelValue?.replace("http://localhost:8080/user/", "") || "";
+const initialImageUrl =
+  props.modelValue?.replace("http://localhost:8080/user/", "") || "";
 const imageUrl = ref(initialImageUrl);
 
 /**
@@ -48,7 +49,7 @@ watch(
   () => props.modelValue,
   (newValue) => {
     imageUrl.value = newValue?.replace("http://localhost:8080/user/", "") || "";
-  }
+  },
 );
 
 /**

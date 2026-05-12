@@ -24,14 +24,14 @@
         @shareFiles="openShareDialog"
         @batchDownload="handleBatchDownload"
       />
-      
+
       <!-- 面包屑导航 -->
       <BreadCrumb
         :currentPath="currentPath"
         :fileType="fileType"
         @pathChange="handlePathChange"
       />
-      
+
       <!-- 文件列表容器 -->
       <div class="file-list-container overflow-auto">
         <div class="file-list-wrapper glass-panel">
@@ -51,7 +51,7 @@
             @shareFiles="openShareDialog"
             @openFileInfo="openFileInfo"
           />
-          
+
           <!-- 网格视图 -->
           <FileGrid
             v-else
@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- 分页容器 -->
     <div class="pagination-container glass-bar">
       <div class="pagination-wrapper">
@@ -81,9 +81,9 @@
     </div>
 
     <!-- 上传文件对话框 -->
-    <DSDialog 
-      v-model="uploadDialogVisible" 
-      title="上传文件" 
+    <DSDialog
+      v-model="uploadDialogVisible"
+      title="上传文件"
       :size="isMobile ? 'fullscreen' : 'large'"
     >
       <FileUpload
@@ -113,9 +113,9 @@
     </DSDialog>
 
     <!-- 移动文件对话框 -->
-    <DSDialog 
-      v-model="moveDialogVisible" 
-      title="移动文件" 
+    <DSDialog
+      v-model="moveDialogVisible"
+      title="移动文件"
       :size="isMobile ? 'fullscreen' : 'large'"
       :show-footer="true"
       @cancel="banch"
@@ -138,9 +138,9 @@
     </DSDialog>
 
     <!-- 复制文件对话框 -->
-    <DSDialog 
-      v-model="CopyDialogVisible" 
-      title="复制文件" 
+    <DSDialog
+      v-model="CopyDialogVisible"
+      title="复制文件"
       :size="isMobile ? 'fullscreen' : 'large'"
       :show-footer="true"
       @cancel="cancelCopy"
@@ -163,9 +163,9 @@
     </DSDialog>
 
     <!-- 分享文件对话框 -->
-    <DSDialog 
-      v-model="shareDialogVisible" 
-      title="分享文件" 
+    <DSDialog
+      v-model="shareDialogVisible"
+      title="分享文件"
       :size="isMobile ? 'fullscreen' : 'medium'"
       :show-footer="true"
       @cancel="shareDialogVisible = false"
@@ -182,7 +182,11 @@
       </div>
       <div class="form-item">
         <label class="form-label">分享类型</label>
-        <el-select v-model="shareForm.shareType" placeholder="请选择分享类型" class="w-full">
+        <el-select
+          v-model="shareForm.shareType"
+          placeholder="请选择分享类型"
+          class="w-full"
+        >
           <el-option :value="no_code" label="公开分享"></el-option>
           <el-option :value="need_code" label="私密分享"></el-option>
         </el-select>
@@ -202,9 +206,9 @@
     </DSDialog>
 
     <!-- 分享结果对话框 -->
-    <DSDialog 
-      v-model="shareResultDialogVisible" 
-      title="分享成功" 
+    <DSDialog
+      v-model="shareResultDialogVisible"
+      title="分享成功"
       :size="isMobile ? 'fullscreen' : 'medium'"
       :show-footer="true"
       @cancel="shareResultDialogVisible = false"
@@ -215,12 +219,12 @@
       <div class="form-item">
         <label class="form-label">分享链接</label>
         <div class="input-with-button">
-          <DSInput
-            v-model="shareUrl"
-            readonly
-            :show-clear="false"
-          />
-          <DSButton variant="secondary" size="small" @click="copyToClipboard(shareUrl)">
+          <DSInput v-model="shareUrl" readonly :show-clear="false" />
+          <DSButton
+            variant="secondary"
+            size="small"
+            @click="copyToClipboard(shareUrl)"
+          >
             复制
           </DSButton>
         </div>
@@ -233,7 +237,11 @@
             readonly
             :show-clear="false"
           />
-          <DSButton variant="secondary" size="small" @click="copyToClipboard(shareResult.shareCode)">
+          <DSButton
+            variant="secondary"
+            size="small"
+            @click="copyToClipboard(shareResult.shareCode)"
+          >
             复制
           </DSButton>
         </div>
@@ -241,9 +249,9 @@
     </DSDialog>
 
     <!-- 重命名对话框 -->
-    <DSDialog 
-      v-model="renameDialogVisible" 
-      title="重命名" 
+    <DSDialog
+      v-model="renameDialogVisible"
+      title="重命名"
       :size="isMobile ? 'fullscreen' : 'small'"
       :show-footer="true"
       @cancel="renameDialogVisible = false"
@@ -274,7 +282,13 @@ import FileGrid from "@/components/file/FileGrid.vue";
 import BreadCrumb from "@/components/file/BreadCrumb.vue";
 import OperationBar from "@/components/file/OperationBar.vue";
 import FileUpload from "@/components/file/FileUpload.vue";
-import { DSTag, DSInput, DSButton, DSDialog, DSPagination } from "@/components/design-system";
+import {
+  DSTag,
+  DSInput,
+  DSButton,
+  DSDialog,
+  DSPagination,
+} from "@/components/design-system";
 import {
   searchFilesByName,
   listFiles,
@@ -507,44 +521,59 @@ const handleFileClick = (file: API.FileDTO) => {
  * 根据文件类型选择不同的预览方式
  */
 const openFilePreview = (file: API.FileDTO) => {
-  const suffix = (file.fileSuffix || '').toLowerCase();
-  
+  const suffix = (file.fileSuffix || "").toLowerCase();
+
   // 图片文件 - 使用图片预览
-  const imageTypes = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg'];
+  const imageTypes = ["jpg", "jpeg", "png", "gif", "bmp", "webp", "svg"];
   if (imageTypes.includes(suffix)) {
     previewImage(file);
     return;
   }
-  
+
   // 视频文件 - 使用视频预览
-  const videoTypes = ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv', 'webm'];
+  const videoTypes = ["mp4", "avi", "mov", "wmv", "flv", "mkv", "webm"];
   if (videoTypes.includes(suffix)) {
     previewVideo(file);
     return;
   }
-  
+
   // 音频文件 - 使用音频预览
-  const audioTypes = ['mp3', 'wav', 'flac', 'aac', 'ogg', 'wma', 'm4a'];
+  const audioTypes = ["mp3", "wav", "flac", "aac", "ogg", "wma", "m4a"];
   if (audioTypes.includes(suffix)) {
     previewAudio(file);
     return;
   }
-  
+
   // 文本文件 - 使用文本预览
-  const textTypes = ['txt', 'md', 'json', 'xml', 'html', 'css', 'js', 'ts', 'java', 'py', 'go', 'c', 'cpp', 'h'];
+  const textTypes = [
+    "txt",
+    "md",
+    "json",
+    "xml",
+    "html",
+    "css",
+    "js",
+    "ts",
+    "java",
+    "py",
+    "go",
+    "c",
+    "cpp",
+    "h",
+  ];
   if (textTypes.includes(suffix)) {
     previewText(file);
     return;
   }
-  
+
   // PDF 文件 - 使用 PDF 预览
-  if (suffix === 'pdf') {
+  if (suffix === "pdf") {
     previewPdf(file);
     return;
   }
-  
+
   // 其他文件 - 提示下载
-  ElMessage.info(`该文件类型 (${suffix || '未知'}) 暂不支持预览，请下载后查看`);
+  ElMessage.info(`该文件类型 (${suffix || "未知"}) 暂不支持预览，请下载后查看`);
 };
 
 /**
@@ -556,8 +585,11 @@ const getStreamUrl = async (file: API.FileDTO): Promise<string> => {
     params: { fileId: file.id },
     responseType: "blob",
   });
-  const mimeType = response.headers['content-type'] || 'application/octet-stream';
-  const url = URL.createObjectURL(new Blob([response.data], { type: mimeType }));
+  const mimeType =
+    response.headers["content-type"] || "application/octet-stream";
+  const url = URL.createObjectURL(
+    new Blob([response.data], { type: mimeType }),
+  );
   return url;
 };
 
@@ -571,17 +603,17 @@ const previewImage = async (file: API.FileDTO) => {
       `<div style="text-align: center;">
         <img src="${url}" style="max-width: 100%; max-height: 70vh; border-radius: 8px; object-fit: contain;" />
       </div>`,
-      file.fileName || '图片预览',
+      file.fileName || "图片预览",
       {
         dangerouslyUseHTMLString: true,
         showConfirmButton: true,
-        confirmButtonText: '关闭',
+        confirmButtonText: "关闭",
         showCancelButton: false,
-        customClass: 'preview-dialog',
-      }
+        customClass: "preview-dialog",
+      },
     ).catch(() => {});
   } catch {
-    ElMessage.error('图片预览失败');
+    ElMessage.error("图片预览失败");
   }
 };
 
@@ -597,17 +629,17 @@ const previewVideo = async (file: API.FileDTO) => {
           <source src="${url}" />
         </video>
       </div>`,
-      file.fileName || '视频预览',
+      file.fileName || "视频预览",
       {
         dangerouslyUseHTMLString: true,
         showConfirmButton: true,
-        confirmButtonText: '关闭',
+        confirmButtonText: "关闭",
         showCancelButton: false,
-        customClass: 'preview-dialog',
-      }
+        customClass: "preview-dialog",
+      },
     ).catch(() => {});
   } catch {
-    ElMessage.error('视频预览失败');
+    ElMessage.error("视频预览失败");
   }
 };
 
@@ -619,22 +651,22 @@ const previewAudio = async (file: API.FileDTO) => {
     const url = await getStreamUrl(file);
     ElMessageBox.alert(
       `<div style="text-align: center; padding: 20px;">
-        <p style="color: #1e1b4b; margin-bottom: 16px; font-weight: 600; font-size: 16px;">${escapeHtml(file.fileName || '')}</p>
+        <p style="color: #1e1b4b; margin-bottom: 16px; font-weight: 600; font-size: 16px;">${escapeHtml(file.fileName || "")}</p>
         <audio controls autoplay style="width: 100%; max-width: 500px;">
           <source src="${url}" />
         </audio>
       </div>`,
-      file.fileName || '音频预览',
+      file.fileName || "音频预览",
       {
         dangerouslyUseHTMLString: true,
         showConfirmButton: true,
-        confirmButtonText: '关闭',
+        confirmButtonText: "关闭",
         showCancelButton: false,
-        customClass: 'preview-dialog',
-      }
+        customClass: "preview-dialog",
+      },
     ).catch(() => {});
   } catch {
-    ElMessage.error('音频预览失败');
+    ElMessage.error("音频预览失败");
   }
 };
 
@@ -655,17 +687,17 @@ const previewText = async (file: API.FileDTO) => {
                     max-height: 70vh; overflow: auto; font-size: 13px; line-height: 1.6;
                     white-space: pre-wrap; word-wrap: break-word;">${escapeHtml(text)}</pre>
       </div>`,
-      file.fileName || '文本预览',
+      file.fileName || "文本预览",
       {
         dangerouslyUseHTMLString: true,
         showConfirmButton: true,
-        confirmButtonText: '关闭',
+        confirmButtonText: "关闭",
         showCancelButton: false,
-        customClass: 'preview-dialog',
-      }
+        customClass: "preview-dialog",
+      },
     );
   } catch {
-    ElMessage.error('文本预览失败');
+    ElMessage.error("文本预览失败");
   }
 };
 
@@ -679,10 +711,12 @@ const previewPdf = async (file: API.FileDTO) => {
       params: { fileId: file.id },
       responseType: "blob",
     });
-    const url = URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
-    window.open(url, '_blank');
+    const url = URL.createObjectURL(
+      new Blob([response.data], { type: "application/pdf" }),
+    );
+    window.open(url, "_blank");
   } catch {
-    ElMessage.error('PDF 预览失败');
+    ElMessage.error("PDF 预览失败");
   }
 };
 
@@ -690,7 +724,7 @@ const previewPdf = async (file: API.FileDTO) => {
  * HTML 转义
  */
 const escapeHtml = (text: string): string => {
-  const div = document.createElement('div');
+  const div = document.createElement("div");
   div.textContent = text;
   return div.innerHTML;
 };
@@ -735,7 +769,7 @@ watch(
     currentPage.value = 1;
     fetchFiles();
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const openUploadDialog = () => {
@@ -799,7 +833,7 @@ const handleBatchDownload = async (filesToDownload: API.FileDTO[]) => {
     const loadingInstance = ElLoading.service({
       lock: true,
       text: `正在准备下载 ${filesToDownload.length} 个文件...`,
-      background: 'rgba(0, 0, 0, 0.7)',
+      background: "rgba(0, 0, 0, 0.7)",
     });
 
     // 收集所有文件ID（包括文件夹内的文件）
@@ -808,12 +842,16 @@ const handleBatchDownload = async (filesToDownload: API.FileDTO[]) => {
     for (const file of filesToDownload) {
       // 兼容 isDir 和 isDirectory 两种字段名
       const isDirValue = file.isDir ?? file.isDirectory;
-      console.log(`处理文件/文件夹: ${file.fileName}, isDir: ${file.isDir}, isDirectory: ${file.isDirectory}, 判断结果: ${isDirValue}`);
+      console.log(
+        `处理文件/文件夹: ${file.fileName}, isDir: ${file.isDir}, isDirectory: ${file.isDirectory}, 判断结果: ${isDirValue}`,
+      );
 
       // 添加文件/文件夹ID到列表（后端会处理文件夹递归）
       if (file.id) {
         fileIds.push(String(file.id));
-        console.log(`添加文件/文件夹ID到下载列表: ${file.fileName}, ID: ${file.id}`);
+        console.log(
+          `添加文件/文件夹ID到下载列表: ${file.fileName}, ID: ${file.id}`,
+        );
       }
     }
 
@@ -827,21 +865,21 @@ const handleBatchDownload = async (filesToDownload: API.FileDTO[]) => {
 
     // 使用后端 ZIP 打包下载接口
     const baseUrl = "http://127.0.0.1:8080/api";
-    const token = loginUserStore.token || '';
+    const token = loginUserStore.token || "";
 
     // 构建表单数据
     const formData = new FormData();
-    formData.append('fileIdsStr', fileIds.join(','));
+    formData.append("fileIdsStr", fileIds.join(","));
 
     console.log(`发送批量下载请求，文件IDs:`, fileIds);
 
     try {
       const response = await fetch(`${baseUrl}/file/v1/batch_download`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'token': token
+          token: token,
         },
-        body: formData
+        body: formData,
       });
 
       console.log(`批量下载响应状态:`, response.status);
@@ -851,8 +889,8 @@ const handleBatchDownload = async (filesToDownload: API.FileDTO[]) => {
       }
 
       // 获取文件名（从Content-Disposition头）
-      const contentDisposition = response.headers.get('content-disposition');
-      let filename = 'batch_download.zip';
+      const contentDisposition = response.headers.get("content-disposition");
+      let filename = "batch_download.zip";
       if (contentDisposition) {
         const filenameMatch = contentDisposition.match(/filename="(.+)"/);
         if (filenameMatch) {
@@ -865,7 +903,7 @@ const handleBatchDownload = async (filesToDownload: API.FileDTO[]) => {
       console.log(`ZIP文件大小:`, blob.size);
 
       if (blob.size === 0) {
-        throw new Error('下载的ZIP文件大小为0');
+        throw new Error("下载的ZIP文件大小为0");
       }
 
       // 创建下载链接
@@ -887,13 +925,11 @@ const handleBatchDownload = async (filesToDownload: API.FileDTO[]) => {
       loadingInstance.close();
       ElMessage.success(`成功下载 ${fileIds.length} 个文件的压缩包`);
       console.log(`批量下载完成: ${filename}`);
-
     } catch (error) {
       console.error(`批量下载失败:`, error);
       loadingInstance.close();
       ElMessage.error("批量下载失败，请重试");
     }
-
   } catch (error) {
     console.error("下载文件出错:", error);
     ElMessage.error("下载文件失败");
@@ -906,31 +942,39 @@ const handleBatchDownload = async (filesToDownload: API.FileDTO[]) => {
 const collectFilesFromFolder = async (
   folder: API.FileDTO,
   fileList: { fileId: string; fileName: string }[],
-  folderPath: string
+  folderPath: string,
 ): Promise<void> => {
   try {
     console.log(`正在获取文件夹内容: ${folder.fileName}, id: ${folder.id}`);
 
     // 使用 getFolderContents 不修改全局状态
     const response = await getFolderContents({
-      parent_id: folder.id || '',
+      parent_id: folder.id || "",
     });
 
     console.log(`文件夹 ${folder.fileName} 的 API 响应:`, response.data);
 
     if (!response.data || !response.data.success) {
-      console.warn(`获取文件夹 ${folder.fileName} 内容失败:`, response.data?.msg);
+      console.warn(
+        `获取文件夹 ${folder.fileName} 内容失败:`,
+        response.data?.msg,
+      );
       return;
     }
 
     const children = response.data.data || [];
-    console.log(`文件夹 ${folder.fileName} 包含 ${children.length} 个子项:`, children);
+    console.log(
+      `文件夹 ${folder.fileName} 包含 ${children.length} 个子项:`,
+      children,
+    );
 
     // 如果文件夹为空，添加一个标记文件来创建空文件夹结构
     if (children.length === 0) {
-      console.log(`文件夹 ${folder.fileName} 为空，添加占位文件以创建文件夹结构`);
+      console.log(
+        `文件夹 ${folder.fileName} 为空，添加占位文件以创建文件夹结构`,
+      );
       fileList.push({
-        fileId: 'EMPTY_FOLDER_MARKER',
+        fileId: "EMPTY_FOLDER_MARKER",
         fileName: `${folderPath}/.gitkeep`,
       });
       return;
@@ -940,7 +984,9 @@ const collectFilesFromFolder = async (
       const childPath = `${folderPath}/${child.fileName}`;
       // 详细打印子项的所有字段，用于排查问题
       console.log(`处理子项详情:`, JSON.stringify(child));
-      console.log(`处理子项: ${child.fileName}, isDir: ${child.isDir}, isDirectory: ${child.isDirectory}, id: ${child.id}`);
+      console.log(
+        `处理子项: ${child.fileName}, isDir: ${child.isDir}, isDirectory: ${child.isDirectory}, id: ${child.id}`,
+      );
 
       // 兼容 isDir 和 isDirectory 两种字段名
       const isDirValue = child.isDir ?? child.isDirectory;
@@ -1087,7 +1133,7 @@ const openShareDialog = (filesToShare: API.FileDTO[]) => {
   selectedFiles.value = filesToShare;
   shareForm.value.shareName =
     filesToShare.length === 1
-      ? filesToShare[0].fileName ?? ""
+      ? (filesToShare[0].fileName ?? "")
       : `${filesToShare[0].fileName ?? ""}等${filesToShare.length}个文件`;
 };
 
@@ -1105,10 +1151,12 @@ const handleCreateShare = async () => {
 
     if (response.data && response.data.success) {
       shareResult.value = response.data.data as API.ShareUrlDTO;
-      shareUrl.value = String(shareResult.value.shareUrl?.replace(
-        shareResult.value.shareUrl?.toString().split("/")[2], 
-        window.location.host
-      ));
+      shareUrl.value = String(
+        shareResult.value.shareUrl?.replace(
+          shareResult.value.shareUrl?.toString().split("/")[2],
+          window.location.host,
+        ),
+      );
       shareDialogVisible.value = false;
       shareResultDialogVisible.value = true;
     } else {
@@ -1180,7 +1228,10 @@ const handleRename = async () => {
       accountId: renameForm.value.accountId,
     });
     // 检查响应是否成功（支持多种返回格式）
-    const isSuccess = response.data?.success === true || response.data?.code === 200 || response.code === 200;
+    const isSuccess =
+      response.data?.success === true ||
+      response.data?.code === 200 ||
+      response.code === 200;
     if (isSuccess) {
       // 更新当前文件名称
       if (currentRenameFile.value) {
@@ -1190,7 +1241,9 @@ const handleRename = async () => {
       refreshFiles();
       renameDialogVisible.value = false;
     } else {
-      ElMessage.error(response.data?.msg || response.data?.message || "重命名失败");
+      ElMessage.error(
+        response.data?.msg || response.data?.message || "重命名失败",
+      );
     }
   } catch (error: any) {
     ElMessage.error(error?.message || "重命名失败");
@@ -1256,7 +1309,7 @@ const openFileInfo = (file: API.FileDTO) => {
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  background: #F8FAFC;
+  background: #f8fafc;
   font-family: var(--font-primary);
 }
 
@@ -1282,7 +1335,7 @@ const openFileInfo = (file: API.FileDTO) => {
 .bg-orb-1 {
   width: 500px;
   height: 500px;
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
   top: -200px;
   right: -100px;
   animation: floatOrb 30s ease-in-out infinite;
@@ -1291,7 +1344,7 @@ const openFileInfo = (file: API.FileDTO) => {
 .bg-orb-2 {
   width: 400px;
   height: 400px;
-  background: linear-gradient(135deg, #D97706 0%, #FBBF24 100%);
+  background: linear-gradient(135deg, #d97706 0%, #fbbf24 100%);
   bottom: -150px;
   left: -100px;
   animation: floatOrb 25s ease-in-out infinite reverse;
@@ -1299,13 +1352,15 @@ const openFileInfo = (file: API.FileDTO) => {
 
 /* ===== Light Panel ===== */
 .glass-panel {
-  background: #FFFFFF;
+  background: #ffffff;
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 20px;
   margin: var(--spacing-md);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 32px rgba(0, 0, 0, 0.03);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    0 8px 32px rgba(0, 0, 0, 0.03);
   animation: fadeInUp 0.5s ease-out;
   position: relative;
   z-index: 1;
@@ -1314,7 +1369,9 @@ const openFileInfo = (file: API.FileDTO) => {
 }
 
 .glass-panel:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 12px 48px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    0 12px 48px rgba(0, 0, 0, 0.04);
 }
 
 /* ===== 文件列表容器 ===== */
@@ -1334,17 +1391,25 @@ const openFileInfo = (file: API.FileDTO) => {
 }
 
 .file-list-container::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(219,39,119,0.15) 0%, rgba(219,39,119,0.05) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(219, 39, 119, 0.15) 0%,
+    rgba(219, 39, 119, 0.05) 100%
+  );
   border-radius: 3px;
 }
 
 .file-list-container::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, rgba(219,39,119,0.3) 0%, rgba(219,39,119,0.1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(219, 39, 119, 0.3) 0%,
+    rgba(219, 39, 119, 0.1) 100%
+  );
 }
 
 /* ===== 分页容器 Light Bar ===== */
 .glass-bar {
-  background: #FFFFFF;
+  background: #ffffff;
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-top: 1px solid rgba(0, 0, 0, 0.06);
@@ -1373,22 +1438,28 @@ const openFileInfo = (file: API.FileDTO) => {
   animation: fadeInUp 0.3s ease-out backwards;
 }
 
-.form-item:nth-child(1) { animation-delay: 0.05s; }
-.form-item:nth-child(2) { animation-delay: 0.1s; }
-.form-item:nth-child(3) { animation-delay: 0.15s; }
+.form-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.form-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.form-item:nth-child(3) {
+  animation-delay: 0.15s;
+}
 
 .form-label {
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: var(--color-text-primary, #1A1A2E);
+  color: var(--color-text-primary, #1a1a2e);
   margin-bottom: 8px;
   letter-spacing: -0.01em;
 }
 
 .form-label.required::after {
-  content: ' *';
-  color: #EF4444;
+  content: " *";
+  color: #ef4444;
 }
 
 .input-with-button {
@@ -1403,7 +1474,7 @@ const openFileInfo = (file: API.FileDTO) => {
 
 /* ===== 对话框样式 ===== */
 :deep(.ds-dialog .el-dialog__header) {
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 50%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 50%, #a855f7 100%);
   color: white;
   padding: 20px 24px;
   border-radius: 16px 16px 0 0;
@@ -1412,7 +1483,7 @@ const openFileInfo = (file: API.FileDTO) => {
 }
 
 :deep(.ds-dialog .el-dialog__header::after) {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   right: -20%;
@@ -1469,8 +1540,8 @@ const openFileInfo = (file: API.FileDTO) => {
   --el-table-tr-bg-color: transparent;
   --el-table-header-bg-color: rgba(219, 39, 119, 0.04);
   --el-table-row-hover-bg-color: rgba(219, 39, 119, 0.03);
-  --el-table-text-color: var(--color-text-primary, #1A1A2E);
-  --el-table-header-text-color: var(--color-text-primary, #1A1A2E);
+  --el-table-text-color: var(--color-text-primary, #1a1a2e);
+  --el-table-header-text-color: var(--color-text-primary, #1a1a2e);
   --el-table-border-color: rgba(0, 0, 0, 0.05);
   font-family: var(--font-primary);
   border-radius: 12px;
@@ -1479,7 +1550,7 @@ const openFileInfo = (file: API.FileDTO) => {
 :deep(.el-table th.el-table__cell) {
   background: rgba(219, 39, 119, 0.04) !important;
   font-weight: 600;
-  color: var(--color-text-primary, #1A1A2E);
+  color: var(--color-text-primary, #1a1a2e);
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -1501,13 +1572,13 @@ const openFileInfo = (file: API.FileDTO) => {
 
 :deep(.el-table .el-table__row.current-row > td) {
   background: rgba(219, 39, 119, 0.06) !important;
-  border-left: 3px solid #DB2777;
+  border-left: 3px solid #db2777;
 }
 
 /* ===== Element Plus 分页穿透 ===== */
 :deep(.el-pagination) {
   --el-pagination-button-bg-color: rgba(255, 255, 255, 0.8);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 :deep(.el-pagination .el-pager li) {
@@ -1517,13 +1588,13 @@ const openFileInfo = (file: API.FileDTO) => {
 }
 
 :deep(.el-pagination .el-pager li.is-active) {
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
   color: white;
   box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
 }
 
 :deep(.el-pagination .el-pager li:hover) {
-  color: #DB2777;
+  color: #db2777;
 }
 
 :deep(.el-pagination button) {
@@ -1532,7 +1603,7 @@ const openFileInfo = (file: API.FileDTO) => {
 
 /* ===== Element Plus Select 穿透 ===== */
 :deep(.el-select) {
-  --el-select-border-color-hover: #F472B6;
+  --el-select-border-color-hover: #f472b6;
 }
 
 :deep(.el-select .el-input__wrapper) {
@@ -1547,8 +1618,8 @@ const openFileInfo = (file: API.FileDTO) => {
 
 /* ===== Element Plus Checkbox 穿透 ===== */
 :deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
-  border-color: #DB2777;
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+  border-color: #db2777;
 }
 
 /* ===== 响应式 ===== */
@@ -1592,7 +1663,8 @@ const openFileInfo = (file: API.FileDTO) => {
 
 /* ===== 动画 ===== */
 @keyframes floatOrb {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
   33% {

@@ -7,7 +7,7 @@
       {
         'ds-tag-closeable': closeable,
         'ds-tag-rounded': rounded,
-      }
+      },
     ]"
   >
     <slot></slot>
@@ -16,29 +16,36 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits } from "vue";
 
 interface Props {
-  variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info' | 'gold';
-  size?: 'small' | 'medium' | 'large';
+  variant?:
+    | "primary"
+    | "secondary"
+    | "success"
+    | "warning"
+    | "danger"
+    | "info"
+    | "gold";
+  size?: "small" | "medium" | "large";
   closeable?: boolean;
   rounded?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  variant: 'primary',
-  size: 'medium',
+  variant: "primary",
+  size: "medium",
   closeable: false,
   rounded: true,
 });
 
 const emit = defineEmits<{
-  (e: 'close'): void;
+  (e: "close"): void;
 }>();
 
 const handleClose = (event: MouseEvent) => {
   event.stopPropagation();
-  emit('close');
+  emit("close");
 };
 </script>
 
@@ -78,38 +85,38 @@ const handleClose = (event: MouseEvent) => {
 /* Variants */
 .ds-tag-primary {
   background-color: rgba(99, 102, 241, 0.1);
-  color: #6366F1;
+  color: #6366f1;
 }
 
 .ds-tag-secondary {
   background-color: rgba(129, 140, 248, 0.1);
-  color: #818CF8;
+  color: #818cf8;
 }
 
 .ds-tag-success {
   background-color: rgba(16, 185, 129, 0.1);
-  color: #10B981;
+  color: #10b981;
 }
 
 .ds-tag-warning {
   background-color: rgba(245, 158, 11, 0.1);
-  color: #F59E0B;
+  color: #f59e0b;
 }
 
 .ds-tag-danger {
   background-color: rgba(239, 68, 68, 0.1);
-  color: #EF4444;
+  color: #ef4444;
 }
 
 .ds-tag-info {
   background-color: rgba(59, 130, 246, 0.1);
-  color: #3B82F6;
+  color: #3b82f6;
 }
 
 /* Tag Gold — HOK 金色标签 */
 .ds-tag-gold {
   background: rgba(217, 119, 6, 0.12);
-  color: var(--color-gold, #FBBF24);
+  color: var(--color-gold, #fbbf24);
   border: 1px solid rgba(217, 119, 6, 0.15);
 }
 

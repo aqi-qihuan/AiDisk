@@ -5,7 +5,7 @@ import request from "@/utils/request";
 export async function visitShare(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.visitShareParams,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>(`/share/v1/visit`, {
     method: "GET",
@@ -17,7 +17,7 @@ export async function visitShare(
 /** 取消分享链接 POST /share/v1/cancel */
 export async function cancel(
   body: API.CancelShareRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/share/v1/cancel", {
     method: "POST",
@@ -32,7 +32,7 @@ export async function cancel(
 /** 校验分享码 POST /share/v1/check_share_code */
 export async function checkShareCode(
   body: API.CheckShareRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/share/v1/check_share_code", {
     method: "POST",
@@ -47,7 +47,7 @@ export async function checkShareCode(
 /** 创建分享链接 POST /share/v1/create */
 export async function createShare(
   body: API.CreateShareRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/share/v1/create", {
     method: "POST",
@@ -86,7 +86,7 @@ export async function getShareUrl(options?: { [key: string]: any }) {
 /** 文件转存 POST /v1/share/save */
 export async function saveFiles(
   body: API.SaveShareRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/share/v1/transfer", {
     method: "POST",
@@ -101,7 +101,7 @@ export async function saveFiles(
 /** 文件转存（需要校验） POST /share/v1/transfer */
 export async function saveFilesWithCode(
   body: API.SaveShareRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/share/v1/transfer", {
     method: "POST",
@@ -116,7 +116,7 @@ export async function saveFilesWithCode(
 /** 分享文件列表查询 POST /v1/share/share-list */
 export async function getShareFileList(
   body: API.ShareFileQueryRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/share/v1/list_share_file", {
     method: "POST",
@@ -131,7 +131,7 @@ export async function getShareFileList(
 /** 分享文件列表查询(需要校验) POST /share/v1/list_share_file */
 export async function getShareFileListWithCode(
   body: API.ShareFileQueryRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/share/v1/list_share_file", {
     method: "POST",

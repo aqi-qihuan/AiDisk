@@ -12,43 +12,43 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from "vue";
 
 interface Props {
   modelValue?: string;
-  type?: 'text' | 'email' | 'password' | 'number';
+  type?: "text" | "email" | "password" | "number";
   placeholder?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   disabled?: boolean;
   error?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  modelValue: '',
-  type: 'text',
-  placeholder: '',
-  size: 'md',
+  modelValue: "",
+  type: "text",
+  placeholder: "",
+  size: "md",
   disabled: false,
   error: false,
 });
 
 const emit = defineEmits<{
-  'update:modelValue': [value: string];
+  "update:modelValue": [value: string];
   focus: [event: FocusEvent];
   blur: [event: FocusEvent];
 }>();
 
 const onInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  emit('update:modelValue', target.value);
+  emit("update:modelValue", target.value);
 };
 
 const onFocus = (event: FocusEvent) => {
-  emit('focus', event);
+  emit("focus", event);
 };
 
 const onBlur = (event: FocusEvent) => {
-  emit('blur', event);
+  emit("blur", event);
 };
 </script>
 
@@ -63,10 +63,14 @@ const onBlur = (event: FocusEvent) => {
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 8px;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  font-family: 'Fira Sans', 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-family:
+    "Fira Sans",
+    "Plus Jakarta Sans",
+    -apple-system,
+    sans-serif;
   font-size: 14px;
   outline: none;
-  color: #F8FAFC;
+  color: #f8fafc;
   box-sizing: border-box;
 }
 
@@ -82,7 +86,7 @@ const onBlur = (event: FocusEvent) => {
 }
 
 .ds-input::placeholder {
-  color: #64748B;
+  color: #64748b;
 }
 
 .ds-input:disabled {

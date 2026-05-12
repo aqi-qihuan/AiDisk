@@ -19,14 +19,17 @@ import "@/styles/mobile.css"; // 移动端样式
 
 // 修复 ResizeObserver loop 警告
 const resizeObserverErrorHandler = (e: ErrorEvent) => {
-  if (e.message === 'ResizeObserver loop completed with undelivered notifications.') {
+  if (
+    e.message ===
+    "ResizeObserver loop completed with undelivered notifications."
+  ) {
     e.stopImmediatePropagation();
     e.preventDefault();
     e.stopPropagation();
   }
 };
 
-window.addEventListener('error', resizeObserverErrorHandler);
+window.addEventListener("error", resizeObserverErrorHandler);
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
@@ -37,12 +40,12 @@ app.use(router);
 
 // 获取 Element Plus 语言包
 function getElementPlusLocale(locale: Locale) {
-  return locale === 'zh-CN' ? zhCn : enUS;
+  return locale === "zh-CN" ? zhCn : enUS;
 }
 
 // 初始化 Element Plus
 app.use(ElementPlus, {
-  locale: getElementPlusLocale(getStoredLocale())
+  locale: getElementPlusLocale(getStoredLocale()),
 });
 
 app.use(pinia);

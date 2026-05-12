@@ -1,5 +1,10 @@
 <template>
-  <el-dialog v-model="dialogVisible" title="文件详情" width="560px" class="file-info-dialog">
+  <el-dialog
+    v-model="dialogVisible"
+    title="文件详情"
+    width="560px"
+    class="file-info-dialog"
+  >
     <!-- 文件图标和名称头部 -->
     <div class="file-header">
       <div class="file-icon" :class="getFileIconClass(fileInfo)">
@@ -9,7 +14,10 @@
       </div>
       <div class="file-title">
         <div class="file-name">{{ fileInfo.fileName }}</div>
-        <div class="file-meta">{{ getFileTypeName(fileInfo) }} · {{ formatFileSize(fileInfo.fileSize) }}</div>
+        <div class="file-meta">
+          {{ getFileTypeName(fileInfo) }} ·
+          {{ formatFileSize(fileInfo.fileSize) }}
+        </div>
       </div>
     </div>
 
@@ -18,17 +26,23 @@
     <!-- 文件详细信息 -->
     <el-descriptions :column="1" border class="file-descriptions">
       <el-descriptions-item label="文件ID">
-        <span class="code-text">{{ fileInfo.fileId || '-' }}</span>
+        <span class="code-text">{{ fileInfo.fileId || "-" }}</span>
       </el-descriptions-item>
       <el-descriptions-item label="文件类型">
         <el-tag size="small" :type="getFileTagType(fileInfo)">
           {{ getFileTypeName(fileInfo) }}
         </el-tag>
-        <span v-if="fileInfo.fileSuffix" class="file-suffix">.{{ fileInfo.fileSuffix }}</span>
+        <span v-if="fileInfo.fileSuffix" class="file-suffix"
+          >.{{ fileInfo.fileSuffix }}</span
+        >
       </el-descriptions-item>
       <el-descriptions-item label="文件大小">
-        <span class="size-highlight">{{ formatFileSize(fileInfo.fileSize) }}</span>
-        <span v-if="fileInfo.fileSize" class="size-bytes">({{ fileInfo.fileSize.toLocaleString() }} 字节)</span>
+        <span class="size-highlight">{{
+          formatFileSize(fileInfo.fileSize)
+        }}</span>
+        <span v-if="fileInfo.fileSize" class="size-bytes"
+          >({{ fileInfo.fileSize.toLocaleString() }} 字节)</span
+        >
       </el-descriptions-item>
       <el-descriptions-item label="存储位置">
         <div class="storage-info">
@@ -43,10 +57,12 @@
         </div>
       </el-descriptions-item>
       <el-descriptions-item label="文件路径">
-        <span class="path-text">{{ fileInfo.filePath || '/' }}</span>
+        <span class="path-text">{{ fileInfo.filePath || "/" }}</span>
       </el-descriptions-item>
       <el-descriptions-item label="文件标识">
-        <span class="code-text truncate">{{ fileInfo.fileIdentifier || '-' }}</span>
+        <span class="code-text truncate">{{
+          fileInfo.fileIdentifier || "-"
+        }}</span>
       </el-descriptions-item>
       <el-descriptions-item label="修改时间">
         <span class="time-text">
@@ -60,7 +76,11 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { formatFileSize, formatDateTime, getFileTypeName } from "@/utils/format";
+import {
+  formatFileSize,
+  formatDateTime,
+  getFileTypeName,
+} from "@/utils/format";
 import type { FileDTO } from "@/api/types";
 import {
   Document,
@@ -104,8 +124,10 @@ const getFileIcon = (file: FileDTO) => {
   const suffix = file.fileSuffix?.toLowerCase() || "";
   const type = file.fileType?.toLowerCase() || "";
 
-  if (["jpg", "jpeg", "png", "gif", "webp", "bmp"].includes(suffix)) return Picture;
-  if (["mp4", "avi", "mov", "wmv", "flv", "mkv"].includes(suffix)) return VideoCamera;
+  if (["jpg", "jpeg", "png", "gif", "webp", "bmp"].includes(suffix))
+    return Picture;
+  if (["mp4", "avi", "mov", "wmv", "flv", "mkv"].includes(suffix))
+    return VideoCamera;
   if (["mp3", "wav", "flac", "aac", "ogg"].includes(suffix)) return Headset;
   if (["zip", "rar", "7z", "tar", "gz"].includes(suffix)) return Box;
 
@@ -119,7 +141,8 @@ const getFileIconClass = (file: FileDTO) => {
   if (file.isDir || file.isDirectory) return "icon-folder";
   const suffix = file.fileSuffix?.toLowerCase() || "";
 
-  if (["jpg", "jpeg", "png", "gif", "webp"].includes(suffix)) return "icon-image";
+  if (["jpg", "jpeg", "png", "gif", "webp"].includes(suffix))
+    return "icon-image";
   if (["mp4", "avi", "mov", "wmv"].includes(suffix)) return "icon-video";
   if (["mp3", "wav", "flac", "aac"].includes(suffix)) return "icon-audio";
   if (["zip", "rar", "7z", "tar"].includes(suffix)) return "icon-archive";
@@ -130,7 +153,9 @@ const getFileIconClass = (file: FileDTO) => {
 /**
  * 获取文件标签类型
  */
-const getFileTagType = (file: FileDTO): "" | "success" | "warning" | "info" | "danger" => {
+const getFileTagType = (
+  file: FileDTO,
+): "" | "success" | "warning" | "info" | "danger" => {
   if (file.isDir || file.isDirectory) return "warning";
   const suffix = file.fileSuffix?.toLowerCase() || "";
 
@@ -252,7 +277,7 @@ const getFileTagType = (file: FileDTO): "" | "success" | "warning" | "info" | "d
 
 /* 各类文本样式 */
 .code-text {
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
   font-size: 12px;
   color: #606266;
   background: #f5f7fa;
@@ -307,7 +332,7 @@ const getFileTagType = (file: FileDTO): "" | "success" | "warning" | "info" | "d
 
 .path-text {
   color: #606266;
-  font-family: 'Consolas', monospace;
+  font-family: "Consolas", monospace;
   font-size: 13px;
 }
 

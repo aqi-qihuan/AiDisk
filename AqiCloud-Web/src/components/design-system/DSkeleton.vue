@@ -1,11 +1,17 @@
 <template>
-  <div :class="['ds-skeleton', `ds-skeleton-${variant}`]" :style="containerStyle">
+  <div
+    :class="['ds-skeleton', `ds-skeleton-${variant}`]"
+    :style="containerStyle"
+  >
     <!-- 标题骨架 -->
     <template v-if="variant === 'text' || variant === '混合'">
       <div
         v-for="(line, index) in lines"
         :key="index"
-        :class="['ds-skeleton-line', { 'ds-skeleton-last': index === lines - 1 }]"
+        :class="[
+          'ds-skeleton-line',
+          { 'ds-skeleton-last': index === lines - 1 },
+        ]"
         :style="getLineStyle(index)"
       ></div>
     </template>
@@ -34,11 +40,7 @@
 
     <!-- 列表骨架 -->
     <template v-if="variant === 'list'">
-      <div
-        v-for="item in count"
-        :key="item"
-        class="ds-skeleton-list-item"
-      >
+      <div v-for="item in count" :key="item" class="ds-skeleton-list-item">
         <div class="ds-skeleton-avatar"></div>
         <div class="ds-skeleton-content">
           <div class="ds-skeleton-line ds-skeleton-title"></div>
@@ -57,11 +59,7 @@
             class="ds-skeleton-table-cell"
           ></div>
         </div>
-        <div
-          v-for="row in rows"
-          :key="row"
-          class="ds-skeleton-table-row"
-        >
+        <div v-for="row in rows" :key="row" class="ds-skeleton-table-row">
           <div
             v-for="col in columns"
             :key="col"
@@ -74,11 +72,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from "vue";
 
 interface Props {
-  variant?: 'text' | 'rect' | 'circle' | 'card' | 'list' | 'table';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "text" | "rect" | "circle" | "card" | "list" | "table";
+  size?: "sm" | "md" | "lg";
   lines?: number;
   count?: number;
   columns?: number;
@@ -88,8 +86,8 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  variant: 'text',
-  size: 'md',
+  variant: "text",
+  size: "md",
   lines: 3,
   count: 3,
   columns: 4,
@@ -101,7 +99,7 @@ const props = withDefaults(defineProps<Props>(), {
 // 容器样式
 const containerStyle = computed(() => {
   const style: Record<string, string> = {};
-  if (props.variant === 'rect' || props.variant === 'circle') {
+  if (props.variant === "rect" || props.variant === "circle") {
     style.width = `${sizeMap[props.size]}px`;
     style.height = `${sizeMap[props.size]}px`;
   }
@@ -111,14 +109,14 @@ const containerStyle = computed(() => {
 // 矩形样式
 const rectStyle = computed(() => {
   return {
-    borderRadius: props.round ? '50%' : '4px',
+    borderRadius: props.round ? "50%" : "4px",
   };
 });
 
 // 圆形样式
 const circleStyle = computed(() => {
   return {
-    borderRadius: '50%',
+    borderRadius: "50%",
   };
 });
 
@@ -127,7 +125,7 @@ const getLineStyle = (index: number) => {
   const style: Record<string, string> = {};
   // 最后一行短一些
   if (index === props.lines - 1 && props.lines > 1) {
-    style.width = '60%';
+    style.width = "60%";
   }
   return style;
 };
@@ -308,7 +306,7 @@ const sizeMap = {
   .ds-skeleton-table {
     overflow-x: auto;
   }
-  
+
   .ds-skeleton-table-header,
   .ds-skeleton-table-row {
     min-width: 500px;

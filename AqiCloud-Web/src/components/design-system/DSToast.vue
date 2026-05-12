@@ -45,30 +45,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { Check, X, AlertTriangle, Info, MessageSquare } from 'lucide-vue-next';
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import { Check, X, AlertTriangle, Info, MessageSquare } from "lucide-vue-next";
 
 interface Props {
-  type?: 'success' | 'error' | 'warning' | 'info' | 'default';
+  type?: "success" | "error" | "warning" | "info" | "default";
   title?: string;
   message: string;
   duration?: number;
   closable?: boolean;
-  position?: 'top-right' | 'top-center' | 'top-left' | 'bottom-right' | 'bottom-center' | 'bottom-left';
+  position?:
+    | "top-right"
+    | "top-center"
+    | "top-left"
+    | "bottom-right"
+    | "bottom-center"
+    | "bottom-left";
   offset?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  type: 'default',
-  title: '',
+  type: "default",
+  title: "",
   duration: 3000,
   closable: true,
-  position: 'top-right',
+  position: "top-right",
   offset: 20,
 });
 
 const emit = defineEmits<{
-  (e: 'close'): void;
+  (e: "close"): void;
 }>();
 
 const visible = ref(false);
@@ -77,29 +83,29 @@ let timer: number | null = null;
 // 计算样式
 const toastStyle = computed(() => {
   const style: Record<string, string> = {};
-  
-  if (props.position.includes('top')) {
+
+  if (props.position.includes("top")) {
     style.top = `${props.offset}px`;
   } else {
     style.bottom = `${props.offset}px`;
   }
-  
-  if (props.position.includes('right')) {
+
+  if (props.position.includes("right")) {
     style.right = `${props.offset}px`;
-  } else if (props.position.includes('left')) {
+  } else if (props.position.includes("left")) {
     style.left = `${props.offset}px`;
   } else {
-    style.left = '50%';
-    style.transform = 'translateX(-50%)';
+    style.left = "50%";
+    style.transform = "translateX(-50%)";
   }
-  
+
   return style;
 });
 
 // 显示
 const show = () => {
   visible.value = true;
-  
+
   if (props.duration > 0) {
     timer = window.setTimeout(() => {
       close();
@@ -110,13 +116,13 @@ const show = () => {
 // 关闭
 const close = () => {
   visible.value = false;
-    
+
   if (timer) {
     clearTimeout(timer);
     timer = null;
   }
-    
-  emit('close');
+
+  emit("close");
 };
 
 // 组件挂载后显示
@@ -152,50 +158,52 @@ defineExpose({
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.6);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 类型样式 */
 .ds-toast-success {
-  border-left: 4px solid #10B981;
+  border-left: 4px solid #10b981;
 }
 
 .ds-toast-success .ds-toast-icon {
-  color: #10B981;
+  color: #10b981;
 }
 
 .ds-toast-error {
-  border-left: 4px solid #EF4444;
+  border-left: 4px solid #ef4444;
 }
 
 .ds-toast-error .ds-toast-icon {
-  color: #EF4444;
+  color: #ef4444;
 }
 
 .ds-toast-warning {
-  border-left: 4px solid #F59E0B;
+  border-left: 4px solid #f59e0b;
 }
 
 .ds-toast-warning .ds-toast-icon {
-  color: #F59E0B;
+  color: #f59e0b;
 }
 
 .ds-toast-info {
-  border-left: 4px solid #3B82F6;
+  border-left: 4px solid #3b82f6;
 }
 
 .ds-toast-info .ds-toast-icon {
-  color: #3B82F6;
+  color: #3b82f6;
 }
 
 .ds-toast-default {
-  border-left: 4px solid #6366F1;
+  border-left: 4px solid #6366f1;
 }
 
 .ds-toast-default .ds-toast-icon {
-  color: #6366F1;
+  color: #6366f1;
 }
 
 /* 图标 */
@@ -219,14 +227,14 @@ defineExpose({
 .ds-toast-title {
   font-size: 14px;
   font-weight: 600;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin-bottom: 4px;
   line-height: 1.4;
 }
 
 .ds-toast-message {
   font-size: 13px;
-  color: #64748B;
+  color: #64748b;
   line-height: 1.5;
   word-wrap: break-word;
 }
@@ -240,7 +248,7 @@ defineExpose({
   height: 24px;
   border: none;
   background: transparent;
-  color: #94A3B8;
+  color: #94a3b8;
   font-size: 18px;
   cursor: pointer;
   display: flex;
@@ -253,7 +261,7 @@ defineExpose({
 
 .ds-toast-close:hover {
   background: rgba(0, 0, 0, 0.05);
-  color: #64748B;
+  color: #64748b;
 }
 
 /* 进度条 */
@@ -262,7 +270,7 @@ defineExpose({
   bottom: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, #6366F1, #818CF8);
+  background: linear-gradient(90deg, #6366f1, #818cf8);
   border-radius: 0 0 12px 12px;
   animation: ds-toast-progress-shrink linear forwards;
   width: 100%;
@@ -316,11 +324,11 @@ defineExpose({
     width: calc(100vw - 40px);
     padding: 12px 16px;
   }
-  
+
   .ds-toast-title {
     font-size: 13px;
   }
-  
+
   .ds-toast-message {
     font-size: 12px;
   }
@@ -334,7 +342,7 @@ defineExpose({
     animation: none;
     transition: opacity 0.01ms;
   }
-  
+
   .ds-toast-progress {
     animation: none;
   }

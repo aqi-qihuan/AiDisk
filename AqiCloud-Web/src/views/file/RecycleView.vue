@@ -17,7 +17,10 @@
           :loading="restoring"
         >
           <RefreshLeft />
-          {{ t('file.restoreRecycle') }}<template v-if="selectedFiles.length"> ({{ selectedFiles.length }})</template>
+          {{ t("file.restoreRecycle")
+          }}<template v-if="selectedFiles.length">
+            ({{ selectedFiles.length }})</template
+          >
         </DSButton>
 
         <DSButton
@@ -28,15 +31,44 @@
           :loading="deleting"
         >
           <Delete />
-          {{ t('file.deletePermanentlyRecycle') }}<template v-if="selectedFiles.length"> ({{ selectedFiles.length }})</template>
+          {{ t("file.deletePermanentlyRecycle")
+          }}<template v-if="selectedFiles.length">
+            ({{ selectedFiles.length }})</template
+          >
         </DSButton>
 
         <div class="info-tags">
           <DSTag color="info">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="vertical-align:-3px;margin-right:4px"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5"/></svg>{{ t('file.totalFiles', { count: fileList.length }) }}
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              style="vertical-align: -3px; margin-right: 4px"
+            >
+              <path
+                d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"
+                stroke="currentColor"
+                stroke-width="1.5"
+              /></svg
+            >{{ t("file.totalFiles", { count: fileList.length }) }}
           </DSTag>
           <DSTag color="warning" v-if="selectedFiles.length > 0">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="vertical-align:-3px;margin-right:4px"><polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ t('file.selectedFiles', { count: selectedFiles.length }) }}
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              style="vertical-align: -3px; margin-right: 4px"
+            >
+              <polyline
+                points="20 6 9 17 4 12"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg
+            >{{ t("file.selectedFiles", { count: selectedFiles.length }) }}
           </DSTag>
         </div>
       </div>
@@ -54,7 +86,7 @@
               :loading="row.restoring"
             >
               <RefreshLeft />
-              {{ t('file.restoreRecycle') }}
+              {{ t("file.restoreRecycle") }}
             </DSButton>
             <DSButton
               variant="danger"
@@ -63,7 +95,7 @@
               :loading="row.deleting"
             >
               <Delete />
-              {{ t('file.delete') }}
+              {{ t("file.delete") }}
             </DSButton>
           </div>
         </template>
@@ -72,41 +104,119 @@
       <!-- 空状态 -->
       <div v-if="fileList.length === 0" class="empty-state">
         <div class="empty-icon">
-          <svg class="empty-svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+          <svg
+            class="empty-svg"
+            width="120"
+            height="120"
+            viewBox="0 0 120 120"
+            fill="none"
+          >
             <defs>
-              <linearGradient id="recycleGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#DB2777"/>
-                <stop offset="100%" stop-color="#A855F7"/>
+              <linearGradient
+                id="recycleGrad1"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stop-color="#DB2777" />
+                <stop offset="100%" stop-color="#A855F7" />
               </linearGradient>
-              <linearGradient id="recycleGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#F472B6"/>
-                <stop offset="100%" stop-color="#C084FC"/>
+              <linearGradient
+                id="recycleGrad2"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stop-color="#F472B6" />
+                <stop offset="100%" stop-color="#C084FC" />
               </linearGradient>
               <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
                 <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
             </defs>
             <!-- 外圈装饰 -->
-            <circle cx="60" cy="60" r="55" stroke="url(#recycleGrad2)" stroke-width="2" opacity="0.3"/>
+            <circle
+              cx="60"
+              cy="60"
+              r="55"
+              stroke="url(#recycleGrad2)"
+              stroke-width="2"
+              opacity="0.3"
+            />
             <!-- 垃圾桶主体 -->
-            <path d="M35 40h50l-5 60H40l-5-60z" fill="rgba(255,255,255,0.3)" stroke="url(#recycleGrad1)" stroke-width="2"/>
+            <path
+              d="M35 40h50l-5 60H40l-5-60z"
+              fill="rgba(255,255,255,0.3)"
+              stroke="url(#recycleGrad1)"
+              stroke-width="2"
+            />
             <!-- 垃圾桶盖 -->
-            <path d="M30 35h60v5H30z" fill="url(#recycleGrad2)" opacity="0.6"/>
-            <rect x="50" y="28" width="20" height="8" rx="2" fill="url(#recycleGrad1)"/>
+            <path d="M30 35h60v5H30z" fill="url(#recycleGrad2)" opacity="0.6" />
+            <rect
+              x="50"
+              y="28"
+              width="20"
+              height="8"
+              rx="2"
+              fill="url(#recycleGrad1)"
+            />
             <!-- 内部线条装饰 -->
-            <line x1="45" y1="50" x2="48" y2="90" stroke="url(#recycleGrad2)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-            <line x1="60" y1="50" x2="60" y2="90" stroke="url(#recycleGrad2)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-            <line x1="75" y1="50" x2="72" y2="90" stroke="url(#recycleGrad2)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+            <line
+              x1="45"
+              y1="50"
+              x2="48"
+              y2="90"
+              stroke="url(#recycleGrad2)"
+              stroke-width="2"
+              stroke-linecap="round"
+              opacity="0.6"
+            />
+            <line
+              x1="60"
+              y1="50"
+              x2="60"
+              y2="90"
+              stroke="url(#recycleGrad2)"
+              stroke-width="2"
+              stroke-linecap="round"
+              opacity="0.6"
+            />
+            <line
+              x1="75"
+              y1="50"
+              x2="72"
+              y2="90"
+              stroke="url(#recycleGrad2)"
+              stroke-width="2"
+              stroke-linecap="round"
+              opacity="0.6"
+            />
             <!-- 勾选标记 -->
-            <circle cx="85" cy="35" r="15" fill="rgba(16, 185, 129, 0.2)" stroke="#10B981" stroke-width="2"/>
-            <path d="M77 35l5 5 10-10" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle
+              cx="85"
+              cy="35"
+              r="15"
+              fill="rgba(16, 185, 129, 0.2)"
+              stroke="#10B981"
+              stroke-width="2"
+            />
+            <path
+              d="M77 35l5 5 10-10"
+              stroke="#10B981"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+            />
           </svg>
         </div>
-        <p class="empty-title">{{ t('file.recycleEmpty') }}</p>
+        <p class="empty-title">{{ t("file.recycleEmpty") }}</p>
         <p class="empty-description">删除的文件会在这里保留30天</p>
       </div>
     </div>
@@ -114,15 +224,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { ElMessage, ElMessageBox } from 'element-plus';
-import { Delete, RefreshLeft } from '@element-plus/icons-vue';
-import { listRecycleFiles, batchRestore, batchDelete } from '@/api/recycle';
-import FileTable from '@/components/file/FileTable.vue';
-import { useStorageStore } from '@/store/storage';
-import DSButton from '@/components/design-system/DSButton.vue';
-import DSTag from '@/components/design-system/DSTag.vue';
+import { ref, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
+import { ElMessage, ElMessageBox } from "element-plus";
+import { Delete, RefreshLeft } from "@element-plus/icons-vue";
+import { listRecycleFiles, batchRestore, batchDelete } from "@/api/recycle";
+import FileTable from "@/components/file/FileTable.vue";
+import { useStorageStore } from "@/store/storage";
+import DSButton from "@/components/design-system/DSButton.vue";
+import DSTag from "@/components/design-system/DSTag.vue";
 
 const { t } = useI18n();
 
@@ -139,17 +249,17 @@ const fetchRecycleFiles = async () => {
     if (response.data?.success) {
       fileList.value = (response.data?.data ?? []).map((file: API.FileDTO) => ({
         ...file,
-        fileType: file.isDir === 1 ? 'folder' : file.fileType || 'other',
-        fileSuffix: file.isDir === 1 ? 'folder' : file.fileSuffix || 'other',
+        fileType: file.isDir === 1 ? "folder" : file.fileType || "other",
+        fileSuffix: file.isDir === 1 ? "folder" : file.fileSuffix || "other",
         restoring: false,
-        deleting: false
+        deleting: false,
       }));
     } else {
-      ElMessage.error(response.data?.msg || '获取回收站文件列表失败');
+      ElMessage.error(response.data?.msg || "获取回收站文件列表失败");
     }
   } catch (error) {
-    console.error('获取回收站文件列表失败:', error);
-    ElMessage.error('获取回收站文件列表失败');
+    console.error("获取回收站文件列表失败:", error);
+    ElMessage.error("获取回收站文件列表失败");
   }
 };
 
@@ -163,19 +273,19 @@ const handleRestore = async (file: API.FileDTO) => {
   file.restoring = true;
   try {
     const response = await batchRestore({
-      fileIds: [String(file.id)]
+      fileIds: [String(file.id)],
     });
 
     if (response.data?.success) {
-      ElMessage.success('文件还原成功');
+      ElMessage.success("文件还原成功");
       fetchRecycleFiles();
       storageStore.updateStorageInfo();
     } else {
-      ElMessage.error(response.data?.msg || '文件还原失败');
+      ElMessage.error(response.data?.msg || "文件还原失败");
     }
   } catch (error) {
-    console.error('文件还原失败:', error);
-    ElMessage.error('文件还原失败');
+    console.error("文件还原失败:", error);
+    ElMessage.error("文件还原失败");
   } finally {
     file.restoring = false;
   }
@@ -188,20 +298,20 @@ const handleBatchRestore = async () => {
   restoring.value = true;
   try {
     const response = await batchRestore({
-      fileIds: selectedFiles.value.map((file) => String(file.id))
+      fileIds: selectedFiles.value.map((file) => String(file.id)),
     });
 
     if (response.data?.success) {
-      ElMessage.success('文件还原成功');
+      ElMessage.success("文件还原成功");
       fetchRecycleFiles();
       selectedFiles.value = [];
       storageStore.updateStorageInfo();
     } else {
-      ElMessage.error(response.data?.msg || '文件还原失败');
+      ElMessage.error(response.data?.msg || "文件还原失败");
     }
   } catch (error) {
-    console.error('文件还原失败:', error);
-    ElMessage.error('文件还原失败');
+    console.error("文件还原失败:", error);
+    ElMessage.error("文件还原失败");
   } finally {
     restoring.value = false;
   }
@@ -212,30 +322,30 @@ const handleDelete = async (file: API.FileDTO) => {
   file.deleting = true;
   try {
     await ElMessageBox.confirm(
-      '此操作将永久删除该文件, 是否继续?',
-      '永久删除警告',
+      "此操作将永久删除该文件, 是否继续?",
+      "永久删除警告",
       {
-        confirmButtonText: '确定删除',
-        cancelButtonText: '取消',
-        type: 'warning',
-        customClass: 'ds-dialog'
-      }
+        confirmButtonText: "确定删除",
+        cancelButtonText: "取消",
+        type: "warning",
+        customClass: "ds-dialog",
+      },
     );
 
     const response = await batchDelete({
-      fileIds: [String(file.id)]
+      fileIds: [String(file.id)],
     });
 
     if (response.data?.success) {
-      ElMessage.success('文件已永久删除');
+      ElMessage.success("文件已永久删除");
       fetchRecycleFiles();
     } else {
-      ElMessage.error(response.data?.msg || '文件删除失败');
+      ElMessage.error(response.data?.msg || "文件删除失败");
     }
   } catch (error) {
-    if (error !== 'cancel') {
-      console.error('文件删除失败:', error);
-      ElMessage.error('文件删除失败');
+    if (error !== "cancel") {
+      console.error("文件删除失败:", error);
+      ElMessage.error("文件删除失败");
     }
   } finally {
     file.deleting = false;
@@ -250,30 +360,30 @@ const handleBatchDelete = async () => {
   try {
     await ElMessageBox.confirm(
       `此操作将永久删除选中的 ${selectedFiles.value.length} 个文件, 是否继续?`,
-      '批量永久删除警告',
+      "批量永久删除警告",
       {
-        confirmButtonText: '确定删除',
-        cancelButtonText: '取消',
-        type: 'warning',
-        customClass: 'ds-dialog'
-      }
+        confirmButtonText: "确定删除",
+        cancelButtonText: "取消",
+        type: "warning",
+        customClass: "ds-dialog",
+      },
     );
 
     const response = await batchDelete({
-      fileIds: selectedFiles.value.map((file) => String(file.id))
+      fileIds: selectedFiles.value.map((file) => String(file.id)),
     });
 
     if (response.data?.success) {
-      ElMessage.success('文件已永久删除');
+      ElMessage.success("文件已永久删除");
       fetchRecycleFiles();
       selectedFiles.value = [];
     } else {
-      ElMessage.error(response.data?.msg || '文件删除失败');
+      ElMessage.error(response.data?.msg || "文件删除失败");
     }
   } catch (error) {
-    if (error !== 'cancel') {
-      console.error('文件删除失败:', error);
-      ElMessage.error('文件删除失败');
+    if (error !== "cancel") {
+      console.error("文件删除失败:", error);
+      ElMessage.error("文件删除失败");
     }
   } finally {
     deleting.value = false;
@@ -288,7 +398,7 @@ onMounted(() => {
 <style scoped>
 .recycle-view {
   padding: var(--ds-spacing-4);
-  background: linear-gradient(135deg, #FDF2F8 0%, #F5F3FF 50%, #FCE7F3 100%);
+  background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 50%, #fce7f3 100%);
   min-height: calc(100vh - 64px);
   position: relative;
   overflow: hidden;
@@ -314,7 +424,11 @@ onMounted(() => {
 .bg-orb-1 {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(219, 39, 119, 0.4) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(219, 39, 119, 0.4) 0%,
+    transparent 70%
+  );
   top: -100px;
   right: -50px;
   animation-delay: 0s;
@@ -323,7 +437,11 @@ onMounted(() => {
 .bg-orb-2 {
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.3) 0%,
+    transparent 70%
+  );
   bottom: -80px;
   left: -60px;
   animation-delay: -7s;
@@ -332,7 +450,11 @@ onMounted(() => {
 .bg-orb-3 {
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.3) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(244, 114, 182, 0.3) 0%,
+    transparent 70%
+  );
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -340,20 +462,27 @@ onMounted(() => {
 }
 
 @keyframes floatOrb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 15px) scale(0.95); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 15px) scale(0.95);
+  }
 }
 
 /* 操作卡片 */
 .operation-card {
   margin-bottom: var(--ds-spacing-4);
   padding: var(--ds-spacing-3) var(--ds-spacing-4);
-  border-left: 4px solid #A855F7;
-  background: rgba(255,255,255,0.65);
+  border-left: 4px solid #a855f7;
+  background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.5) inset;
+  border: 1px solid rgba(255, 255, 255, 0.5) inset;
   animation: fadeInUp 0.5s ease-out;
   position: relative;
   z-index: 1;
@@ -375,10 +504,10 @@ onMounted(() => {
 /* 文件列表卡片 */
 .file-list-card {
   padding: var(--ds-spacing-4);
-  background: rgba(255,255,255,0.65);
+  background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.5) inset;
+  border: 1px solid rgba(255, 255, 255, 0.5) inset;
   animation: fadeInUp 0.5s ease-out 0.1s both;
   position: relative;
   z-index: 1;
@@ -425,7 +554,8 @@ onMounted(() => {
 
 /* 浮动动画 */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -434,13 +564,25 @@ onMounted(() => {
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* 响应式 */

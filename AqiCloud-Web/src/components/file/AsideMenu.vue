@@ -14,10 +14,17 @@
             <div class="ai-icon-sparkle sparkle-1">✦</div>
             <div class="ai-icon-sparkle sparkle-2">✦</div>
           </div>
-          <span v-if="!isCollapse" class="menu-text ai-text">{{ t('ai.title') }}</span>
-          <el-icon v-if="!isCollapse" class="arrow-icon ai-arrow"><ArrowDown /></el-icon>
+          <span v-if="!isCollapse" class="menu-text ai-text">{{
+            t("ai.title")
+          }}</span>
+          <el-icon v-if="!isCollapse" class="arrow-icon ai-arrow"
+            ><ArrowDown
+          /></el-icon>
         </div>
-        <div v-show="isAiMenuOpen || isCollapse" class="sub-menu-items ai-items">
+        <div
+          v-show="isAiMenuOpen || isCollapse"
+          class="sub-menu-items ai-items"
+        >
           <DSMenuItem
             index="/Answer"
             :active="activeIndex === '/Answer'"
@@ -29,7 +36,7 @@
                 <el-icon><Document /></el-icon>
               </div>
             </template>
-            {{ t('ai.answer') }}
+            {{ t("ai.answer") }}
           </DSMenuItem>
           <DSMenuItem
             index="/Chat"
@@ -42,7 +49,7 @@
                 <el-icon><ChatDotRound /></el-icon>
               </div>
             </template>
-            {{ t('ai.chat') }}
+            {{ t("ai.chat") }}
           </DSMenuItem>
           <DSMenuItem
             index="/Document"
@@ -55,7 +62,7 @@
                 <el-icon><Edit /></el-icon>
               </div>
             </template>
-            {{ t('ai.document') }}
+            {{ t("ai.document") }}
           </DSMenuItem>
         </div>
       </div>
@@ -71,7 +78,7 @@
         <template #icon>
           <el-icon><FolderOpened /></el-icon>
         </template>
-        {{ t('nav.files') }}
+        {{ t("nav.files") }}
       </DSMenuItem>
 
       <DSMenuItem
@@ -83,7 +90,7 @@
         <template #icon>
           <el-icon><Share /></el-icon>
         </template>
-        {{ t('nav.share') }}
+        {{ t("nav.share") }}
       </DSMenuItem>
 
       <DSMenuItem
@@ -95,7 +102,7 @@
         <template #icon>
           <el-icon><Delete /></el-icon>
         </template>
-        {{ t('nav.recycle') }}
+        {{ t("nav.recycle") }}
       </DSMenuItem>
     </DSMenu>
 
@@ -119,7 +126,7 @@ import {
   Star,
 } from "@element-plus/icons-vue";
 import { ref, watch } from "vue";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import CapacityProcess from "@/components/storage/CapacityProcess.vue";
 import { DSMenu, DSMenuItem } from "@/components/design-system";
@@ -185,7 +192,7 @@ watch(
       activeIndex.value = newPath;
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>
 
@@ -274,7 +281,11 @@ watch(
   align-items: center;
   gap: 12px;
   padding: 14px 16px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(129, 140, 248, 0.08) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.08) 0%,
+    rgba(129, 140, 248, 0.08) 100%
+  );
   border-radius: var(--radius-xl);
   border: 1px solid rgba(99, 102, 241, 0.12);
   cursor: pointer;
@@ -282,14 +293,22 @@ watch(
 }
 
 .ai-title:hover {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(129, 140, 248, 0.12) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.12) 0%,
+    rgba(129, 140, 248, 0.12) 100%
+  );
   border-color: rgba(99, 102, 241, 0.2);
   transform: translateY(-1px);
   box-shadow: 0 4px 16px rgba(99, 102, 241, 0.12);
 }
 
 .ai-title.is-open {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(129, 140, 248, 0.15) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.15) 0%,
+    rgba(129, 140, 248, 0.15) 100%
+  );
   border-color: rgba(99, 102, 241, 0.25);
 }
 
@@ -300,11 +319,15 @@ watch(
   justify-content: center;
   width: 44px;
   height: 44px;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
   border-radius: var(--radius-lg);
   color: white;
   font-size: 22px;
-  box-shadow: 
+  box-shadow:
     0 4px 12px rgba(99, 102, 241, 0.3),
     0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   flex-shrink: 0;
@@ -320,7 +343,11 @@ watch(
 .ai-icon-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3) 0%, transparent 50%);
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 50%
+  );
   z-index: 1;
 }
 
@@ -346,7 +373,8 @@ watch(
 }
 
 @keyframes starPulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
   }
@@ -357,7 +385,8 @@ watch(
 }
 
 @keyframes sparkle {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.4;
     transform: scale(0.8);
   }
@@ -408,14 +437,18 @@ watch(
 }
 
 .ai-items :deep(.ds-menu-item.is-active::before) {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
   width: 3px;
   height: 20px;
-  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
   border-radius: 0 3px 3px 0;
 }
 
@@ -440,7 +473,13 @@ watch(
 /* 菜单分隔线 */
 .menu-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--color-border) 20%, var(--color-border) 80%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-border) 20%,
+    var(--color-border) 80%,
+    transparent 100%
+  );
   margin: 16px 20px;
 }
 
@@ -464,14 +503,18 @@ watch(
 }
 
 :deep(.ds-menu-item.is-active::before) {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
   width: 3px;
   height: 20px;
-  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
   border-radius: 0 3px 3px 0;
 }
 
@@ -493,7 +536,11 @@ watch(
 }
 
 :deep(.ds-menu-item.is-active .menu-item-icon) {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
   color: white;
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
 }

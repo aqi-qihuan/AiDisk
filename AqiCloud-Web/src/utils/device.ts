@@ -1,33 +1,33 @@
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from "vue";
 
 /**
  * 设备检测工具
  * 用于检测当前设备类型和响应式监听屏幕变化
  */
 export function useDevice() {
-  const isMobile = ref(false)
-  const isTablet = ref(false)
-  const isDesktop = ref(false)
+  const isMobile = ref(false);
+  const isTablet = ref(false);
+  const isDesktop = ref(false);
 
   const updateDevice = () => {
-    const width = window.innerWidth
-    isMobile.value = width <= 768
-    isTablet.value = width > 768 && width <= 1024
-    isDesktop.value = width > 1024
-  }
+    const width = window.innerWidth;
+    isMobile.value = width <= 768;
+    isTablet.value = width > 768 && width <= 1024;
+    isDesktop.value = width > 1024;
+  };
 
   onMounted(() => {
-    updateDevice()
-    window.addEventListener('resize', updateDevice)
-  })
+    updateDevice();
+    window.addEventListener("resize", updateDevice);
+  });
 
   onUnmounted(() => {
-    window.removeEventListener('resize', updateDevice)
-  })
+    window.removeEventListener("resize", updateDevice);
+  });
 
   return {
     isMobile,
     isTablet,
-    isDesktop
-  }
+    isDesktop,
+  };
 }

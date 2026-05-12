@@ -25,7 +25,13 @@
     <!-- 消息区域 -->
     <div class="chat-content" ref="messageContainer">
       <!-- 欢迎界面 -->
-      <div v-if="messages.length === 0 || (messages.length === 1 && messages[0].isHistory)" class="welcome-section">
+      <div
+        v-if="
+          messages.length === 0 ||
+          (messages.length === 1 && messages[0].isHistory)
+        "
+        class="welcome-section"
+      >
         <div class="welcome-card">
           <div class="welcome-avatar-large">
             <div class="welcome-ring"></div>
@@ -38,11 +44,17 @@
               <span class="action-icon">💻</span>
               <span class="action-text">写代码</span>
             </div>
-            <div class="quick-action-item" @click="quickSend('解释一下这个概念')">
+            <div
+              class="quick-action-item"
+              @click="quickSend('解释一下这个概念')"
+            >
               <span class="action-icon">📚</span>
               <span class="action-text">解释概念</span>
             </div>
-            <div class="quick-action-item" @click="quickSend('帮我优化这段文字')">
+            <div
+              class="quick-action-item"
+              @click="quickSend('帮我优化这段文字')"
+            >
               <span class="action-icon">✍️</span>
               <span class="action-text">优化文字</span>
             </div>
@@ -56,18 +68,29 @@
 
       <!-- 消息列表 -->
       <template v-else>
-        <div v-for="(message, index) in messages"
-             :key="index"
-             :class="['message-item', message.type, { 'first-message': index === 0 }]">
+        <div
+          v-for="(message, index) in messages"
+          :key="index"
+          :class="[
+            'message-item',
+            message.type,
+            { 'first-message': index === 0 },
+          ]"
+        >
           <div class="message-avatar-wrapper" v-if="message.type === 'ai'">
             <div class="message-avatar ai-avatar">
               <span>🤖</span>
             </div>
           </div>
           <div class="message-bubble">
-            <div class="message-sender">{{ message.type === 'ai' ? 'AI 助手' : '我' }}</div>
+            <div class="message-sender">
+              {{ message.type === "ai" ? "AI 助手" : "我" }}
+            </div>
             <div class="message-content">
-              <div v-if="message.type === 'ai' && !message.isHistory" class="typewriter">
+              <div
+                v-if="message.type === 'ai' && !message.isHistory"
+                class="typewriter"
+              >
                 {{ message.displayText }}
               </div>
               <span v-else>{{ message.content }}</span>
@@ -121,12 +144,19 @@
           </div>
           <button
             class="send-btn"
-            :class="{ 'active': inputMessage.trim(), 'loading': isLoading }"
+            :class="{ active: inputMessage.trim(), loading: isLoading }"
             @click="sendMessage"
             :disabled="!inputMessage.trim() || isLoading"
           >
-            <svg v-if="!isLoading" class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            <svg
+              v-if="!isLoading"
+              class="send-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
             </svg>
             <div v-else class="btn-spinner"></div>
           </button>
@@ -137,197 +167,207 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick, watch } from 'vue'
-import axios from 'axios'
-import { ElMessage } from 'element-plus'
-import { Delete } from '@element-plus/icons-vue'
+import { ref, onMounted, nextTick, watch } from "vue";
+import axios from "axios";
+import { ElMessage } from "element-plus";
+import { Delete } from "@element-plus/icons-vue";
 import { useLoginUserStore } from "@/store/user";
 
 const { token } = useLoginUserStore();
-const messages = ref([])
-const textareaRef = ref(null)
-const inputMessage = ref('')
-const messageContainer = ref(null)
-const isLoading = ref(false)
+const messages = ref([]);
+const textareaRef = ref(null);
+const inputMessage = ref("");
+const messageContainer = ref(null);
+const isLoading = ref(false);
 // 格式化时间
 const formatTime = (timestamp) => {
-  if (!timestamp) return ''
-  const date = new Date(timestamp)
-  return date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
-}
+  if (!timestamp) return "";
+  const date = new Date(timestamp);
+  return date.toLocaleTimeString("zh-CN", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
 
 // 快捷发送
 const quickSend = (text) => {
-  inputMessage.value = text
-  sendMessage()
-}
+  inputMessage.value = text;
+  sendMessage();
+};
 
 // 清空对话
 const clearChat = () => {
-  messages.value = []
-}
+  messages.value = [];
+};
 
 // 获取历史记录
 const fetchChatHistory = async () => {
   try {
-    const response = await axios.get('/api/chat/history', {
-      headers: { 'Authorization': `Bearer ${token}` }
+    const response = await axios.get("/api/chat/history", {
+      headers: { Authorization: `Bearer ${token}` },
     });
-    
+
     if (response.data.messages && Array.isArray(response.data.messages)) {
-      const historyMessages = response.data.messages.map(msg => ({
-        type: msg.role === 'user' ? 'user' : 'ai',
+      const historyMessages = response.data.messages.map((msg) => ({
+        type: msg.role === "user" ? "user" : "ai",
         content: msg.content,
         displayText: msg.content,
         timestamp: msg.timestamp,
-        isHistory: true
-      }))
-      messages.value = historyMessages
-      await nextTick()
-      scrollToBottom()
+        isHistory: true,
+      }));
+      messages.value = historyMessages;
+      await nextTick();
+      scrollToBottom();
     }
   } catch (error) {
     if (error.response?.status === 422) {
-      const errorDetail = error.response.data.detail
-      ElMessage.error(`验证错误: ${errorDetail.map(d => d.msg).join(', ')}`)
+      const errorDetail = error.response.data.detail;
+      ElMessage.error(`验证错误: ${errorDetail.map((d) => d.msg).join(", ")}`);
     } else {
-      ElMessage.error('获取历史记录失败')
+      ElMessage.error("获取历史记录失败");
     }
-    console.error('获取历史记录错误:', error)
+    console.error("获取历史记录错误:", error);
   }
-}
+};
 
 // 发送消息
 const sendMessage = async () => {
-  if (!inputMessage.value.trim() || isLoading.value) return
+  if (!inputMessage.value.trim() || isLoading.value) return;
 
-  isLoading.value = true
+  isLoading.value = true;
 
   // 添加用户消息
   const userMessage = {
-    type: 'user',
+    type: "user",
     content: inputMessage.value,
     displayText: inputMessage.value,
     timestamp: new Date().toISOString(),
-    isHistory: false
-  }
-  messages.value.push(userMessage)
+    isHistory: false,
+  };
+  messages.value.push(userMessage);
 
   try {
     // 发送聊天请求
-    const response = await fetch('/api/chat/stream', {
-      method: 'POST',
+    const response = await fetch("/api/chat/stream", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        message: inputMessage.value  // 修改为符合接口要求的参数
-      })
-    })
+        message: inputMessage.value, // 修改为符合接口要求的参数
+      }),
+    });
 
     if (response.status === 422) {
-      const errorData = await response.json()
-      throw new Error(`验证错误: ${errorData.detail.map(d => d.msg).join(', ')}`)
+      const errorData = await response.json();
+      throw new Error(
+        `验证错误: ${errorData.detail.map((d) => d.msg).join(", ")}`,
+      );
     }
 
     if (!response.ok) {
-      throw new Error(`请求失败，状态码: ${response.status}`)
+      throw new Error(`请求失败，状态码: ${response.status}`);
     }
 
     // 处理流式响应
-    await handleStreamResponse(response)
+    await handleStreamResponse(response);
   } catch (error) {
-    isLoading.value = false
-    ElMessage.error(error.message || 'AI响应失败')
-    console.error('发送消息错误:', error)
+    isLoading.value = false;
+    ElMessage.error(error.message || "AI响应失败");
+    console.error("发送消息错误:", error);
 
     // 添加错误提示消息
     messages.value.push({
-      type: 'ai',
-      content: '很抱歉，处理您的请求时出现错误。请稍后再试。',
-      displayText: '很抱歉，处理您的请求时出现错误。请稍后再试。',
+      type: "ai",
+      content: "很抱歉，处理您的请求时出现错误。请稍后再试。",
+      displayText: "很抱歉，处理您的请求时出现错误。请稍后再试。",
       timestamp: new Date().toISOString(),
-      isHistory: false
-    })
+      isHistory: false,
+    });
   }
 
-  inputMessage.value = ''
-  await nextTick()
-  scrollToBottom()
-}
+  inputMessage.value = "";
+  await nextTick();
+  scrollToBottom();
+};
 
 // 处理流式响应
 const handleStreamResponse = async (response) => {
-  const reader = response.body.getReader()
-  const decoder = new TextDecoder()
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
   let aiMessage = {
-    type: 'ai',
-    content: '',
-    displayText: '',
+    type: "ai",
+    content: "",
+    displayText: "",
     timestamp: new Date().toISOString(),
-    isHistory: false
-  }
-  messages.value.push(aiMessage)
-  isLoading.value = false
+    isHistory: false,
+  };
+  messages.value.push(aiMessage);
+  isLoading.value = false;
 
   try {
     while (true) {
-      const { done, value } = await reader.read()
-      if (done) break
+      const { done, value } = await reader.read();
+      if (done) break;
 
-      const chunk = decoder.decode(value)
+      const chunk = decoder.decode(value);
       // 直接使用返回的字符串，不需要 JSON 解析
-      aiMessage.content += chunk
-      aiMessage.displayText += chunk
-      scrollToBottom()
+      aiMessage.content += chunk;
+      aiMessage.displayText += chunk;
+      scrollToBottom();
     }
   } catch (error) {
-    console.error('处理流式响应错误:', error)
-    ElMessage.error('接收AI响应出错')
+    console.error("处理流式响应错误:", error);
+    ElMessage.error("接收AI响应出错");
   }
-}
+};
 
 // 滚动到底部
 const scrollToBottom = () => {
-  const container = messageContainer.value
+  const container = messageContainer.value;
   if (container) {
-    container.scrollTop = container.scrollHeight
+    container.scrollTop = container.scrollHeight;
   }
-}
+};
 
 // 打字机效果函数
 const typeWriter = (message, speed = 50) => {
-  let index = 0
-  message.displayText = ''
+  let index = 0;
+  message.displayText = "";
 
   const timer = setInterval(() => {
     if (index < message.content.length) {
-      message.displayText += message.content[index]
-      index++
+      message.displayText += message.content[index];
+      index++;
     } else {
-      clearInterval(timer)
+      clearInterval(timer);
     }
-  }, speed)
-}
+  }, speed);
+};
 
 // 自动调整文本框高度
 watch(inputMessage, () => {
   if (textareaRef.value) {
-    textareaRef.value.style.height = 'auto'
-    textareaRef.value.style.height = Math.min(textareaRef.value.scrollHeight, 120) + 'px'
+    textareaRef.value.style.height = "auto";
+    textareaRef.value.style.height =
+      Math.min(textareaRef.value.scrollHeight, 120) + "px";
   }
-})
+});
 
 // 组件加载时获取历史记录
 onMounted(async () => {
-  await fetchChatHistory()
-})
+  await fetchChatHistory();
+});
 
 // 监听消息变化，自动滚动到底部
-watch(messages, () => {
-  scrollToBottom()
-}, {deep: true})
+watch(
+  messages,
+  () => {
+    scrollToBottom();
+  },
+  { deep: true },
+);
 </script>
 
 <style scoped>
@@ -356,13 +396,18 @@ watch(messages, () => {
 }
 
 .chat-header::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(102, 126, 234, 0.2),
+    transparent
+  );
 }
 
 .header-content {
@@ -497,7 +542,7 @@ watch(messages, () => {
 }
 
 .welcome-ring::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 3px;
   border-radius: 50%;
@@ -561,7 +606,11 @@ watch(messages, () => {
 .action-icon {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.1) 0%,
+    rgba(118, 75, 162, 0.1) 100%
+  );
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -685,25 +734,41 @@ watch(messages, () => {
   animation: typing 1.4s ease-in-out infinite;
 }
 
-.typing-indicator .dot:nth-child(1) { animation-delay: 0s; }
-.typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
-.typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+.typing-indicator .dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.typing-indicator .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-indicator .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
 
 /* ========== 输入区域 ========== */
 .chat-input-area {
   padding: 20px 24px;
-  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 20%, white 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.9) 20%,
+    white 100%
+  );
   position: relative;
 }
 
 .chat-input-area::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 24px;
   right: 24px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.15), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(102, 126, 234, 0.15),
+    transparent
+  );
 }
 
 .input-wrapper {
@@ -715,17 +780,23 @@ watch(messages, () => {
   border: 1px solid rgba(102, 126, 234, 0.12);
   padding: 16px 70px 16px 20px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .input-wrapper:hover {
   border-color: rgba(102, 126, 234, 0.2);
-  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 8px 30px rgba(102, 126, 234, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .input-wrapper:focus-within {
   border-color: rgba(102, 126, 234, 0.35);
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.06), 0 8px 30px rgba(102, 126, 234, 0.1);
+  box-shadow:
+    0 0 0 4px rgba(102, 126, 234, 0.06),
+    0 8px 30px rgba(102, 126, 234, 0.1);
   transform: translateY(-1px);
 }
 
@@ -831,7 +902,11 @@ watch(messages, () => {
 }
 
 .chat-content::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(102, 126, 234, 0.3) 0%,
+    rgba(118, 75, 162, 0.3) 100%
+  );
   border-radius: 3px;
 }
 
@@ -852,7 +927,8 @@ watch(messages, () => {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.4;
     transform: scale(1);
   }
@@ -863,7 +939,8 @@ watch(messages, () => {
 }
 
 @keyframes pulse-green {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
   }
@@ -883,7 +960,8 @@ watch(messages, () => {
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -892,7 +970,9 @@ watch(messages, () => {
 }
 
 @keyframes typing {
-  0%, 60%, 100% {
+  0%,
+  60%,
+  100% {
     transform: translateY(0);
     opacity: 1;
   }

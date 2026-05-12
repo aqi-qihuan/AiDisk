@@ -5,7 +5,7 @@ import request from "@/utils/request";
 /** 批量彻底删除 POST /v1/recycle/delete/batch */
 export async function batchDelete(
   body: API.BatchFilesRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/recycle/v1/delete", {
     method: "POST",
@@ -28,7 +28,7 @@ export async function listRecycleFiles(options?: { [key: string]: any }) {
 /** 批量文件还原 POST /v1/recycle/restore/batch */
 export async function batchRestore(
   body: API.BatchFilesRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/recycle/v1/restore", {
     method: "POST",

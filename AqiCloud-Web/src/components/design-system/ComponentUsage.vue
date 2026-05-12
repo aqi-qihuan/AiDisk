@@ -79,32 +79,20 @@
         <div class="demo-block">
           <h3>不同尺寸</h3>
           <div class="demo-row">
-            <DSInput
-              v-model="inputValue"
-              size="small"
-              placeholder="小输入框"
-            />
+            <DSInput v-model="inputValue" size="small" placeholder="小输入框" />
             <DSInput
               v-model="inputValue"
               size="medium"
               placeholder="中输入框"
             />
-            <DSInput
-              v-model="inputValue"
-              size="large"
-              placeholder="大输入框"
-            />
+            <DSInput v-model="inputValue" size="large" placeholder="大输入框" />
           </div>
         </div>
 
         <div class="demo-block">
           <h3>不同状态</h3>
           <div class="demo-row">
-            <DSInput
-              v-model="inputValue"
-              placeholder="正常状态"
-              label="正常"
-            />
+            <DSInput v-model="inputValue" placeholder="正常状态" label="正常" />
             <DSInput
               v-model="inputValue"
               placeholder="禁用状态"
@@ -152,7 +140,7 @@
         <div class="demo-block">
           <h3>基础卡片</h3>
           <div class="demo-row">
-            <DSCard title="卡片标题" style="max-width: 400px;">
+            <DSCard title="卡片标题" style="max-width: 400px">
               <p>这是卡片的内容区域，可以放置文本、图片或其他组件。</p>
               <p>卡片支持悬停效果和阴影效果。</p>
             </DSCard>
@@ -162,11 +150,7 @@
         <div class="demo-block">
           <h3>带头部和底部</h3>
           <div class="demo-row">
-            <DSCard
-              title="文件信息"
-              hoverable
-              style="max-width: 400px;"
-            >
+            <DSCard title="文件信息" hoverable style="max-width: 400px">
               <template #extra>
                 <DSTag variant="success">活跃</DSTag>
               </template>
@@ -222,7 +206,9 @@
         <div class="demo-block">
           <h3>可关闭标签</h3>
           <div class="demo-row">
-            <DSTag variant="primary" closeable @close="handleClose">可关闭</DSTag>
+            <DSTag variant="primary" closeable @close="handleClose"
+              >可关闭</DSTag
+            >
             <DSTag variant="success" closeable @close="handleClose">成功</DSTag>
             <DSTag variant="danger" closeable @close="handleClose">删除</DSTag>
           </div>
@@ -244,17 +230,17 @@
               title="项目文档.pdf"
               hoverable
               shadow
-              style="max-width: 400px;"
+              style="max-width: 400px"
             >
               <template #extra>
                 <DSTag variant="success">已同步</DSTag>
               </template>
-              <div style="margin-bottom: 16px;">
+              <div style="margin-bottom: 16px">
                 <p><strong>文件大小:</strong> 3.2 MB</p>
                 <p><strong>修改时间:</strong> 2026-03-11 14:30</p>
                 <p><strong>文件类型:</strong> PDF文档</p>
               </div>
-              <div style="margin-bottom: 16px;">
+              <div style="margin-bottom: 16px">
                 <DSInput
                   v-model="fileName"
                   label="重命名"
@@ -275,34 +261,34 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { DSButton, DSInput, DSCard, DSTag } from './index';
+import { ref } from "vue";
+import { DSButton, DSInput, DSCard, DSTag } from "./index";
 
-const inputValue = ref('');
-const fileName = ref('项目文档.pdf');
+const inputValue = ref("");
+const fileName = ref("项目文档.pdf");
 
 const handleClick = () => {
-  console.log('按钮被点击');
+  console.log("按钮被点击");
 };
 
 const handleClear = () => {
-  console.log('输入框已清除');
-  inputValue.value = '';
+  console.log("输入框已清除");
+  inputValue.value = "";
 };
 
 const handleChange = (value: string) => {
-  console.log('输入值变化:', value);
+  console.log("输入值变化:", value);
 };
 
 const handleClose = () => {
-  console.log('标签已关闭');
+  console.log("标签已关闭");
 };
 </script>
 
 <style scoped>
 .component-usage-demo {
   min-height: 100vh;
-  background-color: #F5F3FF;
+  background-color: #f5f3ff;
   padding: 24px;
   box-sizing: border-box;
 }
@@ -315,18 +301,18 @@ const handleClose = () => {
 .page-title {
   font-size: 48px;
   font-weight: 700;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0 0 16px 0;
 }
 
 .page-subtitle {
   font-size: 18px;
-  color: #64748B;
+  color: #64748b;
   margin: 0 0 48px 0;
 }
 
 .demo-section {
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 12px;
   padding: 32px;
   margin-bottom: 32px;
@@ -336,7 +322,7 @@ const handleClose = () => {
 .section-title {
   font-size: 36px;
   font-weight: 600;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0 0 24px 0;
 }
 
@@ -347,7 +333,7 @@ const handleClose = () => {
 .demo-block h3 {
   font-size: 18px;
   font-weight: 500;
-  color: #64748B;
+  color: #64748b;
   margin: 0 0 16px 0;
 }
 
@@ -359,7 +345,7 @@ const handleClose = () => {
 }
 
 .code-block {
-  background-color: #1E1B4B;
+  background-color: #1e1b4b;
   border-radius: 8px;
   padding: 16px;
   overflow-x: auto;
@@ -370,9 +356,9 @@ const handleClose = () => {
 }
 
 .code-block code {
-  font-family: 'Fira Code', 'Courier New', monospace;
+  font-family: "Fira Code", "Courier New", monospace;
   font-size: 14px;
-  color: #F5F3FF;
+  color: #f5f3ff;
   line-height: 1.6;
 }
 </style>

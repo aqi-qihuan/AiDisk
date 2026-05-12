@@ -3,12 +3,10 @@
     <template v-if="isCollapse">
       <!-- 圆形进度条 -->
       <div class="circle-container">
-        <el-tooltip
-          placement="right"
-        >
+        <el-tooltip placement="right">
           <template #content>
-            {{ t('user.used') }}: {{ formatStorage(usedStorage) }}<br />
-            {{ t('user.totalCapacity') }}: {{ formatStorage(totalStorage) }}
+            {{ t("user.used") }}: {{ formatStorage(usedStorage) }}<br />
+            {{ t("user.totalCapacity") }}: {{ formatStorage(totalStorage) }}
           </template>
           <div class="progress-wrapper">
             <el-progress
@@ -29,7 +27,7 @@
     </template>
     <template v-else>
       <!-- 条形进度条 -->
-      <div class="storage-title">{{ t('user.storage') }}</div>
+      <div class="storage-title">{{ t("user.storage") }}</div>
       <el-progress
         :percentage="usagePercentage"
         :status="progressStatus"
@@ -38,12 +36,12 @@
       />
       <div class="storage-info">
         <div class="used-info">
-          <span class="label">{{ t('user.used') }}</span>
+          <span class="label">{{ t("user.used") }}</span>
           <span class="value">{{ formatStorage(usedStorage) }}</span>
         </div>
         <div class="total-info">
           <span class="value">{{ formatStorage(totalStorage) }}</span>
-          <span class="label">{{ t('user.totalCapacity') }}</span>
+          <span class="label">{{ t("user.totalCapacity") }}</span>
         </div>
       </div>
     </template>
@@ -52,7 +50,7 @@
 
 <script setup lang="ts">
 import { onMounted, computed } from "vue";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 import { useStorageStore } from "@/store/storage";
 
 const { t } = useI18n();

@@ -4,43 +4,72 @@
     <div v-if="isAllFiles && !isSelectionMode" class="normal-actions">
       <DSButton variant="golden" size="medium" @click="openCreateFolderDialog">
         <template #icon>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M12 5v14M5 12h14"/>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path d="M12 5v14M5 12h14" />
           </svg>
         </template>
-        {{ t('file.newFolder') }}
+        {{ t("file.newFolder") }}
       </DSButton>
       <DSButton variant="secondary" size="medium" @click="openUploadDialog">
         <template #icon>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"
+            />
           </svg>
         </template>
-        {{ t('file.uploadFile') }}
+        {{ t("file.uploadFile") }}
       </DSButton>
     </div>
 
     <!-- 批量操作按钮 -->
-    <div v-if="isSelectionMode && selectedFiles.length > 0" class="batch-actions">
+    <div
+      v-if="isSelectionMode && selectedFiles.length > 0"
+      class="batch-actions"
+    >
       <DSButton variant="primary" size="small" @click="handleBatchDownload">
-        <template #icon><el-icon><Download /></el-icon></template>
-        {{ t('common.download') }}
+        <template #icon
+          ><el-icon><Download /></el-icon
+        ></template>
+        {{ t("common.download") }}
       </DSButton>
       <DSButton variant="danger" size="small" @click="handleBatchDelete">
-        <template #icon><el-icon><Delete /></el-icon></template>
-        {{ t('common.delete') }}
+        <template #icon
+          ><el-icon><Delete /></el-icon
+        ></template>
+        {{ t("common.delete") }}
       </DSButton>
       <DSButton variant="secondary" size="small" @click="handleMove">
-        <template #icon><el-icon><Position /></el-icon></template>
-        {{ t('file.move') }}
+        <template #icon
+          ><el-icon><Position /></el-icon
+        ></template>
+        {{ t("file.move") }}
       </DSButton>
       <DSButton variant="secondary" size="small" @click="handleCopy">
-        <template #icon><el-icon><DocumentCopy /></el-icon></template>
-        {{ t('file.copy') }}
+        <template #icon
+          ><el-icon><DocumentCopy /></el-icon
+        ></template>
+        {{ t("file.copy") }}
       </DSButton>
       <DSButton variant="cta" size="small" @click="handleShare">
-        <template #icon><el-icon><Share /></el-icon></template>
-        {{ t('file.share') }}
+        <template #icon
+          ><el-icon><Share /></el-icon
+        ></template>
+        {{ t("file.share") }}
       </DSButton>
     </div>
 
@@ -74,11 +103,7 @@
           :content="t('file.selectionMode')"
           placement="top"
         >
-          <DSButton
-            variant="ghost"
-            size="small"
-            @click="toggleSelectionMode"
-          >
+          <DSButton variant="ghost" size="small" @click="toggleSelectionMode">
             <el-icon><Finished /></el-icon>
           </DSButton>
         </el-tooltip>
@@ -126,7 +151,7 @@ import {
 } from "@element-plus/icons-vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { computed, ref } from "vue";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 import { getFileTree } from "@/api/file";
 import type { FileDTO } from "@/api/types";
 import { DSButton, DSInput } from "@/components/design-system";
@@ -168,7 +193,7 @@ const searchQuery = ref("");
  * 判断是否显示所有文件
  */
 const isAllFiles = computed(
-  () => props.fileType === undefined || props.fileType === null
+  () => props.fileType === undefined || props.fileType === null,
 );
 
 /**
@@ -204,7 +229,7 @@ const handleBatchDelete = (): void => {
       confirmButtonText: "确定",
       cancelButtonText: "取消",
       type: "warning",
-    }
+    },
   )
     .then(() => {
       emit("batchDelete", props.selectedFiles);

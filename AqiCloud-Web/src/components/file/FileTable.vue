@@ -15,21 +15,34 @@
             @click="handleFileClick(scope.row)"
             @contextmenu.prevent="handleContextMenu($event, scope.row)"
           >
-            <DSFileIcon 
+            <DSFileIcon
               :fileSuffix="scope.row.fileSuffix"
-              :isFolder="scope.row.fileType === 'folder' || scope.row.fileType === 'DIR'"
+              :isFolder="
+                scope.row.fileType === 'folder' || scope.row.fileType === 'DIR'
+              "
               size="medium"
             />
             <span class="file-name-text">{{ scope.row.fileName }}</span>
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="fileType" :label="t('file.type')" width="100" class-name="type-col">
+      <el-table-column
+        prop="fileType"
+        :label="t('file.type')"
+        width="100"
+        class-name="type-col"
+      >
         <template #default="scope">
           {{ getFileTypeName(scope.row.fileType) }}
         </template>
       </el-table-column>
-      <el-table-column prop="fileSize" :label="t('file.size')" width="100" align="right" class-name="size-col">
+      <el-table-column
+        prop="fileSize"
+        :label="t('file.size')"
+        width="100"
+        align="right"
+        class-name="size-col"
+      >
         <template #default="scope">
           {{ formatFileSize(scope.row.fileSize) }}
         </template>
@@ -58,9 +71,13 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 import { DSFileIcon } from "@/components/design-system";
-import { formatFileSize, formatDateTime, getFileTypeName } from "@/utils/format";
+import {
+  formatFileSize,
+  formatDateTime,
+  getFileTypeName,
+} from "@/utils/format";
 import ContextMenu from "./ContextMenu.vue";
 
 const { t } = useI18n();
@@ -179,7 +196,7 @@ const tableRowClassName = (): string => {
 
 .file-name:hover .file-name-text {
   text-decoration: underline;
-  color: var(--color-primary, #DB2777);
+  color: var(--color-primary, #db2777);
 }
 
 .file-icon {
@@ -191,7 +208,7 @@ const tableRowClassName = (): string => {
 
 .file-name-text {
   font-size: 18px;
-  color: var(--color-text-primary, #F8FAFC);
+  color: var(--color-text-primary, #f8fafc);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -219,7 +236,7 @@ const tableRowClassName = (): string => {
 }
 
 ::v-deep(.el-checkbox.is-checked .el-checkbox__inner) {
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
   border-color: transparent;
   box-shadow: 0 2px 8px rgba(219, 39, 119, 0.3);
 }

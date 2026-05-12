@@ -1,7 +1,7 @@
 /**
  * Type declarations for spark-md5
  */
-declare module 'spark-md5' {
+declare module "spark-md5" {
   export default class SparkMD5 {
     /**
      * Create a SparkMD5 instance

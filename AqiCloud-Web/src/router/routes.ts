@@ -12,16 +12,15 @@ import NoAuthView from "@/views/error/NoAuthView.vue";
 import NotFoundView from "@/views/error/NotFoundView.vue";
 import ServerErrorView from "@/views/error/ServerErrorView.vue";
 import { RouteRecordRaw } from "vue-router";
-import SearchView from '@/views/file/Search.vue';
-import PictureView from '@/views/file/Picture.vue';
-import ChatView from '@/views/file/Chat.vue';
-import DocumentView from '@/views/file/Document.vue';
-import AnswerView from '@/views/file/Answer.vue';
-import DesignSystemDemo from '@/components/design-system/DesignSystemDemo.vue';
-import ComponentUsage from '@/components/design-system/ComponentUsage.vue';
-import TermsView from '@/views/TermsView.vue';
-import PrivacyView from '@/views/PrivacyView.vue';
-
+import SearchView from "@/views/file/Search.vue";
+import PictureView from "@/views/file/Picture.vue";
+import ChatView from "@/views/file/Chat.vue";
+import DocumentView from "@/views/file/Document.vue";
+import AnswerView from "@/views/file/Answer.vue";
+import DesignSystemDemo from "@/components/design-system/DesignSystemDemo.vue";
+import ComponentUsage from "@/components/design-system/ComponentUsage.vue";
+import TermsView from "@/views/TermsView.vue";
+import PrivacyView from "@/views/PrivacyView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -82,7 +81,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: AdminUserView,
     meta: {
       access: ACCESS_ENUM.ADMIN,
-      isAuth: true
+      isAuth: true,
     },
   },
   {
@@ -91,7 +90,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: AboutView,
     meta: {
       access: ACCESS_ENUM.NOT_LOGIN,
-      isAuth: true
+      isAuth: true,
     },
   },
   {
@@ -118,7 +117,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: MyShareView,
     meta: {
       hideInMenu: true,
-      isAuth: true
+      isAuth: true,
     },
   },
   {
@@ -127,7 +126,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: RecycleView,
     meta: {
       hideInMenu: true,
-      isAuth: true
+      isAuth: true,
     },
   },
   {
@@ -136,7 +135,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: MyShareView,
     meta: {
       hideInMenu: true,
-      isAuth: true
+      isAuth: true,
     },
   },
 
@@ -146,7 +145,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: AnswerView,
     meta: {
       hideInMenu: true,
-      isAuth: true
+      isAuth: true,
     },
   },
 
@@ -156,7 +155,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: ChatView,
     meta: {
       hideInMenu: true,
-      isAuth: true
+      isAuth: true,
     },
   },
   {
@@ -165,7 +164,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: DocumentView,
     meta: {
       hideInMenu: true,
-      isAuth: true
+      isAuth: true,
     },
   },
   {
@@ -174,7 +173,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: PictureView,
     meta: {
       hideInMenu: true,
-      isAuth: true
+      isAuth: true,
     },
   },
   {
@@ -184,7 +183,7 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       hideInMenu: true,
       access: ACCESS_ENUM.NOT_LOGIN,
-      isAuth: true
+      isAuth: true,
     },
   },
   {

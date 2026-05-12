@@ -1,6 +1,6 @@
 <template>
   <div class="breadcrumb-wrapper">
-    <div class="title">{{ t('file.currentPath') }}</div>
+    <div class="title">{{ t("file.currentPath") }}</div>
     <div class="breadcrumb-box" :class="{ 'able-input': isAllFiles }">
       <el-breadcrumb separator=">">
         <el-breadcrumb-item v-if="!isAllFiles">
@@ -8,7 +8,7 @@
         </el-breadcrumb-item>
         <template v-else>
           <el-breadcrumb-item @click="handleRootClick">
-            {{ t('file.rootDirectory') }}
+            {{ t("file.rootDirectory") }}
           </el-breadcrumb-item>
           <el-breadcrumb-item
             v-for="(item, index) in pathParts"
@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from "vue";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 import { useFileStores } from "@/store/filePath";
 import { useLoginUserStore } from "@/store/user";
 
@@ -117,7 +117,7 @@ watch(
   () => props.fileType,
   () => {
     // 可以在这里添加类型切换时的逻辑
-  }
+  },
 );
 
 /**
@@ -128,7 +128,7 @@ watch(
   (newPath) => {
     inputFilePath.value = newPath;
     localStorage.setItem("Path", inputFilePath.value);
-  }
+  },
 );
 </script>
 

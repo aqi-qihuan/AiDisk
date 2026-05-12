@@ -6,8 +6,18 @@
         <div class="hero-text">
           <!-- Badge -->
           <div class="badge">
-            <svg class="badge-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M9.663 17h4.674M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            <svg
+              class="badge-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M9.663 17h4.674M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              />
             </svg>
             <span>AI 驱动</span>
           </div>
@@ -19,9 +29,7 @@
           </h1>
 
           <!-- Subtitle -->
-          <p class="subtitle">
-            让 AI 帮你管理文件，更智能、更高效
-          </p>
+          <p class="subtitle">让 AI 帮你管理文件，更智能、更高效</p>
 
           <!-- Buttons -->
           <div class="hero-buttons">
@@ -31,8 +39,16 @@
               @click="goToFiles"
               class="cta-button"
             >
-              <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              <svg
+                class="btn-icon"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
               立即体验
             </DSButton>
@@ -42,9 +58,17 @@
               @click="scrollToFeatures"
               class="learn-more-button"
             >
-              <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 16v-4M12 8h.01"/>
+              <svg
+                class="btn-icon"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4M12 8h.01" />
               </svg>
               了解更多
             </DSButton>
@@ -63,9 +87,22 @@
               <span class="visual-title">文件管理系统</span>
             </div>
             <div class="visual-body">
-              <div class="file-item" v-for="(file, index) in demoFiles" :key="index">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
-                  <path d="M7 21h10a2 2 0 0 0 2-2V9.414a1 1 0 0 0-.293-.707l-5.414-5.414A1 1 0 0 0 12.586 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z"/>
+              <div
+                class="file-item"
+                v-for="(file, index) in demoFiles"
+                :key="index"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#6B7280"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M7 21h10a2 2 0 0 0 2-2V9.414a1 1 0 0 0-.293-.707l-5.414-5.414A1 1 0 0 0 12.586 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z"
+                  />
                 </svg>
                 <span class="file-name">{{ file.name }}</span>
                 <span class="file-size">{{ file.size }}</span>
@@ -80,8 +117,18 @@
     <div class="features-section" ref="featuresSection">
       <div class="section-header">
         <DSTag variant="info" size="sm">
-          <svg class="tag-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9.663 17h4.674M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          <svg
+            class="tag-icon"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M9.663 17h4.674M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+            />
           </svg>
           AI 赋能
         </DSTag>
@@ -92,10 +139,22 @@
       </div>
 
       <div class="feature-grid">
-        <div class="feature-card" v-for="(feature, index) in features" :key="index">
+        <div
+          class="feature-card"
+          v-for="(feature, index) in features"
+          :key="index"
+        >
           <div class="feature-icon-wrapper">
-            <svg class="feature-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" :stroke="feature.color" stroke-width="2">
-              <path :d="feature.icon"/>
+            <svg
+              class="feature-icon"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              :stroke="feature.color"
+              stroke-width="2"
+            >
+              <path :d="feature.icon" />
             </svg>
           </div>
           <h3 class="feature-title">{{ feature.title }}</h3>
@@ -109,8 +168,15 @@
       <div class="stats-container">
         <div class="stat-card" v-for="(stat, index) in stats" :key="index">
           <div class="stat-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path :d="stat.icon"/>
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path :d="stat.icon" />
             </svg>
           </div>
           <div class="stat-content">
@@ -128,9 +194,7 @@
     <div class="cta-section">
       <div class="cta-content">
         <h2 class="cta-title">准备好开始了吗？</h2>
-        <p class="cta-description">
-          立即注册，免费体验所有 AI 功能
-        </p>
+        <p class="cta-description">立即注册，免费体验所有 AI 功能</p>
         <div class="cta-buttons">
           <DSButton
             variant="primary"
@@ -138,8 +202,18 @@
             @click="goToRegister"
             class="cta-primary"
           >
-            <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-7.372a12.004 12.004 0 0 1 7.072 0m0 0a12.004 12.004 0 0 1 7.072 0m-7.072 0A12 12 0 1 0 5.928 7.628m12.144 0a12 12 0 0 1-7.072 0"/>
+            <svg
+              class="btn-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-7.372a12.004 12.004 0 0 1 7.072 0m0 0a12.004 12.004 0 0 1 7.072 0m-7.072 0A12 12 0 1 0 5.928 7.628m12.144 0a12 12 0 0 1-7.072 0"
+              />
             </svg>
             免费注册
           </DSButton>
@@ -149,8 +223,18 @@
             @click="goToLogin"
             class="cta-secondary"
           >
-            <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+            <svg
+              class="btn-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+              />
             </svg>
             登录账号
           </DSButton>
@@ -164,8 +248,18 @@
         <div class="footer-top">
           <div class="footer-brand">
             <div class="footer-logo">
-              <svg class="logo-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+              <svg
+                class="logo-icon"
+                width="36"
+                height="36"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                />
               </svg>
               <span class="logo-text">AI Pan</span>
             </div>
@@ -175,7 +269,9 @@
           <div class="footer-nav">
             <router-link to="/about" class="footer-link">关于我们</router-link>
             <router-link to="/terms" class="footer-link">使用条款</router-link>
-            <router-link to="/privacy" class="footer-link">隐私政策</router-link>
+            <router-link to="/privacy" class="footer-link"
+              >隐私政策</router-link
+            >
             <router-link to="/about" class="footer-link">联系我们</router-link>
           </div>
         </div>
@@ -188,11 +284,21 @@
           </div>
 
           <div class="footer-icp">
-            <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="icp-link">
+            <a
+              href="https://beian.miit.gov.cn/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="icp-link"
+            >
               京ICP备XXXXXXXX号-1
             </a>
             <span class="icp-divider">|</span>
-            <a href="http://www.beian.gov.cn/" target="_blank" rel="noopener noreferrer" class="icp-link">
+            <a
+              href="http://www.beian.gov.cn/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="icp-link"
+            >
               京公网安备 XXXXXXXXXXXX号
             </a>
           </div>
@@ -203,106 +309,111 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
-import DSButton from '@/components/design-system/DSButton.vue';
-import DSTag from '@/components/design-system/DSTag.vue';
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
+import DSButton from "@/components/design-system/DSButton.vue";
+import DSTag from "@/components/design-system/DSTag.vue";
 
 const router = useRouter();
 const { t } = useI18n();
 
 // Demo data
 const demoFiles = ref([
-  { name: '项目方案.pdf', size: '2.5 MB' },
-  { name: '设计素材', size: '--' },
-  { name: '会议纪要.docx', size: '856 KB' },
-  { name: '数据分析.xlsx', size: '1.2 MB' }
+  { name: "项目方案.pdf", size: "2.5 MB" },
+  { name: "设计素材", size: "--" },
+  { name: "会议纪要.docx", size: "856 KB" },
+  { name: "数据分析.xlsx", size: "1.2 MB" },
 ]);
 
 const features = ref([
   {
-    title: '智能问答',
-    description: '用自然语言查询文件，AI 秒速响应',
-    icon: 'M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z',
-    color: '#3B82F6'
+    title: "智能问答",
+    description: "用自然语言查询文件，AI 秒速响应",
+    icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z",
+    color: "#3B82F6",
   },
   {
-    title: '文档助手',
-    description: 'AI 自动整理和分析文档内容',
-    icon: 'M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z',
-    color: '#10B981'
+    title: "文档助手",
+    description: "AI 自动整理和分析文档内容",
+    icon: "M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z",
+    color: "#10B981",
   },
   {
-    title: 'AI 聊天',
-    description: '与 AI 对话，快速获取文件信息',
-    icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
-    color: '#F59E0B'
+    title: "AI 聊天",
+    description: "与 AI 对话，快速获取文件信息",
+    icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z",
+    color: "#F59E0B",
   },
   {
-    title: '智能搜索',
-    description: '语义搜索，快速定位目标文件',
-    icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
-    color: '#EF4444'
-  }
+    title: "智能搜索",
+    description: "语义搜索，快速定位目标文件",
+    icon: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z",
+    color: "#EF4444",
+  },
 ]);
 
 const stats = ref([
   {
-    label: '活跃用户',
-    value: '100',
-    unit: '万+',
-    icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+    label: "活跃用户",
+    value: "100",
+    unit: "万+",
+    icon: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z",
   },
   {
-    label: '可用性',
-    value: '99.9',
-    unit: '%',
-    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01 8.618 3.04A12.02 12.02 0 013 13.69a12.088 12.088 0 01 1.254 4.06c.723 1.308 1.752 2.355 3.003 3.084'
+    label: "可用性",
+    value: "99.9",
+    unit: "%",
+    icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01 8.618 3.04A12.02 12.02 0 013 13.69a12.088 12.088 0 01 1.254 4.06c.723 1.308 1.752 2.355 3.003 3.084",
   },
   {
-    label: '存储容量',
-    value: '50',
-    unit: 'PB+',
-    icon: 'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z'
+    label: "存储容量",
+    value: "50",
+    unit: "PB+",
+    icon: "M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z",
   },
   {
-    label: '客户支持',
-    value: '24/7',
-    unit: '',
-    icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
-  }
+    label: "客户支持",
+    value: "24/7",
+    unit: "",
+    icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+  },
 ]);
 
 // Navigation methods
 const goToFiles = () => {
-  router.push('/file');
+  router.push("/file");
 };
 
 const goToRegister = () => {
-  router.push('/user/register');
+  router.push("/user/register");
 };
 
 const goToLogin = () => {
-  router.push('/user/login');
+  router.push("/user/login");
 };
 
 const scrollToFeatures = () => {
-  const featuresSection = document.querySelector('.features-section');
+  const featuresSection = document.querySelector(".features-section");
   if (featuresSection) {
-    featuresSection.scrollIntoView({ behavior: 'smooth' });
+    featuresSection.scrollIntoView({ behavior: "smooth" });
   }
 };
 </script>
 
 <style scoped>
 /* Import Inter font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 .home-view {
   min-height: 100vh;
-  background: var(--color-gray-50, #F9FAFB);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--color-gray-50, #f9fafb);
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
 /* ===== Hero Section ===== */
@@ -333,8 +444,8 @@ const scrollToFeatures = () => {
   align-items: center;
   gap: 8px;
   padding: 6px 12px;
-  background: var(--color-primary-light, #EFF6FF);
-  color: var(--color-primary, #3B82F6);
+  background: var(--color-primary-light, #eff6ff);
+  color: var(--color-primary, #3b82f6);
   border-radius: 9999px;
   font-size: 13px;
   font-weight: 500;
@@ -343,11 +454,11 @@ const scrollToFeatures = () => {
 }
 
 .badge:hover {
-  background: #DBEAFE;
+  background: #dbeafe;
 }
 
 .badge-icon {
-  color: var(--color-primary, #3B82F6);
+  color: var(--color-primary, #3b82f6);
 }
 
 .title {
@@ -361,12 +472,12 @@ const scrollToFeatures = () => {
 
 .title-highlight {
   display: block;
-  color: var(--color-primary, #3B82F6);
+  color: var(--color-primary, #3b82f6);
 }
 
 .subtitle {
   font-size: 18px;
-  color: var(--color-gray-600, #4B5563);
+  color: var(--color-gray-600, #4b5563);
   line-height: 1.6;
   margin-bottom: 40px;
   max-width: 500px;
@@ -400,14 +511,14 @@ const scrollToFeatures = () => {
   width: 100%;
   max-width: 480px;
   background: white;
-  border: 1px solid var(--color-gray-200, #E5E7EB);
+  border: 1px solid var(--color-gray-200, #e5e7eb);
   border-radius: 8px;
   overflow: hidden;
   transition: border-color 0.15s ease;
 }
 
 .visual-card:hover {
-  border-color: var(--color-gray-300, #D1D5DB);
+  border-color: var(--color-gray-300, #d1d5db);
 }
 
 .visual-header {
@@ -415,8 +526,8 @@ const scrollToFeatures = () => {
   align-items: center;
   gap: 12px;
   padding: 16px;
-  background: var(--color-gray-50, #F9FAFB);
-  border-bottom: 1px solid var(--color-gray-200, #E5E7EB);
+  background: var(--color-gray-50, #f9fafb);
+  border-bottom: 1px solid var(--color-gray-200, #e5e7eb);
 }
 
 .visual-dots {
@@ -430,13 +541,19 @@ const scrollToFeatures = () => {
   border-radius: 50%;
 }
 
-.dot-red { background: #EF4444; }
-.dot-yellow { background: #F59E0B; }
-.dot-green { background: #10B981; }
+.dot-red {
+  background: #ef4444;
+}
+.dot-yellow {
+  background: #f59e0b;
+}
+.dot-green {
+  background: #10b981;
+}
 
 .visual-title {
   font-size: 13px;
-  color: var(--color-gray-600, #4B5563);
+  color: var(--color-gray-600, #4b5563);
   font-weight: 500;
 }
 
@@ -454,7 +571,7 @@ const scrollToFeatures = () => {
 }
 
 .file-item:hover {
-  background: var(--color-gray-50, #F9FAFB);
+  background: var(--color-gray-50, #f9fafb);
 }
 
 .file-name {
@@ -465,7 +582,7 @@ const scrollToFeatures = () => {
 
 .file-size {
   font-size: 13px;
-  color: var(--color-gray-500, #6B7280);
+  color: var(--color-gray-500, #6b7280);
 }
 
 /* ===== Features Section ===== */
@@ -489,7 +606,7 @@ const scrollToFeatures = () => {
 
 .section-description {
   font-size: 16px;
-  color: var(--color-gray-600, #4B5563);
+  color: var(--color-gray-600, #4b5563);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -506,13 +623,13 @@ const scrollToFeatures = () => {
 .feature-card {
   padding: 32px 24px;
   background: white;
-  border: 1px solid var(--color-gray-200, #E5E7EB);
+  border: 1px solid var(--color-gray-200, #e5e7eb);
   border-radius: 8px;
   transition: border-color 0.15s ease;
 }
 
 .feature-card:hover {
-  border-color: var(--color-gray-300, #D1D5DB);
+  border-color: var(--color-gray-300, #d1d5db);
 }
 
 .feature-icon-wrapper {
@@ -521,14 +638,14 @@ const scrollToFeatures = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-gray-50, #F9FAFB);
+  background: var(--color-gray-50, #f9fafb);
   border-radius: 8px;
   margin-bottom: 16px;
   transition: background-color 0.15s ease;
 }
 
 .feature-card:hover .feature-icon-wrapper {
-  background: var(--color-gray-100, #F3F4F6);
+  background: var(--color-gray-100, #f3f4f6);
 }
 
 .feature-icon {
@@ -548,7 +665,7 @@ const scrollToFeatures = () => {
 
 .feature-description {
   font-size: 14px;
-  color: var(--color-gray-600, #4B5563);
+  color: var(--color-gray-600, #4b5563);
   line-height: 1.5;
   margin: 0;
 }
@@ -556,7 +673,7 @@ const scrollToFeatures = () => {
 /* ===== Stats Section ===== */
 .stats-section {
   padding: 80px 48px;
-  background: var(--color-primary, #3B82F6);
+  background: var(--color-primary, #3b82f6);
 }
 
 .stats-container {
@@ -642,7 +759,7 @@ const scrollToFeatures = () => {
 
 .cta-description {
   font-size: 16px;
-  color: var(--color-gray-600, #4B5563);
+  color: var(--color-gray-600, #4b5563);
   margin-bottom: 40px;
   line-height: 1.6;
 }
@@ -666,31 +783,31 @@ const scrollToFeatures = () => {
 }
 
 .cta-primary {
-  background: var(--color-primary, #3B82F6);
+  background: var(--color-primary, #3b82f6);
   color: white;
   border: none;
 }
 
 .cta-primary:hover {
-  background: var(--color-primary-hover, #2563EB);
+  background: var(--color-primary-hover, #2563eb);
 }
 
 .cta-secondary {
   background: white;
   color: var(--color-gray-700, #374151);
-  border: 1px solid var(--color-gray-200, #E5E7EB);
+  border: 1px solid var(--color-gray-200, #e5e7eb);
 }
 
 .cta-secondary:hover {
-  background: var(--color-gray-50, #F9FAFB);
-  border-color: var(--color-gray-300, #D1D5DB);
+  background: var(--color-gray-50, #f9fafb);
+  border-color: var(--color-gray-300, #d1d5db);
 }
 
 /* ===== Footer Section ===== */
 .footer-section {
   padding: 60px 48px 30px;
-  background: var(--color-gray-50, #F9FAFB);
-  border-top: 1px solid var(--color-gray-200, #E5E7EB);
+  background: var(--color-gray-50, #f9fafb);
+  border-top: 1px solid var(--color-gray-200, #e5e7eb);
 }
 
 .footer-content {
@@ -722,7 +839,7 @@ const scrollToFeatures = () => {
 }
 
 .logo-icon {
-  color: var(--color-primary, #3B82F6);
+  color: var(--color-primary, #3b82f6);
   transition: transform 0.15s ease;
 }
 
@@ -738,7 +855,7 @@ const scrollToFeatures = () => {
 
 .footer-slogan {
   font-size: 14px;
-  color: var(--color-gray-500, #6B7280);
+  color: var(--color-gray-500, #6b7280);
   padding-left: 48px;
 }
 
@@ -750,7 +867,7 @@ const scrollToFeatures = () => {
 
 .footer-link {
   font-size: 14px;
-  color: var(--color-gray-600, #4B5563);
+  color: var(--color-gray-600, #4b5563);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.15s ease;
@@ -758,13 +875,13 @@ const scrollToFeatures = () => {
 }
 
 .footer-link:hover {
-  color: var(--color-primary, #3B82F6);
+  color: var(--color-primary, #3b82f6);
 }
 
 .footer-divider {
   width: 100%;
   height: 1px;
-  background: var(--color-gray-200, #E5E7EB);
+  background: var(--color-gray-200, #e5e7eb);
 }
 
 .footer-bottom {
@@ -777,7 +894,7 @@ const scrollToFeatures = () => {
 
 .footer-copyright {
   font-size: 13px;
-  color: var(--color-gray-500, #6B7280);
+  color: var(--color-gray-500, #6b7280);
   font-weight: 500;
 }
 
@@ -789,17 +906,17 @@ const scrollToFeatures = () => {
 
 .icp-link {
   font-size: 13px;
-  color: var(--color-gray-500, #6B7280);
+  color: var(--color-gray-500, #6b7280);
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
 .icp-link:hover {
-  color: var(--color-primary, #3B82F6);
+  color: var(--color-primary, #3b82f6);
 }
 
 .icp-divider {
-  color: var(--color-gray-300, #D1D5DB);
+  color: var(--color-gray-300, #d1d5db);
 }
 
 /* ===== Animations ===== */

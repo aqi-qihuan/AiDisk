@@ -71,7 +71,7 @@ const handleNodeClick = (data: TreeNodeDTO, node: any): void => {
  */
 const loadNode = async (
   node: TreeNode,
-  resolve: (data: TreeNodeDTO[]) => void
+  resolve: (data: TreeNodeDTO[]) => void,
 ): Promise<void> => {
   if (node.level === 0) {
     try {

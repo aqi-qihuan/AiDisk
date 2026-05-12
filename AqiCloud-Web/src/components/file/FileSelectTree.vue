@@ -46,7 +46,7 @@ const handleNodeClick = (data: API.TreeNodeDTO, node: any) => {
 
 const loadNode = async (
   node: any,
-  resolve: (data: API.TreeNodeDTO[]) => void
+  resolve: (data: API.TreeNodeDTO[]) => void,
 ) => {
   if (node.level === 0) {
     try {
@@ -98,4 +98,4 @@ onMounted(() => {
 :deep(.el-tree-node.is-current > .el-tree-node__content) {
   background-color: #e6f7ff;
 }
-</style> 
+</style>

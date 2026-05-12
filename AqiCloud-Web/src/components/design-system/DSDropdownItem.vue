@@ -1,5 +1,9 @@
 <template>
-  <div class="ds-dropdown-item" :class="{ 'is-divided': divided }" @click="handleClick">
+  <div
+    class="ds-dropdown-item"
+    :class="{ 'is-divided': divided }"
+    @click="handleClick"
+  >
     <span v-if="$slots.icon" class="dropdown-item-icon">
       <slot name="icon" />
     </span>

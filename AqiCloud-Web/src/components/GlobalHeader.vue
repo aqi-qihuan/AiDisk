@@ -4,7 +4,7 @@
     <div class="header-left">
       <div class="logo-section">
         <img src="@/assets/logo.svg" alt="小七云盘 Logo" class="logo" />
-        <h1 class="site-title">{{ t('app.name') }}</h1>
+        <h1 class="site-title">{{ t("app.name") }}</h1>
       </div>
 
       <!-- Navigation Menu - Desktop -->
@@ -22,7 +22,14 @@
 
       <!-- Mobile Menu Button -->
       <button class="mobile-menu-btn" @click="mobileMenuOpen = !mobileMenuOpen">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <line x1="3" y1="6" x2="21" y2="6" />
           <line x1="3" y1="12" x2="21" y2="12" />
           <line x1="3" y1="18" x2="21" y2="18" />
@@ -66,13 +73,13 @@
               <template #icon>
                 <el-icon><User /></el-icon>
               </template>
-              {{ t('user.profile') }}
+              {{ t("user.profile") }}
             </DSDropdownItem>
             <DSDropdownItem @click="handleLogout" divided>
               <template #icon>
                 <el-icon><SwitchButton /></el-icon>
               </template>
-              {{ t('auth.logout') }}
+              {{ t("auth.logout") }}
             </DSDropdownItem>
           </template>
         </DSDropdown>
@@ -85,7 +92,7 @@
           size="md"
           @click="doMenuClick('/user/login')"
         >
-          {{ t('auth.login') }}
+          {{ t("auth.login") }}
         </DSButton>
       </template>
     </div>
@@ -108,7 +115,7 @@
         <div class="avatar-wrapper-large">
           <ImageUpload v-model="userSettingsForm.avatarUrl" />
         </div>
-        <p class="avatar-hint">{{ t('user.clickToChangeAvatar') }}</p>
+        <p class="avatar-hint">{{ t("user.clickToChangeAvatar") }}</p>
       </div>
 
       <!-- 表单区域 -->
@@ -130,7 +137,7 @@
 <script lang="ts" setup>
 /**
  * GlobalHeader - 全局顶部导航组件
- * 
+ *
  * 特性：
  * - 使用设计系统组件和样式
  * - 响应式导航菜单
@@ -142,13 +149,22 @@ import checkAccess from "@/access/checkAccess";
 import { updateUserInfo } from "@/api/user";
 import ImageUpload from "@/components/common/ImageUpload.vue";
 import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
-import { DSButton, DSAvatar, DSDropdown, DSDropdownItem, DSDialog, DSForm, DSFormItem, DSInput } from "@/components/design-system";
+import {
+  DSButton,
+  DSAvatar,
+  DSDropdown,
+  DSDropdownItem,
+  DSDialog,
+  DSForm,
+  DSFormItem,
+  DSInput,
+} from "@/components/design-system";
 import { useLoginUserStore } from "@/store/user";
 import { ElMessage } from "element-plus";
 import { computed, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { routes } from "../router/routes";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
 const router = useRouter();
 const { t } = useI18n();
@@ -161,17 +177,17 @@ const mobileMenuOpen = ref(false);
  * 路由名称翻译映射
  */
 const routeNameMap: Record<string, string> = {
-  '主页': 'nav.home',
-  '文件': 'nav.files',
-  '我的分享': 'nav.share',
-  '回收站': 'nav.recycle',
-  'AI网盘智答': 'ai.answer',
-  'AI聊天智能助理-可联网': 'ai.chat',
-  'AI在线文档助手': 'ai.document',
-  '图片管理': 'nav.pictures',
-  '关于': 'nav.about',
-  '搜索': 'nav.search',
-  '管理': 'nav.admin'
+  主页: "nav.home",
+  文件: "nav.files",
+  我的分享: "nav.share",
+  回收站: "nav.recycle",
+  AI网盘智答: "ai.answer",
+  "AI聊天智能助理-可联网": "ai.chat",
+  AI在线文档助手: "ai.document",
+  图片管理: "nav.pictures",
+  关于: "nav.about",
+  搜索: "nav.search",
+  管理: "nav.admin",
 };
 
 /**
@@ -253,17 +269,17 @@ const updateUserSettings = async (): Promise<void> => {
   try {
     const res = await updateUserInfo({}, userSettingsForm.value);
     if (res.data.code === 0) {
-      ElMessage.success(t('message.profileUpdateSuccess'));
+      ElMessage.success(t("message.profileUpdateSuccess"));
       await useLoginUserStore().fetchLoginUser();
       const updatedUser = useLoginUserStore().loginUser;
       loginUser.username = updatedUser.username;
       loginUser.avatarUrl = updatedUser.avatarUrl;
       settingsDialogVisible.value = false;
     } else {
-      ElMessage.error(t('message.updateFailed') + "，" + res.data?.msg);
+      ElMessage.error(t("message.updateFailed") + "，" + res.data?.msg);
     }
   } catch (error) {
-    ElMessage.error(t('message.updateFailedRetry'));
+    ElMessage.error(t("message.updateFailedRetry"));
   }
 };
 
@@ -275,7 +291,7 @@ watch(
       userSettingsForm.value.username = newValue;
       loginUser.username = newValue;
     }
-  }
+  },
 );
 
 /**
@@ -291,15 +307,15 @@ const getDefaultAvatar = (userId?: number): string => {
 
 <style scoped>
 /* 引入 Inter 字体 */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 /* CSS变量定义 - HOK Dark Theme */
 :root {
-  --header-primary: #DB2777;
-  --header-secondary: #F472B6;
-  --header-cta: #D97706;
+  --header-primary: #db2777;
+  --header-secondary: #f472b6;
+  --header-cta: #d97706;
   --header-bg: rgba(20, 20, 28, 0.85);
-  --header-text: #F8FAFC;
+  --header-text: #f8fafc;
   --header-font: var(--font-primary);
 }
 
@@ -354,7 +370,7 @@ const getDefaultAvatar = (userId?: number): string => {
   font-weight: 700;
   font-family: var(--header-font);
   margin: 0;
-  background: linear-gradient(135deg, #DB2777 0%, #CA8A04 100%);
+  background: linear-gradient(135deg, #db2777 0%, #ca8a04 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -378,7 +394,7 @@ const getDefaultAvatar = (userId?: number): string => {
   font-size: 0.9375rem;
   font-weight: 500;
   font-family: var(--header-font);
-  color: var(--color-text-secondary, #94A3B8);
+  color: var(--color-text-secondary, #94a3b8);
   background: transparent;
   border: none;
   border-radius: 12px;
@@ -390,13 +406,17 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .nav-item::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   width: 0;
   height: 0;
-  background: radial-gradient(circle, rgba(219, 39, 119, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(219, 39, 119, 0.15) 0%,
+    transparent 70%
+  );
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.4s ease;
@@ -409,26 +429,30 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .nav-item:hover {
-  color: #F472B6;
+  color: #f472b6;
   transform: translateY(-1px);
   background: rgba(219, 39, 119, 0.06);
 }
 
 .nav-item.active {
-  color: #FFFFFF;
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.12) 0%, rgba(217, 119, 6, 0.08) 100%);
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(219, 39, 119, 0.12) 0%,
+    rgba(217, 119, 6, 0.08) 100%
+  );
   font-weight: 600;
 }
 
 .nav-item.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 4px;
   left: 50%;
   transform: translateX(-50%);
   width: 24px;
   height: 3px;
-  background: linear-gradient(90deg, #DB2777 0%, #D97706 100%);
+  background: linear-gradient(90deg, #db2777 0%, #d97706 100%);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(219, 39, 119, 0.4);
 }
@@ -465,8 +489,9 @@ const getDefaultAvatar = (userId?: number): string => {
 
 .user-avatar {
   border: 2px solid transparent;
-  background: linear-gradient(#1A1A24, #1A1A24) padding-box,
-              linear-gradient(135deg, #DB2777 0%, #D97706 100%) border-box;
+  background:
+    linear-gradient(#1a1a24, #1a1a24) padding-box,
+    linear-gradient(135deg, #db2777 0%, #d97706 100%) border-box;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
@@ -480,7 +505,7 @@ const getDefaultAvatar = (userId?: number): string => {
   font-size: 0.9375rem;
   font-weight: 600;
   font-family: var(--header-font);
-  color: var(--color-text-primary, #F8FAFC);
+  color: var(--color-text-primary, #f8fafc);
   max-width: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -489,7 +514,7 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .user-profile:hover .username {
-  color: #F8FAFC;
+  color: #f8fafc;
 }
 /* ==================== Dropdown Styles ==================== */
 :deep(.el-dropdown) {
@@ -533,12 +558,16 @@ const getDefaultAvatar = (userId?: number): string => {
   justify-content: center;
   width: 44px;
   height: 44px;
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.08) 0%, rgba(202, 138, 4, 0.08) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(219, 39, 119, 0.08) 0%,
+    rgba(202, 138, 4, 0.08) 100%
+  );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1.5px solid rgba(219, 39, 119, 0.2);
   border-radius: 12px;
-  color: #DB2777;
+  color: #db2777;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-left: 12px;
@@ -547,16 +576,24 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .mobile-menu-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(219, 39, 119, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    circle at center,
+    rgba(219, 39, 119, 0.15) 0%,
+    transparent 70%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .mobile-menu-btn:hover {
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.12) 0%, rgba(202, 138, 4, 0.12) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(219, 39, 119, 0.12) 0%,
+    rgba(202, 138, 4, 0.12) 100%
+  );
   border-color: rgba(219, 39, 119, 0.35);
   box-shadow: 0 4px 16px rgba(219, 39, 119, 0.2);
   transform: translateY(-2px);
@@ -578,7 +615,11 @@ const getDefaultAvatar = (userId?: number): string => {
 
 /* 菜单打开状态 */
 .mobile-menu-btn.menu-open {
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.15) 0%, rgba(202, 138, 4, 0.15) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(219, 39, 119, 0.15) 0%,
+    rgba(202, 138, 4, 0.15) 100%
+  );
 }
 
 .mobile-menu-btn.menu-open svg {
@@ -610,7 +651,7 @@ const getDefaultAvatar = (userId?: number): string => {
   font-size: 1rem;
   font-weight: 500;
   font-family: var(--header-font);
-  color: var(--color-text-secondary, #94A3B8);
+  color: var(--color-text-secondary, #94a3b8);
   background: transparent;
   border: none;
   border-radius: 12px;
@@ -623,14 +664,14 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .mobile-nav-item::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
   width: 0;
   height: 70%;
-  background: linear-gradient(135deg, #DB2777 0%, #D97706 100%);
+  background: linear-gradient(135deg, #db2777 0%, #d97706 100%);
   border-radius: 0 6px 6px 0;
   transition: width 0.3s ease;
 }
@@ -640,8 +681,12 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .mobile-nav-item:hover {
-  color: #F472B6;
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.08) 0%, rgba(217, 119, 6, 0.06) 100%);
+  color: #f472b6;
+  background: linear-gradient(
+    135deg,
+    rgba(219, 39, 119, 0.08) 0%,
+    rgba(217, 119, 6, 0.06) 100%
+  );
   transform: translateX(4px);
   padding-left: 24px;
 }
@@ -651,8 +696,12 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .mobile-nav-item.active {
-  color: #FFFFFF;
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.12) 0%, rgba(217, 119, 6, 0.08) 100%);
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(219, 39, 119, 0.12) 0%,
+    rgba(217, 119, 6, 0.08) 100%
+  );
   font-weight: 600;
   padding-left: 24px;
 }
@@ -678,11 +727,11 @@ const getDefaultAvatar = (userId?: number): string => {
   .header-left {
     gap: 32px;
   }
-  
+
   .nav-menu {
     gap: 4px;
   }
-  
+
   .nav-item {
     padding: 8px 12px;
     font-size: 0.875rem;
@@ -693,7 +742,7 @@ const getDefaultAvatar = (userId?: number): string => {
   .global-header {
     padding: 12px 24px;
   }
-  
+
   .site-title {
     font-size: 1.125rem;
   }
@@ -702,7 +751,7 @@ const getDefaultAvatar = (userId?: number): string => {
     padding: 6px 12px;
     font-size: 0.875rem;
   }
-  
+
   .header-left {
     gap: 24px;
   }
@@ -814,11 +863,21 @@ const getDefaultAvatar = (userId?: number): string => {
   animation: slideInFromLeft 0.3s ease-out;
 }
 
-.mobile-nav-item:nth-child(1) { animation-delay: 0.05s; }
-.mobile-nav-item:nth-child(2) { animation-delay: 0.1s; }
-.mobile-nav-item:nth-child(3) { animation-delay: 0.15s; }
-.mobile-nav-item:nth-child(4) { animation-delay: 0.2s; }
-.mobile-nav-item:nth-child(5) { animation-delay: 0.25s; }
+.mobile-nav-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.mobile-nav-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.mobile-nav-item:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.mobile-nav-item:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.mobile-nav-item:nth-child(5) {
+  animation-delay: 0.25s;
+}
 
 /* ==================== Settings Dialog ==================== */
 .settings-content {

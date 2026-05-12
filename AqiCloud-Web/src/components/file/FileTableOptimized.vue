@@ -11,15 +11,11 @@
       :header-cell-style="headerCellStyle"
       :cell-style="cellStyle"
     >
-      <el-table-column 
-        type="selection" 
-        width="55" 
-        class-name="selection-col" 
-      />
-      
-      <el-table-column 
-        prop="fileName" 
-        label="文件名" 
+      <el-table-column type="selection" width="55" class-name="selection-col" />
+
+      <el-table-column
+        prop="fileName"
+        label="文件名"
         min-width="200"
         class-name="filename-col"
       >
@@ -34,20 +30,22 @@
             @keydown.enter="handleFileClick(scope.row)"
             @keydown.space.prevent="handleFileClick(scope.row)"
           >
-            <DSFileIcon 
+            <DSFileIcon
               :fileSuffix="scope.row.fileSuffix"
-              :isFolder="scope.row.fileType === 'folder' || scope.row.fileType === 'DIR'"
+              :isFolder="
+                scope.row.fileType === 'folder' || scope.row.fileType === 'DIR'
+              "
               size="medium"
             />
             <span class="file-name-text">{{ scope.row.fileName }}</span>
           </div>
         </template>
       </el-table-column>
-      
-      <el-table-column 
-        prop="fileType" 
-        label="类型" 
-        width="100" 
+
+      <el-table-column
+        prop="fileType"
+        label="类型"
+        width="100"
         class-name="type-col"
       >
         <template #default="scope">
@@ -56,19 +54,21 @@
           </el-tag>
         </template>
       </el-table-column>
-      
-      <el-table-column 
-        prop="fileSize" 
-        label="大小" 
-        width="100" 
-        align="right" 
+
+      <el-table-column
+        prop="fileSize"
+        label="大小"
+        width="100"
+        align="right"
         class-name="size-col"
       >
         <template #default="scope">
-          <span class="file-size">{{ formatFileSize(scope.row.fileSize) }}</span>
+          <span class="file-size">{{
+            formatFileSize(scope.row.fileSize)
+          }}</span>
         </template>
       </el-table-column>
-      
+
       <el-table-column
         prop="gmtModified"
         label="修改日期"
@@ -78,13 +78,15 @@
         sortable
       >
         <template #default="scope">
-          <span class="file-date">{{ formatDateTime(scope.row.gmtModified) }}</span>
+          <span class="file-date">{{
+            formatDateTime(scope.row.gmtModified)
+          }}</span>
         </template>
       </el-table-column>
     </el-table>
 
     <!-- 移动端列表视图 -->
-    <div 
+    <div
       v-else
       class="mobile-file-list"
       @touchstart="handleTouchStart"
@@ -93,7 +95,7 @@
     >
       <!-- 全选复选框 -->
       <div class="mobile-select-all" v-if="showSelection">
-        <el-checkbox 
+        <el-checkbox
           v-model="allSelected"
           @change="handleSelectAll"
           class="select-all-checkbox"
@@ -107,7 +109,7 @@
         v-for="file in fileList"
         :key="file.id"
         class="mobile-file-item"
-        :class="{ 'selected': selectedFiles.includes(file.id) }"
+        :class="{ selected: selectedFiles.includes(file.id) }"
         @click="handleMobileFileClick(file)"
         :aria-label="`文件 ${file.fileName}`"
         role="button"
@@ -117,7 +119,7 @@
       >
         <!-- 选择框 -->
         <div class="file-checkbox" v-if="showSelection">
-          <el-checkbox 
+          <el-checkbox
             :model-value="selectedFiles.includes(file.id)"
             @click.stop
             @change="(val: boolean) => handleMobileSelect(file, val)"
@@ -126,7 +128,7 @@
 
         <!-- 文件图标 -->
         <div class="file-icon-wrapper">
-          <DSFileIcon 
+          <DSFileIcon
             :fileSuffix="file.fileSuffix"
             :isFolder="file.fileType === 'folder' || file.fileType === 'DIR'"
             size="medium"
@@ -137,29 +139,33 @@
         <div class="file-info">
           <div class="file-name-mobile">{{ file.fileName }}</div>
           <div class="file-meta">
-            <span class="file-size-mobile">{{ formatFileSize(file.fileSize) }}</span>
-            <span class="file-date-mobile">{{ formatDateTime(file.gmtModified) }}</span>
+            <span class="file-size-mobile">{{
+              formatFileSize(file.fileSize)
+            }}</span>
+            <span class="file-date-mobile">{{
+              formatDateTime(file.gmtModified)
+            }}</span>
           </div>
         </div>
 
         <!-- 滑动操作按钮 -->
-        <div 
+        <div
           class="swipe-actions"
           :style="{ transform: `translateX(${getSwipeOffset(file.id)}px)` }"
         >
-          <button 
+          <button
             class="swipe-btn swipe-btn-primary"
             @click.stop="handleSwipeAction(file, 'share')"
           >
             分享
           </button>
-          <button 
+          <button
             class="swipe-btn swipe-btn-warning"
             @click.stop="handleSwipeAction(file, 'rename')"
           >
             重命名
           </button>
-          <button 
+          <button
             class="swipe-btn swipe-btn-danger"
             @click.stop="handleSwipeAction(file, 'delete')"
           >
@@ -182,7 +188,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { DSFileIcon } from "@/components/design-system";
-import { formatFileSize, formatDateTime, getFileTypeName } from "@/utils/format";
+import {
+  formatFileSize,
+  formatDateTime,
+  getFileTypeName,
+} from "@/utils/format";
 import ContextMenu from "./ContextMenu.vue";
 
 /**
@@ -231,8 +241,10 @@ const currentSwipeFileId = ref<string | number | null>(null);
 
 // 计算属性
 const allSelected = computed(() => {
-  return props.fileList.length > 0 && 
-         props.fileList.every(file => selectedFiles.value.includes(file.id));
+  return (
+    props.fileList.length > 0 &&
+    props.fileList.every((file) => selectedFiles.value.includes(file.id))
+  );
 });
 
 // 监听窗口大小变化
@@ -241,39 +253,39 @@ const handleResize = () => {
 };
 
 onMounted(() => {
-  window.addEventListener('resize', handleResize);
+  window.addEventListener("resize", handleResize);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', handleResize);
+  window.removeEventListener("resize", handleResize);
 });
 
 // 表格样式
 const headerCellStyle = {
-  background: 'rgba(253, 242, 248, 0.6)',
-  fontWeight: '600',
-  color: '#1E1B4B',
-  fontSize: '13px',
-  textTransform: 'uppercase',
-  letterSpacing: '0.03em',
+  background: "rgba(253, 242, 248, 0.6)",
+  fontWeight: "600",
+  color: "#1E1B4B",
+  fontSize: "13px",
+  textTransform: "uppercase",
+  letterSpacing: "0.03em",
 };
 
 const cellStyle = {
-  color: '#475569',
-  fontSize: '14px',
-  borderBottomColor: 'rgba(0, 0, 0, 0.04)',
+  color: "#475569",
+  fontSize: "14px",
+  borderBottomColor: "rgba(0, 0, 0, 0.04)",
 };
 
 // 文件类型标签样式
 const getFileTypeTagType = (fileType: string) => {
   const typeMap: Record<string, string> = {
-    folder: 'primary',
-    image: 'success',
-    video: 'warning',
-    audio: 'info',
-    document: 'info',
+    folder: "primary",
+    image: "success",
+    video: "warning",
+    audio: "info",
+    document: "info",
   };
-  return typeMap[fileType] || 'info';
+  return typeMap[fileType] || "info";
 };
 
 // 触摸手势处理
@@ -285,12 +297,15 @@ const handleTouchStart = (event: TouchEvent) => {
 
 const handleTouchMove = (event: TouchEvent) => {
   if (!currentSwipeFileId.value) return;
-  
+
   const touch = event.touches[0];
   const deltaX = touch.clientX - touchStartX.value;
-  
+
   // 只允许左滑（负值）
-  if (deltaX < 0 && Math.abs(deltaX) > Math.abs(touch.clientY - touchStartY.value)) {
+  if (
+    deltaX < 0 &&
+    Math.abs(deltaX) > Math.abs(touch.clientY - touchStartY.value)
+  ) {
     event.preventDefault();
     const offset = Math.max(deltaX, -150); // 最大滑动距离150px
     swipeOffsets.value = {
@@ -316,7 +331,7 @@ const handleTouchEnd = () => {
       };
     }
   }
-  
+
   // 重置触摸起始位置
   touchStartX.value = 0;
   touchStartY.value = 0;
@@ -333,7 +348,10 @@ const handleFileClick = (file: API.FileDTO) => {
 
 const handleMobileFileClick = (file: API.FileDTO) => {
   // 如果当前有滑动打开的项，先关闭
-  if (currentSwipeFileId.value && swipeOffsets.value[currentSwipeFileId.value] < -75) {
+  if (
+    currentSwipeFileId.value &&
+    swipeOffsets.value[currentSwipeFileId.value] < -75
+  ) {
     swipeOffsets.value = {
       ...swipeOffsets.value,
       [currentSwipeFileId.value]: 0,
@@ -341,7 +359,7 @@ const handleMobileFileClick = (file: API.FileDTO) => {
     currentSwipeFileId.value = null;
     return;
   }
-  
+
   emit("fileClick", file);
 };
 
@@ -359,23 +377,23 @@ const handleMobileSelect = (file: API.FileDTO, selected: boolean) => {
       selectedFiles.value.splice(index, 1);
     }
   }
-  
+
   // 触发选择变更事件
-  const selectedFileObjects = props.fileList.filter(file => 
-    selectedFiles.value.includes(file.id)
+  const selectedFileObjects = props.fileList.filter((file) =>
+    selectedFiles.value.includes(file.id),
   );
   emit("selectionChange", selectedFileObjects);
 };
 
 const handleSelectAll = (selected: boolean) => {
   if (selected) {
-    selectedFiles.value = props.fileList.map(file => file.id);
+    selectedFiles.value = props.fileList.map((file) => file.id);
   } else {
     selectedFiles.value = [];
   }
-  
-  const selectedFileObjects = props.fileList.filter(file => 
-    selectedFiles.value.includes(file.id)
+
+  const selectedFileObjects = props.fileList.filter((file) =>
+    selectedFiles.value.includes(file.id),
   );
   emit("selectionChange", selectedFileObjects);
 };
@@ -389,16 +407,16 @@ const handleSwipeAction = (file: API.FileDTO, action: string) => {
       [currentSwipeFileId.value]: 0,
     };
   }
-  
+
   // 执行对应操作
   switch (action) {
-    case 'share':
+    case "share":
       emit("shareFiles", [file]);
       break;
-    case 'rename':
+    case "rename":
       emit("openRenameDialog", file);
       break;
-    case 'delete':
+    case "delete":
       emit("deleteFile", file);
       break;
   }
@@ -469,7 +487,7 @@ const tableRowClassName = () => {
 :deep(.el-table__header) th {
   background: rgba(253, 242, 248, 0.5) !important;
   font-weight: 600;
-  color: #1E1B4B;
+  color: #1e1b4b;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -492,12 +510,12 @@ const tableRowClassName = () => {
 
 .file-name:hover .file-name-text {
   text-decoration: underline;
-  color: #DB2777;
+  color: #db2777;
 }
 
 .file-name-text {
   font-size: 14px;
-  color: #1E1B4B;
+  color: #1e1b4b;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -507,7 +525,7 @@ const tableRowClassName = () => {
 .file-size,
 .file-date {
   font-size: 13px;
-  color: #64748B;
+  color: #64748b;
 }
 
 /* ==================== 移动端列表样式 ==================== */
@@ -584,7 +602,7 @@ const tableRowClassName = () => {
 .file-name-mobile {
   font-size: 14px;
   font-weight: 500;
-  color: #1E1B4B;
+  color: #1e1b4b;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -594,7 +612,7 @@ const tableRowClassName = () => {
   display: flex;
   gap: 12px;
   font-size: 12px;
-  color: #64748B;
+  color: #64748b;
 }
 
 .file-size-mobile,
@@ -633,15 +651,15 @@ const tableRowClassName = () => {
 }
 
 .swipe-btn-primary {
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
 }
 
 .swipe-btn-warning {
-  background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
 }
 
 .swipe-btn-danger {
-  background: linear-gradient(135deg, #EF4444 0%, #F87171 100%);
+  background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
 }
 
 /* ==================== 响应式适配 ==================== */
@@ -656,22 +674,22 @@ const tableRowClassName = () => {
     padding: 10px 12px;
     min-height: 56px;
   }
-  
+
   .file-icon-wrapper {
     width: 36px;
     height: 36px;
     margin-right: 10px;
   }
-  
+
   .file-name-mobile {
     font-size: 13px;
   }
-  
+
   .file-meta {
     font-size: 11px;
     gap: 8px;
   }
-  
+
   .swipe-btn {
     padding: 0 16px;
     font-size: 12px;
@@ -682,7 +700,7 @@ const tableRowClassName = () => {
 /* ==================== 无障碍访问性 ==================== */
 .mobile-file-item:focus,
 .file-name:focus {
-  outline: 2px solid #DB2777;
+  outline: 2px solid #db2777;
   outline-offset: 2px;
 }
 

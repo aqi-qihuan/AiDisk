@@ -1,29 +1,54 @@
 <template>
-  <el-dropdown 
-    trigger="click" 
+  <el-dropdown
+    trigger="click"
     @command="handleLanguageChange"
     class="language-switcher"
   >
     <button class="language-btn">
-      <svg class="language-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        class="language-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <circle cx="12" cy="12" r="10"></circle>
         <line x1="2" y1="12" x2="22" y2="12"></line>
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        <path
+          d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+        ></path>
       </svg>
       <span class="language-text">{{ currentLanguageLabel }}</span>
     </button>
-    
+
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item 
-          v-for="lang in languages" 
+        <el-dropdown-item
+          v-for="lang in languages"
           :key="lang.value"
           :command="lang.value"
           :class="{ 'is-active': currentLocale === lang.value }"
         >
           <span class="lang-flag">{{ lang.flag }}</span>
           <span class="lang-label">{{ lang.label }}</span>
-          <svg v-if="currentLocale === lang.value" class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            v-if="currentLocale === lang.value"
+            class="check-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
         </el-dropdown-item>
@@ -33,47 +58,50 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { changeLocale, type Locale } from '@/locales'
-import { ElMessage } from 'element-plus'
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+import { changeLocale, type Locale } from "@/locales";
+import { ElMessage } from "element-plus";
 
-const { locale, t } = useI18n()
+const { locale, t } = useI18n();
 
 // 支持的语言列表
 const languages = [
-  { 
-    value: 'zh-CN' as Locale, 
-    label: '简体中文', 
-    flag: '🇨🇳' 
+  {
+    value: "zh-CN" as Locale,
+    label: "简体中文",
+    flag: "🇨🇳",
   },
-  { 
-    value: 'en-US' as Locale, 
-    label: 'English', 
-    flag: '🇺🇸' 
-  }
-]
+  {
+    value: "en-US" as Locale,
+    label: "English",
+    flag: "🇺🇸",
+  },
+];
 
 // 当前语言
-const currentLocale = computed(() => locale.value as Locale)
+const currentLocale = computed(() => locale.value as Locale);
 
 // 当前语言标签
 const currentLanguageLabel = computed(() => {
-  const lang = languages.find(l => l.value === locale.value)
-  return lang?.flag || '🌐'
-})
+  const lang = languages.find((l) => l.value === locale.value);
+  return lang?.flag || "🌐";
+});
 
 // 切换语言
 const handleLanguageChange = (langValue: Locale) => {
-  if (langValue === locale.value) return
-  
-  changeLocale(langValue)
-  
+  if (langValue === locale.value) return;
+
+  changeLocale(langValue);
+
   ElMessage.success({
-    message: t('language.switch') + ' ' + (langValue === 'zh-CN' ? '简体中文' : 'English'),
-    duration: 2000
-  })
-}
+    message:
+      t("language.switch") +
+      " " +
+      (langValue === "zh-CN" ? "简体中文" : "English"),
+    duration: 2000,
+  });
+};
 </script>
 
 <style scoped>
@@ -131,7 +159,7 @@ const handleLanguageChange = (langValue: Locale) => {
 
 :deep(.el-dropdown-menu__item.is-active) {
   background: rgba(64, 158, 255, 0.1);
-  color: #409EFF;
+  color: #409eff;
   font-weight: 600;
 }
 
@@ -146,7 +174,7 @@ const handleLanguageChange = (langValue: Locale) => {
 }
 
 .check-icon {
-  color: #409EFF;
+  color: #409eff;
   margin-left: auto;
 }
 

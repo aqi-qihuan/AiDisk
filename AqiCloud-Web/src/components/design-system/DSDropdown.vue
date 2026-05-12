@@ -1,6 +1,10 @@
 <template>
   <div class="ds-dropdown" ref="dropdownRef" @mouseleave="handleMouseLeave">
-    <div class="ds-dropdown-trigger" @click="handleClick" @mouseenter="handleMouseEnter">
+    <div
+      class="ds-dropdown-trigger"
+      @click="handleClick"
+      @mouseenter="handleMouseEnter"
+    >
       <slot />
     </div>
     <Transition name="dropdown">

@@ -1,4 +1,4 @@
-import SparkMD5 from 'spark-md5';
+import SparkMD5 from "spark-md5";
 
 /**
  * 计算文件的 MD5 值
@@ -27,7 +27,7 @@ export const calculateFileMD5 = (file: File): Promise<string> => {
     };
 
     fileReader.onerror = () => {
-      reject(new Error('文件读取失败'));
+      reject(new Error("文件读取失败"));
     };
 
     const loadNext = () => {

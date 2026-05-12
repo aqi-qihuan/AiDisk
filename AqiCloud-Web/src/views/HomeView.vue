@@ -7,19 +7,19 @@
         <div class="gradient-orb orb-2"></div>
         <div class="gradient-orb orb-3"></div>
       </div>
-      
+
       <div class="hero-content">
         <div class="hero-text">
           <div class="badge">
             <span class="badge-dot"></span>
-            <span>{{ t('app.aiPowered') }} · {{ t('app.name') }}</span>
+            <span>{{ t("app.aiPowered") }} · {{ t("app.name") }}</span>
           </div>
           <h1 class="title">
             <span class="title-gold">驾驭云端</span>
             <span class="title-highlight">智驭未来</span>
           </h1>
           <p class="subtitle">
-            {{ t('home.hero.subtitle') }}
+            {{ t("home.hero.subtitle") }}
           </p>
           <div class="hero-buttons">
             <DSButton
@@ -31,7 +31,7 @@
               <svg class="btn-icon" width="20" height="20">
                 <use href="#icon-rocket"></use>
               </svg>
-              {{ t('home.hero.cta') }}
+              {{ t("home.hero.cta") }}
             </DSButton>
             <DSButton
               variant="ghost"
@@ -42,11 +42,11 @@
               <svg class="btn-icon" width="20" height="20">
                 <use href="#icon-info"></use>
               </svg>
-              {{ t('home.hero.learnMore') }}
+              {{ t("home.hero.learnMore") }}
             </DSButton>
           </div>
         </div>
-        
+
         <div class="hero-visual">
           <div class="visual-card glass-card">
             <img src="@/assets/file-management.svg" alt="文件管理" />
@@ -62,14 +62,14 @@
           <svg class="tag-icon" width="14" height="14">
             <use href="#icon-ai"></use>
           </svg>
-          {{ t('home.features.ai') }}
+          {{ t("home.features.ai") }}
         </DSTag>
-        <h2 class="section-title">{{ t('home.features.title') }}</h2>
+        <h2 class="section-title">{{ t("home.features.title") }}</h2>
         <p class="section-description">
-          {{ t('home.features.subtitle') }}
+          {{ t("home.features.subtitle") }}
         </p>
       </div>
-      
+
       <div class="feature-grid">
         <div class="feature-card glass-card cursor-pointer">
           <div class="feature-header">
@@ -78,10 +78,10 @@
                 <use href="#icon-brain"></use>
               </svg>
             </div>
-            <h3 class="feature-title">{{ t('home.features.qa.title') }}</h3>
+            <h3 class="feature-title">{{ t("home.features.qa.title") }}</h3>
           </div>
           <p class="feature-description">
-            {{ t('home.features.qa.desc') }}
+            {{ t("home.features.qa.desc") }}
           </p>
         </div>
 
@@ -92,10 +92,10 @@
                 <use href="#icon-document"></use>
               </svg>
             </div>
-            <h3 class="feature-title">{{ t('home.features.doc.title') }}</h3>
+            <h3 class="feature-title">{{ t("home.features.doc.title") }}</h3>
           </div>
           <p class="feature-description">
-            {{ t('home.features.doc.desc') }}
+            {{ t("home.features.doc.desc") }}
           </p>
         </div>
 
@@ -106,10 +106,10 @@
                 <use href="#icon-chat"></use>
               </svg>
             </div>
-            <h3 class="feature-title">{{ t('home.features.chat.title') }}</h3>
+            <h3 class="feature-title">{{ t("home.features.chat.title") }}</h3>
           </div>
           <p class="feature-description">
-            {{ t('home.features.chat.desc') }}
+            {{ t("home.features.chat.desc") }}
           </p>
         </div>
 
@@ -120,10 +120,10 @@
                 <use href="#icon-search"></use>
               </svg>
             </div>
-            <h3 class="feature-title">{{ t('home.features.search.title') }}</h3>
+            <h3 class="feature-title">{{ t("home.features.search.title") }}</h3>
           </div>
           <p class="feature-description">
-            {{ t('home.features.search.desc') }}
+            {{ t("home.features.search.desc") }}
           </p>
         </div>
       </div>
@@ -143,7 +143,7 @@
               <span class="count">100</span>
               <span class="unit">万+</span>
             </div>
-            <div class="stat-label">{{ t('home.stats.users') }}</div>
+            <div class="stat-label">{{ t("home.stats.users") }}</div>
           </div>
         </div>
 
@@ -158,7 +158,7 @@
               <span class="count">99.9</span>
               <span class="unit">%</span>
             </div>
-            <div class="stat-label">{{ t('home.stats.availability') }}</div>
+            <div class="stat-label">{{ t("home.stats.availability") }}</div>
           </div>
         </div>
 
@@ -173,7 +173,7 @@
               <span class="count">50</span>
               <span class="unit">PB+</span>
             </div>
-            <div class="stat-label">{{ t('home.stats.storage') }}</div>
+            <div class="stat-label">{{ t("home.stats.storage") }}</div>
           </div>
         </div>
 
@@ -188,7 +188,7 @@
               <span class="count">24/7</span>
               <span class="unit"></span>
             </div>
-            <div class="stat-label">{{ t('home.stats.support') }}</div>
+            <div class="stat-label">{{ t("home.stats.support") }}</div>
           </div>
         </div>
       </div>
@@ -197,9 +197,9 @@
     <!-- CTA区域 -->
     <div class="cta-section">
       <div class="cta-content">
-        <h2 class="cta-title">{{ t('home.cta.title') }}</h2>
+        <h2 class="cta-title">{{ t("home.cta.title") }}</h2>
         <p class="cta-description">
-          {{ t('home.cta.desc') }}
+          {{ t("home.cta.desc") }}
         </p>
         <div class="cta-buttons">
           <DSButton
@@ -211,7 +211,7 @@
             <svg class="btn-icon" width="20" height="20">
               <use href="#icon-user-add"></use>
             </svg>
-            {{ t('home.cta.register') }}
+            {{ t("home.cta.register") }}
           </DSButton>
           <DSButton
             variant="outline"
@@ -222,7 +222,7 @@
             <svg class="btn-icon" width="20" height="20">
               <use href="#icon-login"></use>
             </svg>
-            {{ t('home.cta.login') }}
+            {{ t("home.cta.login") }}
           </DSButton>
         </div>
       </div>
@@ -240,32 +240,50 @@
               </svg>
               <span class="logo-text">AI Pan</span>
             </div>
-            <p class="footer-slogan">{{ t('home.footer.slogan') }}</p>
+            <p class="footer-slogan">{{ t("home.footer.slogan") }}</p>
           </div>
 
           <div class="footer-nav">
-            <router-link to="/about" class="footer-link cursor-pointer">{{ t('home.footer.about') }}</router-link>
-            <router-link to="/terms" class="footer-link cursor-pointer">{{ t('home.footer.terms') }}</router-link>
-            <router-link to="/privacy" class="footer-link cursor-pointer">{{ t('home.footer.privacy') }}</router-link>
-            <router-link to="/about" class="footer-link cursor-pointer">{{ t('home.footer.contact') }}</router-link>
+            <router-link to="/about" class="footer-link cursor-pointer">{{
+              t("home.footer.about")
+            }}</router-link>
+            <router-link to="/terms" class="footer-link cursor-pointer">{{
+              t("home.footer.terms")
+            }}</router-link>
+            <router-link to="/privacy" class="footer-link cursor-pointer">{{
+              t("home.footer.privacy")
+            }}</router-link>
+            <router-link to="/about" class="footer-link cursor-pointer">{{
+              t("home.footer.contact")
+            }}</router-link>
           </div>
         </div>
-        
+
         <!-- 分隔线 -->
         <div class="footer-divider"></div>
-        
+
         <!-- 底部信息区 -->
         <div class="footer-bottom">
           <div class="footer-copyright">
-            <span>{{ t('home.footer.copyright') }}</span>
+            <span>{{ t("home.footer.copyright") }}</span>
           </div>
-          
+
           <div class="footer-icp">
-            <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="icp-link cursor-pointer">
+            <a
+              href="https://beian.miit.gov.cn/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="icp-link cursor-pointer"
+            >
               京ICP备XXXXXXXX号-1
             </a>
             <span class="icp-divider">|</span>
-            <a href="http://www.beian.gov.cn/portal/registerSystemInfo" target="_blank" rel="noopener noreferrer" class="icp-link cursor-pointer">
+            <a
+              href="http://www.beian.gov.cn/portal/registerSystemInfo"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="icp-link cursor-pointer"
+            >
               京公网安备 XXXXXXXXXXXX号
             </a>
           </div>
@@ -276,8 +294,8 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import {
   Cpu,
   Document,
@@ -290,58 +308,58 @@ import {
   CircleCheck,
   Files,
   Timer,
-  UserFilled
-} from '@element-plus/icons-vue';
-import DSButton from '@/components/design-system/DSButton.vue';
-import DSTag from '@/components/design-system/DSTag.vue';
+  UserFilled,
+} from "@element-plus/icons-vue";
+import DSButton from "@/components/design-system/DSButton.vue";
+import DSTag from "@/components/design-system/DSTag.vue";
 
 const router = useRouter();
 const { t } = useI18n();
 
 // 跳转到文件页面
 const goToFiles = () => {
-  router.push('/file');
+  router.push("/file");
 };
 
 // 跳转到注册页面
 const goToRegister = () => {
-  router.push('/user/register');
+  router.push("/user/register");
 };
 
 // 跳转到登录页面
 const goToLogin = () => {
-  router.push('/user/login');
+  router.push("/user/login");
 };
 
 // 滚动到特性区域
 const scrollToFeatures = () => {
-  const featuresSection = document.querySelector('.features-section');
+  const featuresSection = document.querySelector(".features-section");
   if (featuresSection) {
-    featuresSection.scrollIntoView({ behavior: 'smooth' });
+    featuresSection.scrollIntoView({ behavior: "smooth" });
   }
 };
 </script>
 
 <style scoped>
 /* 引入字体 - HOK Dark Theme */
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
 /* CSS变量定义 - HOK Dark */
 :root {
-  --primary: #DB2777;
-  --secondary: #F472B6;
-  --cta: #D97706;
-  --gold: #FBBF24;
-  --background: #0B0B10;
-  --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
-  --font-display: 'Plus Jakarta Sans', sans-serif;
-  --font-primary: 'Fira Sans', sans-serif;
+  --primary: #db2777;
+  --secondary: #f472b6;
+  --cta: #d97706;
+  --gold: #fbbf24;
+  --background: #0b0b10;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-primary: "Fira Sans", sans-serif;
 }
 
 .home-view {
   min-height: 100vh;
-  background: #0B0B10;
+  background: #0b0b10;
   overflow-x: hidden;
   font-family: var(--font-primary);
 }
@@ -354,7 +372,7 @@ const scrollToFeatures = () => {
   align-items: center;
   padding: 120px 48px;
   overflow: hidden;
-  background: linear-gradient(135deg, #0B0B10 0%, #14141C 50%, #1A1A24 100%);
+  background: linear-gradient(135deg, #0b0b10 0%, #14141c 50%, #1a1a24 100%);
 }
 
 .hero-background {
@@ -378,7 +396,7 @@ const scrollToFeatures = () => {
 .orb-1 {
   width: 500px;
   height: 500px;
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 50%, #D97706 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 50%, #d97706 100%);
   top: -150px;
   right: -100px;
   animation-delay: 0s;
@@ -387,7 +405,7 @@ const scrollToFeatures = () => {
 .orb-2 {
   width: 400px;
   height: 400px;
-  background: linear-gradient(135deg, #F472B6 0%, #CA8A04 50%, #FBCFE8 100%);
+  background: linear-gradient(135deg, #f472b6 0%, #ca8a04 50%, #fbcfe8 100%);
   bottom: -100px;
   left: -100px;
   animation-delay: 7s;
@@ -396,7 +414,7 @@ const scrollToFeatures = () => {
 .orb-3 {
   width: 300px;
   height: 300px;
-  background: linear-gradient(135deg, #CA8A04 0%, #DB2777 50%, #F472B6 100%);
+  background: linear-gradient(135deg, #ca8a04 0%, #db2777 50%, #f472b6 100%);
   top: 40%;
   left: 30%;
   transform: translate(-50%, -50%);
@@ -441,13 +459,18 @@ const scrollToFeatures = () => {
   height: 6px;
   border-radius: 50%;
   background: var(--primary);
-  box-shadow: 0 0 8px rgba(219,39,119,0.5);
+  box-shadow: 0 0 8px rgba(219, 39, 119, 0.5);
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
 
 .badge-icon {
@@ -472,20 +495,20 @@ const scrollToFeatures = () => {
 
 .title-highlight {
   display: block;
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 20px rgba(219,39,119,0.3));
+  filter: drop-shadow(0 0 20px rgba(219, 39, 119, 0.3));
 }
 
 .title-gold {
   display: block;
-  background: linear-gradient(135deg, #D97706 0%, #FBBF24 100%);
+  background: linear-gradient(135deg, #d97706 0%, #fbbf24 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 20px rgba(251,191,36,0.3));
+  filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.3));
 }
 
 .subtitle {
@@ -538,24 +561,28 @@ const scrollToFeatures = () => {
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 60px rgba(219, 39, 119, 0.05);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(219, 39, 119, 0.05);
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .visual-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #DB2777 0%, #D97706 100%);
+  background: linear-gradient(90deg, #db2777 0%, #d97706 100%);
 }
 
 .visual-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 80px rgba(219, 39, 119, 0.1);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(219, 39, 119, 0.1);
 }
 
 .visual-card img {
@@ -568,7 +595,7 @@ const scrollToFeatures = () => {
 /* ===== Features Section ===== */
 .features-section {
   padding: 100px 48px;
-  background: #14141C;
+  background: #14141c;
 }
 
 .section-header {
@@ -612,29 +639,35 @@ const scrollToFeatures = () => {
 }
 
 .feature-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #DB2777 0%, #D97706 100%);
+  background: linear-gradient(90deg, #db2777 0%, #d97706 100%);
   transform: scaleX(0);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .feature-card::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.05) 0%, rgba(217, 119, 6, 0.03) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(219, 39, 119, 0.05) 0%,
+    rgba(217, 119, 6, 0.03) 100%
+  );
   opacity: 0;
   transition: opacity 0.4s ease;
 }
 
 .feature-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(219, 39, 119, 0.08);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(219, 39, 119, 0.08);
   border-color: rgba(219, 39, 119, 0.2);
 }
 
@@ -653,7 +686,7 @@ const scrollToFeatures = () => {
   width: 64px;
   height: 64px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
   box-shadow: 0 8px 24px rgba(219, 39, 119, 0.3);
   flex-shrink: 0;
   transition: all 0.3s ease;
@@ -691,13 +724,13 @@ const scrollToFeatures = () => {
 /* ===== Stats Section ===== */
 .stats-section {
   padding: 80px 48px;
-  background: linear-gradient(135deg, #DB2777 0%, #BE185D 50%, #1A1A24 100%);
+  background: linear-gradient(135deg, #db2777 0%, #be185d 50%, #1a1a24 100%);
   position: relative;
   overflow: hidden;
 }
 
 .stats-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -734,7 +767,7 @@ const scrollToFeatures = () => {
 }
 
 .stat-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -761,7 +794,11 @@ const scrollToFeatures = () => {
   justify-content: center;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
   border-radius: 16px;
   font-size: 28px;
   color: var(--gold);
@@ -771,7 +808,11 @@ const scrollToFeatures = () => {
 
 .stat-card:hover .stat-icon {
   transform: scale(1.1) rotate(5deg);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
 }
 
 .stat-content {
@@ -789,7 +830,7 @@ const scrollToFeatures = () => {
   font-size: var(--text-3xl);
   font-weight: var(--font-bold);
   color: var(--gold);
-  text-shadow: 0 0 20px rgba(251,191,36,0.3);
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
 }
 
 .stat-number .unit {
@@ -805,18 +846,23 @@ const scrollToFeatures = () => {
 /* ===== CTA Section ===== */
 .cta-section {
   padding: 100px 48px;
-  background: #14141C;
+  background: #14141c;
   position: relative;
 }
 
 .cta-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(219, 39, 119, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(219, 39, 119, 0.2),
+    transparent
+  );
 }
 
 .cta-content {
@@ -861,7 +907,7 @@ const scrollToFeatures = () => {
 }
 
 .cta-primary {
-  background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
   color: white;
   border: none;
   box-shadow: 0 4px 20px rgba(219, 39, 119, 0.4);
@@ -887,18 +933,23 @@ const scrollToFeatures = () => {
 /* ===== Footer Section ===== */
 .footer-section {
   padding: 60px 48px 30px;
-  background: #0B0B10;
+  background: #0b0b10;
   position: relative;
 }
 
 .footer-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(219, 39, 119, 0.15), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(219, 39, 119, 0.15),
+    transparent
+  );
 }
 
 .footer-content {
@@ -943,7 +994,7 @@ const scrollToFeatures = () => {
   font-size: 28px;
   font-weight: 700;
   font-family: var(--font-display);
-  background: linear-gradient(135deg, #DB2777 0%, #FBBF24 100%);
+  background: linear-gradient(135deg, #db2777 0%, #fbbf24 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -973,13 +1024,13 @@ const scrollToFeatures = () => {
 }
 
 .footer-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #DB2777 0%, #D97706 100%);
+  background: linear-gradient(90deg, #db2777 0%, #d97706 100%);
   transition: width 0.3s ease;
 }
 
@@ -995,7 +1046,12 @@ const scrollToFeatures = () => {
 .footer-divider {
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(219, 39, 119, 0.15), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(219, 39, 119, 0.15),
+    transparent
+  );
 }
 
 /* Footer Bottom - 版权和备案 */
@@ -1036,7 +1092,8 @@ const scrollToFeatures = () => {
 
 /* ===== Animations ===== */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) scale(1) rotate(0deg);
   }
   25% {
@@ -1077,7 +1134,7 @@ const scrollToFeatures = () => {
   .feature-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .stats-container {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1088,28 +1145,28 @@ const scrollToFeatures = () => {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  
+
   .hero-text {
     order: 1;
   }
-  
+
   .hero-visual {
     order: 0;
     margin-bottom: var(--ds-spacing-xl);
   }
-  
+
   .hero-features {
     justify-content: center;
   }
-  
+
   .hero-buttons {
     justify-content: center;
   }
-  
+
   .title {
     font-size: 2.5rem;
   }
-  
+
   .visual-card {
     max-width: 400px;
   }
@@ -1121,92 +1178,92 @@ const scrollToFeatures = () => {
     min-height: auto;
     padding-top: var(--ds-spacing-xxl);
   }
-  
+
   .hero-visual {
     display: none;
   }
-  
+
   .title {
     font-size: 2rem;
   }
-  
+
   .subtitle {
     font-size: var(--ds-text-size-lg);
   }
-  
+
   .feature-grid {
     grid-template-columns: 1fr;
     gap: var(--ds-spacing-lg);
   }
-  
+
   .feature-card {
     padding: var(--ds-spacing-lg);
   }
-  
+
   .feature-header {
     gap: var(--ds-spacing-sm);
   }
-  
+
   .feature-icon-wrapper {
     width: 48px;
     height: 48px;
   }
-  
+
   .feature-icon {
     font-size: 24px;
   }
-  
+
   .feature-title {
     font-size: 18px;
   }
-  
+
   .stats-container {
     grid-template-columns: 1fr;
     gap: var(--ds-spacing-md);
   }
-  
+
   .stat-card {
     padding: var(--ds-spacing-md);
     flex-direction: row;
     align-items: center;
   }
-  
+
   .stat-icon {
     width: 44px;
     height: 44px;
     font-size: 20px;
   }
-  
+
   .stat-number .count {
     font-size: 20px;
   }
-  
+
   .stat-label {
     font-size: 13px;
   }
-  
+
   .hero-buttons {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .cta-buttons {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .gradient-orb {
     display: none;
   }
-  
+
   .section-header {
     margin-bottom: var(--ds-spacing-lg);
   }
-  
+
   .section-title {
     font-size: var(--ds-text-size-xl);
   }
-  
+
   .section-description {
     font-size: var(--ds-text-size-base);
   }
@@ -1216,21 +1273,21 @@ const scrollToFeatures = () => {
   .title {
     font-size: 1.75rem;
   }
-  
+
   .section-title {
     font-size: var(--ds-text-size-xl);
   }
-  
+
   .stat-card {
     padding: var(--ds-spacing-md);
   }
-  
+
   .stat-icon {
     width: 48px;
     height: 48px;
     font-size: 20px;
   }
-  
+
   .stat-number .count {
     font-size: var(--ds-text-size-xl);
   }
@@ -1242,15 +1299,15 @@ const scrollToFeatures = () => {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .footer-slogan {
     padding-left: 0;
   }
-  
+
   .footer-nav {
     gap: 24px;
   }
-  
+
   .footer-bottom {
     flex-direction: column;
     text-align: center;

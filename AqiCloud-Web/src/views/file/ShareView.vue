@@ -20,9 +20,15 @@
             <div class="avatar-ring"></div>
           </div>
           <div class="user-card-info">
-            <h2 class="user-card-name">{{ shareInfo?.shareAccountDTO?.username }}</h2>
+            <h2 class="user-card-name">
+              {{ shareInfo?.shareAccountDTO?.username }}
+            </h2>
             <p class="user-card-share">
-              分享了 <span class="share-count">{{ shareInfo?.fileCount || shareDetail?.fileDTOList?.length || 0 }}</span> 个文件
+              分享了
+              <span class="share-count">{{
+                shareInfo?.fileCount || shareDetail?.fileDTOList?.length || 0
+              }}</span>
+              个文件
             </p>
           </div>
         </div>
@@ -59,9 +65,50 @@
         <div class="illustration-container">
           <img src="@/assets/verify_bg.svg" alt="分享" class="verify-image" />
           <div class="floating-elements">
-            <div class="float-item float-1"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="1.5" opacity="0.6"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-            <div class="float-item float-2"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.5" opacity="0.6"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div>
-            <div class="float-item float-3"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="1.5" opacity="0.6"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg></div>
+            <div class="float-item float-1">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#DB2777"
+                stroke-width="1.5"
+                opacity="0.6"
+              >
+                <path
+                  d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"
+                />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+            </div>
+            <div class="float-item float-2">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#A855F7"
+                stroke-width="1.5"
+                opacity="0.6"
+              >
+                <path
+                  d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"
+                />
+              </svg>
+            </div>
+            <div class="float-item float-3">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#F472B6"
+                stroke-width="1.5"
+                opacity="0.6"
+              >
+                <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -83,15 +130,17 @@
                 shareInfo?.shareAccountDTO?.username
               }}</span>
               <DSTag variant="info" size="small">
-                {{ formatShareEndTime(shareInfo?.shareEndTime, shareInfo?.shareDayType) }}
+                {{
+                  formatShareEndTime(
+                    shareInfo?.shareEndTime,
+                    shareInfo?.shareDayType,
+                  )
+                }}
               </DSTag>
             </div>
           </div>
           <div class="share-actions">
-            <DSButton
-              variant="primary"
-              @click="handleSaveClick"
-            >
+            <DSButton variant="primary" @click="handleSaveClick">
               <el-icon><FolderAdd /></el-icon>
               保存{{
                 selectedFiles.length ? `(${selectedFiles.length}个文件)` : ""
@@ -103,11 +152,17 @@
         <!-- 面包屑导航 -->
         <div class="breadcrumb">
           <el-breadcrumb separator="/">
-            <el-breadcrumb-item class="breadcrumb-item" @click="handlePathChange('/')">
+            <el-breadcrumb-item
+              class="breadcrumb-item"
+              @click="handlePathChange('/')"
+            >
               全部文件
             </el-breadcrumb-item>
             <template v-for="(path, index) in currentPathArray" :key="index">
-              <el-breadcrumb-item class="breadcrumb-item" @click="handlePathChange(getFullPath(index))">
+              <el-breadcrumb-item
+                class="breadcrumb-item"
+                @click="handlePathChange(getFullPath(index))"
+              >
                 {{ path }}
               </el-breadcrumb-item>
             </template>
@@ -124,7 +179,7 @@
           <div class="pagination-container">
             <div class="pagination-wrapper">
               <DSTag variant="info" class="total-info">
-                {{ t('common.total', { count: pagination.total }) }}
+                {{ t("common.total", { count: pagination.total }) }}
               </DSTag>
               <el-pagination
                 v-model:current-page="pagination.current"
@@ -156,9 +211,9 @@
     </div>
 
     <!-- 保存对话框 -->
-    <el-dialog 
-      v-model="saveDialogVisible" 
-      title="保存到我的网盘" 
+    <el-dialog
+      v-model="saveDialogVisible"
+      title="保存到我的网盘"
       :width="isMobile ? '90%' : '500px'"
       :fullscreen="isMobile"
       class="ds-dialog"
@@ -186,7 +241,11 @@
           <DSButton variant="secondary" @click="saveDialogVisible = false">
             取消
           </DSButton>
-          <DSButton variant="primary" @click="delayedHandleSave" :loading="isSaving">
+          <DSButton
+            variant="primary"
+            @click="delayedHandleSave"
+            :loading="isSaving"
+          >
             确定
           </DSButton>
         </div>
@@ -196,7 +255,7 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 import {
   checkShareCode,
   getShareDetail,
@@ -453,7 +512,7 @@ watch(
       updateFileList();
     }
   },
-  { immediate: false }
+  { immediate: false },
 );
 
 // 分页处理函数
@@ -471,7 +530,7 @@ const handleCurrentChange = async (page: number) => {
 // 格式化有效期
 const formatShareEndTime = (
   endTime: string | undefined,
-  dayType: number | undefined
+  dayType: number | undefined,
 ) => {
   if (!endTime) return "-";
   if (dayType === 0) {
@@ -503,13 +562,15 @@ const handleSaveClick = () => {
   }
 
   if (!token) {
-    ElMessageBox.confirm(t('common.loginRequired'), t('common.info'), {
+    ElMessageBox.confirm(t("common.loginRequired"), t("common.info"), {
       confirmButtonText: "去登录",
       cancelButtonText: "取消",
       type: "warning",
-    }).then(() => {
-      window.location.href = `/account/v1/login?redirect=${window.location.href}`;
-    }).catch(() => {});
+    })
+      .then(() => {
+        window.location.href = `/account/v1/login?redirect=${window.location.href}`;
+      })
+      .catch(() => {});
     return;
   }
 
@@ -594,7 +655,7 @@ onMounted(() => {
 <style scoped>
 .share-view {
   position: relative;
-  background: linear-gradient(135deg, #FDF2F8 0%, #F5F3FF 50%, #FCE7F3 100%);
+  background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 50%, #fce7f3 100%);
 }
 
 /* 浮动背景装饰球 */
@@ -617,7 +678,11 @@ onMounted(() => {
 .bg-orb-1 {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(219, 39, 119, 0.4) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(219, 39, 119, 0.4) 0%,
+    transparent 70%
+  );
   top: -100px;
   right: -50px;
   animation-delay: 0s;
@@ -626,7 +691,11 @@ onMounted(() => {
 .bg-orb-2 {
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.3) 0%,
+    transparent 70%
+  );
   bottom: -80px;
   left: -60px;
   animation-delay: -7s;
@@ -635,7 +704,11 @@ onMounted(() => {
 .bg-orb-3 {
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.3) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(244, 114, 182, 0.3) 0%,
+    transparent 70%
+  );
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -643,9 +716,16 @@ onMounted(() => {
 }
 
 @keyframes floatOrb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 15px) scale(0.95); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 15px) scale(0.95);
+  }
 }
 
 /* 验证页面 */
@@ -706,7 +786,11 @@ onMounted(() => {
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
   z-index: -1;
   opacity: 0.5;
 }
@@ -761,7 +845,9 @@ onMounted(() => {
 }
 
 .verify-input :deep(.el-input__wrapper.is-focus) {
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2) inset, 0 0 0 1px var(--color-primary) inset;
+  box-shadow:
+    0 0 0 2px rgba(99, 102, 241, 0.2) inset,
+    0 0 0 1px var(--color-primary) inset;
 }
 
 .verify-input :deep(.el-input__inner) {
@@ -852,7 +938,8 @@ onMounted(() => {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   50% {
@@ -880,11 +967,11 @@ onMounted(() => {
 
 .share-info-bar {
   padding: 24px 32px;
-  border-bottom: 1px solid #E2E8F0;
+  border-bottom: 1px solid #e2e8f0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   color: white;
 }
 
@@ -963,7 +1050,11 @@ onMounted(() => {
   text-align: center;
   font-size: 13px;
   color: var(--text-secondary);
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.95) 20%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.95) 20%
+  );
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   z-index: 100;
@@ -1046,7 +1137,11 @@ onMounted(() => {
 
 /* 对话框样式优化 */
 :deep(.ds-dialog .el-dialog__header) {
-  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-secondary) 0%,
+    var(--color-primary) 100%
+  );
   color: white;
   padding: var(--spacing-lg);
 }

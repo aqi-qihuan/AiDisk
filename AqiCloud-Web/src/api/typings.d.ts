@@ -21,7 +21,6 @@ declare namespace API {
     shareCode?: string;
   };
 
-
   type UploadFile = {
     filename?: string;
     identifier?: string;
@@ -29,7 +28,7 @@ declare namespace API {
     parentId?: string;
     fileSize?: number;
     file?: File;
-  }
+  };
   type ChunkInitTaskRequest = {
     /** 文件唯一标识 */
     identifier: string;
@@ -63,7 +62,7 @@ declare namespace API {
     fileIds?: string[];
     accountId?: number;
     /** 分享的路径 */
-    host?:string;
+    host?: string;
   };
 
   type downloadParams = {
@@ -119,7 +118,6 @@ declare namespace API {
     success?: boolean;
   };
 
-
   type preSignUploadUrlParams = {
     identifier: string;
     partNumber: number;
@@ -137,7 +135,7 @@ declare namespace API {
     /** 保存路径 */
     accountId?: number;
     /** 当前路径 */
-   parentId?: string;
+    parentId?: string;
   };
 
   type ShareFileQueryRequest = {
@@ -166,11 +164,11 @@ declare namespace API {
     /** 状态 0不是文件夹，1是文件夹 */
     isDirectory?: number;
   };
-type DownloadUrlParams = {
-  fileIds?: string[];
-  accountId?: number;
-};
-type downloadUrlEntity = {
+  type DownloadUrlParams = {
+    fileIds?: string[];
+    accountId?: number;
+  };
+  type downloadUrlEntity = {
     downloadUrl?: string;
     fileName?: string;
   };
@@ -290,11 +288,11 @@ type downloadUrlEntity = {
   };
 
   type sDTO = {
-    accountId?: string; 
-    id? : string;
+    accountId?: string;
+    id?: string;
     totalSize: string;
-    usedSize : string;
-  }
+    usedSize: string;
+  };
   // ==========文件相关==========
 
   type FileDTO = {
@@ -527,9 +525,8 @@ type downloadUrlEntity = {
     username?: string;
 
     avatarUrl?: string;
-
-  }
-    /** 分享的类型 */
+  };
+  /** 分享的类型 */
   type ShareSimpleDTO = {
     /** 分享ID */
     shareId?: string;

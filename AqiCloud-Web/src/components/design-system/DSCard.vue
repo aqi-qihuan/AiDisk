@@ -6,17 +6,17 @@
 
 <script setup lang="ts">
 interface Props {
-  variant?: 'default' | 'hoverable' | 'glass';
+  variant?: "default" | "hoverable" | "glass";
 }
 
 withDefaults(defineProps<Props>(), {
-  variant: 'default'
+  variant: "default",
 });
 </script>
 
 <style scoped>
 .ds-card {
-  background: var(--color-bg-card, #1A1A24);
+  background: var(--color-bg-card, #1a1a24);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-lg);
   padding: 24px;
@@ -49,13 +49,18 @@ withDefaults(defineProps<Props>(), {
 }
 
 .ds-card--glass::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-primary),
+    transparent
+  );
   opacity: 0;
   transition: opacity var(--transition-base);
 }

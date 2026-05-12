@@ -1,7 +1,11 @@
 <template>
   <Teleport to="body">
     <Transition name="ds-dialog">
-      <div v-if="modelValue" class="ds-dialog-overlay" @click.self="handleOverlayClick">
+      <div
+        v-if="modelValue"
+        class="ds-dialog-overlay"
+        @click.self="handleOverlayClick"
+      >
         <div
           :class="[
             'ds-dialog',
@@ -9,7 +13,7 @@
             {
               'ds-dialog-fullscreen': fullscreen,
               'ds-dialog-centered': centered,
-            }
+            },
           ]"
           :style="dialogStyle"
         >
@@ -18,9 +22,16 @@
             <slot name="header">
               <h3 class="ds-dialog-title">{{ title }}</h3>
             </slot>
-            <button v-if="showClose" class="ds-dialog-close" @click="handleClose">
+            <button
+              v-if="showClose"
+              class="ds-dialog-close"
+              @click="handleClose"
+            >
               <svg viewBox="0 0 24 24" width="16" height="16">
-                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                <path
+                  fill="currentColor"
+                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
               </svg>
             </button>
           </div>
@@ -36,7 +47,11 @@
               <DSButton variant="secondary" @click="handleCancel">
                 {{ cancelText }}
               </DSButton>
-              <DSButton variant="primary" @click="handleConfirm" :loading="confirmLoading">
+              <DSButton
+                variant="primary"
+                @click="handleConfirm"
+                :loading="confirmLoading"
+              >
                 {{ confirmText }}
               </DSButton>
             </slot>
@@ -48,13 +63,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue';
-import DSButton from './DSButton.vue';
+import { computed, watch } from "vue";
+import DSButton from "./DSButton.vue";
 
 interface Props {
   modelValue: boolean;
   title?: string;
-  size?: 'small' | 'medium' | 'large' | 'fullscreen';
+  size?: "small" | "medium" | "large" | "fullscreen";
   width?: string | number;
   fullscreen?: boolean;
   showClose?: boolean;
@@ -69,47 +84,48 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  title: '',
-  size: 'medium',
-  width: '',
+  title: "",
+  size: "medium",
+  width: "",
   fullscreen: false,
   showClose: true,
   showHeader: true,
   showFooter: false,
   closeOnClickOverlay: true,
   closeOnPressEscape: true,
-  confirmText: '确定',
-  cancelText: '取消',
+  confirmText: "确定",
+  cancelText: "取消",
   confirmLoading: false,
   centered: false,
 });
 
 const emit = defineEmits<{
-  'update:modelValue': [value: boolean];
-  'close': [];
-  'confirm': [];
-  'cancel': [];
+  "update:modelValue": [value: boolean];
+  close: [];
+  confirm: [];
+  cancel: [];
 }>();
 
 const dialogStyle = computed(() => {
   if (props.fullscreen) return {};
   if (props.width) {
-    const width = typeof props.width === 'number' ? `${props.width}px` : props.width;
-    return { width, maxWidth: '90vw' };
+    const width =
+      typeof props.width === "number" ? `${props.width}px` : props.width;
+    return { width, maxWidth: "90vw" };
   }
   return {};
 });
 
 const bodyStyle = computed(() => {
   if (props.fullscreen) {
-    return { maxHeight: 'calc(100vh - 120px)', overflow: 'auto' };
+    return { maxHeight: "calc(100vh - 120px)", overflow: "auto" };
   }
   return {};
 });
 
 const handleClose = () => {
-  emit('update:modelValue', false);
-  emit('close');
+  emit("update:modelValue", false);
+  emit("close");
 };
 
 const handleOverlayClick = () => {
@@ -119,35 +135,41 @@ const handleOverlayClick = () => {
 };
 
 const handleConfirm = () => {
-  emit('confirm');
+  emit("confirm");
 };
 
 const handleCancel = () => {
-  emit('update:modelValue', false);
-  emit('cancel');
+  emit("update:modelValue", false);
+  emit("cancel");
 };
 
 // ESC key handler
-watch(() => props.modelValue, (val) => {
-  if (val && props.closeOnPressEscape) {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        handleClose();
-      }
-    };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }
-});
+watch(
+  () => props.modelValue,
+  (val) => {
+    if (val && props.closeOnPressEscape) {
+      const handleEscape = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          handleClose();
+        }
+      };
+      document.addEventListener("keydown", handleEscape);
+      return () => document.removeEventListener("keydown", handleEscape);
+    }
+  },
+);
 
 // Lock body scroll when dialog is open
-watch(() => props.modelValue, (val) => {
-  if (val) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = '';
-  }
-});
+watch(
+  () => props.modelValue,
+  (val) => {
+    if (val) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  },
+);
 </script>
 
 <style scoped>
@@ -174,9 +196,11 @@ watch(() => props.modelValue, (val) => {
 }
 
 .ds-dialog {
-  background: var(--color-bg-card, #1A1A24);
+  background: var(--color-bg-card, #1a1a24);
   border-radius: var(--radius-xl, 16px);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.5),
+    0 8px 32px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.06);
   max-height: 90vh;
   display: flex;
@@ -227,14 +251,19 @@ watch(() => props.modelValue, (val) => {
   padding: 20px 24px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   flex-shrink: 0;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--pink-300) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 50%,
+    var(--pink-300) 100%
+  );
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   position: relative;
   overflow: hidden;
 }
 
 .ds-dialog-header::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   right: -20%;
@@ -250,7 +279,7 @@ watch(() => props.modelValue, (val) => {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   line-height: 1.4;
   position: relative;
   z-index: 1;
@@ -276,7 +305,7 @@ watch(() => props.modelValue, (val) => {
 
 .ds-dialog-close:hover {
   background: rgba(255, 255, 255, 0.2);
-  color: #FFFFFF;
+  color: #ffffff;
   transform: rotate(90deg);
 }
 
@@ -296,7 +325,7 @@ watch(() => props.modelValue, (val) => {
   gap: 12px;
   padding: 16px 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-  background: var(--color-bg-elevated, #22222E);
+  background: var(--color-bg-elevated, #22222e);
   border-radius: 0 0 var(--radius-xl) var(--radius-xl);
   flex-shrink: 0;
 }
@@ -313,7 +342,9 @@ watch(() => props.modelValue, (val) => {
 
 .ds-dialog-enter-active .ds-dialog,
 .ds-dialog-leave-active .ds-dialog {
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .ds-dialog-enter-from,

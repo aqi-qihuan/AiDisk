@@ -5,12 +5,48 @@
       <div
         v-for="(message, index) in messages"
         :key="index"
-        :class="['message-item', message.type === 'question' ? 'user-message' : 'assistant-message']"
+        :class="[
+          'message-item',
+          message.type === 'question' ? 'user-message' : 'assistant-message',
+        ]"
       >
         <!-- 头像 -->
         <div class="avatar">
-          <span v-if="message.type === 'question'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#DB2777" stroke-width="1.5"/><path d="M20 21a8 8 0 10-16 0" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-          <span v-else><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="10" rx="2" stroke="#A855F7" stroke-width="1.5"/><circle cx="9" cy="15" r="1" fill="#DB2777"/><circle cx="15" cy="15" r="1" fill="#DB2777"/><path d="M8 7V4a4 4 0 018 0v3" stroke="#DB2777" stroke-width="1.5"/></svg></span>
+          <span v-if="message.type === 'question'"
+            ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle
+                cx="12"
+                cy="8"
+                r="4"
+                stroke="#DB2777"
+                stroke-width="1.5"
+              />
+              <path
+                d="M20 21a8 8 0 10-16 0"
+                stroke="#A855F7"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              /></svg
+          ></span>
+          <span v-else
+            ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <rect
+                x="3"
+                y="11"
+                width="18"
+                height="10"
+                rx="2"
+                stroke="#A855F7"
+                stroke-width="1.5"
+              />
+              <circle cx="9" cy="15" r="1" fill="#DB2777" />
+              <circle cx="15" cy="15" r="1" fill="#DB2777" />
+              <path
+                d="M8 7V4a4 4 0 018 0v3"
+                stroke="#DB2777"
+                stroke-width="1.5"
+              /></svg
+          ></span>
         </div>
 
         <!-- 消息内容 -->
@@ -21,7 +57,31 @@
 
       <!-- 空状态提示 -->
       <div v-if="messages.length === 0" class="welcome-message">
-        <div class="welcome-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="url(#searchGrad)" stroke-width="1.5"><defs><linearGradient id="searchGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#DB2777"/><stop offset="100%" stop-color="#A855F7"/></linearGradient></defs><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/></svg></div>
+        <div class="welcome-icon">
+          <svg
+            width="64"
+            height="64"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="url(#searchGrad)"
+            stroke-width="1.5"
+          >
+            <defs>
+              <linearGradient
+                id="searchGrad"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stop-color="#DB2777" />
+                <stop offset="100%" stop-color="#A855F7" />
+              </linearGradient>
+            </defs>
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" stroke-linecap="round" />
+          </svg>
+        </div>
         <h3 class="welcome-title">AI 智能搜索</h3>
         <p class="welcome-description">输入问题，AI 为您智能解答</p>
         <div class="suggestions">
@@ -68,14 +128,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, nextTick } from 'vue';
-import DSButton from '@/components/design-system/DSButton.vue';
-import DSTag from '@/components/design-system/DSTag.vue';
+import { ref, nextTick } from "vue";
+import DSButton from "@/components/design-system/DSButton.vue";
+import DSTag from "@/components/design-system/DSTag.vue";
 
 // 存储问答消息
-const messages = ref<{ type: 'question' | 'answer'; content: string }[]>([]);
+const messages = ref<{ type: "question" | "answer"; content: string }[]>([]);
 // 用户输入的问题
-const question = ref('');
+const question = ref("");
 // 加载状态
 const isLoading = ref(false);
 // 消息列表引用
@@ -85,9 +145,9 @@ const inputRef = ref<HTMLInputElement | null>(null);
 
 // 建议问题
 const suggestions = ref([
-  '什么是人工智能？',
-  '如何学习编程？',
-  '云存储的优势是什么？'
+  "什么是人工智能？",
+  "如何学习编程？",
+  "云存储的优势是什么？",
 ]);
 
 // 滚动到底部
@@ -101,35 +161,38 @@ const scrollToBottom = () => {
 
 // 提交问题
 const submitQuestion = async () => {
-  if (question.value.trim() === '' || isLoading.value) return;
+  if (question.value.trim() === "" || isLoading.value) return;
 
   const userQuestion = question.value;
 
   // 添加用户问题到消息列表
-  messages.value.push({ type: 'question', content: userQuestion });
-  question.value = '';
+  messages.value.push({ type: "question", content: userQuestion });
+  question.value = "";
 
   // 添加加载中的答案
-  messages.value.push({ type: 'answer', content: '<div class="loading-dots">思考中...</div>' });
+  messages.value.push({
+    type: "answer",
+    content: '<div class="loading-dots">思考中...</div>',
+  });
 
   isLoading.value = true;
   scrollToBottom();
 
   try {
-    const response = await fetch('http://127.0.0.1:8081/ai/chat', {
-      method: 'POST',
+    const response = await fetch("http://127.0.0.1:8081/ai/chat", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ question: userQuestion })
+      body: JSON.stringify({ question: userQuestion }),
     });
 
-    if (!response.body) throw new Error('Response stream not available.');
+    if (!response.body) throw new Error("Response stream not available.");
 
     const reader = response.body.getReader();
-    const decoder = new TextDecoder('utf-8');
+    const decoder = new TextDecoder("utf-8");
 
-    let answerContent = '';
+    let answerContent = "";
 
     while (true) {
       const { done, value } = await reader.read();
@@ -141,8 +204,9 @@ const submitQuestion = async () => {
       scrollToBottom();
     }
   } catch (error) {
-    console.error('请求AI接口出错:', error);
-    messages.value[messages.value.length - 1].content = '❌ 请求出错，请稍后重试。';
+    console.error("请求AI接口出错:", error);
+    messages.value[messages.value.length - 1].content =
+      "❌ 请求出错，请稍后重试。";
   } finally {
     isLoading.value = false;
   }
@@ -156,7 +220,7 @@ const submitQuestion = async () => {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
 }
 
 /* 消息列表 */
@@ -219,7 +283,7 @@ const submitQuestion = async () => {
 }
 
 .message-item.user-message .message-content {
-  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
   color: white;
   box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
 }
@@ -338,7 +402,8 @@ const submitQuestion = async () => {
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {

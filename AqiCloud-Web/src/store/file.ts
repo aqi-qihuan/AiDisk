@@ -30,10 +30,10 @@ export const useFileStore = defineStore(
           const parsed = JSON.parse(value);
           localStorage.setItem(
             key,
-            JSON.stringify({ viewMode: parsed.viewMode })
+            JSON.stringify({ viewMode: parsed.viewMode }),
           );
         },
       },
     },
-  }
+  },
 );

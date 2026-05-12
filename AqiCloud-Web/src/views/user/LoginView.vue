@@ -8,16 +8,24 @@
     <div class="auth-card-hok">
       <div class="auth-card-header-hok">
         <div class="auth-logo-hok">A</div>
-        <h2 class="auth-title-hok">{{ t('login.title') }}</h2>
-        <p class="auth-subtitle-hok">{{ t('login.subtitle') }}</p>
+        <h2 class="auth-title-hok">{{ t("login.title") }}</h2>
+        <p class="auth-subtitle-hok">{{ t("login.subtitle") }}</p>
       </div>
 
       <div class="auth-body">
         <!-- 用户名 -->
         <div class="auth-input-hok">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="auth-input-icon-hok">
-            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            class="auth-input-icon-hok"
+          >
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
           </svg>
           <input
             v-model="loginForm.phone"
@@ -31,8 +39,17 @@
 
         <!-- 密码 -->
         <div class="auth-input-hok">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="auth-input-icon-hok">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            class="auth-input-icon-hok"
+          >
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0110 0v4" />
           </svg>
           <input
             v-model="loginForm.password"
@@ -42,31 +59,53 @@
             @keyup.enter="handleSubmit"
           />
         </div>
-        <span v-if="errors.password" class="error-text">{{ errors.password }}</span>
+        <span v-if="errors.password" class="error-text">{{
+          errors.password
+        }}</span>
 
         <!-- 记住我 + 忘记密码 -->
         <div class="auth-options">
           <label class="auth-remember">
             <div class="checkbox-hok">
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg
+                width="9"
+                height="9"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                stroke-width="3"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
             </div>
-            <span>{{ t('login.rememberMe') }}</span>
+            <span>{{ t("login.rememberMe") }}</span>
           </label>
-          <span class="auth-forgot">{{ t('auth.forgotPassword') }}</span>
+          <span class="auth-forgot">{{ t("auth.forgotPassword") }}</span>
         </div>
 
         <!-- 登录按钮 -->
         <button class="auth-btn-hok" :disabled="loading" @click="handleSubmit">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M13 12H3"/>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path
+              d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M13 12H3"
+            />
           </svg>
-          {{ loading ? t('common.loading') : t('login.submit') }}
+          {{ loading ? t("common.loading") : t("login.submit") }}
         </button>
 
         <!-- 注册链接 -->
         <p class="auth-footer-text">
-          {{ t('login.noAccount') }}
-          <router-link to="/user/register" class="auth-link">{{ t('login.registerLink') }} →</router-link>
+          {{ t("login.noAccount") }}
+          <router-link to="/user/register" class="auth-link"
+            >{{ t("login.registerLink") }} →</router-link
+          >
         </p>
       </div>
     </div>
@@ -78,7 +117,7 @@ import { ref, reactive } from "vue";
 import { useLoginUserStore } from "@/store/user";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 import DSButton from "@/components/design-system/DSButton.vue";
 
 const { t } = useI18n();
@@ -102,19 +141,19 @@ const clearError = (field: keyof typeof errors) => {
 };
 
 const handleSubmit = async () => {
-  Object.keys(errors).forEach(key => {
+  Object.keys(errors).forEach((key) => {
     errors[key as keyof typeof errors] = "";
   });
 
   if (!loginForm.phone) {
-    errors.phone = t('login.usernameRequired');
-    ElMessage.error(t('login.usernameRequired'));
+    errors.phone = t("login.usernameRequired");
+    ElMessage.error(t("login.usernameRequired"));
     return;
   }
 
   if (!loginForm.password) {
-    errors.password = t('login.passwordRequired');
-    ElMessage.error(t('login.passwordRequired'));
+    errors.password = t("login.passwordRequired");
+    ElMessage.error(t("login.passwordRequired"));
     return;
   }
 
@@ -122,8 +161,8 @@ const handleSubmit = async () => {
   try {
     await login(loginForm);
   } catch (error) {
-    console.error(t('login.errorTitle'), error);
-    ElMessage.error(t('login.errorMessage'));
+    console.error(t("login.errorTitle"), error);
+    ElMessage.error(t("login.errorMessage"));
   } finally {
     loading.value = false;
   }
@@ -154,7 +193,7 @@ const handleSubmit = async () => {
   height: 400px;
   top: -100px;
   right: -50px;
-  background: radial-gradient(circle, #DB2777, transparent);
+  background: radial-gradient(circle, #db2777, transparent);
 }
 
 .hok-glow-orb.gold {
@@ -162,7 +201,7 @@ const handleSubmit = async () => {
   height: 300px;
   bottom: -50px;
   left: -50px;
-  background: radial-gradient(circle, #D97706, transparent);
+  background: radial-gradient(circle, #d97706, transparent);
 }
 
 .hok-glow-orb.purple {
@@ -171,7 +210,7 @@ const handleSubmit = async () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, #7C3AED, transparent);
+  background: radial-gradient(circle, #7c3aed, transparent);
   opacity: 0.15;
 }
 
@@ -186,7 +225,9 @@ const handleSubmit = async () => {
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .auth-card-header-hok {
@@ -201,27 +242,29 @@ const handleSubmit = async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Plus Jakarta Sans', 'Fira Code', sans-serif;
+  font-family: "Plus Jakarta Sans", "Fira Code", sans-serif;
   font-size: 28px;
   font-weight: 800;
-  color: #0B0B10;
-  background: linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #FBBF24 100%);
+  color: #0b0b10;
+  background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
   border-radius: 14px;
-  box-shadow: 0 4px 20px rgba(217, 119, 6, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 20px rgba(217, 119, 6, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .auth-title-hok {
-  font-family: 'Plus Jakarta Sans', 'Fira Code', sans-serif;
+  font-family: "Plus Jakarta Sans", "Fira Code", sans-serif;
   font-size: 24px;
   font-weight: 700;
-  color: #F8FAFC;
+  color: #f8fafc;
   margin: 0 0 8px;
   letter-spacing: -0.02em;
 }
 
 .auth-subtitle-hok {
   font-size: 14px;
-  color: #94A3B8;
+  color: #94a3b8;
   margin: 0;
 }
 
@@ -241,7 +284,11 @@ const handleSubmit = async () => {
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 8px;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  font-family: 'Fira Sans', 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-family:
+    "Fira Sans",
+    "Plus Jakarta Sans",
+    -apple-system,
+    sans-serif;
   font-size: 14px;
 }
 
@@ -252,7 +299,7 @@ const handleSubmit = async () => {
 }
 
 .auth-input-icon-hok {
-  color: #64748B;
+  color: #64748b;
   flex-shrink: 0;
 }
 
@@ -263,17 +310,17 @@ const handleSubmit = async () => {
   background: transparent;
   font-family: inherit;
   font-size: inherit;
-  color: #F8FAFC;
+  color: #f8fafc;
   height: 32px;
 }
 
 .auth-input-hok input::placeholder {
-  color: #64748B;
+  color: #64748b;
 }
 
 .error-text {
   font-size: 12px;
-  color: #EF4444;
+  color: #ef4444;
   margin-top: -8px;
 }
 
@@ -290,7 +337,7 @@ const handleSubmit = async () => {
   gap: 8px;
   cursor: pointer;
   font-size: 13px;
-  color: #94A3B8;
+  color: #94a3b8;
 }
 
 .checkbox-hok {
@@ -305,13 +352,13 @@ const handleSubmit = async () => {
 
 .auth-forgot {
   font-size: 13px;
-  color: #FBBF24;
+  color: #fbbf24;
   cursor: pointer;
   transition: color 0.2s ease;
 }
 
 .auth-forgot:hover {
-  color: #FDE68A;
+  color: #fde68a;
 }
 
 /* 登录按钮 - 金色渐变 */
@@ -324,20 +371,24 @@ const handleSubmit = async () => {
   height: 48px;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(135deg, #D97706, #F59E0B, #FBBF24);
-  color: #0B0B10;
-  font-family: 'Plus Jakarta Sans', 'Fira Code', sans-serif;
+  background: linear-gradient(135deg, #d97706, #f59e0b, #fbbf24);
+  color: #0b0b10;
+  font-family: "Plus Jakarta Sans", "Fira Code", sans-serif;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 20px rgba(217, 119, 6, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 20px rgba(217, 119, 6, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
   letter-spacing: 0.02em;
 }
 
 .auth-btn-hok:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(217, 119, 6, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 8px 32px rgba(217, 119, 6, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .auth-btn-hok:active:not(:disabled) {
@@ -352,18 +403,18 @@ const handleSubmit = async () => {
 .auth-footer-text {
   text-align: center;
   font-size: 13px;
-  color: #64748B;
+  color: #64748b;
   margin: 0;
 }
 
 .auth-link {
-  color: #FBBF24;
+  color: #fbbf24;
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .auth-link:hover {
-  color: #FDE68A;
+  color: #fde68a;
 }
 </style>

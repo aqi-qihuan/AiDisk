@@ -7,13 +7,12 @@ import { useFileStores } from "@/store/filePath";
 
 export async function listFiles(
   params: {
-    parent_id: any
+    parent_id: any;
   },
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
-
-  useFileStores().addFilePath(params.parent_id.toString())
-  localStorage.setItem("parent_id", params.parent_id.toString())
+  useFileStores().addFilePath(params.parent_id.toString());
+  localStorage.setItem("parent_id", params.parent_id.toString());
   return request<API.JsonData>("/file/v1/list", {
     method: "GET",
     params: {
@@ -32,7 +31,7 @@ export async function getFolderContents(
   params: {
     parent_id: string | number;
   },
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/file/v1/list", {
     method: "GET",
@@ -46,13 +45,12 @@ export async function getFolderContents(
   });
 }
 
-
 /**根据条件查询文件列表 */
 export async function searchFilesByName(
   params: {
-    search: any
+    search: any;
   },
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/file/v1/search", {
     method: "GET",
@@ -67,7 +65,6 @@ export async function searchFilesByName(
   });
 }
 
-
 /** 获取文件树 GET /v1/file/get-file-tree */
 export async function getFileTree(options?: { [key: string]: any }) {
   return request<API.JsonData>("/file/v1/folder/tree", {
@@ -79,7 +76,7 @@ export async function getFileTree(options?: { [key: string]: any }) {
 /** 创建文件夹 POST /file/v1/create_folder */
 export async function createFolder(
   body: API.CreateFileRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/file/v1/create_folder", {
     method: "POST",
@@ -91,12 +88,11 @@ export async function createFolder(
   });
 }
 
-
 /** 1.获取分片上传进度 GET /file/v1/chunk_upload_progress/{identifier} */
 export async function taskInfo(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.taskInfoParams,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   const { identifier: param0, ...queryParams } = params;
   return request<API.JsonData>(`/file/v1/chunk_upload_progress/${param0}`, {
@@ -106,11 +102,10 @@ export async function taskInfo(
   });
 }
 
-
 /** 2.创建分片上传任务 POST /v1/file */
 export async function initTask(
   body: API.ChunkInitTaskRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/file/v1/init_file_chunk_task", {
     method: "POST",
@@ -126,21 +121,23 @@ export async function initTask(
 export async function preSignUploadUrl(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.preSignUploadUrlParams,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   const { identifier: param0, partNumber: param1, ...queryParams } = params;
-  return request<API.JsonData>(`/file/v1/get_chunk_upload_url/${param0}/${param1}`, {
-    method: "GET",
-    params: { ...queryParams },
-    ...(options || {}),
-  });
+  return request<API.JsonData>(
+    `/file/v1/get_chunk_upload_url/${param0}/${param1}`,
+    {
+      method: "GET",
+      params: { ...queryParams },
+      ...(options || {}),
+    },
+  );
 }
-
 
 /** 4.合并分片 POST /file/v1/merge_file_chunk */
 export async function merge(
   body: API.FileMergeRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/file/v1/merge_file_chunk", {
     method: "POST",
@@ -155,7 +152,7 @@ export async function merge(
 /** 批量删除文件 POST /file/v1/del_batch */
 export async function delFiles(
   body: API.BatchFilesRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/file/v1/del_batch", {
     method: "POST",
@@ -170,7 +167,7 @@ export async function delFiles(
 /** 批量移动文件 POST /file/v1/move_batch */
 export async function moveFiles(
   body: API.BatchFilesRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/file/v1/move_batch", {
     method: "POST",
@@ -185,7 +182,7 @@ export async function moveFiles(
 /** 批量复制文件 POST /file/v1/copy_batch */
 export async function copyFiles(
   body: API.BatchFilesRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/file/v1/copy_batch", {
     method: "POST",
@@ -200,7 +197,7 @@ export async function copyFiles(
 /** 文件重命名 POST /file/v1/rename_file */
 export async function renameFile(
   body: API.FileUpdateRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/file/v1/rename_file", {
     method: "POST",
@@ -215,9 +212,8 @@ export async function renameFile(
 /** 获得文件下载地址 GET /v1/file/getDownloadUrl */
 export async function downloadUrlParam(
   body: API.BatchFilesRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  
 ) {
   return request<API.JsonData>("/file/v1/batch_download_url", {
     method: "POST",
@@ -233,7 +229,7 @@ export async function downloadUrlParam(
 export async function preview(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.previewParams,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<any>("/file/v1/preview", {
     method: "GET",
@@ -248,7 +244,7 @@ export async function preview(
 /** 文件秒传 POST /file/v1/second_upload */
 export async function secUpload(
   body: API.SecUploadRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/file/v1/second_upload", {
     method: "POST",
@@ -262,7 +258,7 @@ export async function secUpload(
 // 单文件上传 /file/v1/upload
 export async function uploadFiles(
   data: API.UploadFile,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/file/v1/upload", {
     method: "POST",
@@ -274,16 +270,15 @@ export async function uploadFiles(
   });
 }
 
-
 // 单文件下载 /file/v1/download
 export async function downloadFiles(
   params: API.DownloadUrlParams,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.JsonData>("/file/v1/download", {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     params: {
       ...params,
@@ -299,17 +294,15 @@ export async function batchDownloadFiles(
   params: {
     fileIds: number[];
   },
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<Blob>("/file/v1/batch_download", {
-    method: 'POST',
+    method: "POST",
     params: {
-      fileIds: params.fileIds.join(','),
+      fileIds: params.fileIds.join(","),
     },
     responseType: "blob",
     timeout: 600000,
     ...(options || {}),
   });
 }
-
-

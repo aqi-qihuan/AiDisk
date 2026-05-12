@@ -3,7 +3,7 @@
     :class="[
       'ds-avatar',
       `ds-avatar-${size}`,
-      { 'ds-avatar-circle': shape === 'circle' }
+      { 'ds-avatar-circle': shape === 'circle' },
     ]"
     :style="avatarStyle"
   >
@@ -20,7 +20,10 @@
     <span v-else class="ds-avatar-icon">
       <slot>
         <svg viewBox="0 0 24 24" width="60%" height="60%">
-          <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+          <path
+            fill="currentColor"
+            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+          />
         </svg>
       </slot>
     </span>
@@ -28,26 +31,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed } from "vue";
 
 interface Props {
   src?: string;
   alt?: string;
-  size?: 'small' | 'medium' | 'large' | number;
-  shape?: 'circle' | 'square';
+  size?: "small" | "medium" | "large" | number;
+  shape?: "circle" | "square";
   text?: string;
   bgColor?: string;
   textColor?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  src: '',
-  alt: '',
-  size: 'medium',
-  shape: 'circle',
-  text: '',
-  bgColor: '',
-  textColor: '',
+  src: "",
+  alt: "",
+  size: "medium",
+  shape: "circle",
+  text: "",
+  bgColor: "",
+  textColor: "",
 });
 
 const imageError = ref(false);
@@ -56,25 +59,25 @@ const displayText = computed(() => {
   if (props.text) {
     return props.text.slice(0, 2).toUpperCase();
   }
-  return '';
+  return "";
 });
 
 const avatarStyle = computed(() => {
   const style: Record<string, string> = {};
-  
-  if (typeof props.size === 'number') {
+
+  if (typeof props.size === "number") {
     style.width = `${props.size}px`;
     style.height = `${props.size}px`;
   }
-  
+
   if (props.bgColor) {
     style.backgroundColor = props.bgColor;
   }
-  
+
   if (props.textColor) {
     style.color = props.textColor;
   }
-  
+
   return style;
 });
 
@@ -88,8 +91,8 @@ const handleImageError = () => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #E0E7FF;
-  color: #6366F1;
+  background-color: #e0e7ff;
+  color: #6366f1;
   overflow: hidden;
   flex-shrink: 0;
   box-sizing: border-box;

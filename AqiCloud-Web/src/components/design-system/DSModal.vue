@@ -1,7 +1,14 @@
 <template>
   <Teleport to="body">
     <Transition name="ds-modal-fade">
-      <div v-if="visible" class="ds-modal-overlay glass-overlay" @click="handleOverlayClick" role="dialog" :aria-label="title || 'Modal'" aria-modal="true">
+      <div
+        v-if="visible"
+        class="ds-modal-overlay glass-overlay"
+        @click="handleOverlayClick"
+        role="dialog"
+        :aria-label="title || 'Modal'"
+        aria-modal="true"
+      >
         <Transition name="ds-modal-scale">
           <div
             v-if="visible"
@@ -41,28 +48,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue';
-import { X } from 'lucide-vue-next';
+import { ref, onMounted, onUnmounted, watch, nextTick } from "vue";
+import { X } from "lucide-vue-next";
 
 interface Props {
   modelValue: boolean;
   title?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  size?: "sm" | "md" | "lg" | "xl" | "full";
   closable?: boolean;
   maskClosable?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  title: '',
-  size: 'md',
+  title: "",
+  size: "md",
   closable: true,
   maskClosable: true,
 });
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: boolean): void;
-  (e: 'close'): void;
-  (e: 'open'): void;
+  (e: "update:modelValue", value: boolean): void;
+  (e: "close"): void;
+  (e: "open"): void;
 }>();
 
 const visible = ref(props.modelValue);
@@ -79,18 +86,18 @@ watch(
     } else {
       close();
     }
-  }
+  },
 );
 
 // 打开模态框
 const open = () => {
   // 保存当前焦点元素
   previousFocusElement = document.activeElement as HTMLElement;
-  
+
   visible.value = true;
-  emit('update:modelValue', true);
-  emit('open');
-  
+  emit("update:modelValue", true);
+  emit("open");
+
   // 焦点陷阱
   nextTick(() => {
     trapFocus();
@@ -100,9 +107,9 @@ const open = () => {
 // 关闭模态框
 const close = () => {
   visible.value = false;
-  emit('update:modelValue', false);
-  emit('close');
-  
+  emit("update:modelValue", false);
+  emit("close");
+
   // 恢复焦点
   if (previousFocusElement) {
     previousFocusElement.focus();
@@ -119,11 +126,11 @@ const handleOverlayClick = () => {
 // 焦点陷阱
 const trapFocus = () => {
   if (!modalRef.value) return;
-  
+
   const focusableElements = modalRef.value.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
   );
-  
+
   if (focusableElements.length > 0) {
     (focusableElements[0] as HTMLElement).focus();
   }
@@ -132,21 +139,23 @@ const trapFocus = () => {
 // 键盘事件处理
 const handleKeydown = (event: KeyboardEvent) => {
   if (!visible.value) return;
-  
+
   // ESC 关闭
-  if (event.key === 'Escape' && props.closable) {
+  if (event.key === "Escape" && props.closable) {
     close();
   }
-  
+
   // Tab 焦点陷阱
-  if (event.key === 'Tab' && modalRef.value) {
+  if (event.key === "Tab" && modalRef.value) {
     const focusableElements = modalRef.value.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
-    
+
     const firstElement = focusableElements[0] as HTMLElement;
-    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
-    
+    const lastElement = focusableElements[
+      focusableElements.length - 1
+    ] as HTMLElement;
+
     if (event.shiftKey) {
       if (document.activeElement === firstElement) {
         lastElement.focus();
@@ -163,7 +172,7 @@ const handleKeydown = (event: KeyboardEvent) => {
 
 // 组件挂载
 onMounted(() => {
-  document.addEventListener('keydown', handleKeydown);
+  document.addEventListener("keydown", handleKeydown);
   if (props.modelValue) {
     open();
   }
@@ -171,7 +180,7 @@ onMounted(() => {
 
 // 组件卸载
 onUnmounted(() => {
-  document.removeEventListener('keydown', handleKeydown);
+  document.removeEventListener("keydown", handleKeydown);
 });
 
 // 暴露方法
@@ -316,23 +325,23 @@ defineExpose({
   .ds-modal-overlay {
     padding: 10px;
   }
-  
+
   .ds-modal {
     max-height: 95vh;
   }
-  
+
   .ds-modal-header {
     padding: 16px;
   }
-  
+
   .ds-modal-body {
     padding: 16px;
   }
-  
+
   .ds-modal-footer {
     padding: 12px 16px;
   }
-  
+
   .ds-modal-title {
     font-size: var(--text-lg);
   }

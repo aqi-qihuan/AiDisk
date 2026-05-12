@@ -7,11 +7,18 @@
       <!-- 色彩系统 -->
       <section class="design-section">
         <h2 class="section-title">色彩系统</h2>
-        
+
         <h3 class="subsection-title">主色调</h3>
         <div class="color-grid">
-          <div class="color-swatch" v-for="color in primaryColors" :key="color.name">
-            <div class="color-preview" :style="{ backgroundColor: color.hex }"></div>
+          <div
+            class="color-swatch"
+            v-for="color in primaryColors"
+            :key="color.name"
+          >
+            <div
+              class="color-preview"
+              :style="{ backgroundColor: color.hex }"
+            ></div>
             <div class="color-info">
               <div class="color-name">{{ color.name }}</div>
               <div class="color-hex">{{ color.hex }}</div>
@@ -21,8 +28,15 @@
 
         <h3 class="subsection-title">功能色</h3>
         <div class="color-grid">
-          <div class="color-swatch" v-for="color in functionalColors" :key="color.name">
-            <div class="color-preview" :style="{ backgroundColor: color.hex }"></div>
+          <div
+            class="color-swatch"
+            v-for="color in functionalColors"
+            :key="color.name"
+          >
+            <div
+              class="color-preview"
+              :style="{ backgroundColor: color.hex }"
+            ></div>
             <div class="color-info">
               <div class="color-name">{{ color.name }}</div>
               <div class="color-hex">{{ color.hex }}</div>
@@ -34,7 +48,7 @@
       <!-- 排版系统 -->
       <section class="design-section">
         <h2 class="section-title">排版系统</h2>
-        
+
         <div class="typography-demo">
           <h1 class="typo-h1">H1 - 主标题 (48px)</h1>
           <h2 class="typo-h2">H2 - 章节标题 (36px)</h2>
@@ -50,18 +64,18 @@
       <!-- 按钮组件 -->
       <section class="design-section">
         <h2 class="section-title">按钮组件</h2>
-        
+
         <div class="button-group">
           <div class="button-row">
             <button class="ds-btn ds-btn-primary">主要按钮</button>
             <button class="ds-btn ds-btn-primary" disabled>禁用状态</button>
           </div>
-          
+
           <div class="button-row">
             <button class="ds-btn ds-btn-secondary">次要按钮</button>
             <button class="ds-btn ds-btn-secondary" disabled>禁用状态</button>
           </div>
-          
+
           <div class="button-row">
             <button class="ds-btn ds-btn-cta">CTA按钮</button>
             <button class="ds-btn ds-btn-cta" disabled>禁用状态</button>
@@ -72,26 +86,35 @@
       <!-- 输入框组件 -->
       <section class="design-section">
         <h2 class="section-title">输入框组件</h2>
-        
+
         <div class="input-demo">
           <div class="ds-input-group">
             <label class="ds-input-label">用户名</label>
             <input type="text" class="ds-input" placeholder="请输入用户名" />
           </div>
-          
+
           <div class="ds-input-group">
             <label class="ds-input-label">密码</label>
             <input type="password" class="ds-input" placeholder="请输入密码" />
           </div>
-          
+
           <div class="ds-input-group">
             <label class="ds-input-label">禁用状态</label>
-            <input type="text" class="ds-input" disabled placeholder="禁用的输入框" />
+            <input
+              type="text"
+              class="ds-input"
+              disabled
+              placeholder="禁用的输入框"
+            />
           </div>
-          
+
           <div class="ds-input-group">
             <label class="ds-input-label">错误状态</label>
-            <input type="text" class="ds-input ds-input-error" placeholder="有错误的输入框" />
+            <input
+              type="text"
+              class="ds-input ds-input-error"
+              placeholder="有错误的输入框"
+            />
             <span class="ds-input-error-text">请输入有效的内容</span>
           </div>
         </div>
@@ -100,21 +123,23 @@
       <!-- 卡片组件 -->
       <section class="design-section">
         <h2 class="section-title">卡片组件</h2>
-        
+
         <div class="card-grid">
           <div class="ds-card">
             <div class="ds-card-header">
               <h3 class="ds-card-title">卡片标题</h3>
             </div>
             <div class="ds-card-body">
-              <p class="ds-card-text">这是卡片的内容区域。可以放置文本、图片或其他组件。</p>
+              <p class="ds-card-text">
+                这是卡片的内容区域。可以放置文本、图片或其他组件。
+              </p>
             </div>
             <div class="ds-card-footer">
               <button class="ds-btn ds-btn-secondary">取消</button>
               <button class="ds-btn ds-btn-primary">确认</button>
             </div>
           </div>
-          
+
           <div class="ds-card">
             <div class="ds-card-body">
               <h3 class="ds-card-title">简化卡片</h3>
@@ -128,7 +153,7 @@
       <!-- 标签 -->
       <section class="design-section">
         <h2 class="section-title">标签</h2>
-        
+
         <div class="tag-group">
           <span class="ds-tag ds-tag-primary">主要标签</span>
           <span class="ds-tag ds-tag-success">成功</span>
@@ -141,19 +166,21 @@
       <!-- 动画效果 -->
       <section class="design-section">
         <h2 class="section-title">动画效果</h2>
-        
+
         <div class="animation-group">
           <button class="ds-btn ds-btn-primary hover-lift">悬停提升</button>
           <button class="ds-btn ds-btn-secondary hover-shadow">悬停阴影</button>
           <button class="ds-btn ds-btn-cta transition-fast">快速过渡</button>
-          <button class="ds-btn ds-btn-primary transition-slow">慢速过渡</button>
+          <button class="ds-btn ds-btn-primary transition-slow">
+            慢速过渡
+          </button>
         </div>
       </section>
 
       <!-- 响应式示例 -->
       <section class="design-section">
         <h2 class="section-title">响应式网格</h2>
-        
+
         <div class="responsive-grid">
           <div class="grid-card">
             <div class="grid-number">1</div>
@@ -179,18 +206,18 @@
 
 <script setup lang="ts">
 const primaryColors = [
-  { name: 'Primary', hex: '#6366F1' },
-  { name: 'Secondary', hex: '#818CF8' },
-  { name: 'CTA', hex: '#10B981' },
-  { name: 'Background', hex: '#F5F3FF' },
-  { name: 'Text Primary', hex: '#1E1B4B' },
+  { name: "Primary", hex: "#6366F1" },
+  { name: "Secondary", hex: "#818CF8" },
+  { name: "CTA", hex: "#10B981" },
+  { name: "Background", hex: "#F5F3FF" },
+  { name: "Text Primary", hex: "#1E1B4B" },
 ];
 
 const functionalColors = [
-  { name: 'Success', hex: '#10B981' },
-  { name: 'Warning', hex: '#F59E0B' },
-  { name: 'Error', hex: '#EF4444' },
-  { name: 'Info', hex: '#3B82F6' },
+  { name: "Success", hex: "#10B981" },
+  { name: "Warning", hex: "#F59E0B" },
+  { name: "Error", hex: "#EF4444" },
+  { name: "Info", hex: "#3B82F6" },
 ];
 </script>
 
@@ -198,7 +225,7 @@ const functionalColors = [
 /* Container */
 .design-system-demo {
   min-height: 100vh;
-  background-color: #F5F3FF;
+  background-color: #f5f3ff;
   padding: 24px;
   box-sizing: border-box;
   overflow-y: auto;
@@ -213,19 +240,19 @@ const functionalColors = [
 .design-system-title {
   font-size: 48px;
   font-weight: 700;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0 0 16px 0;
 }
 
 .design-system-subtitle {
   font-size: 18px;
-  color: #64748B;
+  color: #64748b;
   margin: 0 0 48px 0;
 }
 
 /* Sections */
 .design-section {
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 12px;
   padding: 32px;
   margin-bottom: 32px;
@@ -235,14 +262,14 @@ const functionalColors = [
 .section-title {
   font-size: 36px;
   font-weight: 600;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0 0 24px 0;
 }
 
 .subsection-title {
   font-size: 20px;
   font-weight: 500;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 24px 0 16px 0;
 }
 
@@ -264,7 +291,7 @@ const functionalColors = [
   width: 100px;
   height: 100px;
   border-radius: 8px;
-  border: 1px solid #E2E8F0;
+  border: 1px solid #e2e8f0;
 }
 
 .color-info {
@@ -273,11 +300,11 @@ const functionalColors = [
 
 .color-name {
   font-weight: 500;
-  color: #1E1B4B;
+  color: #1e1b4b;
 }
 
 .color-hex {
-  color: #64748B;
+  color: #64748b;
 }
 
 /* Typography */
@@ -290,52 +317,52 @@ const functionalColors = [
 .typo-h1 {
   font-size: 48px;
   font-weight: 700;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0;
 }
 
 .typo-h2 {
   font-size: 36px;
   font-weight: 600;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0;
 }
 
 .typo-h3 {
   font-size: 24px;
   font-weight: 600;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0;
 }
 
 .typo-h4 {
   font-size: 20px;
   font-weight: 500;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0;
 }
 
 .typo-lg {
   font-size: 18px;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0;
 }
 
 .typo-base {
   font-size: 16px;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0;
 }
 
 .typo-sm {
   font-size: 14px;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0;
 }
 
 .typo-xs {
   font-size: 12px;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0;
 }
 
@@ -363,29 +390,29 @@ const functionalColors = [
 }
 
 .ds-btn-primary {
-  background-color: #6366F1;
+  background-color: #6366f1;
   color: white;
 }
 
 .ds-btn-primary:hover:not(:disabled) {
-  background-color: #4F46E5;
+  background-color: #4f46e5;
   transform: translateY(-1px);
 }
 
 .ds-btn-primary:disabled {
-  background-color: #E2E8F0;
+  background-color: #e2e8f0;
   cursor: not-allowed;
 }
 
 .ds-btn-secondary {
-  background-color: #FFFFFF;
-  color: #6366F1;
-  border: 1px solid #E2E8F0;
+  background-color: #ffffff;
+  color: #6366f1;
+  border: 1px solid #e2e8f0;
 }
 
 .ds-btn-secondary:hover:not(:disabled) {
-  border-color: #6366F1;
-  background-color: #F5F3FF;
+  border-color: #6366f1;
+  background-color: #f5f3ff;
 }
 
 .ds-btn-secondary:disabled {
@@ -394,7 +421,7 @@ const functionalColors = [
 }
 
 .ds-btn-cta {
-  background-color: #10B981;
+  background-color: #10b981;
   color: white;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
@@ -427,37 +454,37 @@ const functionalColors = [
 .ds-input-label {
   font-size: 14px;
   font-weight: 500;
-  color: #1E1B4B;
+  color: #1e1b4b;
 }
 
 .ds-input {
   padding: 12px 16px;
-  border: 1px solid #E2E8F0;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
   font-size: 16px;
-  color: #1E1B4B;
+  color: #1e1b4b;
   transition: all 0.2s ease;
   box-sizing: border-box;
 }
 
 .ds-input:focus {
   outline: none;
-  border-color: #6366F1;
+  border-color: #6366f1;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .ds-input:disabled {
-  background-color: #F5F3FF;
+  background-color: #f5f3ff;
   cursor: not-allowed;
 }
 
 .ds-input-error {
-  border-color: #EF4444;
+  border-color: #ef4444;
 }
 
 .ds-input-error-text {
   font-size: 12px;
-  color: #EF4444;
+  color: #ef4444;
 }
 
 /* Card */
@@ -468,12 +495,12 @@ const functionalColors = [
 }
 
 .ds-card {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   overflow: hidden;
   transition: box-shadow 0.2s ease;
-  border: 1px solid #E2E8F0;
+  border: 1px solid #e2e8f0;
 }
 
 .ds-card:hover {
@@ -482,13 +509,13 @@ const functionalColors = [
 
 .ds-card-header {
   padding: 20px 24px;
-  border-bottom: 1px solid #E2E8F0;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .ds-card-title {
   font-size: 20px;
   font-weight: 500;
-  color: #1E1B4B;
+  color: #1e1b4b;
   margin: 0;
 }
 
@@ -498,7 +525,7 @@ const functionalColors = [
 
 .ds-card-text {
   font-size: 16px;
-  color: #64748B;
+  color: #64748b;
   margin: 0;
 }
 
@@ -507,8 +534,8 @@ const functionalColors = [
   justify-content: flex-end;
   gap: 12px;
   padding: 16px 24px;
-  border-top: 1px solid #E2E8F0;
-  background-color: #F5F3FF;
+  border-top: 1px solid #e2e8f0;
+  background-color: #f5f3ff;
 }
 
 /* Tags */
@@ -528,27 +555,27 @@ const functionalColors = [
 
 .ds-tag-primary {
   background-color: rgba(99, 102, 241, 0.1);
-  color: #6366F1;
+  color: #6366f1;
 }
 
 .ds-tag-success {
   background-color: rgba(16, 185, 129, 0.1);
-  color: #10B981;
+  color: #10b981;
 }
 
 .ds-tag-warning {
   background-color: rgba(245, 158, 11, 0.1);
-  color: #F59E0B;
+  color: #f59e0b;
 }
 
 .ds-tag-error {
   background-color: rgba(239, 68, 68, 0.1);
-  color: #EF4444;
+  color: #ef4444;
 }
 
 .ds-tag-info {
   background-color: rgba(59, 130, 246, 0.1);
-  color: #3B82F6;
+  color: #3b82f6;
 }
 
 /* Animation */
@@ -594,23 +621,23 @@ const functionalColors = [
 }
 
 .grid-card {
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 12px;
   padding: 24px;
   text-align: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  border: 1px solid #E2E8F0;
+  border: 1px solid #e2e8f0;
 }
 
 .grid-number {
   font-size: 48px;
   font-weight: 700;
-  color: #6366F1;
+  color: #6366f1;
   margin-bottom: 8px;
 }
 
 .grid-desc {
   font-size: 14px;
-  color: #64748B;
+  color: #64748b;
 }
 </style>
