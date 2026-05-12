@@ -15,9 +15,17 @@ import (
 	"github.com/aqi/AqiCloud-Ai/internal/core"
 	"github.com/aqi/AqiCloud-Ai/internal/handlers"
 	"github.com/aqi/AqiCloud-Ai/internal/util"
+	"github.com/aqi/AqiCloud-Ai/docs"
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// @title AI智能体中心API
+// @version 1.0
+// @description AI智能体中心API服务，提供聊天、文档处理、网盘查询等功能
+// @host localhost:8000
+// @BasePath /
 func main() {
 	start := time.Now()
 
@@ -56,6 +64,13 @@ func main() {
 
 	// 注册路由
 	handlers.RegisterRoutes(r)
+
+	// 配置 Swagger 文档
+	docs.SwaggerInfo.Host = cfg.ListenAddr
+	if cfg.ListenAddr[0] == ':' {
+		docs.SwaggerInfo.Host = "localhost" + cfg.ListenAddr
+	}
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	elapsed := time.Since(start).Milliseconds()
 

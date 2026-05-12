@@ -1,0 +1,9 @@
+basePath: /
+host: localhost:8000
+info:
+  contact: {}
+  description: AI智能体中心API服务，提供聊天、文档处理、网盘查询等功能
+  title: AI智能体中心API
+  version: "1.0"
+paths: {}
+swagger: "2.0"

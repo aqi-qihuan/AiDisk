@@ -1,0 +1,12 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "AI智能体中心API服务，提供聊天、文档处理、网盘查询等功能",
+        "title": "AI智能体中心API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8000",
+    "basePath": "/",
+    "paths": {}
+}

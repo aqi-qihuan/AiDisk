@@ -48,7 +48,14 @@ func AuthMiddleware() gin.HandlerFunc {
 func RegisterRoutes(r *gin.Engine) {
 	// 全局 CORS 中间件
 	r.Use(core.CorsMiddleware())
+
 	// 根路径
+	// @Summary API根路径
+	// @Description 返回API服务基本信息
+	// @Tags System
+	// @Produce json
+	// @Success 200 {object} map[string]interface{}
+	// @Router / [get]
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message":          "欢迎使用AI智能体中心API",
@@ -57,7 +64,47 @@ func RegisterRoutes(r *gin.Engine) {
 		})
 	})
 
+	// /api 路径 - 列出所有可用接口
+	// @Summary API接口列表
+	// @Description 返回所有可用的API接口列表
+	// @Tags System
+	// @Produce json
+	// @Success 200 {object} map[string]interface{}
+	// @Router /api [get]
+	r.GET("/api", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "AI智能体中心API",
+			"version": "1.0.0",
+			"endpoints": map[string]interface{}{
+				"chat": map[string]interface{}{
+					"base":            "/api/chat",
+					"stream":          "POST /api/chat/stream",
+					"providers":       "GET  /api/chat/providers",
+					"switch-provider": "POST /api/chat/switch-provider",
+					"history":         "GET  /api/chat/history",
+					"clear-history":   "DELETE /api/chat/history",
+					"token-usage":     "GET  /api/chat/token-usage",
+					"global-usage":    "GET  /api/chat/token-usage/global",
+				},
+				"document": map[string]interface{}{
+					"base":      "/api/document",
+					"stream":    "POST /api/document/stream",
+					"providers": "GET  /api/document/providers",
+				},
+				"pan": map[string]interface{}{
+					"base":      "/api/pan",
+					"query":     "POST /api/pan/query",
+					"providers": "GET  /api/pan/providers",
+				},
+			},
+			"docs": "/swagger/index.html",
+		})
+	})
+
 	// ===== Chat 路由 =====
+	// @Summary Chat API分组
+	// @Tags Chat
+	r.Group("/api/chat")
 	chat := r.Group("/api/chat")
 	{
 		chat.POST("/stream", AuthMiddleware(), chatStream)
@@ -70,6 +117,9 @@ func RegisterRoutes(r *gin.Engine) {
 	}
 
 	// ===== Document 路由 =====
+	// @Summary Document API分组
+	// @Tags Document
+	r.Group("/api/document")
 	doc := r.Group("/api/document")
 	{
 		doc.POST("/stream", docStream)
@@ -77,6 +127,9 @@ func RegisterRoutes(r *gin.Engine) {
 	}
 
 	// ===== Pan 路由 =====
+	// @Summary Pan API分组
+	// @Tags Pan
+	r.Group("/api/pan")
 	pan := r.Group("/api/pan")
 	{
 		pan.POST("/query", AuthMiddleware(), panQuery)
