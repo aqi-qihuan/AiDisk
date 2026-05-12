@@ -7,7 +7,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/tools"
+	"github.com/aqi/AqiCloud-Ai/internal/tools"
 	"github.com/cloudwego/eino/components/tool"
 	"github.com/cloudwego/eino/schema"
 )

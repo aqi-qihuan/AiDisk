@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/models"
+	"github.com/aqi/AqiCloud-Ai/internal/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	gormlogger "gorm.io/gorm/logger"

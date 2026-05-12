@@ -3,8 +3,8 @@ package controller
 import (
 	"net/http"
 
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/model"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/service"
+	"github.com/aqi/AqiCloud-Agent/internal/model"
+	"github.com/aqi/AqiCloud-Agent/internal/service"
 	"github.com/gin-gonic/gin"
 )
 

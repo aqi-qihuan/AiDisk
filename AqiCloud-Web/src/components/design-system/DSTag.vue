@@ -19,7 +19,7 @@
 import { defineProps, defineEmits } from 'vue';
 
 interface Props {
-  variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info';
+  variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info' | 'gold';
   size?: 'small' | 'medium' | 'large';
   closeable?: boolean;
   rounded?: boolean;
@@ -104,6 +104,13 @@ const handleClose = (event: MouseEvent) => {
 .ds-tag-info {
   background-color: rgba(59, 130, 246, 0.1);
   color: #3B82F6;
+}
+
+/* Tag Gold — HOK 金色标签 */
+.ds-tag-gold {
+  background: rgba(217, 119, 6, 0.12);
+  color: var(--color-gold, #FBBF24);
+  border: 1px solid rgba(217, 119, 6, 0.15);
 }
 
 /* Rounded */

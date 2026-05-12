@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/config"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/model"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/util"
+	"github.com/aqi/AqiCloud-Agent/internal/config"
+	"github.com/aqi/AqiCloud-Agent/internal/model"
+	"github.com/aqi/AqiCloud-Agent/internal/util"
 	"gorm.io/gorm"
 )
 
@@ -141,8 +141,8 @@ func (s *RecycleService) restoreRecursive(ctx context.Context, db *gorm.DB, file
 	}
 
 	db.WithContext(ctx).Model(&model.AccountFile{}).Where("id = ?", fileID).Updates(map[string]interface{}{
-		"del":      0,
-		"del_time": nil,
+		"del":       0,
+		"del_time":  nil,
 		"file_name": newName,
 	})
 }

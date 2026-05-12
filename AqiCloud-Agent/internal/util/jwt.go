@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/config"
+	"github.com/aqi/AqiCloud-Agent/internal/config"
 	"github.com/golang-jwt/jwt/v5"
 )
 

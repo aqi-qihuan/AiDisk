@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/agents"
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/core"
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/models"
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/services"
+	"github.com/aqi/AqiCloud-Ai/internal/agents"
+	"github.com/aqi/AqiCloud-Ai/internal/core"
+	"github.com/aqi/AqiCloud-Ai/internal/models"
+	"github.com/aqi/AqiCloud-Ai/internal/services"
 	"github.com/cloudwego/eino/schema"
 	"github.com/gin-gonic/gin"
 )

@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/config"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/model"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/util"
+	"github.com/aqi/AqiCloud-Agent/internal/config"
+	"github.com/aqi/AqiCloud-Agent/internal/model"
+	"github.com/aqi/AqiCloud-Agent/internal/util"
 	"gorm.io/gorm"
 )
 

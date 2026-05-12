@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/core"
+	"github.com/aqi/AqiCloud-Ai/internal/core"
 	"github.com/cloudwego/eino/callbacks"
 	"github.com/cloudwego/eino/components/model"
 	"github.com/cloudwego/eino/components/tool"

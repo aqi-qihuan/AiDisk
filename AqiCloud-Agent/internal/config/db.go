@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/model"
+	"github.com/aqi/AqiCloud-Agent/internal/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

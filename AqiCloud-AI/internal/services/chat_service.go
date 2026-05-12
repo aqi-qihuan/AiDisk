@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/core"
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/models"
+	"github.com/aqi/AqiCloud-Ai/internal/core"
+	"github.com/aqi/AqiCloud-Ai/internal/models"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )
@@ -30,10 +30,10 @@ type ChatService struct {
 }
 
 var (
-	chatServiceMu     sync.Mutex
-	chatServiceCache  = make(map[string]*ChatService)
-	redisOnce         sync.Once
-	redisClient       *redis.Client
+	chatServiceMu    sync.Mutex
+	chatServiceCache = make(map[string]*ChatService)
+	redisOnce        sync.Once
+	redisClient      *redis.Client
 )
 
 func getRedisClient() *redis.Client {

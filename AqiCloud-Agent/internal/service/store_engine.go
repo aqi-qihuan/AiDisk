@@ -10,8 +10,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/config"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/model"
+	"github.com/aqi/AqiCloud-Agent/internal/config"
+	"github.com/aqi/AqiCloud-Agent/internal/model"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials"
@@ -41,7 +41,7 @@ type StoreEngine struct {
 func NewStoreEngine() *StoreEngine {
 	cfg := config.GetConfig()
 	creds := credentials.NewStaticCredentialsProvider(cfg.MinIOAccessKeyID, cfg.MinIOSecretAccessKey, "")
-	
+
 	// 内部端点用于后端与 MinIO 通信
 	internalEndpoint := "http://" + cfg.MinIOEndpoint
 	awsCfg := aws.Config{
@@ -221,7 +221,7 @@ func (e *StoreEngine) ListMultipartParts(ctx context.Context, objectKey, uploadI
 	return parts, nil
 }
 
-func (e *StoreEngine) GetBucket() string     { return e.bucket }
+func (e *StoreEngine) GetBucket() string       { return e.bucket }
 func (e *StoreEngine) GetAvatarBucket() string { return e.avatarBucket }
 
 func (e *StoreEngine) DoesObjectExist(ctx context.Context, objectKey string) (bool, error) {
@@ -230,8 +230,7 @@ func (e *StoreEngine) DoesObjectExist(ctx context.Context, objectKey string) (bo
 		Key:    aws.String(objectKey),
 	})
 	if err != nil {
-		var notFound *types.NotFound
-		if errors.As(err, &notFound) {
+		if _, ok := errors.AsType[*types.NotFound](err); ok {
 			return false, nil
 		}
 		return false, err

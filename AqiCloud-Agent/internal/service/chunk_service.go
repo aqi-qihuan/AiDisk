@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/config"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/model"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/util"
+	"github.com/aqi/AqiCloud-Agent/internal/config"
+	"github.com/aqi/AqiCloud-Agent/internal/model"
+	"github.com/aqi/AqiCloud-Agent/internal/util"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
@@ -52,17 +52,17 @@ func (s *ChunkService) InitChunkTask(ctx context.Context, req *model.FileChunkIn
 	chunkNum := int((totalSize + chunkSize - 1) / chunkSize)
 
 	chunk := model.FileChunk{
-		ID:         util.NextID(),
-		Identifier: req.Identifier,
-		UploadID:   uploadID,
-		FileName:   req.FileName,
-		BucketName: getStoreEngine().GetBucket(),
-		ObjectKey:  objectKey,
-		TotalSize:  totalSize,
-		ChunkSize:  chunkSize,
-		ChunkNum:   chunkNum,
-		AccountID:  req.AccountID,
-		GmtCreate:  time.Now(),
+		ID:          util.NextID(),
+		Identifier:  req.Identifier,
+		UploadID:    uploadID,
+		FileName:    req.FileName,
+		BucketName:  getStoreEngine().GetBucket(),
+		ObjectKey:   objectKey,
+		TotalSize:   totalSize,
+		ChunkSize:   chunkSize,
+		ChunkNum:    chunkNum,
+		AccountID:   req.AccountID,
+		GmtCreate:   time.Now(),
 		GmtModified: time.Now(),
 	}
 	db.WithContext(ctx).Create(&chunk)
@@ -164,17 +164,17 @@ func (s *ChunkService) MergeChunks(ctx context.Context, req *model.FileChunkMerg
 	db.WithContext(ctx).Create(&fileRecord)
 
 	accountFile := model.AccountFile{
-		ID:         util.NextID(),
-		AccountID:  chunk.AccountID,
-		IsDir:      0,
-		ParentID:   req.ParentID,
-		FileID:     &fileID,
-		FileName:   chunk.FileName,
-		FileType:   util.DetectFileType(ext),
-		FileSuffix: ext,
-		FileSize:   chunk.TotalSize,
-		Del:        false,
-		GmtCreate:  time.Now(),
+		ID:          util.NextID(),
+		AccountID:   chunk.AccountID,
+		IsDir:       0,
+		ParentID:    req.ParentID,
+		FileID:      &fileID,
+		FileName:    chunk.FileName,
+		FileType:    util.DetectFileType(ext),
+		FileSuffix:  ext,
+		FileSize:    chunk.TotalSize,
+		Del:         false,
+		GmtCreate:   time.Now(),
 		GmtModified: time.Now(),
 	}
 	db.WithContext(ctx).Create(&accountFile)

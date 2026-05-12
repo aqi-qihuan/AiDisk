@@ -27,9 +27,17 @@ vendor/
 *.swo
 *~
 
+# AI assistants
+.codebuddy/
+.workbuddy/
+qodana.yaml
+
 # OS
 .DS_Store
 Thumbs.db
 
 # Logs
 *.log
+
+# Junk
+nul

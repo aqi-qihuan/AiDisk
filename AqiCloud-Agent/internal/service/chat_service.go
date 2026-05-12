@@ -8,8 +8,8 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/config"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/model"
+	"github.com/aqi/AqiCloud-Agent/internal/config"
+	"github.com/aqi/AqiCloud-Agent/internal/model"
 )
 
 type ChatService struct{}

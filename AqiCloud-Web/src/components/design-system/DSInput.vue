@@ -55,61 +55,71 @@ const onBlur = (event: FocusEvent) => {
 <style scoped>
 .ds-input {
   width: 100%;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  font-family: var(--font-primary);
-  color: var(--color-text-primary);
-  background: var(--color-surface);
-  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Fira Sans', 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 14px;
+  outline: none;
+  color: #F8FAFC;
   box-sizing: border-box;
 }
 
 .ds-input:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+  border-color: rgba(219, 39, 119, 0.3);
+  box-shadow: 0 0 12px rgba(219, 39, 119, 0.08);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .ds-input:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-text-secondary);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ds-input::placeholder {
+  color: #64748B;
 }
 
 .ds-input:disabled {
-  background: var(--color-bg);
-  color: var(--color-text-tertiary);
+  opacity: 0.5;
   cursor: not-allowed;
-  opacity: 0.6;
 }
 
 .ds-input--error {
-  border-color: var(--color-error);
+  border-color: rgba(239, 68, 68, 0.3);
 }
 
 .ds-input--error:focus {
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.08);
 }
 
 /* Sizes */
 .ds-input--sm {
-  padding: 6px 10px;
-  font-size: var(--text-sm);
+  padding: 6px 12px;
+  font-size: 12px;
 }
 
 .ds-input--md {
-  padding: 8px 12px;
-  font-size: var(--text-base);
+  padding: 8px 16px;
+  font-size: 14px;
 }
 
 .ds-input--lg {
-  padding: 12px 16px;
-  font-size: var(--text-lg);
+  padding: 12px 20px;
+  font-size: 16px;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .ds-input--lg {
-    font-size: var(--text-base);
-    padding: 10px 14px;
+    font-size: 14px;
+    padding: 10px 16px;
   }
 }
 

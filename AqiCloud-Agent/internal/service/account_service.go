@@ -6,9 +6,9 @@ import (
 	"mime/multipart"
 	"time"
 
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/config"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/model"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/util"
+	"github.com/aqi/AqiCloud-Agent/internal/config"
+	"github.com/aqi/AqiCloud-Agent/internal/model"
+	"github.com/aqi/AqiCloud-Agent/internal/util"
 	"gorm.io/gorm"
 )
 
@@ -165,15 +165,15 @@ func (s *AccountService) GetAccountDetail(ctx context.Context, accountID int64) 
 		Order("id ASC").First(&rootFolder)
 
 	dto := &model.AccountDTO{
-		ID:          account.ID,
-		Username:    account.Username,
-		AvatarURL:   account.AvatarURL,
-		Phone:       account.Phone,
-		Role:        account.Role,
-		Del:         account.Del,
-		GmtCreate:   account.GmtCreate.Format("2006-01-02 15:04:05"),
-		GmtModified: account.GmtModified.Format("2006-01-02 15:04:05"),
-		RootFileID:  rootFolder.ID,
+		ID:           account.ID,
+		Username:     account.Username,
+		AvatarURL:    account.AvatarURL,
+		Phone:        account.Phone,
+		Role:         account.Role,
+		Del:          account.Del,
+		GmtCreate:    account.GmtCreate.Format("2006-01-02 15:04:05"),
+		GmtModified:  account.GmtModified.Format("2006-01-02 15:04:05"),
+		RootFileID:   rootFolder.ID,
 		RootFileName: rootFolder.FileName,
 	}
 	if storage.ID != 0 {

@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/config"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/model"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/util"
+	"github.com/aqi/AqiCloud-Agent/internal/config"
+	"github.com/aqi/AqiCloud-Agent/internal/model"
+	"github.com/aqi/AqiCloud-Agent/internal/util"
 	"gorm.io/gorm"
 )
 
@@ -140,31 +140,31 @@ func (s *FileService) UploadFile(ctx context.Context, accountID, parentID int64,
 
 	fileID := util.NextID()
 	fileRecord := model.File{
-		ID:         fileID,
-		AccountID:  accountID,
-		FileName:   fileName,
-		FileSuffix: ext,
-		FileSize:   fileSize,
-		ObjectKey:  objectKey,
-		Identifier: util.MD5(fileName + fmt.Sprintf("%d", time.Now().UnixNano())),
-		Del:        false,
-		GmtCreate:  time.Now(),
+		ID:          fileID,
+		AccountID:   accountID,
+		FileName:    fileName,
+		FileSuffix:  ext,
+		FileSize:    fileSize,
+		ObjectKey:   objectKey,
+		Identifier:  util.MD5(fileName + fmt.Sprintf("%d", time.Now().UnixNano())),
+		Del:         false,
+		GmtCreate:   time.Now(),
 		GmtModified: time.Now(),
 	}
 	db.WithContext(ctx).Create(&fileRecord)
 
 	accountFile := model.AccountFile{
-		ID:         util.NextID(),
-		AccountID:  accountID,
-		IsDir:      0,
-		ParentID:   parentID,
-		FileID:     &fileID,
-		FileName:   fileName,
-		FileType:   fileType,
-		FileSuffix: ext,
-		FileSize:   fileSize,
-		Del:        false,
-		GmtCreate:  time.Now(),
+		ID:          util.NextID(),
+		AccountID:   accountID,
+		IsDir:       0,
+		ParentID:    parentID,
+		FileID:      &fileID,
+		FileName:    fileName,
+		FileType:    fileType,
+		FileSuffix:  ext,
+		FileSize:    fileSize,
+		Del:         false,
+		GmtCreate:   time.Now(),
 		GmtModified: time.Now(),
 	}
 	db.WithContext(ctx).Create(&accountFile)
@@ -317,17 +317,17 @@ func (s *FileService) SecondUpload(ctx context.Context, req *model.FileSecondUpl
 		}
 
 		accountFile := model.AccountFile{
-			ID:         util.NextID(),
-			AccountID:  req.AccountID,
-			IsDir:      0,
-			ParentID:   req.ParentID,
-			FileID:     &existing.ID,
-			FileName:   newName,
-			FileType:   util.DetectFileType(existing.FileSuffix),
-			FileSuffix: existing.FileSuffix,
-			FileSize:   existing.FileSize,
-			Del:        false,
-			GmtCreate:  time.Now(),
+			ID:          util.NextID(),
+			AccountID:   req.AccountID,
+			IsDir:       0,
+			ParentID:    req.ParentID,
+			FileID:      &existing.ID,
+			FileName:    newName,
+			FileType:    util.DetectFileType(existing.FileSuffix),
+			FileSuffix:  existing.FileSuffix,
+			FileSize:    existing.FileSize,
+			Del:         false,
+			GmtCreate:   time.Now(),
 			GmtModified: time.Now(),
 		}
 		db.WithContext(ctx).Create(&accountFile)

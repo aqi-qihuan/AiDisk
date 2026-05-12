@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/models"
+	"github.com/aqi/AqiCloud-Ai/internal/models"
 	"github.com/ledongthuc/pdf"
 )
 

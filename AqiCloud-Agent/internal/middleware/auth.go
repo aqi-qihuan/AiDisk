@@ -3,8 +3,8 @@ package middleware
 import (
 	"net/http"
 
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/model"
-	"github.com/aqi/AqiCloud-AgentPan-Go/internal/util"
+	"github.com/aqi/AqiCloud-Agent/internal/model"
+	"github.com/aqi/AqiCloud-Agent/internal/util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -51,19 +51,19 @@ func ShareTokenMiddleware() gin.HandlerFunc {
 }
 
 var publicPaths = map[string]bool{
-	"/api/account/v1/register":         true,
-	"/api/account/v1/login":            true,
-	"/api/account/v1/upload_avatar":    true,
-	"/api/share/v1/check_share_code":   true,
-	"/api/share/v1/visit":              true,
+	"/api/account/v1/register":           true,
+	"/api/account/v1/login":              true,
+	"/api/account/v1/upload_avatar":      true,
+	"/api/share/v1/check_share_code":     true,
+	"/api/share/v1/visit":                true,
 	"/api/share/v1/getShareSimpleDetail": true,
-	"/api/share/v1/detail":             true,
-	"/api/share/v1/getShareDetail":     true,
-	"/api/share/v1/list_share_file":    true,
-	"/api/share/v1/listShareFile":      true,
-	"/api/share/v1/transfer":           true,
-	"/api/file/v1/folder/tree":         true,
-	"/v1/chat/completions":             true,
+	"/api/share/v1/detail":               true,
+	"/api/share/v1/getShareDetail":       true,
+	"/api/share/v1/list_share_file":      true,
+	"/api/share/v1/listShareFile":        true,
+	"/api/share/v1/transfer":             true,
+	"/api/file/v1/folder/tree":           true,
+	"/v1/chat/completions":               true,
 }
 
 func ShouldSkipAuth(path string) bool {

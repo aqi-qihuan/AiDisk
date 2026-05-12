@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/core"
+	"github.com/aqi/AqiCloud-Ai/internal/core"
 	"github.com/cloudwego/eino/components/model"
 	"github.com/cloudwego/eino/schema"
 	openai "github.com/sashabaranov/go-openai"

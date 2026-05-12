@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/core"
-	"github.com/aqi/AqiCloud-Ai-Agent-Go/internal/models"
+	"github.com/aqi/AqiCloud-Ai/internal/core"
+	"github.com/aqi/AqiCloud-Ai/internal/models"
 	"gorm.io/gorm"
 )
 
@@ -29,9 +29,9 @@ func GetPanService() *PanService {
 // QueryStorage 查询存储空间使用情况
 func (s *PanService) QueryStorage(ctx context.Context, accountID int) (*models.StorageInfo, error) {
 	var result struct {
-		UsedSize       int64
-		TotalSize      int64
-		Percentage     float64
+		UsedSize   int64
+		TotalSize  int64
+		Percentage float64
 	}
 
 	err := s.db.WithContext(ctx).Raw(
