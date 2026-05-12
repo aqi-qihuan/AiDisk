@@ -1,9 +1,234 @@
 basePath: /
+definitions:
+  models.ChatMessage:
+    properties:
+      content:
+        type: string
+      role:
+        type: string
+    type: object
+  models.ChatRequest:
+    properties:
+      history:
+        items:
+          $ref: '#/definitions/models.ChatMessage'
+        type: array
+      message:
+        type: string
+      model:
+        type: string
+      provider:
+        type: string
+    type: object
+  models.DocumentRequest:
+    properties:
+      additional_instructions:
+        type: string
+      language:
+        type: string
+      length:
+        type: string
+      summary_type:
+        type: string
+      url:
+        type: string
+    type: object
+  models.JsonData:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+      type:
+        type: string
+    type: object
+  models.PanQueryRequest:
+    properties:
+      query:
+        type: string
+    type: object
 host: localhost:8000
 info:
   contact: {}
   description: AI智能体中心API服务，提供聊天、文档处理、网盘查询等功能
   title: AI智能体中心API
   version: "1.0"
-paths: {}
+paths:
+  /api/chat/history:
+    delete:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 清空聊天历史
+      tags:
+      - Chat
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 获取聊天历史
+      tags:
+      - Chat
+  /api/chat/providers:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 获取聊天提供商
+      tags:
+      - Chat
+  /api/chat/stream:
+    post:
+      consumes:
+      - application/json
+      description: 发送消息并获取流式AI回复
+      parameters:
+      - description: 聊天请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.ChatRequest'
+      produces:
+      - text/event-stream
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonData'
+      summary: 流式聊天
+      tags:
+      - Chat
+  /api/chat/switch-provider:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: '{\'
+        in: body
+        name: request
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 切换聊天提供商
+      tags:
+      - Chat
+  /api/chat/token-usage:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonData'
+      summary: 获取用户Token用量
+      tags:
+      - Chat
+  /api/chat/token-usage/global:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonData'
+      summary: 获取全局Token用量
+      tags:
+      - Chat
+  /api/document/providers:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 获取文档提供商
+      tags:
+      - Document
+  /api/document/stream:
+    post:
+      consumes:
+      - application/json
+      description: 输入URL获取文档并流式AI处理
+      parameters:
+      - description: 文档请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.DocumentRequest'
+      produces:
+      - text/event-stream
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonData'
+      summary: 流式文档处理
+      tags:
+      - Document
+  /api/pan/providers:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 获取网盘提供商
+      tags:
+      - Pan
+  /api/pan/query:
+    post:
+      consumes:
+      - application/json
+      description: 查询网盘文件、存储空间、文件统计等信息
+      parameters:
+      - description: 网盘查询请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.PanQueryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonData'
+      summary: 网盘查询
+      tags:
+      - Pan
 swagger: "2.0"

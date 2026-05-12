@@ -139,6 +139,16 @@ func RegisterRoutes(r *gin.Engine) {
 
 // ===== Chat Handler =====
 
+// chatStream 流式聊天
+// @Summary 流式聊天
+// @Description 发送消息并获取流式AI回复
+// @Tags Chat
+// @Accept json
+// @Produce text/event-stream
+// @Param request body models.ChatRequest true "聊天请求"
+// @Header 200 {string} Content-Type "text/event-stream"
+// @Success 200 {object} models.JsonData
+// @Router /api/chat/stream [post]
 func chatStream(c *gin.Context) {
 	var req models.ChatRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -232,6 +242,12 @@ func chatStream(c *gin.Context) {
 	}()
 }
 
+// getProviders 获取聊天提供商
+// @Summary 获取聊天提供商
+// @Tags Chat
+// @Produce json
+// @Success 200 {object} map[string]interface{}
+// @Router /api/chat/providers [get]
 func getProviders(c *gin.Context) {
 	cfg := core.GetConfig()
 	c.JSON(http.StatusOK, gin.H{
@@ -241,6 +257,14 @@ func getProviders(c *gin.Context) {
 	})
 }
 
+// switchProvider 切换聊天提供商
+// @Summary 切换聊天提供商
+// @Tags Chat
+// @Accept json
+// @Produce json
+// @Param request body object true "{\"provider\": \"ollama\"}"
+// @Success 200 {object} map[string]interface{}
+// @Router /api/chat/switch-provider [post]
 func switchProvider(c *gin.Context) {
 	var req struct {
 		Provider string `json:"provider"`
@@ -264,6 +288,12 @@ func switchProvider(c *gin.Context) {
 	})
 }
 
+// getChatHistory 获取聊天历史
+// @Summary 获取聊天历史
+// @Tags Chat
+// @Produce json
+// @Success 200 {object} map[string]interface{}
+// @Router /api/chat/history [get]
 func getChatHistory(c *gin.Context) {
 	accountID, _ := c.Get("account_id")
 	chatSvc := services.GetChatService()
@@ -275,6 +305,12 @@ func getChatHistory(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"history": messages})
 }
 
+// clearChatHistory 清空聊天历史
+// @Summary 清空聊天历史
+// @Tags Chat
+// @Produce json
+// @Success 200 {object} map[string]interface{}
+// @Router /api/chat/history [delete]
 func clearChatHistory(c *gin.Context) {
 	accountID, _ := c.Get("account_id")
 	chatSvc := services.GetChatService()
@@ -285,12 +321,24 @@ func clearChatHistory(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "聊天历史已清空", "success": true})
 }
 
+// getTokenUsage 获取用户Token用量
+// @Summary 获取用户Token用量
+// @Tags Chat
+// @Produce json
+// @Success 200 {object} models.JsonData
+// @Router /api/chat/token-usage [get]
 func getTokenUsage(c *gin.Context) {
 	accountID, _ := c.Get("account_id")
 	stats := core.GetTokenTracker().GetUserStats(fmt.Sprintf("%d", accountID))
 	c.JSON(http.StatusOK, models.Success(stats))
 }
 
+// getGlobalTokenUsage 获取全局Token用量
+// @Summary 获取全局Token用量
+// @Tags Chat
+// @Produce json
+// @Success 200 {object} models.JsonData
+// @Router /api/chat/token-usage/global [get]
 func getGlobalTokenUsage(c *gin.Context) {
 	stats := core.GetTokenTracker().GetGlobalStats()
 	c.JSON(http.StatusOK, models.Success(stats))
@@ -303,6 +351,16 @@ type docChunkResult struct {
 	text  string
 }
 
+// docStream 流式文档处理
+// @Summary 流式文档处理
+// @Description 输入URL获取文档并流式AI处理
+// @Tags Document
+// @Accept json
+// @Produce text/event-stream
+// @Param request body models.DocumentRequest true "文档请求"
+// @Header 200 {string} Content-Type "text/event-stream"
+// @Success 200 {object} models.JsonData
+// @Router /api/document/stream [post]
 func docStream(c *gin.Context) {
 	var req models.DocumentRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -445,6 +503,12 @@ func streamDocChunk(c *gin.Context, req models.DocumentRequest, title, content s
 	stream.Close()
 }
 
+// getDocProviders 获取文档提供商
+// @Summary 获取文档提供商
+// @Tags Document
+// @Produce json
+// @Success 200 {object} map[string]interface{}
+// @Router /api/document/providers [get]
 func getDocProviders(c *gin.Context) {
 	cfg := core.GetConfig()
 	c.JSON(http.StatusOK, gin.H{
@@ -456,6 +520,15 @@ func getDocProviders(c *gin.Context) {
 
 // ===== Pan Handler =====
 
+// panQuery 网盘查询
+// @Summary 网盘查询
+// @Description 查询网盘文件、存储空间、文件统计等信息
+// @Tags Pan
+// @Accept json
+// @Produce json
+// @Param request body models.PanQueryRequest true "网盘查询请求"
+// @Success 200 {object} models.JsonData
+// @Router /api/pan/query [post]
 func panQuery(c *gin.Context) {
 	var req models.PanQueryRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -513,6 +586,12 @@ func panQuery(c *gin.Context) {
 	}))
 }
 
+// getPanProviders 获取网盘提供商
+// @Summary 获取网盘提供商
+// @Tags Pan
+// @Produce json
+// @Success 200 {object} map[string]interface{}
+// @Router /api/pan/providers [get]
 func getPanProviders(c *gin.Context) {
 	cfg := core.GetConfig()
 	c.JSON(http.StatusOK, gin.H{
