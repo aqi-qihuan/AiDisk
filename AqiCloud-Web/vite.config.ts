@@ -13,8 +13,9 @@ export default defineConfig({
     port: 8081,
     host: true,
     proxy: {
-      '/api/file': {
-        target: 'http://127.0.0.1:8080',
+      // 代理所有 /api 请求到后端服务器
+      '/api': {
+        target: 'https://pan.aqi125.cn',
         changeOrigin: true,
       },
     },

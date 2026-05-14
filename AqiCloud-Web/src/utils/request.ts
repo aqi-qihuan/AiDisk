@@ -1,6 +1,6 @@
 /**
  * Spring Boot 服务 Axios 实例
- * 端口: 8080 (开发) / pan-api.a4i.icu (生产)
+ * 端口: 8080 (开发) / pan.aqi125.cn (生产)
  * 用于: 文件管理、用户管理、分享、回收站等核心功能
  */
 import axios from "axios";
@@ -11,8 +11,9 @@ import { useLoginUserStore } from "@/store/user";
 axios.defaults.transformResponse = [];
 // 创建自定义 Axios 实例
 const myAxios = axios.create({
-  // 使用相对路径，由Nginx代理到正确的后端服务
-  baseURL: "http://127.0.0.1:8080/api",
+  // 使用相对路径，由 Vite 代理到后端服务（开发环境）
+  // 生产环境由 Nginx 代理
+  baseURL: "/api",
   timeout: 10000,
   withCredentials: false,
   // 直接在创建时设置 transformResponse

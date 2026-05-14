@@ -865,7 +865,17 @@ MIT 许可证允许：
 ---
 
 <div align="center">
+# 1. 进入项目目录
 
+cd C:\Users\aqi\Desktop\AIPAN-LLM\AiDisk\AqiCloud-AI
+
+# 2. 设置环境变量并编译
+
+$env:CGO_ENABLED="0"; $env:GOOS="linux"; $env:GOARCH="amd64"; go build -ldflags "-w -s" -o AqiCloud-AI ./cmd/agent
+
+# 3. 检查生成的文件
+
+ls -l AqiCloud-AI
 **⭐ 如果这个项目对你有帮助，请给它一个 Star！⭐**
 
 </div>

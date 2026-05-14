@@ -625,7 +625,17 @@ git push origin feature/your-feature-name
 - [Swag](https://github.com/swaggo/swag) - Swagger 文档生成
 
 ---
+# 1. 进入项目目录
 
+cd C:\Users\aqi\Desktop\AIPAN-LLM\AiDisk\AqiCloud-Agent
+
+# 2. 设置环境变量并编译
+
+$env:CGO_ENABLED="0"; $env:GOOS="linux"; $env:GOARCH="amd64"; go build -ldflags "-w -s" -o AqiCloud-Agent ./cmd/server
+
+# 3. 检查生成的文件
+
+ls -l AqiCloud-Agent
 <div align="center">
 
 **⭐ 如果这个项目对你有帮助，请给它一个 Star！⭐**
