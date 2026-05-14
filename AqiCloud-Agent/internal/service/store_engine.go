@@ -49,7 +49,10 @@ func NewStoreEngine() *StoreEngine {
 		BaseEndpoint: aws.String(internalEndpoint),
 		Credentials:  creds,
 	}
-	client := s3.NewFromConfig(awsCfg)
+	// 强制使用 path-style 访问，避免 virtual-hosted-style 导致的 DNS 解析问题
+	client := s3.NewFromConfig(awsCfg, func(o *s3.Options) {
+		o.UsePathStyle = true
+	})
 	presignClient := s3.NewPresignClient(client)
 
 	return &StoreEngine{
