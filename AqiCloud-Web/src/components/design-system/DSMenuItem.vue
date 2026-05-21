@@ -50,18 +50,18 @@ const handleClick = () => {
   padding: 14px 20px;
   cursor: pointer;
   transition: all var(--transition-base);
-  color: var(--color-text-secondary);
+  color: #8b8878;
   position: relative;
 }
 
 .ds-menu-item:hover {
-  color: var(--color-primary);
-  background-color: rgba(99, 102, 241, 0.08);
+  color: #e8d5b0;
+  background-color: rgba(212, 168, 83, 0.06);
 }
 
 .ds-menu-item.is-active {
-  color: var(--color-primary);
-  background-color: rgba(99, 102, 241, 0.12);
+  color: #d4a853;
+  background-color: rgba(212, 168, 83, 0.1);
 }
 
 .ds-menu-item.is-active::before {
@@ -72,7 +72,7 @@ const handleClick = () => {
   transform: translateY(-50%);
   width: 3px;
   height: 20px;
-  background: var(--color-primary);
+  background: linear-gradient(180deg, #d4a853 0%, #c9a96e 100%);
   border-radius: 0 2px 2px 0;
 }
 
@@ -84,6 +84,7 @@ const handleClick = () => {
   height: 24px;
   font-size: 18px;
   flex-shrink: 0;
+  line-height: 1;
 }
 
 .ds-menu-item.is-collapse {

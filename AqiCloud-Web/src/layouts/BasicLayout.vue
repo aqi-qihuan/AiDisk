@@ -192,7 +192,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: var(--color-bg);
+  background-color: #0a0a1a;
 }
 
 /* ==================== Header ==================== */
@@ -201,9 +201,9 @@ onMounted(() => {
   top: 0;
   z-index: var(--z-sticky);
   height: 60px;
-  background-color: var(--color-surface);
-  box-shadow: var(--shadow-sm);
-  border-bottom: 1px solid var(--color-border);
+  background-color: #0d1117;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(212, 168, 83, 0.1);
 }
 
 /* ==================== Container ==================== */
@@ -217,12 +217,12 @@ onMounted(() => {
 /* ==================== Sidebar ==================== */
 .layout-sidebar {
   width: 240px;
-  background-color: var(--color-surface);
-  border-right: 1px solid var(--color-border);
+  background-color: #0d1117;
+  border-right: 1px solid rgba(212, 168, 83, 0.1);
   transition: width var(--transition-slow);
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   flex-shrink: 0;
+  position: relative;
 }
 
 .layout-sidebar.collapsed {
@@ -239,12 +239,12 @@ onMounted(() => {
 }
 
 .layout-sidebar::-webkit-scrollbar-thumb {
-  background-color: var(--color-border);
+  background-color: rgba(212, 168, 83, 0.12);
   border-radius: var(--radius-full);
 }
 
 .layout-sidebar::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-text-tertiary);
+  background-color: rgba(212, 168, 83, 0.2);
 }
 
 /* ==================== Sidebar Toggle ==================== */
@@ -280,7 +280,7 @@ onMounted(() => {
   background: linear-gradient(
     180deg,
     transparent,
-    var(--color-primary),
+    #d4a853,
     transparent
   );
   border-radius: 1px;
@@ -289,7 +289,7 @@ onMounted(() => {
 
 /* 箭头图标 */
 .toggle-arrow {
-  color: var(--color-primary);
+  color: #d4a853;
   opacity: 0;
   transform: translateX(-2px);
   transition: all var(--transition-base);
@@ -305,7 +305,7 @@ onMounted(() => {
   background: linear-gradient(
     180deg,
     transparent,
-    var(--color-secondary),
+    #c9a96e,
     transparent
   );
 }
@@ -313,7 +313,7 @@ onMounted(() => {
 .toggle-button:hover .toggle-arrow {
   opacity: 1;
   transform: translateX(0);
-  color: var(--color-secondary);
+  color: #c9a96e;
 }
 
 .toggle-button:active .toggle-arrow {
@@ -323,7 +323,7 @@ onMounted(() => {
 /* ==================== Main Content ==================== */
 .layout-main {
   flex: 1;
-  background-color: var(--color-surface);
+  background-color: #0a0a1a;
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
@@ -336,16 +336,16 @@ onMounted(() => {
 }
 
 .layout-main::-webkit-scrollbar-track {
-  background: var(--color-bg);
+  background: transparent;
 }
 
 .layout-main::-webkit-scrollbar-thumb {
-  background-color: var(--color-border);
+  background-color: rgba(212, 168, 83, 0.08);
   border-radius: var(--radius-full);
 }
 
 .layout-main::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-text-tertiary);
+  background-color: rgba(212, 168, 83, 0.15);
 }
 
 /* ==================== Responsive ==================== */
@@ -427,19 +427,19 @@ onMounted(() => {
   .mobile-toggle-button {
     width: 44px;
     height: 44px;
-    background: var(--color-primary);
+    background: linear-gradient(135deg, #c9a96e 0%, #b8943f 100%);
     border: none;
     border-radius: var(--radius-md);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 4px 12px rgba(212, 168, 83, 0.3);
     transition: all var(--transition-base);
   }
 
   .mobile-toggle-button:hover {
-    background-color: var(--color-secondary);
+    background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
     transform: scale(1.05);
   }
 

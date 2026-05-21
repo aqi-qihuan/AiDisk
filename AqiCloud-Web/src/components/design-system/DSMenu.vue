@@ -23,8 +23,8 @@ withDefaults(defineProps<DSMenuProps>(), {
 .ds-menu {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-surface);
-  border-right: 1px solid var(--color-border);
+  background-color: #0d1117;
+  border-right: 1px solid rgba(212, 168, 83, 0.1);
   height: 100%;
   overflow-y: auto;
 }

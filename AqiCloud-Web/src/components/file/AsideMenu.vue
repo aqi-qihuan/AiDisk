@@ -199,17 +199,16 @@ watch(
 <style scoped>
 .aside-container {
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  position: relative;
   background-color: #0d1117;
 }
 
 .aside-menu {
-  flex: 1;
+  height: 100%;
   border-right: none;
   overflow-y: auto;
   background-color: #0d1117;
-  padding: 8px 0;
+  padding: 8px 0 80px 0;
 }
 
 /* 子菜单样式 */
@@ -422,11 +421,7 @@ watch(
 
 .ai-items :deep(.ds-menu-item) {
   margin: 4px 0;
-  padding: 12px 16px;
-  border-radius: var(--radius-lg);
-  background: transparent;
   color: #8b8878;
-  transition: all 0.25s ease;
 }
 
 .ai-items :deep(.ds-menu-item:hover) {
@@ -441,28 +436,22 @@ watch(
   font-weight: 600;
 }
 
-.ai-items :deep(.ds-menu-item.is-active::before) {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 20px;
+.ai-items :deep(.ds-menu-item.is-active .menu-item-icon) {
   background: linear-gradient(
-    180deg,
+    135deg,
     #d4a853 0%,
     #c9a96e 100%
   );
-  border-radius: 0 3px 3px 0;
+  color: #0a0a1a;
+  border-radius: 8px;
 }
 
 .sub-item-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   color: #8b8878;
   transition: color 0.25s ease;
 }
@@ -491,11 +480,7 @@ watch(
 /* 优化普通菜单项样式 */
 :deep(.ds-menu-item) {
   margin: 4px 12px;
-  padding: 12px 16px;
-  border-radius: var(--radius-lg);
   color: #8b8878;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
 }
 
 :deep(.ds-menu-item:hover) {
@@ -508,22 +493,6 @@ watch(
   background: rgba(212, 168, 83, 0.1);
   color: #d4a853;
   font-weight: 600;
-}
-
-:deep(.ds-menu-item.is-active::before) {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 20px;
-  background: linear-gradient(
-    180deg,
-    #d4a853 0%,
-    #c9a96e 100%
-  );
-  border-radius: 0 3px 3px 0;
 }
 
 :deep(.ds-menu-item .menu-item-icon) {
@@ -544,18 +513,27 @@ watch(
 }
 
 :deep(.ds-menu-item.is-active .menu-item-icon) {
-  background: linear-gradient(
-    135deg,
-    #d4a853 0%,
-    #c9a96e 100%
-  );
-  color: #0a0a1a;
-  box-shadow: 0 4px 12px rgba(212, 168, 83, 0.25);
+  background: rgba(212, 168, 83, 0.2);
+  color: #d4a853;
+  border-radius: 6px;
+}
+
+.ai-items :deep(.ds-menu-item.is-active .menu-item-icon) {
+  background: rgba(212, 168, 83, 0.2);
+  color: #d4a853;
+  border-radius: 6px;
 }
 
 .capacity-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
   padding: 16px;
   border-top: 1px solid rgba(212, 168, 83, 0.15);
+  background: rgba(13, 17, 23, 0.95);
+  backdrop-filter: blur(8px);
 }
 
 /* 移动端适配 */
