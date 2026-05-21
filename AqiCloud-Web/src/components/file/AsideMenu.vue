@@ -425,16 +425,20 @@ watch(
   padding: 12px 16px;
   border-radius: var(--radius-lg);
   background: transparent;
+  color: #8b8878;
   transition: all 0.25s ease;
 }
 
 .ai-items :deep(.ds-menu-item:hover) {
   background: rgba(212, 168, 83, 0.06);
+  color: #e8d5b0;
   transform: translateX(4px);
 }
 
 .ai-items :deep(.ds-menu-item.is-active) {
   background: rgba(212, 168, 83, 0.1);
+  color: #d4a853;
+  font-weight: 600;
 }
 
 .ai-items :deep(.ds-menu-item.is-active::before) {
@@ -489,18 +493,21 @@ watch(
   margin: 4px 12px;
   padding: 12px 16px;
   border-radius: var(--radius-lg);
+  color: #8b8878;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
 :deep(.ds-menu-item:hover) {
   background: rgba(212, 168, 83, 0.06);
+  color: #e8d5b0;
   transform: translateX(4px);
 }
 
 :deep(.ds-menu-item.is-active) {
   background: rgba(212, 168, 83, 0.1);
-  font-weight: var(--font-medium);
+  color: #d4a853;
+  font-weight: 600;
 }
 
 :deep(.ds-menu-item.is-active::before) {

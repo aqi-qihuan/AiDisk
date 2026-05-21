@@ -112,7 +112,9 @@ onMounted(() => {
 <style scoped>
 .capacity-process {
   padding: 16px;
-  background-color: var(--el-menu-bg-color);
+  background-color: rgba(15, 18, 35, 0.6);
+  border: 1px solid rgba(212, 168, 83, 0.1);
+  border-radius: 12px;
   transition: all 0.3s;
 }
 
@@ -138,19 +140,19 @@ onMounted(() => {
 .percentage-text {
   position: absolute;
   font-size: 9px;
-  color: var(--el-text-color-regular);
+  color: #e8d5b0;
   font-weight: normal;
 }
 
 .storage-info-mini {
   font-size: 8px;
-  color: var(--el-text-color-secondary);
+  color: #8b8878;
   line-height: 1;
   margin-top: 2px;
 }
 
 .storage-title {
-  color: var(--el-text-color-secondary);
+  color: #8b8878;
   font-size: 13px;
   margin-bottom: 12px;
 }
@@ -171,21 +173,22 @@ onMounted(() => {
 }
 
 .label {
-  color: var(--el-text-color-secondary);
+  color: #8b8878;
 }
 
 .value {
-  color: var(--el-text-color-primary);
+  color: #e8d5b0;
   font-weight: 500;
 }
 
 :deep(.el-progress-bar__outer) {
-  background-color: var(--el-fill-color-light);
+  background-color: rgba(20, 22, 40, 0.5);
   border-radius: 4px;
 }
 
 :deep(.el-progress-bar__inner) {
   border-radius: 4px;
+  background: linear-gradient(90deg, #c9a96e 0%, #d4a853 100%) !important;
   transition: all 0.3s;
 }
 
@@ -195,7 +198,7 @@ onMounted(() => {
 
 :deep(.el-progress-circle path:first-child) {
   opacity: 0.12;
-  stroke: var(--el-border-color-darker);
+  stroke: rgba(212, 168, 83, 0.3);
 }
 
 :deep(.el-progress-circle path:last-child) {
@@ -204,14 +207,14 @@ onMounted(() => {
 }
 
 :deep(.el-progress.is-success path:last-child) {
-  stroke: var(--el-color-success);
+  stroke: #d4a853;
 }
 
 :deep(.el-progress.is-warning path:last-child) {
-  stroke: var(--el-color-warning);
+  stroke: #d4a853;
 }
 
 :deep(.el-progress.is-exception path:last-child) {
-  stroke: var(--el-color-danger);
+  stroke: #ef4444;
 }
 </style>
