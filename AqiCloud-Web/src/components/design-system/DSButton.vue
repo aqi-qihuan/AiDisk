@@ -128,12 +128,12 @@ const handleClick = (event: MouseEvent) => {
 
 .ds-btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(219, 39, 119, 0.5);
+  box-shadow: 0 6px 30px rgba(212, 168, 83, 0.5);
 }
 
 .ds-btn-primary:active:not(:disabled) {
   transform: translateY(0) scale(0.98);
-  box-shadow: 0 2px 12px rgba(219, 39, 119, 0.3);
+  box-shadow: 0 2px 12px rgba(212, 168, 83, 0.3);
 }
 
 /* Secondary - Dark elevated */
@@ -145,7 +145,7 @@ const handleClick = (event: MouseEvent) => {
 
 .ds-btn-secondary:hover:not(:disabled) {
   border-color: var(--color-primary);
-  background: rgba(219, 39, 119, 0.08);
+  background: rgba(212, 168, 83, 0.08);
   transform: translateY(-1px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
@@ -218,11 +218,11 @@ const handleClick = (event: MouseEvent) => {
 .ds-btn-ghost {
   background: transparent;
   color: var(--color-primary);
-  border: 1px solid rgba(219, 39, 119, 0.3);
+  border: 1px solid rgba(212, 168, 83, 0.3);
 }
 
 .ds-btn-ghost:hover:not(:disabled) {
-  background: rgba(219, 39, 119, 0.1);
+  background: rgba(212, 168, 83, 0.1);
   border-color: var(--color-primary);
   transform: translateY(-1px);
 }

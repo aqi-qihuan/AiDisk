@@ -220,7 +220,7 @@ const submitQuestion = async () => {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #a855f7 100%);
 }
 
 /* 消息列表 */
@@ -283,7 +283,7 @@ const submitQuestion = async () => {
 }
 
 .message-item.user-message .message-content {
-  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #a855f7 100%);
   color: white;
   box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
 }

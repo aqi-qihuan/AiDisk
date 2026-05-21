@@ -75,8 +75,8 @@ const onBlur = (event: FocusEvent) => {
 }
 
 .ds-input:focus {
-  border-color: rgba(219, 39, 119, 0.3);
-  box-shadow: 0 0 12px rgba(219, 39, 119, 0.08);
+  border-color: rgba(212, 168, 83, 0.3);
+  box-shadow: 0 0 12px rgba(212, 168, 83, 0.08);
   background: rgba(255, 255, 255, 0.05);
 }
 

@@ -481,7 +481,7 @@ const tableRowClassName = () => {
 }
 
 :deep(.custom-row:hover) {
-  background-color: rgba(219, 39, 119, 0.03) !important;
+  background-color: rgba(212, 168, 83, 0.03) !important;
 }
 
 :deep(.el-table__header) th {
@@ -510,7 +510,7 @@ const tableRowClassName = () => {
 
 .file-name:hover .file-name-text {
   text-decoration: underline;
-  color: #db2777;
+  color: #d4a853;
 }
 
 .file-name-text {
@@ -568,12 +568,12 @@ const tableRowClassName = () => {
 
 .mobile-file-item:active {
   transform: scale(0.98);
-  background: rgba(219, 39, 119, 0.05);
+  background: rgba(212, 168, 83, 0.05);
 }
 
 .mobile-file-item.selected {
-  background: rgba(219, 39, 119, 0.08);
-  border-color: rgba(219, 39, 119, 0.3);
+  background: rgba(212, 168, 83, 0.08);
+  border-color: rgba(212, 168, 83, 0.3);
 }
 
 .file-checkbox {
@@ -651,7 +651,7 @@ const tableRowClassName = () => {
 }
 
 .swipe-btn-primary {
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
 }
 
 .swipe-btn-warning {
@@ -700,7 +700,7 @@ const tableRowClassName = () => {
 /* ==================== 无障碍访问性 ==================== */
 .mobile-file-item:focus,
 .file-name:focus {
-  outline: 2px solid #db2777;
+  outline: 2px solid #d4a853;
   outline-offset: 2px;
 }
 

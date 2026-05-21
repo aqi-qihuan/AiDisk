@@ -75,7 +75,7 @@
 .orb-1 {
   width: 500px;
   height: 500px;
-  background: linear-gradient(135deg, #db2777, #f472b6);
+  background: linear-gradient(135deg, #d4a853, #c9a96e);
   top: -200px;
   right: -100px;
   animation-delay: 0s;
@@ -93,7 +93,7 @@
 .orb-3 {
   width: 300px;
   height: 300px;
-  background: linear-gradient(135deg, #db2777, #d97706);
+  background: linear-gradient(135deg, #d4a853, #d97706);
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -156,7 +156,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #db2777, #d97706, #fbbf24);
+  background: linear-gradient(90deg, #d4a853, #d97706, #fbbf24);
 }
 
 /* ===== Logo ===== */
@@ -171,7 +171,7 @@
 .logo-icon-wrapper {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #db2777, #f472b6);
+  background: linear-gradient(135deg, #d4a853, #c9a96e);
   border-radius: 14px;
   display: flex;
   align-items: center;
@@ -184,7 +184,7 @@
   font-size: 26px;
   font-weight: 700;
   font-family: "Plus Jakarta Sans", sans-serif;
-  background: linear-gradient(135deg, #db2777 0%, #fbbf24 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #fbbf24 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

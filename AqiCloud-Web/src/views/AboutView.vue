@@ -548,8 +548,8 @@ const techs = [
 <style>
 /* Global CSS variables - must be in unscoped style to apply to :root */
 :root {
-  --p-primary: #db2777;
-  --p-secondary: #f472b6;
+  --p-primary: #d4a853;
+  --p-secondary: #c9a96e;
   --p-gold: #d97706;
   --p-gold-light: #fbbf24;
   --p-bg-dark: #0b0b10;
@@ -601,7 +601,7 @@ const techs = [
   opacity: 0.4;
 }
 .hero-glow.pink {
-  background: radial-gradient(circle, #db2777, transparent);
+  background: radial-gradient(circle, #d4a853, transparent);
 }
 .hero-glow.gold {
   background: radial-gradient(circle, #d97706, transparent);
@@ -647,7 +647,7 @@ const techs = [
 }
 
 .gold-gradient {
-  background: linear-gradient(135deg, #fbbf24 0%, #fde68a 50%, #f472b6 100%);
+  background: linear-gradient(135deg, #fbbf24 0%, #fde68a 50%, #c9a96e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -812,7 +812,7 @@ const techs = [
   padding: 24px;
   background: rgba(255, 255, 255, 0.02);
   border-radius: 12px;
-  border-left: 4px solid #db2777;
+  border-left: 4px solid #d4a853;
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-left-width: 4px;
 }

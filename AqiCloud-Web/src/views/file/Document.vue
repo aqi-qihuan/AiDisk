@@ -150,7 +150,7 @@
         <div class="input-row">
           <div class="input-item">
             <label class="input-label">
-              <span class="label-dot" style="background: #667eea"></span>
+              <span class="label-dot" style="background: #d4a853"></span>
               概要长度
             </label>
             <input
@@ -162,7 +162,7 @@
           </div>
           <div class="input-item">
             <label class="input-label">
-              <span class="label-dot" style="background: #764ba2"></span>
+              <span class="label-dot" style="background: #c9a96e"></span>
               输出语言
             </label>
             <input
@@ -174,7 +174,7 @@
           </div>
           <div class="input-item">
             <label class="input-label">
-              <span class="label-dot" style="background: #f093fb"></span>
+              <span class="label-dot" style="background: #b8943f"></span>
               生成风格
             </label>
             <input
@@ -186,7 +186,7 @@
           </div>
           <div class="input-item">
             <label class="input-label">
-              <span class="label-dot" style="background: #f5576c"></span>
+              <span class="label-dot" style="background: #8b7355"></span>
               附加要求
             </label>
             <input
@@ -563,7 +563,7 @@ const startGeneration = async () => {
   height: 100%;
   padding: 24px;
   gap: 20px;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(160deg, #0a0a1a 0%, #141428 40%, #1a1530 100%);
 }
 
 /* ========== 内容容器 ========== */
@@ -571,11 +571,12 @@ const startGeneration = async () => {
   flex: 1;
   padding: 32px;
   overflow-y: auto;
-  background: white;
+  background: rgba(20, 22, 40, 0.7);
   border-radius: 24px;
+  border: 1px solid rgba(212, 168, 83, 0.12);
   box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.05),
-    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    0 4px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(212, 168, 83, 0.05);
   position: relative;
 }
 
@@ -585,15 +586,16 @@ const startGeneration = async () => {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  height: 3px;
+  background: linear-gradient(90deg, #d4a853 0%, #c9a96e 50%, #b8943f 100%);
   border-radius: 24px 24px 0 0;
+  opacity: 0.8;
 }
 
 .generated-content {
   white-space: pre-wrap;
   line-height: 1.8;
-  color: #334155;
+  color: #e8d5b0;
   font-size: 15px;
 }
 
@@ -627,7 +629,7 @@ const startGeneration = async () => {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 50%, #b8943f 100%);
   animation: rotate 4s linear infinite;
 }
 
@@ -636,17 +638,18 @@ const startGeneration = async () => {
   position: absolute;
   inset: 3px;
   border-radius: 50%;
-  background: white;
+  background: #0f1125;
 }
 
 .avatar-inner {
   position: absolute;
   inset: 6px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #c9a96e 0%, #b8943f 100%);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #0a0a1a;
   font-size: 48px;
   animation: bounce 2s ease-in-out infinite;
 }
@@ -654,22 +657,23 @@ const startGeneration = async () => {
 .welcome-title {
   font-size: 32px;
   font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #f0c060 50%, #c9a96e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 8px;
+  text-shadow: 0 2px 10px rgba(212, 168, 83, 0.3);
 }
 
 .welcome-subtitle {
   font-size: 16px;
-  color: #64748b;
+  color: #8b8878;
   font-weight: 500;
 }
 
 .welcome-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+  background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.2), transparent);
   margin: 32px 0;
 }
 
@@ -686,33 +690,34 @@ const startGeneration = async () => {
   align-items: center;
   gap: 16px;
   padding: 20px;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: rgba(20, 22, 40, 0.5);
   border-radius: 16px;
-  border: 1px solid rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(212, 168, 83, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .feature-item:hover {
-  background: white;
-  border-color: rgba(102, 126, 234, 0.2);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.1);
+  background: rgba(30, 32, 55, 0.7);
+  border-color: rgba(212, 168, 83, 0.25);
+  box-shadow: 0 8px 24px rgba(212, 168, 83, 0.1);
   transform: translateY(-2px);
 }
 
 .feature-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
+  background: linear-gradient(135deg, #c9a96e 0%, #b8943f 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #0a0a1a;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
+  box-shadow: 0 4px 12px rgba(212, 168, 83, 0.25);
 }
 
 .feature-icon .el-icon {
-  color: white;
+  color: #0a0a1a;
   font-size: 24px;
 }
 
@@ -726,12 +731,12 @@ const startGeneration = async () => {
 .feature-title {
   font-size: 15px;
   font-weight: 600;
-  color: #1e293b;
+  color: #e8d5b0;
 }
 
 .feature-desc {
   font-size: 13px;
-  color: #64748b;
+  color: #8b8878;
 }
 
 /* 底部指示器 */
@@ -750,7 +755,7 @@ const startGeneration = async () => {
 .typing-indicator .dot {
   width: 6px;
   height: 6px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
   border-radius: 50%;
   animation: typing 1.4s ease-in-out infinite;
 }
@@ -767,7 +772,7 @@ const startGeneration = async () => {
 
 .footer-text {
   font-size: 14px;
-  color: #94a3b8;
+  color: #8b8878;
 }
 
 /* ========== 加载状态 ========== */
@@ -792,19 +797,20 @@ const startGeneration = async () => {
   inset: 0;
   border-radius: 50%;
   border: 3px solid transparent;
-  border-top-color: #db2777;
-  border-right-color: #a855f7;
+  border-top-color: #d4a853;
+  border-right-color: #c9a96e;
   animation: spin 1s linear infinite;
 }
 
 .loading-icon {
   position: absolute;
   inset: 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #c9a96e 0%, #b8943f 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #0a0a1a;
   font-size: 32px;
   animation: pulse 2s ease-in-out infinite;
 }
@@ -812,23 +818,24 @@ const startGeneration = async () => {
 .loading-text {
   font-size: 18px;
   font-weight: 600;
-  color: #1e293b;
+  color: #e8d5b0;
   margin-bottom: 8px;
 }
 
 .loading-subtext {
   font-size: 14px;
-  color: #64748b;
+  color: #8b8878;
 }
 
 /* ========== 输入区域 ========== */
 .input-section {
   padding: 24px;
-  background: white;
+  background: rgba(20, 22, 40, 0.7);
   border-radius: 20px;
+  border: 1px solid rgba(212, 168, 83, 0.12);
   box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.05),
-    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    0 4px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(212, 168, 83, 0.05);
 }
 
 /* 区域标签 */
@@ -838,11 +845,12 @@ const startGeneration = async () => {
   gap: 8px;
   margin-bottom: 16px;
   font-weight: 600;
-  color: #1e293b;
+  color: #e8d5b0;
   font-size: 15px;
 }
 
 .label-icon {
+  color: #d4a853;
   font-size: 18px;
 }
 
@@ -864,19 +872,19 @@ const startGeneration = async () => {
 .input-wrapper .ds-input {
   width: 100%;
   padding: 14px 44px 14px 16px;
-  border: 2px solid #e2e8f0;
+  border: 1px solid rgba(212, 168, 83, 0.15);
   border-radius: 12px;
   font-size: 15px;
-  background: #f8fafc;
-  color: #334155;
+  background: rgba(15, 18, 35, 0.6);
+  color: #e8d5b0;
   transition: all 0.3s ease;
   outline: none;
 }
 
 .input-wrapper .ds-input:focus {
-  border-color: #667eea;
-  background: white;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  border-color: #d4a853;
+  background: rgba(20, 22, 40, 0.8);
+  box-shadow: 0 0 0 4px rgba(212, 168, 83, 0.08);
 }
 
 .input-icon {
@@ -886,8 +894,8 @@ const startGeneration = async () => {
   transform: translateY(-50%);
   width: 24px;
   height: 24px;
-  background: #10b981;
-  color: white;
+  background: #d4a853;
+  color: #0a0a1a;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -900,20 +908,20 @@ const startGeneration = async () => {
   align-items: center;
   gap: 8px;
   padding: 14px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #c9a96e 0%, #b8943f 100%);
+  color: #0a0a1a;
   border: none;
   border-radius: 12px;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(212, 168, 83, 0.3);
 }
 
 .select-file-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(212, 168, 83, 0.4);
 }
 
 .select-file-btn:active {
@@ -943,7 +951,7 @@ const startGeneration = async () => {
   gap: 8px;
   font-size: 13px;
   font-weight: 500;
-  color: #64748b;
+  color: #8b8878;
 }
 
 .label-dot {
@@ -955,22 +963,23 @@ const startGeneration = async () => {
 .input-item .ds-input {
   width: 100%;
   padding: 12px 14px;
-  border: 2px solid #e2e8f0;
+  border: 1px solid rgba(212, 168, 83, 0.15);
   border-radius: 10px;
   font-size: 14px;
-  background: white;
-  color: #334155;
+  background: rgba(15, 18, 35, 0.6);
+  color: #e8d5b0;
   transition: all 0.3s ease;
   outline: none;
 }
 
 .input-item .ds-input:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #d4a853;
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.08);
+  background: rgba(20, 22, 40, 0.8);
 }
 
 .input-item .ds-input::placeholder {
-  color: #94a3b8;
+  color: #5a5a6e;
 }
 
 /* 生成按钮 */
@@ -985,9 +994,9 @@ const startGeneration = async () => {
   align-items: center;
   gap: 10px;
   padding: 16px 48px;
-  background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%);
-  color: #94a3b8;
-  border: none;
+  background: rgba(30, 32, 55, 0.7);
+  color: #6b6b78;
+  border: 1px solid rgba(212, 168, 83, 0.1);
   border-radius: 14px;
   font-size: 16px;
   font-weight: 600;
@@ -996,28 +1005,29 @@ const startGeneration = async () => {
 }
 
 .generate-btn:not(.disabled) {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #c9a96e 0%, #b8943f 100%);
+  color: #0a0a1a;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(212, 168, 83, 0.35);
 }
 
 .generate-btn:not(.disabled):hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.5);
+  box-shadow: 0 6px 24px rgba(212, 168, 83, 0.45);
 }
 
 .generate-btn.loading {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #c9a96e 0%, #b8943f 100%);
+  color: #0a0a1a;
   cursor: wait;
 }
 
 .btn-spinner {
   width: 20px;
   height: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
+  border: 2px solid rgba(10, 10, 26, 0.3);
+  border-top-color: #0a0a1a;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -1035,8 +1045,9 @@ const startGeneration = async () => {
   flex-wrap: wrap;
   gap: 8px;
   padding: 12px;
-  background: #f8fafc;
+  background: rgba(15, 18, 35, 0.5);
   border-radius: 10px;
+  border: 1px solid rgba(212, 168, 83, 0.1);
 }
 
 .file-list {
@@ -1053,19 +1064,21 @@ const startGeneration = async () => {
   padding: 12px 16px;
   border-radius: 10px;
   cursor: pointer;
+  color: #e8d5b0;
   transition: all 0.3s ease;
   border: 1px solid transparent;
 }
 
 .file-list-item:hover {
-  background: #f8fafc;
-  border-color: #e2e8f0;
+  background: rgba(20, 22, 40, 0.5);
+  border-color: rgba(212, 168, 83, 0.15);
   transform: translateX(4px);
 }
 
 .file-list-item.is-selected {
-  background: rgba(219, 39, 119, 0.1);
-  border-color: #db2777;
+  background: rgba(212, 168, 83, 0.1);
+  border-color: rgba(212, 168, 83, 0.3);
+  color: #d4a853;
 }
 
 /* ========== 动画 ========== */

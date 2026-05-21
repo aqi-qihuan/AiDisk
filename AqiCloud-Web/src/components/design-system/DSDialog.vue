@@ -255,7 +255,7 @@ watch(
     135deg,
     var(--color-primary) 0%,
     var(--color-secondary) 50%,
-    var(--pink-300) 100%
+    var(--color-gold-light) 100%
   );
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   position: relative;

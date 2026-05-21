@@ -971,7 +971,7 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #a855f7 100%);
   color: white;
 }
 

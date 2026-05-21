@@ -105,10 +105,22 @@
               </div>
             </div>
 
-            <!-- 提取码显示 -->
-            <div v-if="share.shareCode" class="share-code">
-              <span class="code-label">提取码</span>
-              <span class="code-value">{{ share.shareCode }}</span>
+            <!-- 提取码显示（点击切换显隐） -->
+            <div
+              v-if="share.shareCode"
+              class="share-code"
+              @click="toggleCodeVisible(share.id!)"
+            >
+              <div class="code-left">
+                <span class="code-label">提取码</span>
+                <span class="code-value">{{
+                  codeVisibleMap[share.id!] ? share.shareCode : "******"
+                }}</span>
+              </div>
+              <el-icon class="code-toggle-icon">
+                <View v-if="!codeVisibleMap[share.id!]" />
+                <Hide v-else />
+              </el-icon>
             </div>
           </div>
 
@@ -155,6 +167,8 @@ import {
   Unlock,
   Lock,
   Document,
+  View,
+  Hide,
 } from "@element-plus/icons-vue";
 import { getShareUrl, cancel } from "@/api/share";
 import { useLoginUserStore } from "@/store/user";
@@ -164,6 +178,13 @@ const { loginUser } = useLoginUserStore();
 const accountId = loginUser.id;
 
 const shareList = ref<API.ShareDTO[]>([]);
+
+// 提取码可见性控制
+const codeVisibleMap = ref<Record<number, boolean>>({});
+
+const toggleCodeVisible = (shareId: number) => {
+  codeVisibleMap.value[shareId] = !codeVisibleMap.value[shareId];
+};
 
 // 计算属性：公开分享数量
 const publicShareCount = computed(() => {
@@ -317,10 +338,8 @@ onMounted(() => {
 <style scoped>
 .my-share-view {
   padding: 24px;
-  max-width: 1400px;
-  margin: 0 auto;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 50%, #fce7f3 100%);
+  min-height: calc(100vh - 64px);
+  background: linear-gradient(160deg, #0a0a1a 0%, #141428 40%, #1a1530 100%);
   position: relative;
   overflow: hidden;
 }
@@ -347,7 +366,7 @@ onMounted(() => {
   height: 300px;
   background: radial-gradient(
     circle,
-    rgba(219, 39, 119, 0.4) 0%,
+    rgba(212, 168, 83, 0.12) 0%,
     transparent 70%
   );
   top: -100px;
@@ -360,7 +379,7 @@ onMounted(() => {
   height: 250px;
   background: radial-gradient(
     circle,
-    rgba(168, 85, 247, 0.3) 0%,
+    rgba(201, 169, 110, 0.08) 0%,
     transparent 70%
   );
   bottom: -80px;
@@ -373,7 +392,7 @@ onMounted(() => {
   height: 200px;
   background: radial-gradient(
     circle,
-    rgba(244, 114, 182, 0.3) 0%,
+    rgba(184, 148, 63, 0.08) 0%,
     transparent 70%
   );
   top: 50%;
@@ -409,8 +428,8 @@ onMounted(() => {
 
 .title-icon {
   font-size: 28px;
-  color: #db2777;
-  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
+  color: #d4a853;
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -419,12 +438,12 @@ onMounted(() => {
 .header-title h1 {
   font-size: 24px;
   font-weight: 600;
-  color: #1e1b4b;
+  color: #e8d5b0;
   margin: 0;
 }
 
 .header-desc {
-  color: #64748b;
+  color: #8b8878;
   font-size: 14px;
   margin: 0;
   padding-left: 40px;
@@ -439,7 +458,7 @@ onMounted(() => {
 }
 
 .stat-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(20, 22, 40, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: 12px;
@@ -447,16 +466,17 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 16px;
-  border: 1px solid rgba(219, 39, 119, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(212, 168, 83, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease;
   position: relative;
   z-index: 1;
 }
 
 .stat-card:hover {
-  box-shadow: 0 20px 40px rgba(219, 39, 119, 0.15);
+  box-shadow: 0 20px 40px rgba(212, 168, 83, 0.08);
   transform: translateY(-2px);
+  border-color: rgba(212, 168, 83, 0.2);
 }
 
 .stat-icon {
@@ -470,18 +490,18 @@ onMounted(() => {
 }
 
 .stat-icon.public {
-  background: rgba(16, 185, 129, 0.1);
-  color: #10b981;
+  background: rgba(212, 168, 83, 0.12);
+  color: #d4a853;
 }
 
 .stat-icon.private {
-  background: rgba(245, 158, 11, 0.1);
-  color: #f59e0b;
+  background: rgba(201, 169, 110, 0.12);
+  color: #c9a96e;
 }
 
 .stat-icon.total {
-  background: rgba(99, 102, 241, 0.1);
-  color: #6366f1;
+  background: rgba(184, 148, 63, 0.12);
+  color: #b8943f;
 }
 
 .stat-info {
@@ -493,13 +513,13 @@ onMounted(() => {
 .stat-value {
   font-size: 24px;
   font-weight: 700;
-  color: #1e1b4b;
+  color: #e8d5b0;
   line-height: 1;
 }
 
 .stat-label {
   font-size: 13px;
-  color: #64748b;
+  color: #8b8878;
 }
 
 /* 分享列表 */
@@ -508,13 +528,13 @@ onMounted(() => {
 }
 
 .empty-state {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(20, 22, 40, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: 16px;
   padding: 64px 24px;
   text-align: center;
-  border: 1px dashed rgba(219, 39, 119, 0.2);
+  border: 1px dashed rgba(212, 168, 83, 0.15);
   position: relative;
   z-index: 1;
 }
@@ -523,55 +543,49 @@ onMounted(() => {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 100%);
+  background: rgba(20, 22, 40, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 20px;
   font-size: 36px;
-  color: #db2777;
+  color: #d4a853;
+  border: 1px solid rgba(212, 168, 83, 0.15);
 }
 
 .empty-title {
   font-size: 18px;
   font-weight: 600;
-  color: #1e1b4b;
+  color: #e8d5b0;
   margin: 0 0 8px;
 }
 
 .empty-desc {
   font-size: 14px;
-  color: #64748b;
+  color: #8b8878;
   margin: 0;
 }
 
 /* 分享卡片网格 */
 .share-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
 }
 
-/* 大屏幕显示4列 */
+/* 响应式卡片宽度微调 */
 @media (min-width: 1400px) {
   .share-cards {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* 中等屏幕显示2列 */
-@media (max-width: 1100px) {
-  .share-cards {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 }
 
 .share-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(20, 22, 40, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: 16px;
-  border: 1px solid rgba(219, 39, 119, 0.1);
+  border: 1px solid rgba(212, 168, 83, 0.1);
   overflow: hidden;
   transition: all 0.2s ease;
   display: flex;
@@ -581,18 +595,18 @@ onMounted(() => {
 }
 
 .share-card:hover {
-  box-shadow: 0 20px 40px rgba(219, 39, 119, 0.15);
+  box-shadow: 0 20px 40px rgba(212, 168, 83, 0.08);
   transform: translateY(-4px);
-  border-color: rgba(219, 39, 119, 0.3);
+  border-color: rgba(212, 168, 83, 0.25);
 }
 
 .share-card.expired {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .share-card.expired .share-name {
   text-decoration: line-through;
-  color: #94a3b8;
+  color: #6b6b78;
 }
 
 /* 卡片头部 */
@@ -607,12 +621,12 @@ onMounted(() => {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
+  background: linear-gradient(135deg, #c9a96e 0%, #b8943f 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  color: #ffffff;
+  color: #0a0a1a;
 }
 
 .share-type-badge {
@@ -626,13 +640,13 @@ onMounted(() => {
 }
 
 .share-type-badge.no_code {
-  background: rgba(16, 185, 129, 0.1);
-  color: #10b981;
+  background: rgba(212, 168, 83, 0.12);
+  color: #d4a853;
 }
 
 .share-type-badge.need_code {
-  background: rgba(245, 158, 11, 0.1);
-  color: #f59e0b;
+  background: rgba(201, 169, 110, 0.12);
+  color: #c9a96e;
 }
 
 /* 卡片内容 */
@@ -644,7 +658,7 @@ onMounted(() => {
 .share-name {
   font-size: 16px;
   font-weight: 600;
-  color: #1e1b4b;
+  color: #e8d5b0;
   margin: 0 0 12px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -663,33 +677,58 @@ onMounted(() => {
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: #64748b;
+  color: #8b8878;
 }
 
 .meta-item .el-icon {
   font-size: 14px;
-  color: #94a3b8;
+  color: #6b6b78;
 }
 
 .share-code {
   margin-top: 12px;
   padding: 10px 12px;
-  background: #f8fafc;
+  background: rgba(15, 18, 35, 0.5);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border: 1px solid rgba(212, 168, 83, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.share-code:hover {
+  background: rgba(15, 18, 35, 0.7);
+  border-color: rgba(212, 168, 83, 0.25);
+}
+
+.code-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.code-toggle-icon {
+  font-size: 16px;
+  color: #8b8878;
+  transition: color 0.2s ease;
+}
+
+.share-code:hover .code-toggle-icon {
+  color: #d4a853;
 }
 
 .code-label {
   font-size: 12px;
-  color: #64748b;
+  color: #8b8878;
 }
 
 .code-value {
   font-size: 14px;
   font-weight: 600;
-  color: #db2777;
+  color: #d4a853;
   font-family: monospace;
   letter-spacing: 2px;
 }
@@ -717,13 +756,13 @@ onMounted(() => {
 }
 
 .action-btn.copy {
-  background: rgba(219, 39, 119, 0.1);
-  color: #db2777;
+  background: rgba(212, 168, 83, 0.1);
+  color: #d4a853;
 }
 
 .action-btn.copy:hover {
-  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
+  color: #0a0a1a;
 }
 
 .action-btn.delete {

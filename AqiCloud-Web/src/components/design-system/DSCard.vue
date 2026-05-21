@@ -30,7 +30,7 @@ withDefaults(defineProps<Props>(), {
 }
 
 .ds-card--hoverable:hover {
-  border-color: rgba(219, 39, 119, 0.3);
+  border-color: rgba(212, 168, 83, 0.3);
   box-shadow: var(--shadow-md), var(--glow-pink);
   transform: translateY(-4px);
 }

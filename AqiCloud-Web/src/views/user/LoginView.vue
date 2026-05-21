@@ -193,7 +193,7 @@ const handleSubmit = async () => {
   height: 400px;
   top: -100px;
   right: -50px;
-  background: radial-gradient(circle, #db2777, transparent);
+  background: radial-gradient(circle, #d4a853, transparent);
 }
 
 .hok-glow-orb.gold {

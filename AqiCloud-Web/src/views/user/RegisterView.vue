@@ -234,7 +234,7 @@ const handleRegister = async () => {
   height: 400px;
   top: -100px;
   right: -50px;
-  background: radial-gradient(circle, #db2777, transparent);
+  background: radial-gradient(circle, #d4a853, transparent);
 }
 
 .hok-glow-orb.gold {
@@ -335,7 +335,7 @@ const handleRegister = async () => {
 }
 
 .avatar-wrapper:hover {
-  border-color: #db2777;
+  border-color: #d4a853;
 }
 
 .avatar-hint {

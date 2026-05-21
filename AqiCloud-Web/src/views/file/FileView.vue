@@ -1309,7 +1309,7 @@ const openFileInfo = (file: API.FileDTO) => {
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  background: #f8fafc;
+  background: linear-gradient(160deg, #0a0a1a 0%, #141428 40%, #1a1530 100%);
   font-family: var(--font-primary);
 }
 
@@ -1335,7 +1335,7 @@ const openFileInfo = (file: API.FileDTO) => {
 .bg-orb-1 {
   width: 500px;
   height: 500px;
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
   top: -200px;
   right: -100px;
   animation: floatOrb 30s ease-in-out infinite;
@@ -1344,7 +1344,7 @@ const openFileInfo = (file: API.FileDTO) => {
 .bg-orb-2 {
   width: 400px;
   height: 400px;
-  background: linear-gradient(135deg, #d97706 0%, #fbbf24 100%);
+  background: linear-gradient(135deg, #b8943f 0%, #8b7355 100%);
   bottom: -150px;
   left: -100px;
   animation: floatOrb 25s ease-in-out infinite reverse;
@@ -1352,15 +1352,15 @@ const openFileInfo = (file: API.FileDTO) => {
 
 /* ===== Light Panel ===== */
 .glass-panel {
-  background: #ffffff;
+  background: rgba(20, 22, 40, 0.7);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(212, 168, 83, 0.1);
   border-radius: 20px;
   margin: var(--spacing-md);
   box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.04),
-    0 8px 32px rgba(0, 0, 0, 0.03);
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 8px 32px rgba(0, 0, 0, 0.2);
   animation: fadeInUp 0.5s ease-out;
   position: relative;
   z-index: 1;
@@ -1370,8 +1370,8 @@ const openFileInfo = (file: API.FileDTO) => {
 
 .glass-panel:hover {
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.06),
-    0 12px 48px rgba(0, 0, 0, 0.04);
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 12px 48px rgba(0, 0, 0, 0.3);
 }
 
 /* ===== 文件列表容器 ===== */
@@ -1393,8 +1393,8 @@ const openFileInfo = (file: API.FileDTO) => {
 .file-list-container::-webkit-scrollbar-thumb {
   background: linear-gradient(
     180deg,
-    rgba(219, 39, 119, 0.15) 0%,
-    rgba(219, 39, 119, 0.05) 100%
+    rgba(212, 168, 83, 0.12) 0%,
+    rgba(212, 168, 83, 0.04) 100%
   );
   border-radius: 3px;
 }
@@ -1402,18 +1402,18 @@ const openFileInfo = (file: API.FileDTO) => {
 .file-list-container::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(
     180deg,
-    rgba(219, 39, 119, 0.3) 0%,
-    rgba(219, 39, 119, 0.1) 100%
+    rgba(212, 168, 83, 0.25) 0%,
+    rgba(212, 168, 83, 0.08) 100%
   );
 }
 
 /* ===== 分页容器 Light Bar ===== */
 .glass-bar {
-  background: #ffffff;
+  background: rgba(20, 22, 40, 0.85);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(212, 168, 83, 0.1);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
   padding: 16px 24px;
   position: relative;
   z-index: 1;
@@ -1452,7 +1452,7 @@ const openFileInfo = (file: API.FileDTO) => {
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: var(--color-text-primary, #1a1a2e);
+  color: #e8d5b0;
   margin-bottom: 8px;
   letter-spacing: -0.01em;
 }
@@ -1474,8 +1474,8 @@ const openFileInfo = (file: API.FileDTO) => {
 
 /* ===== 对话框样式 ===== */
 :deep(.ds-dialog .el-dialog__header) {
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 50%, #a855f7 100%);
-  color: white;
+  background: linear-gradient(135deg, #c9a96e 0%, #b8943f 50%, #8b7355 100%);
+  color: #0a0a1a;
   padding: 20px 24px;
   border-radius: 16px 16px 0 0;
   position: relative;
@@ -1489,13 +1489,13 @@ const openFileInfo = (file: API.FileDTO) => {
   right: -20%;
   width: 200px;
   height: 200px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(212, 168, 83, 0.1);
   border-radius: 50%;
   filter: blur(40px);
 }
 
 :deep(.ds-dialog .el-dialog__title) {
-  color: white;
+  color: #0a0a1a;
   font-weight: 700;
   font-size: 16px;
   letter-spacing: -0.01em;
@@ -1548,7 +1548,7 @@ const openFileInfo = (file: API.FileDTO) => {
 }
 
 :deep(.el-table th.el-table__cell) {
-  background: rgba(219, 39, 119, 0.04) !important;
+  background: rgba(212, 168, 83, 0.04) !important;
   font-weight: 600;
   color: var(--color-text-primary, #1a1a2e);
   font-size: 13px;
@@ -1567,17 +1567,17 @@ const openFileInfo = (file: API.FileDTO) => {
 }
 
 :deep(.el-table .el-table__row:hover > td) {
-  background: rgba(219, 39, 119, 0.04) !important;
+  background: rgba(212, 168, 83, 0.04) !important;
 }
 
 :deep(.el-table .el-table__row.current-row > td) {
-  background: rgba(219, 39, 119, 0.06) !important;
-  border-left: 3px solid #db2777;
+  background: rgba(212, 168, 83, 0.06) !important;
+  border-left: 3px solid #d4a853;
 }
 
 /* ===== Element Plus 分页穿透 ===== */
 :deep(.el-pagination) {
-  --el-pagination-button-bg-color: rgba(255, 255, 255, 0.8);
+  --el-pagination-button-bg-color: rgba(20, 22, 40, 0.5);
   font-family: "Inter", sans-serif;
 }
 
@@ -1588,13 +1588,13 @@ const openFileInfo = (file: API.FileDTO) => {
 }
 
 :deep(.el-pagination .el-pager li.is-active) {
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
-  color: white;
-  box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
+  background: linear-gradient(135deg, #c9a96e 0%, #b8943f 100%);
+  color: #0a0a1a;
+  box-shadow: 0 4px 12px rgba(212, 168, 83, 0.25);
 }
 
 :deep(.el-pagination .el-pager li:hover) {
-  color: #db2777;
+  color: #d4a853;
 }
 
 :deep(.el-pagination button) {
@@ -1603,7 +1603,7 @@ const openFileInfo = (file: API.FileDTO) => {
 
 /* ===== Element Plus Select 穿透 ===== */
 :deep(.el-select) {
-  --el-select-border-color-hover: #f472b6;
+  --el-select-border-color-hover: #d4a853;
 }
 
 :deep(.el-select .el-input__wrapper) {
@@ -1613,13 +1613,13 @@ const openFileInfo = (file: API.FileDTO) => {
 }
 
 :deep(.el-select .el-input__wrapper:hover) {
-  box-shadow: 0 2px 8px rgba(219, 39, 119, 0.1);
+  box-shadow: 0 2px 8px rgba(212, 168, 83, 0.1);
 }
 
 /* ===== Element Plus Checkbox 穿透 ===== */
 :deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
-  border-color: #db2777;
+  background: linear-gradient(135deg, #c9a96e 0%, #b8943f 100%);
+  border-color: #d4a853;
 }
 
 /* ===== 响应式 ===== */

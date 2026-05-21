@@ -196,7 +196,7 @@ const tableRowClassName = (): string => {
 
 .file-name:hover .file-name-text {
   text-decoration: underline;
-  color: var(--color-primary, #db2777);
+  color: #d4a853;
 }
 
 .file-icon {
@@ -231,14 +231,14 @@ const tableRowClassName = (): string => {
 }
 
 ::v-deep(.el-checkbox__inner:hover) {
-  border-color: rgba(219, 39, 119, 0.4);
-  box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.08);
+  border-color: rgba(212, 168, 83, 0.5);
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.08);
 }
 
 ::v-deep(.el-checkbox.is-checked .el-checkbox__inner) {
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+  background: linear-gradient(135deg, #c9a96e 0%, #d4a853 100%);
   border-color: transparent;
-  box-shadow: 0 2px 8px rgba(219, 39, 119, 0.3);
+  box-shadow: 0 2px 8px rgba(212, 168, 83, 0.3);
 }
 
 ::v-deep(.el-checkbox.is-checked .el-checkbox__inner::after) {
@@ -251,8 +251,8 @@ const tableRowClassName = (): string => {
 }
 
 ::v-deep(.el-checkbox__input.is-indeterminate .el-checkbox__inner) {
-  background: rgba(219, 39, 119, 0.3);
-  border-color: rgba(219, 39, 119, 0.5);
+  background: rgba(212, 168, 83, 0.3);
+  border-color: rgba(212, 168, 83, 0.5);
 }
 
 /* Selection column background */
@@ -272,17 +272,44 @@ const tableRowClassName = (): string => {
 ::v-deep(.el-table__header) th {
   font-size: 15px;
   font-weight: bold;
-  background-color: #f5f7fa;
+  background-color: rgba(20, 22, 40, 0.9) !important;
+  color: #e8d5b0;
   padding: 14px 0;
+  border-bottom: 1px solid rgba(212, 168, 83, 0.15);
 }
 
 ::v-deep(.el-table__body) td {
   padding: 14px 0;
   font-size: 14px;
+  border-bottom-color: rgba(212, 168, 83, 0.06);
 }
 
 ::v-deep(.el-table--enable-row-hover .el-table__body tr:hover > td) {
-  background-color: #c6d5ed;
+  background-color: rgba(212, 168, 83, 0.06) !important;
+}
+
+::v-deep(.el-table) {
+  background-color: transparent !important;
+  --el-table-bg-color: transparent;
+  --el-table-tr-bg-color: transparent;
+}
+
+::v-deep(.el-table__body tr) {
+  background-color: transparent !important;
+}
+
+::v-deep(.el-table td.el-table__cell),
+::v-deep(.el-table th.el-table__cell) {
+  background-color: transparent !important;
+  color: #b8b0a0;
+}
+
+::v-deep(.el-table th.el-table__cell) {
+  color: #e8d5b0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 13px;
 }
 
 ::v-deep(.el-checkbox__inner) {

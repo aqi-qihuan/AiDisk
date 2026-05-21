@@ -6,8 +6,8 @@
       <div class="bg-orb bg-orb-2"></div>
       <div class="bg-orb bg-orb-3"></div>
     </div>
-    <!-- 顶部操作栏卡片 -->
-    <div class="ds-card operation-card">
+    <!-- 顶部操作栏卡片（有文件时才显示） -->
+    <div v-if="fileList.length > 0" class="ds-card operation-card">
       <div class="operation-bar">
         <DSButton
           variant="success"
@@ -74,8 +74,8 @@
       </div>
     </div>
 
-    <!-- 文件列表 -->
-    <div class="ds-card file-list-card">
+    <!-- 文件列表（有数据时显示表格） -->
+    <div v-if="fileList.length > 0" class="ds-card file-list-card">
       <FileTable :fileList="fileList" @selection-change="handleSelectionChange">
         <template #operation="{ row }">
           <div class="operation-buttons">
@@ -100,9 +100,11 @@
           </div>
         </template>
       </FileTable>
+    </div>
 
-      <!-- 空状态 -->
-      <div v-if="fileList.length === 0" class="empty-state">
+    <!-- 空状态（无数据时独立显示） -->
+    <div v-if="fileList.length === 0" class="ds-card file-list-card">
+      <div class="empty-state">
         <div class="empty-icon">
           <svg
             class="empty-svg"
@@ -119,8 +121,8 @@
                 x2="100%"
                 y2="100%"
               >
-                <stop offset="0%" stop-color="#DB2777" />
-                <stop offset="100%" stop-color="#A855F7" />
+                <stop offset="0%" stop-color="#D4A853" />
+                <stop offset="100%" stop-color="#C9A96E" />
               </linearGradient>
               <linearGradient
                 id="recycleGrad2"
@@ -129,8 +131,8 @@
                 x2="100%"
                 y2="100%"
               >
-                <stop offset="0%" stop-color="#F472B6" />
-                <stop offset="100%" stop-color="#C084FC" />
+                <stop offset="0%" stop-color="#B8943F" />
+                <stop offset="100%" stop-color="#D4A853" />
               </linearGradient>
               <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="3" result="coloredBlur" />
@@ -152,7 +154,7 @@
             <!-- 垃圾桶主体 -->
             <path
               d="M35 40h50l-5 60H40l-5-60z"
-              fill="rgba(255,255,255,0.3)"
+              fill="rgba(20,22,40,0.5)"
               stroke="url(#recycleGrad1)"
               stroke-width="2"
             />
@@ -202,13 +204,13 @@
               cx="85"
               cy="35"
               r="15"
-              fill="rgba(16, 185, 129, 0.2)"
-              stroke="#10B981"
+              fill="rgba(212, 168, 83, 0.15)"
+              stroke="#D4A853"
               stroke-width="2"
             />
             <path
               d="M77 35l5 5 10-10"
-              stroke="#10B981"
+              stroke="#D4A853"
               stroke-width="3"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -217,7 +219,7 @@
           </svg>
         </div>
         <p class="empty-title">{{ t("file.recycleEmpty") }}</p>
-        <p class="empty-description">删除的文件会在这里保留30天</p>
+        <p class="empty-description">{{ t("file.recycleEmptyDesc") }}</p>
       </div>
     </div>
   </div>
@@ -398,7 +400,7 @@ onMounted(() => {
 <style scoped>
 .recycle-view {
   padding: var(--ds-spacing-4);
-  background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 50%, #fce7f3 100%);
+  background: linear-gradient(160deg, #0a0a1a 0%, #141428 40%, #1a1530 100%);
   min-height: calc(100vh - 64px);
   position: relative;
   overflow: hidden;
@@ -426,7 +428,7 @@ onMounted(() => {
   height: 300px;
   background: radial-gradient(
     circle,
-    rgba(219, 39, 119, 0.4) 0%,
+    rgba(212, 168, 83, 0.12) 0%,
     transparent 70%
   );
   top: -100px;
@@ -439,7 +441,7 @@ onMounted(() => {
   height: 250px;
   background: radial-gradient(
     circle,
-    rgba(168, 85, 247, 0.3) 0%,
+    rgba(201, 169, 110, 0.08) 0%,
     transparent 70%
   );
   bottom: -80px;
@@ -452,7 +454,7 @@ onMounted(() => {
   height: 200px;
   background: radial-gradient(
     circle,
-    rgba(244, 114, 182, 0.3) 0%,
+    rgba(184, 148, 63, 0.08) 0%,
     transparent 70%
   );
   top: 50%;
@@ -478,11 +480,11 @@ onMounted(() => {
 .operation-card {
   margin-bottom: var(--ds-spacing-4);
   padding: var(--ds-spacing-3) var(--ds-spacing-4);
-  border-left: 4px solid #a855f7;
-  background: rgba(255, 255, 255, 0.65);
+  border-left: 4px solid #d4a853;
+  background: rgba(20, 22, 40, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.5) inset;
+  border: 1px solid rgba(212, 168, 83, 0.12);
   animation: fadeInUp 0.5s ease-out;
   position: relative;
   z-index: 1;
@@ -504,10 +506,10 @@ onMounted(() => {
 /* 文件列表卡片 */
 .file-list-card {
   padding: var(--ds-spacing-4);
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(20, 22, 40, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.5) inset;
+  border: 1px solid rgba(212, 168, 83, 0.1);
   animation: fadeInUp 0.5s ease-out 0.1s both;
   position: relative;
   z-index: 1;
@@ -532,7 +534,7 @@ onMounted(() => {
   justify-content: center;
   margin-bottom: var(--ds-spacing-4);
   animation: float 3s ease-in-out infinite;
-  filter: drop-shadow(0 10px 20px rgba(219, 39, 119, 0.15));
+  filter: drop-shadow(0 10px 20px rgba(212, 168, 83, 0.1));
 }
 
 .empty-svg {
@@ -543,13 +545,13 @@ onMounted(() => {
 .empty-title {
   font-size: var(--ds-text-size-lg);
   font-weight: 600;
-  color: var(--ds-color-text-primary);
+  color: #e8d5b0;
   margin-bottom: var(--ds-spacing-2);
 }
 
 .empty-description {
   font-size: var(--ds-text-size-sm);
-  color: var(--ds-color-text-secondary);
+  color: #8b8878;
 }
 
 /* 浮动动画 */

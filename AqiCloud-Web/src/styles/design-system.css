@@ -56,9 +56,9 @@
      Semantic Colors (Dark Mode Defaults)
      ==================== */
   
-  --color-primary: #DB2777;
-  --color-primary-dark: #BE185D;
-  --color-secondary: #F472B6;
+  --color-primary: #D4A853;
+  --color-primary-dark: #B8943F;
+  --color-secondary: #C9A96E;
   --color-cta: #D97706;
   --color-cta-light: #F59E0B;
   --color-gold: #FBBF24;
@@ -91,11 +91,11 @@
   /* ====================
      Glow Effects
      ==================== */
-  --glow-pink: 0 0 24px rgba(219,39,119,0.25), 0 0 60px rgba(219,39,119,0.1);
-  --glow-gold: 0 0 24px rgba(217,119,6,0.3), 0 0 60px rgba(217,119,6,0.1);
-  --glow-text-pink: 0 0 20px rgba(219,39,119,0.5);
+  --glow-pink: 0 0 24px rgba(212,168,83,0.25), 0 0 60px rgba(212,168,83,0.1);
+  --glow-gold: 0 0 24px rgba(212,168,83,0.3), 0 0 60px rgba(212,168,83,0.1);
+  --glow-text-pink: 0 0 20px rgba(212,168,83,0.5);
   --glow-text-gold: 0 0 20px rgba(251,191,36,0.5);
-  --glow-primary-btn: 0 4px 24px rgba(219,39,119,0.4);
+  --glow-primary-btn: 0 4px 24px rgba(212,168,83,0.4);
   --glow-cta-btn: 0 4px 24px rgba(217,119,6,0.4);
   
   /* ====================
@@ -112,8 +112,8 @@
   /* Glass Variants */
   --glass-subtle-bg: rgba(255, 255, 255, 0.02);
   --glass-strong-bg: rgba(255, 255, 255, 0.08);
-  --glass-primary-bg: rgba(219, 39, 119, 0.08);
-  --glass-primary-border: 1px solid rgba(219, 39, 119, 0.2);
+  --glass-primary-bg: rgba(212, 168, 83, 0.08);
+  --glass-primary-border: 1px solid rgba(212, 168, 83, 0.2);
   
   /* ====================
      Typography (Design Spec v2.0.0)
@@ -823,7 +823,7 @@ body {
    =================================== */
 
 .text-glow-pink {
-  text-shadow: 0 0 20px rgba(219,39,119,0.5), 0 0 40px rgba(219,39,119,0.2);
+  text-shadow: 0 0 20px rgba(212,168,83,0.5), 0 0 40px rgba(212,168,83,0.2);
 }
 
 .text-glow-gold {

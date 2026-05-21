@@ -339,7 +339,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--color-bg-surface, #14141c);
+  background: linear-gradient(160deg, #0a0a1a 0%, #141428 40%, #1a1530 100%);
   position: relative;
   overflow: hidden;
 }
@@ -378,8 +378,8 @@ export default defineComponent({
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(212, 168, 83, 0.25);
   transition: transform 0.3s ease;
 }
 
@@ -415,39 +415,42 @@ export default defineComponent({
 
 /* 用户消息 - 金色渐变气泡（HOK设计） */
 .message-item.user-message .message-content {
-  background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
-  color: #0b0b10;
+  background: linear-gradient(135deg, #c9a96e 0%, #d4a853 100%);
+  color: #0a0a1a;
   font-weight: 500;
   box-shadow:
-    0 8px 24px rgba(217, 119, 6, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.1);
+    0 8px 24px rgba(212, 168, 83, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.3);
   border-bottom-right-radius: 6px;
 }
 
 .message-item.user-message .message-content:hover {
   box-shadow:
-    0 12px 32px rgba(217, 119, 6, 0.4),
-    0 4px 8px rgba(0, 0, 0, 0.15);
+    0 12px 32px rgba(212, 168, 83, 0.35),
+    0 4px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-1px);
 }
 
-/* AI 消息 - 粉色毛玻璃气泡（HOK设计） */
+/* AI 消息 - 暗色毛玻璃气泡（HOK设计） */
 .message-item.assistant-message .message-content {
-  background: rgba(219, 39, 119, 0.08);
-  color: var(--color-text-primary, #f8fafc);
+  background: rgba(20, 22, 45, 0.85);
+  color: #e8d5b0;
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.2),
-    0 1px 3px rgba(0, 0, 0, 0.1);
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(212, 168, 83, 0.1);
   border-bottom-left-radius: 6px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(219, 39, 119, 0.15);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 168, 83, 0.15);
 }
 
 .message-item.assistant-message .message-content:hover {
   box-shadow:
-    0 8px 24px rgba(219, 39, 119, 0.3),
-    0 2px 6px rgba(0, 0, 0, 0.15);
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(212, 168, 83, 0.15);
   transform: translateY(-1px);
+  border-color: rgba(212, 168, 83, 0.25);
 }
 
 /* 消息文本 */
@@ -478,15 +481,17 @@ export default defineComponent({
 }
 
 .welcome-card {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(20, 22, 40, 0.8);
   backdrop-filter: blur(24px);
   border-radius: 24px;
   padding: var(--ds-spacing-8);
   max-width: 480px;
   width: 100%;
+  border: 1px solid rgba(212, 168, 83, 0.2);
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.06);
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(212, 168, 83, 0.1) inset,
+    0 0 40px rgba(212, 168, 83, 0.05);
   animation: slideUp 0.6s ease-out;
 }
 
@@ -506,7 +511,7 @@ export default defineComponent({
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: linear-gradient(135deg, #db2777 0%, #a855f7 50%, #f472b6 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 50%, #b8943f 100%);
   animation: rotate 3s linear infinite;
 }
 
@@ -515,17 +520,18 @@ export default defineComponent({
   position: absolute;
   inset: 3px;
   border-radius: 50%;
-  background: var(--color-bg-card, #1a1a24);
+  background: #0f1125;
 }
 
 .avatar-inner {
   position: absolute;
   inset: 6px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+  background: linear-gradient(135deg, #c9a96e 0%, #b8943f 100%);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #0a0a1a;
   font-size: 36px;
   animation: bounce 2s ease-in-out infinite;
 }
@@ -533,16 +539,17 @@ export default defineComponent({
 .welcome-title {
   font-size: 28px;
   font-weight: 700;
-  background: linear-gradient(135deg, #db2777 0%, #fbbf24 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #f0c060 50%, #c9a96e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: var(--ds-spacing-2);
+  text-shadow: 0 2px 10px rgba(212, 168, 83, 0.3);
 }
 
 .welcome-subtitle {
   font-size: var(--text-base);
-  color: var(--color-text-secondary, #94a3b8);
+  color: #8b8878;
   font-weight: 500;
 }
 
@@ -551,7 +558,7 @@ export default defineComponent({
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.1),
+    rgba(212, 168, 83, 0.2),
     transparent
   );
   margin: var(--ds-spacing-6) 0;
@@ -559,7 +566,7 @@ export default defineComponent({
 
 .welcome-description {
   font-size: var(--text-base);
-  color: var(--color-text-secondary, #94a3b8);
+  color: #8b8878;
   text-align: center;
   margin-bottom: var(--ds-spacing-5);
   font-weight: 500;
@@ -577,31 +584,31 @@ export default defineComponent({
   align-items: center;
   gap: var(--ds-spacing-4);
   padding: var(--ds-spacing-4);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(20, 22, 40, 0.5);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 168, 83, 0.1);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .suggestion-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(219, 39, 119, 0.2);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  background: rgba(30, 32, 55, 0.7);
+  border-color: rgba(212, 168, 83, 0.25);
+  box-shadow: 0 8px 24px rgba(212, 168, 83, 0.12);
   transform: translateY(-2px);
 }
 
 .suggestion-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+  background: linear-gradient(135deg, #c9a96e 0%, #b8943f 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  color: #0a0a1a;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
+  box-shadow: 0 4px 12px rgba(212, 168, 83, 0.25);
 }
 
 .suggestion-content {
@@ -614,25 +621,25 @@ export default defineComponent({
 .suggestion-text {
   font-size: var(--text-base);
   font-weight: 600;
-  color: var(--color-text-primary, #f8fafc);
+  color: #e8d5b0;
 }
 
 .suggestion-arrow {
   width: 32px;
   height: 32px;
-  background: rgba(219, 39, 119, 0.1);
+  background: rgba(212, 168, 83, 0.1);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-primary, #db2777);
+  color: #d4a853;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .suggestion-card:hover .suggestion-arrow {
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
-  color: white;
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
+  color: #0a0a1a;
   transform: translateX(4px);
 }
 
@@ -642,7 +649,7 @@ export default defineComponent({
   justify-content: center;
   gap: var(--ds-spacing-3);
   padding-top: var(--ds-spacing-4);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(212, 168, 83, 0.15);
 }
 
 .typing-indicator {
@@ -653,7 +660,7 @@ export default defineComponent({
 .typing-indicator .dot {
   width: 6px;
   height: 6px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
   border-radius: 50%;
   animation: typing 1.4s ease-in-out infinite;
 }
@@ -670,17 +677,17 @@ export default defineComponent({
 
 .footer-text {
   font-size: var(--ds-text-size-sm);
-  color: var(--ds-color-text-tertiary);
+  color: #8b8878;
 }
 
-/* 输入区域 - 全新设计 */
+/* 输入区域 - HOK暗黑史诗风格 */
 .input-area {
   padding: var(--ds-spacing-4) var(--ds-spacing-6);
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.9) 20%,
-    white 100%
+    rgba(10, 10, 30, 0) 0%,
+    rgba(20, 22, 40, 0.8) 20%,
+    rgba(15, 18, 35, 0.95) 100%
   );
   position: relative;
 }
@@ -695,7 +702,7 @@ export default defineComponent({
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(102, 126, 234, 0.2),
+    rgba(212, 168, 83, 0.2),
     transparent
   );
 }
@@ -704,9 +711,9 @@ export default defineComponent({
   position: relative;
   max-width: 900px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(20, 22, 40, 0.7);
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 168, 83, 0.12);
   padding: var(--ds-spacing-3) var(--ds-spacing-16) var(--ds-spacing-3)
     var(--ds-spacing-5);
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -716,14 +723,14 @@ export default defineComponent({
 }
 
 .input-wrapper:hover {
-  border-color: rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(212, 168, 83, 0.2);
+  background: rgba(25, 28, 48, 0.75);
 }
 
 .input-wrapper:focus-within {
-  border-color: rgba(219, 39, 119, 0.3);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 12px rgba(219, 39, 119, 0.08);
+  border-color: rgba(212, 168, 83, 0.4);
+  background: rgba(25, 28, 48, 0.8);
+  box-shadow: 0 0 0 4px rgba(212, 168, 83, 0.06);
 }
 
 .input-wrapper textarea {
@@ -738,11 +745,11 @@ export default defineComponent({
   min-height: 24px;
   overflow-y: auto;
   font-family: inherit;
-  color: var(--color-text-primary, #f8fafc);
+  color: #e8d5b0;
 }
 
 .input-wrapper textarea::placeholder {
-  color: var(--color-text-tertiary, #64748b);
+  color: #5a5a6e;
   font-size: 14px;
 }
 
@@ -759,9 +766,9 @@ export default defineComponent({
 
 .tip-badge {
   font-size: 11px;
-  color: var(--color-primary, #db2777);
-  background: rgba(219, 39, 119, 0.1);
-  border: 1px solid rgba(219, 39, 119, 0.2);
+  color: #c9a96e;
+  background: rgba(212, 168, 83, 0.08);
+  border: 1px solid rgba(212, 168, 83, 0.15);
   padding: 3px 10px;
   border-radius: 6px;
   font-weight: 500;
@@ -769,11 +776,11 @@ export default defineComponent({
 }
 
 .tip-badge:hover {
-  background: rgba(219, 39, 119, 0.18);
+  background: rgba(212, 168, 83, 0.15);
   transform: translateY(-1px);
 }
 
-/* 发送按钮 - 暗色设计 */
+/* 发送按钮 - HOK暗黑史诗风格 */
 .send-btn {
   position: absolute;
   right: 12px;
@@ -785,28 +792,28 @@ export default defineComponent({
   justify-content: center;
   cursor: pointer;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(30, 32, 55, 0.8);
+  border: 1px solid rgba(212, 168, 83, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .send-btn svg {
   width: 18px;
   height: 18px;
-  fill: #64748b;
+  fill: #6b6b78;
   transition: all 0.3s ease;
 }
 
 .send-btn.active {
-  background: linear-gradient(135deg, #d97706 0%, #fbbf24 100%);
+  background: linear-gradient(135deg, #c9a96e 0%, #d4a853 100%);
   border-color: transparent;
-  box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+  box-shadow: 0 4px 15px rgba(212, 168, 83, 0.35);
 }
 
 .send-btn.active svg {
-  fill: white;
+  fill: #0a0a1a;
   transform: translateX(1px);
 }
 
@@ -816,7 +823,7 @@ export default defineComponent({
 
 .send-btn.active:hover:not(.loading) {
   transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.5);
+  box-shadow: 0 6px 20px rgba(212, 168, 83, 0.45);
 }
 
 .send-btn:active:not(.loading) {
@@ -831,8 +838,8 @@ export default defineComponent({
 .loading-spinner {
   width: 18px;
   height: 18px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
+  border: 2px solid rgba(10, 10, 26, 0.3);
+  border-top-color: #0a0a1a;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }

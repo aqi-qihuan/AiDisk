@@ -107,7 +107,7 @@ import DSButton from "@/components/design-system/DSButton.vue";
 .orb-1 {
   width: 400px;
   height: 400px;
-  background: #db2777;
+  background: #d4a853;
   top: -150px;
   right: -100px;
   animation: float 20s ease-in-out infinite;

@@ -494,8 +494,8 @@ const scrollToSection = (index: number) => {
 <style>
 /* HOK 暗色设计系统 — Terms */
 :root {
-  --primary: #db2777;
-  --secondary: #f472b6;
+  --primary: #d4a853;
+  --secondary: #c9a96e;
   --cta: #d97706;
   --gold: #fbbf24;
   --bg-dark: #0b0b10;
@@ -537,7 +537,7 @@ const scrollToSection = (index: number) => {
 .terms-page::before {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, #db2777, transparent);
+  background: radial-gradient(circle, #d4a853, transparent);
   top: -200px;
   right: -100px;
   opacity: 0.25;
@@ -634,7 +634,7 @@ const scrollToSection = (index: number) => {
 .header-title {
   font-size: 3rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #fbbf24 0%, #fde68a 40%, #f472b6 100%);
+  background: linear-gradient(135deg, #fbbf24 0%, #fde68a 40%, #c9a96e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -653,7 +653,7 @@ const scrollToSection = (index: number) => {
 .header-divider {
   width: 60px;
   height: 4px;
-  background: linear-gradient(90deg, #db2777, #fbbf24);
+  background: linear-gradient(90deg, #d4a853, #fbbf24);
   border-radius: 2px;
   margin: 20px auto 0;
 }
@@ -731,7 +731,7 @@ const scrollToSection = (index: number) => {
 
 .toc-link:hover {
   background: rgba(219, 39, 119, 0.08);
-  color: #db2777;
+  color: #d4a853;
   transform: translateX(4px);
 }
 
@@ -742,7 +742,7 @@ const scrollToSection = (index: number) => {
   align-items: center;
   justify-content: center;
   background: rgba(219, 39, 119, 0.15);
-  color: #db2777;
+  color: #d4a853;
   border-radius: 8px;
   font-size: 12px;
   font-weight: 700;
@@ -751,7 +751,7 @@ const scrollToSection = (index: number) => {
 }
 
 .toc-link:hover .toc-number {
-  background: #db2777;
+  background: #d4a853;
   color: white;
   transform: rotate(10deg) scale(1.1);
 }
@@ -833,7 +833,7 @@ const scrollToSection = (index: number) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
   color: white;
   border-radius: 12px;
   font-size: 15px;
@@ -978,7 +978,7 @@ const scrollToSection = (index: number) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
   border-radius: 12px;
   flex-shrink: 0;
   box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
@@ -1032,7 +1032,7 @@ const scrollToSection = (index: number) => {
 }
 
 .effective-date svg {
-  color: #db2777;
+  color: #d4a853;
 }
 
 .back-link {

@@ -311,8 +311,8 @@ const getDefaultAvatar = (userId?: number): string => {
 
 /* CSS变量定义 - HOK Dark Theme */
 :root {
-  --header-primary: #db2777;
-  --header-secondary: #f472b6;
+  --header-primary: #d4a853;
+  --header-secondary: #c9a96e;
   --header-cta: #d97706;
   --header-bg: rgba(20, 20, 28, 0.85);
   --header-text: #f8fafc;
@@ -370,7 +370,7 @@ const getDefaultAvatar = (userId?: number): string => {
   font-weight: 700;
   font-family: var(--header-font);
   margin: 0;
-  background: linear-gradient(135deg, #db2777 0%, #ca8a04 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #ca8a04 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -429,7 +429,7 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .nav-item:hover {
-  color: #f472b6;
+  color: #c9a96e;
   transform: translateY(-1px);
   background: rgba(219, 39, 119, 0.06);
 }
@@ -452,7 +452,7 @@ const getDefaultAvatar = (userId?: number): string => {
   transform: translateX(-50%);
   width: 24px;
   height: 3px;
-  background: linear-gradient(90deg, #db2777 0%, #d97706 100%);
+  background: linear-gradient(90deg, #d4a853 0%, #d97706 100%);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(219, 39, 119, 0.4);
 }
@@ -491,7 +491,7 @@ const getDefaultAvatar = (userId?: number): string => {
   border: 2px solid transparent;
   background:
     linear-gradient(#1a1a24, #1a1a24) padding-box,
-    linear-gradient(135deg, #db2777 0%, #d97706 100%) border-box;
+    linear-gradient(135deg, #d4a853 0%, #d97706 100%) border-box;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
@@ -567,7 +567,7 @@ const getDefaultAvatar = (userId?: number): string => {
   -webkit-backdrop-filter: blur(10px);
   border: 1.5px solid rgba(219, 39, 119, 0.2);
   border-radius: 12px;
-  color: #db2777;
+  color: #d4a853;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-left: 12px;
@@ -671,7 +671,7 @@ const getDefaultAvatar = (userId?: number): string => {
   transform: translateY(-50%);
   width: 0;
   height: 70%;
-  background: linear-gradient(135deg, #db2777 0%, #d97706 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #d97706 100%);
   border-radius: 0 6px 6px 0;
   transition: width 0.3s ease;
 }
@@ -681,7 +681,7 @@ const getDefaultAvatar = (userId?: number): string => {
 }
 
 .mobile-nav-item:hover {
-  color: #f472b6;
+  color: #c9a96e;
   background: linear-gradient(
     135deg,
     rgba(219, 39, 119, 0.08) 0%,

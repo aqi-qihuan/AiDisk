@@ -141,14 +141,17 @@ watch(
   border-radius: 8px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: rgba(20, 22, 40, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(212, 168, 83, 0.12);
+  color: #e8d5b0;
 }
 
 .title {
   margin-right: 12px;
   font-size: 14px;
-  color: #f8f9fa;
+  color: #8b8878;
   font-weight: 500;
 }
 
@@ -167,7 +170,7 @@ watch(
 }
 
 ::v-deep(.el-breadcrumb__inner) {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(232, 213, 176, 0.75);
   font-size: 14px;
   padding: 4px 10px;
   border-radius: 4px;
@@ -175,18 +178,18 @@ watch(
 }
 
 ::v-deep(.el-breadcrumb__inner:hover) {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: white;
+  background-color: rgba(212, 168, 83, 0.12);
+  color: #d4a853;
 }
 
 ::v-deep(.el-breadcrumb__separator) {
   margin: 0 6px;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(139, 136, 120, 0.6);
 }
 
 ::v-deep(.el-breadcrumb__item:last-child .el-breadcrumb__inner) {
-  color: white;
+  color: #e8d5b0;
   font-weight: 600;
   cursor: default;
 }

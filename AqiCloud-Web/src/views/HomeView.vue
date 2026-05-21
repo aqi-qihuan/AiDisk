@@ -346,8 +346,8 @@ const scrollToFeatures = () => {
 
 /* CSS变量定义 - HOK Dark */
 :root {
-  --primary: #db2777;
-  --secondary: #f472b6;
+  --primary: #d4a853;
+  --secondary: #c9a96e;
   --cta: #d97706;
   --gold: #fbbf24;
   --background: #0b0b10;
@@ -396,7 +396,7 @@ const scrollToFeatures = () => {
 .orb-1 {
   width: 500px;
   height: 500px;
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 50%, #d97706 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 50%, #d97706 100%);
   top: -150px;
   right: -100px;
   animation-delay: 0s;
@@ -405,7 +405,7 @@ const scrollToFeatures = () => {
 .orb-2 {
   width: 400px;
   height: 400px;
-  background: linear-gradient(135deg, #f472b6 0%, #ca8a04 50%, #fbcfe8 100%);
+  background: linear-gradient(135deg, #c9a96e 0%, #ca8a04 50%, #fbcfe8 100%);
   bottom: -100px;
   left: -100px;
   animation-delay: 7s;
@@ -414,7 +414,7 @@ const scrollToFeatures = () => {
 .orb-3 {
   width: 300px;
   height: 300px;
-  background: linear-gradient(135deg, #ca8a04 0%, #db2777 50%, #f472b6 100%);
+  background: linear-gradient(135deg, #ca8a04 0%, #d4a853 50%, #c9a96e 100%);
   top: 40%;
   left: 30%;
   transform: translate(-50%, -50%);
@@ -495,7 +495,7 @@ const scrollToFeatures = () => {
 
 .title-highlight {
   display: block;
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -575,7 +575,7 @@ const scrollToFeatures = () => {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #db2777 0%, #d97706 100%);
+  background: linear-gradient(90deg, #d4a853 0%, #d97706 100%);
 }
 
 .visual-card:hover {
@@ -645,7 +645,7 @@ const scrollToFeatures = () => {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #db2777 0%, #d97706 100%);
+  background: linear-gradient(90deg, #d4a853 0%, #d97706 100%);
   transform: scaleX(0);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -686,7 +686,7 @@ const scrollToFeatures = () => {
   width: 64px;
   height: 64px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
   box-shadow: 0 8px 24px rgba(219, 39, 119, 0.3);
   flex-shrink: 0;
   transition: all 0.3s ease;
@@ -724,7 +724,7 @@ const scrollToFeatures = () => {
 /* ===== Stats Section ===== */
 .stats-section {
   padding: 80px 48px;
-  background: linear-gradient(135deg, #db2777 0%, #be185d 50%, #1a1a24 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #b8943f 50%, #1a1a24 100%);
   position: relative;
   overflow: hidden;
 }
@@ -907,7 +907,7 @@ const scrollToFeatures = () => {
 }
 
 .cta-primary {
-  background: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
   color: white;
   border: none;
   box-shadow: 0 4px 20px rgba(219, 39, 119, 0.4);
@@ -994,7 +994,7 @@ const scrollToFeatures = () => {
   font-size: 28px;
   font-weight: 700;
   font-family: var(--font-display);
-  background: linear-gradient(135deg, #db2777 0%, #fbbf24 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #fbbf24 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1030,7 +1030,7 @@ const scrollToFeatures = () => {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #db2777 0%, #d97706 100%);
+  background: linear-gradient(90deg, #d4a853 0%, #d97706 100%);
   transition: width 0.3s ease;
 }
 

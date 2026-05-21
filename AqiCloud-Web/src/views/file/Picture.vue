@@ -638,7 +638,7 @@ onUnmounted(() => {
   justify-content: center;
   width: 64px;
   height: 64px;
-  background: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
+  background: linear-gradient(135deg, #d4a853 0%, #a855f7 100%);
   border-radius: var(--ds-radius-lg);
   color: white;
   animation: bounce 2s infinite;
