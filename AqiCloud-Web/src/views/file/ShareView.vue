@@ -568,7 +568,7 @@ const handleSaveClick = () => {
       type: "warning",
     })
       .then(() => {
-        window.location.href = `/account/v1/login?redirect=${window.location.href}`;
+        window.location.href = `/user/login?redirect=${window.location.href}`;
       })
       .catch(() => {});
     return;
@@ -655,7 +655,7 @@ onMounted(() => {
 <style scoped>
 .share-view {
   position: relative;
-  background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 50%, #fce7f3 100%);
+  background: linear-gradient(135deg, #fdf2f8 0%, #FCE7F3 50%, #fce7f3 100%);
 }
 
 /* 浮动背景装饰球 */

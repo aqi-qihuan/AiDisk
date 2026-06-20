@@ -91,8 +91,8 @@ const handleImageError = () => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #e0e7ff;
-  color: #6366f1;
+  background-color: rgba(219, 39, 119, 0.1);
+  color: #DB2777;
   overflow: hidden;
   flex-shrink: 0;
   box-sizing: border-box;

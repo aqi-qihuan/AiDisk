@@ -121,12 +121,12 @@ const customUpload = async (options: UploadOptions): Promise<void> => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fafafa;
+  background-color: var(--color-bg-card, #1A1A24);
 }
 
 .avatar-uploader:hover {
   border-color: var(--el-color-primary);
-  background-color: #f5f7fa;
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
 .avatar-uploader-icon {

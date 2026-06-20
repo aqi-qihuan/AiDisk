@@ -199,11 +199,11 @@ defineExpose({
 }
 
 .ds-toast-default {
-  border-left: 4px solid #6366f1;
+  border-left: 4px solid #DB2777;
 }
 
 .ds-toast-default .ds-toast-icon {
-  color: #6366f1;
+  color: #DB2777;
 }
 
 /* 图标 */
@@ -270,7 +270,7 @@ defineExpose({
   bottom: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, #6366f1, #818cf8);
+  background: linear-gradient(90deg, #DB2777, #F472B6);
   border-radius: 0 0 12px 12px;
   animation: ds-toast-progress-shrink linear forwards;
   width: 100%;

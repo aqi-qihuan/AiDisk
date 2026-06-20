@@ -1,9 +1,10 @@
 import { createI18n } from "vue-i18n";
 import zhCN from "./zh-CN.json";
 import enUS from "./en-US.json";
+import jaJP from "./ja-JP.json";
 
 // 定义语言类型
-export type Locale = "zh-CN" | "en-US";
+export type Locale = "zh-CN" | "en-US" | "ja-JP";
 
 // 获取浏览器语言
 function getBrowserLocale(): Locale {
@@ -18,7 +19,9 @@ function getBrowserLocale(): Locale {
 
   // 简化语言代码
   const locale = navigatorLocale.split("-")[0];
-  return locale === "zh" ? "zh-CN" : "en-US";
+  if (locale === "zh") return "zh-CN";
+  if (locale === "ja") return "ja-JP";
+  return "en-US";
 }
 
 // 获取存储的语言或浏览器语言
@@ -33,13 +36,14 @@ export function setStoredLocale(locale: Locale): void {
 }
 
 // 创建 i18n 实例
-const i18n = createI18n<[typeof zhCN, typeof enUS], Locale>({
+const i18n = createI18n<[typeof zhCN, typeof enUS, typeof jaJP], Locale>({
   legacy: false, // 使用 Composition API 模式
   locale: getStoredLocale(),
   fallbackLocale: "zh-CN", // 回退语言
   messages: {
     "zh-CN": zhCN,
     "en-US": enUS,
+    "ja-JP": jaJP,
   },
   globalInjection: true, // 全局注入 $t
 });

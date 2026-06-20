@@ -158,15 +158,15 @@ const fileTypeColorMap: Record<string, string> = {
   md: "color-info",
 
   // 代码 - 靛蓝色
-  js: "color-indigo",
-  ts: "color-indigo",
-  vue: "color-indigo",
-  html: "color-indigo",
-  css: "color-indigo",
-  json: "color-indigo",
-  java: "color-indigo",
-  py: "color-indigo",
-  go: "color-indigo",
+  js: "color-primary",
+  ts: "color-primary",
+  vue: "color-primary",
+  html: "color-primary",
+  css: "color-primary",
+  json: "color-primary",
+  java: "color-primary",
+  py: "color-primary",
+  go: "color-primary",
 
   // 压缩文件 - 黄色
   zip: "color-yellow",
@@ -187,9 +187,9 @@ const fileTypeColorMap: Record<string, string> = {
   bat: "color-gray",
 
   // 代码文件 - 靛蓝色
-  cpp: "color-indigo",
-  c: "color-indigo",
-  h: "color-indigo",
+  cpp: "color-primary",
+  c: "color-primary",
+  h: "color-primary",
 };
 
 /**
@@ -266,7 +266,7 @@ const iconColorClass = computed(() => {
 }
 
 .color-primary {
-  color: var(--color-primary, #6366f1);
+  color: var(--color-primary, #DB2777);
 }
 
 .color-purple {
@@ -285,8 +285,8 @@ const iconColorClass = computed(() => {
   color: #64748b;
 }
 
-.color-indigo {
-  color: #6366f1;
+.color-primary {
+  color: #DB2777;
 }
 
 .color-yellow {

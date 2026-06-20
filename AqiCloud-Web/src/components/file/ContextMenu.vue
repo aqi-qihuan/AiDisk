@@ -167,7 +167,7 @@ onUnmounted(() => {
 }
 
 .context-menu-item:active {
-  background-color: var(--color-primary-100, #e0e7ff);
+  background-color: var(--color-primary-100, rgba(219, 39, 119, 0.1));
   transform: scale(0.98);
 }
 
@@ -179,7 +179,7 @@ onUnmounted(() => {
 }
 
 .context-menu-item:hover .el-icon {
-  color: var(--color-primary, #6366f1);
+  color: var(--color-primary, #DB2777);
 }
 
 .context-menu-item span {
@@ -190,7 +190,7 @@ onUnmounted(() => {
 }
 
 .context-menu-item:hover span {
-  color: var(--color-primary, #6366f1);
+  color: var(--color-primary, #DB2777);
 }
 
 .context-menu-divider {

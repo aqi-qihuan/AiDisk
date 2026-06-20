@@ -535,7 +535,7 @@ onUnmounted(() => {
 .picture-view {
   min-height: 100vh;
   padding: var(--ds-spacing-lg);
-  background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 50%, #fce7f3 100%);
+  background: linear-gradient(135deg, #fdf2f8 0%, #FCE7F3 50%, #fce7f3 100%);
   position: relative;
   overflow: hidden;
 }

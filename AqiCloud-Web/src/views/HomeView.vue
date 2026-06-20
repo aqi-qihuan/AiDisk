@@ -340,23 +340,28 @@ const scrollToFeatures = () => {
 };
 </script>
 
-<style scoped>
-/* 引入字体 - HOK Dark Theme */
+<style>
+/* HOK 暗色设计系统 — Home (页面级变量，不污染全局) */
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
-/* CSS变量定义 - HOK Dark */
-:root {
-  --primary: #d4a853;
-  --secondary: #c9a96e;
+.home-view {
+  --primary: #f59e0b;
+  --secondary: #fbbf24;
   --cta: #d97706;
   --gold: #fbbf24;
-  --background: #0b0b10;
+  --bg-dark: #0b0b10;
+  --bg-surface: #14141c;
+  --bg-card: #1a1a24;
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
   --font-display: "Plus Jakarta Sans", sans-serif;
   --font-primary: "Fira Sans", sans-serif;
+  --font-heading: "Fira Code", monospace;
 }
+</style>
 
+<style scoped>
 .home-view {
   min-height: 100vh;
   background: #0b0b10;
@@ -443,10 +448,10 @@ const scrollToFeatures = () => {
   gap: 8px;
   margin-bottom: var(--spacing-lg);
   padding: 6px 14px;
-  background: rgba(219, 39, 119, 0.1);
+  background: rgba(245, 158, 11, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  border: 1px solid rgba(219, 39, 119, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.2);
   color: var(--secondary);
   font-size: 13px;
   font-weight: 500;
@@ -459,7 +464,7 @@ const scrollToFeatures = () => {
   height: 6px;
   border-radius: 50%;
   background: var(--primary);
-  box-shadow: 0 0 8px rgba(219, 39, 119, 0.5);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
@@ -478,8 +483,8 @@ const scrollToFeatures = () => {
 }
 
 .badge:hover {
-  background: rgba(219, 39, 119, 0.15);
-  border-color: rgba(219, 39, 119, 0.4);
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.4);
   transform: translateY(-2px);
 }
 
@@ -499,7 +504,7 @@ const scrollToFeatures = () => {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 20px rgba(219, 39, 119, 0.3));
+  filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.3));
 }
 
 .title-gold {
@@ -563,7 +568,7 @@ const scrollToFeatures = () => {
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.4),
-    0 0 60px rgba(219, 39, 119, 0.05);
+    0 0 60px rgba(245, 158, 11, 0.05);
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -582,7 +587,7 @@ const scrollToFeatures = () => {
   transform: translateY(-8px) scale(1.02);
   box-shadow:
     0 20px 48px rgba(0, 0, 0, 0.5),
-    0 0 80px rgba(219, 39, 119, 0.1);
+    0 0 80px rgba(245, 158, 11, 0.1);
 }
 
 .visual-card img {
@@ -656,7 +661,7 @@ const scrollToFeatures = () => {
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(219, 39, 119, 0.05) 0%,
+    rgba(245, 158, 11, 0.05) 0%,
     rgba(217, 119, 6, 0.03) 100%
   );
   opacity: 0;
@@ -667,8 +672,8 @@ const scrollToFeatures = () => {
   transform: translateY(-8px);
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.4),
-    0 0 40px rgba(219, 39, 119, 0.08);
-  border-color: rgba(219, 39, 119, 0.2);
+    0 0 40px rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.2);
 }
 
 .feature-card:hover::before {
@@ -687,7 +692,7 @@ const scrollToFeatures = () => {
   height: 64px;
   border-radius: 16px;
   background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
-  box-shadow: 0 8px 24px rgba(219, 39, 119, 0.3);
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3);
   flex-shrink: 0;
   transition: all 0.3s ease;
   margin-bottom: var(--spacing-md);
@@ -695,7 +700,7 @@ const scrollToFeatures = () => {
 
 .feature-card:hover .feature-icon-wrapper {
   transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 12px 32px rgba(219, 39, 119, 0.5);
+  box-shadow: 0 12px 32px rgba(245, 158, 11, 0.5);
 }
 
 .feature-icon {
@@ -860,7 +865,7 @@ const scrollToFeatures = () => {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(219, 39, 119, 0.2),
+    rgba(245, 158, 11, 0.2),
     transparent
   );
 }
@@ -910,12 +915,12 @@ const scrollToFeatures = () => {
   background: linear-gradient(135deg, #d4a853 0%, #c9a96e 100%);
   color: white;
   border: none;
-  box-shadow: 0 4px 20px rgba(219, 39, 119, 0.4);
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
 }
 
 .cta-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(219, 39, 119, 0.5);
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5);
 }
 
 .cta-secondary {
@@ -926,7 +931,7 @@ const scrollToFeatures = () => {
 
 .cta-secondary:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(219, 39, 119, 0.3);
+  border-color: rgba(245, 158, 11, 0.3);
   transform: translateY(-2px);
 }
 
@@ -947,7 +952,7 @@ const scrollToFeatures = () => {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(219, 39, 119, 0.15),
+    rgba(245, 158, 11, 0.15),
     transparent
   );
 }
@@ -1049,7 +1054,7 @@ const scrollToFeatures = () => {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(219, 39, 119, 0.15),
+    rgba(245, 158, 11, 0.15),
     transparent
   );
 }

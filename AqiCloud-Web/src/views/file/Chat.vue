@@ -315,6 +315,20 @@ export default defineComponent({
       if (textareaRef.value) {
         textareaRef.value.focus();
       }
+
+      // 移动端虚拟键盘适配
+      if (window.visualViewport) {
+        const viewport = window.visualViewport;
+        const onResize = () => {
+          const chatContainer = document.querySelector('.chat-container') as HTMLElement;
+          if (chatContainer) {
+            chatContainer.style.height = viewport.height + 'px';
+          }
+          scrollToBottom();
+        };
+        viewport.addEventListener('resize', onResize);
+        viewport.addEventListener('scroll', onResize);
+      }
     });
 
     return {
@@ -990,6 +1004,26 @@ export default defineComponent({
   .send-icon {
     width: 16px;
     height: 16px;
+  }
+
+  /* 虚拟键盘弹起时固定底部输入区 */
+  .input-area {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .message-item .avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .message-content {
+    padding: 10px 14px;
+    font-size: 14px;
   }
 }
 </style>

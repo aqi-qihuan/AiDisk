@@ -84,13 +84,13 @@ const handleClose = (event: MouseEvent) => {
 
 /* Variants */
 .ds-tag-primary {
-  background-color: rgba(99, 102, 241, 0.1);
-  color: #6366f1;
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
 }
 
 .ds-tag-secondary {
-  background-color: rgba(129, 140, 248, 0.1);
-  color: #818cf8;
+  background-color: rgba(217, 119, 6, 0.1);
+  color: #d97706;
 }
 
 .ds-tag-success {

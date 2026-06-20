@@ -102,13 +102,13 @@ const getStatusText = (status) => {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 4px;
-  background-color: #f5f7fa;
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
 .file-icon {
   font-size: 24px;
   margin-right: 10px;
-  color: #909399;
+  color: var(--color-text-tertiary, #64748B);
 }
 
 .file-info {
@@ -123,7 +123,7 @@ const getStatusText = (status) => {
 
 .file-size {
   font-size: 12px;
-  color: #909399;
+  color: var(--color-text-tertiary, #64748B);
 }
 
 .file-speed {

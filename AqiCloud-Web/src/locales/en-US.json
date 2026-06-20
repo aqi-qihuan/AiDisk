@@ -333,6 +333,7 @@
     "title": "Language",
     "zh": "简体中文",
     "en": "English",
+    "ja": "日本語",
     "switch": "Language switched to"
   },
   "message": {
@@ -484,6 +485,7 @@
       "contactEmail": "Email",
       "contactAddress": "Address",
       "addressValue": "No.xxx, Haidian District, Beijing",
+      "contactEmailValue": "support'{'@'}'aipan.com",
       "lastUpdated": "Last updated: January 1, 2024",
       "backHome": "Back to Home"
     },
@@ -518,8 +520,6 @@
       "section2List4Desc": "Browsing history, operation logs, device information, etc.",
       "section2List5Title": "AI Interaction Data",
       "section2List5Desc": "Your conversation records with the AI assistant",
-      "section2List5Title": "AI Interaction Data",
-      "section2List5Desc": ": Your conversation history with AI assistant",
       "section2P1": "2.2 We may collect your information through:",
       "section2List5": "Information you actively provide (registration, file uploads, etc.)",
       "section2List6": "Automatically collected information (browser info, IP address, etc.)",

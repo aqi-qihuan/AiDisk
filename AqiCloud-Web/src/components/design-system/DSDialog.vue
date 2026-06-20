@@ -11,8 +11,8 @@
             'ds-dialog',
             `ds-dialog-${size}`,
             {
-              'ds-dialog-fullscreen': fullscreen,
-              'ds-dialog-centered': centered,
+              'ds-dialog-fullscreen': effectiveFullscreen,
+              'ds-dialog-centered': centered && !effectiveFullscreen,
             },
           ]"
           :style="dialogStyle"
@@ -63,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from "vue";
+import { computed, watch, onMounted, onUnmounted, ref } from "vue";
 import DSButton from "./DSButton.vue";
 
 interface Props {
@@ -81,6 +81,8 @@ interface Props {
   cancelText?: string;
   confirmLoading?: boolean;
   centered?: boolean;
+  /** 移动端是否自动 fullscreen (默认 true) */
+  mobileFullscreen?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -97,6 +99,7 @@ const props = withDefaults(defineProps<Props>(), {
   cancelText: "取消",
   confirmLoading: false,
   centered: false,
+  mobileFullscreen: true,
 });
 
 const emit = defineEmits<{
@@ -106,8 +109,26 @@ const emit = defineEmits<{
   cancel: [];
 }>();
 
+// 移动端检测
+const isMobile = ref(false);
+const checkMobile = () => {
+  isMobile.value = window.innerWidth <= 768;
+};
+onMounted(() => {
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
+});
+onUnmounted(() => {
+  window.removeEventListener("resize", checkMobile);
+});
+
+// 是否实际 fullscreen（移动端自动或手动 fullscreen）
+const effectiveFullscreen = computed(() => {
+  return props.fullscreen || (props.mobileFullscreen && isMobile.value);
+});
+
 const dialogStyle = computed(() => {
-  if (props.fullscreen) return {};
+  if (effectiveFullscreen.value) return {};
   if (props.width) {
     const width =
       typeof props.width === "number" ? `${props.width}px` : props.width;
@@ -117,7 +138,7 @@ const dialogStyle = computed(() => {
 });
 
 const bodyStyle = computed(() => {
-  if (props.fullscreen) {
+  if (effectiveFullscreen.value) {
     return { maxHeight: "calc(100vh - 120px)", overflow: "auto" };
   }
   return {};

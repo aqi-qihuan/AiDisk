@@ -201,8 +201,8 @@ const getFileTagType = (
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e7ed 100%);
-  color: #909399;
+  background: linear-gradient(135deg, #1A1A24 0%, #22222E 100%);
+  color: var(--color-text-tertiary, #64748B);
   transition: all 0.3s ease;
 }
 
@@ -264,8 +264,8 @@ const getFileTagType = (
 .file-descriptions :deep(.el-descriptions__label) {
   width: 100px;
   font-weight: 600;
-  color: #606266;
-  background-color: #fafafa;
+  color: var(--color-text-secondary, #94A3B8);
+  background-color: var(--color-bg-card, #1A1A24);
   padding: 14px 16px;
 }
 
@@ -279,8 +279,8 @@ const getFileTagType = (
 .code-text {
   font-family: "Consolas", "Monaco", "Courier New", monospace;
   font-size: 12px;
-  color: #606266;
-  background: #f5f7fa;
+  color: var(--color-text-secondary, #94A3B8);
+  background: rgba(255, 255, 255, 0.04);
   padding: 2px 8px;
   border-radius: 4px;
 }
@@ -296,7 +296,7 @@ const getFileTagType = (
 
 .file-suffix {
   margin-left: 8px;
-  color: #909399;
+  color: var(--color-text-tertiary, #64748B);
   font-size: 12px;
 }
 
@@ -308,7 +308,7 @@ const getFileTagType = (
 
 .size-bytes {
   margin-left: 8px;
-  color: #909399;
+  color: var(--color-text-tertiary, #64748B);
   font-size: 12px;
 }
 
@@ -325,13 +325,13 @@ const getFileTagType = (
 }
 
 .storage-item .label {
-  color: #909399;
+  color: var(--color-text-tertiary, #64748B);
   font-size: 12px;
   min-width: 56px;
 }
 
 .path-text {
-  color: #606266;
+  color: var(--color-text-secondary, #94A3B8);
   font-family: "Consolas", monospace;
   font-size: 13px;
 }
@@ -340,11 +340,11 @@ const getFileTagType = (
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #606266;
+  color: var(--color-text-secondary, #94A3B8);
 }
 
 .time-text .el-icon {
-  color: #909399;
+  color: var(--color-text-tertiary, #64748B);
 }
 
 /* 移动端适配 */

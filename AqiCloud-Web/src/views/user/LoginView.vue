@@ -210,8 +210,8 @@ const handleSubmit = async () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, #7c3aed, transparent);
-  opacity: 0.15;
+  background: radial-gradient(circle, #db2777, transparent);
+  opacity: 0.12;
 }
 
 .auth-card-hok {
@@ -228,6 +228,7 @@ const handleSubmit = async () => {
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.4),
     0 2px 8px rgba(0, 0, 0, 0.2);
+  margin: 16px;
 }
 
 .auth-card-header-hok {
@@ -416,5 +417,104 @@ const handleSubmit = async () => {
 
 .auth-link:hover {
   color: #fde68a;
+}
+
+/* ===== 移动端适配 - HOK 标准 ===== */
+@media (max-width: 768px) {
+  .auth-hok {
+    padding: 0;
+    align-items: flex-start;
+  }
+
+  .hok-glow-orb.pink {
+    width: 250px;
+    height: 250px;
+    top: -60px;
+    right: -80px;
+  }
+
+  .hok-glow-orb.gold {
+    width: 200px;
+    height: 200px;
+    bottom: -30px;
+    left: -80px;
+  }
+
+  .hok-glow-orb.purple {
+    width: 120px;
+    height: 120px;
+  }
+
+  .auth-card-hok {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    padding: 48px 24px 32px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .auth-logo-hok {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    border-radius: 12px;
+  }
+
+  .auth-title-hok {
+    font-size: 22px;
+  }
+
+  .auth-input-hok {
+    padding: 10px 14px;
+  }
+
+  .auth-input-hok input {
+    height: 36px;
+    font-size: 16px; /* 防止 iOS 自动缩放 */
+  }
+
+  .auth-btn-hok {
+    height: 52px; /* 触控友好最小 44px */
+    font-size: 16px;
+    border-radius: 12px;
+  }
+
+  .auth-options {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card-hok {
+    padding: 40px 18px 28px;
+  }
+
+  .auth-body {
+    gap: 14px;
+  }
+
+  .auth-title-hok {
+    font-size: 20px;
+  }
+
+  .auth-subtitle-hok {
+    font-size: 13px;
+  }
+
+  .auth-remember,
+  .auth-forgot,
+  .auth-footer-text {
+    font-size: 13px;
+  }
+
+  .auth-btn-hok {
+    height: 50px;
+  }
 }
 </style>

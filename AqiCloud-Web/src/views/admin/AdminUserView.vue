@@ -645,7 +645,7 @@ watchEffect(() => {
 .admin-user-view {
   min-height: 100vh;
   padding: var(--ds-spacing-lg);
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8eaf6 100%);
+  background: linear-gradient(135deg, #0B0B10 0%, #1A1A24 100%);
 }
 
 /* ===== 页面头部 ===== */

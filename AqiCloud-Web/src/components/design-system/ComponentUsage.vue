@@ -288,7 +288,7 @@ const handleClose = () => {
 <style scoped>
 .component-usage-demo {
   min-height: 100vh;
-  background-color: #f5f3ff;
+  background-color: var(--color-bg-card, #1A1A24);
   padding: 24px;
   box-sizing: border-box;
 }
@@ -358,7 +358,7 @@ const handleClose = () => {
 .code-block code {
   font-family: "Fira Code", "Courier New", monospace;
   font-size: 14px;
-  color: #f5f3ff;
+  color: var(--color-primary, #DB2777);
   line-height: 1.6;
 }
 </style>

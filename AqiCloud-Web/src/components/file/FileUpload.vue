@@ -548,7 +548,7 @@ const handleRemoveFile = (file: UploadFile): void => {
   align-items: center;
   border: 2px dashed #dcdfe6;
   border-radius: 6px;
-  background-color: #fafafa;
+  background-color: var(--color-bg-card, #1A1A24);
   transition: all 0.3s;
 }
 
@@ -559,7 +559,7 @@ const handleRemoveFile = (file: UploadFile): void => {
 
 .upload-icon {
   font-size: 67px;
-  color: #c0c4cc;
+  color: var(--color-text-tertiary, #64748B);
   margin-bottom: 16px;
   transition: color 0.3s;
 }
@@ -569,7 +569,7 @@ const handleRemoveFile = (file: UploadFile): void => {
 }
 
 .upload-text {
-  color: #606266;
+  color: var(--color-text-secondary, #94A3B8);
   font-size: 14px;
   text-align: center;
 }
@@ -581,7 +581,7 @@ const handleRemoveFile = (file: UploadFile): void => {
 
 .upload-tip {
   font-size: 12px;
-  color: #909399;
+  color: var(--color-text-tertiary, #64748B);
   margin-top: 7px;
   text-align: center;
 }
@@ -604,7 +604,7 @@ const handleRemoveFile = (file: UploadFile): void => {
 }
 
 ::v-deep(.el-upload-list__item:hover) {
-  background-color: #f5f7fa;
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
 /* 移动端适配 */

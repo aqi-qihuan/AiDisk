@@ -120,7 +120,7 @@ onMounted(() => {
 .custom-tree-node .el-icon {
   margin-right: 6px;
   font-size: 16px;
-  color: #909399;
+  color: var(--color-text-tertiary, #64748B);
 }
 
 ::v-deep(.el-tree-node__content) {
@@ -129,7 +129,7 @@ onMounted(() => {
 }
 
 ::v-deep(.el-tree-node__content:hover) {
-  background-color: #f5f7fa;
+  background-color: rgba(219, 39, 119, 0.08);
 }
 
 ::v-deep(.el-tree-node.is-current > .el-tree-node__content) {

@@ -1601,5 +1601,15 @@ export default defineComponent({
     width: 16px;
     height: 16px;
   }
+
+  /* 虚拟键盘弹起时固定底部输入区 */
+  .input-area {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
 }
 </style>

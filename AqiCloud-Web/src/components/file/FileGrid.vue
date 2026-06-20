@@ -193,12 +193,20 @@ watch(
   box-sizing: border-box;
   border-radius: 8px;
   user-select: none;
+  /* HOK 触摸优化: 最小触控 44px */
+  min-height: 44px;
 }
 
 .file-item:hover {
-  background-color: #f5f7fa;
+  background-color: rgba(255, 255, 255, 0.04);
   transform: translateY(-2px);
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.file-item:active {
+  transform: translateY(0);
+  background-color: rgba(255, 255, 255, 0.06);
 }
 
 .file-item.selection-mode {
@@ -237,13 +245,13 @@ watch(
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: #f5f7fa;
+  background-color: rgba(255, 255, 255, 0.03);
   border-radius: 4px;
 }
 
 .image-error .el-icon {
   font-size: 40px;
-  color: #c0c4cc;
+  color: #64748b;
 }
 
 .file-name {
@@ -257,7 +265,7 @@ watch(
   line-clamp: 2;
   -webkit-box-orient: vertical;
   font-size: 12px;
-  color: #606266;
+  color: #94a3b8;
   line-height: 1.4;
 }
 
@@ -269,6 +277,42 @@ watch(
 
   .file-name {
     font-size: 11px;
+  }
+
+  .file-item {
+    padding: 8px;
+    min-height: 44px;
+    /* 触摸优化: 增大触控热区 */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .file-item:hover {
+    /* 移动端 hover 效果减弱，用 active 替代 */
+    transform: none;
+    box-shadow: none;
+  }
+
+  .file-item:active {
+    background-color: rgba(219, 39, 119, 0.08);
+    transform: scale(0.97);
+  }
+}
+
+@media (max-width: 480px) {
+  .file-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 6px;
+  }
+
+  .file-item {
+    padding: 6px;
+  }
+
+  .file-name {
+    font-size: 10px;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
   }
 }
 </style>

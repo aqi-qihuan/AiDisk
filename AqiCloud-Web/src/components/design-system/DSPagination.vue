@@ -244,7 +244,7 @@ const handleJumperChange = (e: Event) => {
 }
 
 .ds-pagination-size-changer select:hover {
-  border-color: #6366f1;
+  border-color: #DB2777;
 }
 
 .ds-pagination-pager {
@@ -271,8 +271,8 @@ const handleJumperChange = (e: Event) => {
 }
 
 .ds-pagination-btn:hover:not(:disabled) {
-  border-color: #6366f1;
-  color: #6366f1;
+  border-color: #DB2777;
+  color: #DB2777;
 }
 
 .ds-pagination-btn:disabled {
@@ -281,8 +281,8 @@ const handleJumperChange = (e: Event) => {
 }
 
 .ds-pagination-btn.is-active {
-  background-color: #6366f1;
-  border-color: #6366f1;
+  background-color: #DB2777;
+  border-color: #DB2777;
   color: #ffffff;
 }
 
@@ -312,12 +312,12 @@ const handleJumperChange = (e: Event) => {
 }
 
 .ds-pagination-jumper input:hover {
-  border-color: #6366f1;
+  border-color: #DB2777;
 }
 
 .ds-pagination-jumper input:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  border-color: #DB2777;
+  box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
   outline: none;
 }
 

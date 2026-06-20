@@ -427,7 +427,7 @@ const handleSearch = (): void => {
 }
 
 .right-actions .el-button:hover {
-  background-color: #f5f7fa;
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
 .right-actions .el-button.is-active {
@@ -491,6 +491,49 @@ const handleSearch = (): void => {
   .normal-actions :deep(.ds-button) .el-icon,
   .batch-actions :deep(.ds-button) .el-icon {
     font-size: 14px;
+  }
+}
+
+/* ===== HOK 移动端增强 - 批量操作折叠 ===== */
+@media (max-width: 640px) {
+  .batch-actions {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 4px;
+    gap: 6px;
+  }
+
+  .batch-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .batch-actions :deep(.ds-button) {
+    flex: 0 0 auto;
+    min-width: auto;
+    white-space: nowrap;
+    font-size: 12px;
+    padding: 0 12px;
+  }
+
+  .normal-actions :deep(.ds-button) {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* 小屏隐藏按钮文字只留图标 */
+  .normal-actions :deep(.ds-button .ds-btn-text),
+  .batch-actions :deep(.ds-button .ds-btn-text) {
+    display: none;
+  }
+
+  .normal-actions :deep(.ds-button),
+  .batch-actions :deep(.ds-button) {
+    padding: 0 14px;
+    min-width: 44px;
+    justify-content: center;
   }
 }
 </style>

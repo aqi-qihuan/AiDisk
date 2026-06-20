@@ -88,11 +88,11 @@ onMounted(() => {
 .custom-tree-node .el-icon {
   margin-right: 4px;
   font-size: 16px;
-  color: #909399;
+  color: var(--color-text-tertiary, #64748B);
 }
 
 :deep(.el-tree-node__content:hover) {
-  background-color: #f5f7fa;
+  background-color: rgba(219, 39, 119, 0.08);
 }
 
 :deep(.el-tree-node.is-current > .el-tree-node__content) {

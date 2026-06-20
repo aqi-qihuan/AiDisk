@@ -38,7 +38,34 @@
       <div class="terms-container">
         <!-- 侧边导航 + 内容 -->
         <div class="terms-layout">
-          <!-- 目录导航 -->
+          <!-- 移动端目录下拉 -->
+          <details class="mobile-toc" ref="mobileTocRef">
+            <summary class="mobile-toc-summary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              <span>{{ t("page.terms.tocTitle") }}</span>
+              <span class="toc-current">{{ tocItems[activeSection] || tocItems[0] }}</span>
+              <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <ul class="toc-list mobile-toc-list">
+              <li v-for="(item, index2) in tocItems" :key="'m-' + index2" class="toc-item">
+                <a :href="'#section-' + (index2 + 1)" class="toc-link" :class="{ 'is-active': activeSection === index2 }" @click.prevent="scrollToSection(index2); closeMobileToc()">
+                  <span class="toc-number">{{ index2 + 1 }}</span>
+                  <span>{{ item }}</span>
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- 桌面端目录导航 -->
           <nav class="toc-nav glass-nav">
             <div class="toc-title">
               <svg
@@ -69,6 +96,7 @@
                 <a
                   :href="'#section-' + (index + 1)"
                   class="toc-link"
+                  :class="{ 'is-active': activeSection === index }"
                   @click.prevent="scrollToSection(index)"
                 >
                   <span class="toc-number">{{ index + 1 }}</span>
@@ -401,7 +429,7 @@
                     <div class="contact-label">
                       {{ t("page.terms.contactEmail") }}
                     </div>
-                    <div class="contact-value">{{ t("page.about.email") }}</div>
+                    <div class="contact-value">{{ t("page.terms.contactEmailValue") }}</div>
                   </div>
                 </div>
                 <div class="contact-card glass-card">
@@ -475,13 +503,43 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 
-const { t } = useI18n();
+const { t, tm } = useI18n();
 const tocItems = computed(
-  () => t("page.terms.tocItems", { returnObjects: true }) as string[],
+  () => tm("page.terms.tocItems") as string[],
 );
+
+// ===== Scroll-Spy: IntersectionObserver =====
+const activeSection = ref(0);
+const sectionCount = 9; // 使用条款共 9 个章节
+let observer: IntersectionObserver | null = null;
+
+onMounted(() => {
+  observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          const id = entry.target.id; // "section-1" ~ "section-9"
+          const num = parseInt(id.split("-")[1]);
+          if (!isNaN(num)) activeSection.value = num - 1;
+          break; // 只取第一个进入视口的
+        }
+      }
+    },
+    { rootMargin: "-80px 0px -60% 0px", threshold: 0 },
+  );
+
+  for (let i = 1; i <= sectionCount; i++) {
+    const el = document.getElementById(`section-${i}`);
+    if (el) observer.observe(el);
+  }
+});
+
+onUnmounted(() => {
+  if (observer) observer.disconnect();
+});
 
 const scrollToSection = (index: number) => {
   const el = document.getElementById(`section-${index + 1}`);
@@ -489,11 +547,17 @@ const scrollToSection = (index: number) => {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 };
+
+// 移动端关闭目录
+const mobileTocRef = ref<HTMLDetailsElement | null>(null);
+const closeMobileToc = () => {
+  if (mobileTocRef.value) mobileTocRef.value.open = false;
+};
 </script>
 
 <style>
-/* HOK 暗色设计系统 — Terms */
-:root {
+/* HOK 暗色设计系统 — Terms (页面级变量，不污染全局) */
+.terms-page {
   --primary: #d4a853;
   --secondary: #c9a96e;
   --cta: #d97706;
@@ -754,6 +818,73 @@ const scrollToSection = (index: number) => {
   background: #d4a853;
   color: white;
   transform: rotate(10deg) scale(1.1);
+}
+
+/* ===== TOC 激活态 ===== */
+.toc-link.is-active {
+  background: rgba(219, 39, 119, 0.12);
+  color: #fbbf24;
+  font-weight: 600;
+}
+.toc-link.is-active .toc-number {
+  background: #d4a853;
+  color: white;
+  box-shadow: 0 0 12px rgba(212, 168, 83, 0.4);
+}
+
+/* ===== 移动端目录下拉 ===== */
+.mobile-toc {
+  display: none;
+  position: sticky;
+  top: 72px;
+  z-index: 50;
+  margin-bottom: 20px;
+  background: rgba(26, 26, 36, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.mobile-toc[open] {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-toc-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  cursor: pointer;
+  list-style: none;
+  color: #f8fafc;
+  font-size: 14px;
+  font-weight: 600;
+  user-select: none;
+}
+.mobile-toc-summary::-webkit-details-marker {
+  display: none;
+}
+.mobile-toc-summary .toc-current {
+  flex: 1;
+  color: #d4a853;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mobile-toc-summary .chevron {
+  transition: transform 0.3s ease;
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+.mobile-toc[open] .chevron {
+  transform: rotate(180deg);
+}
+
+.mobile-toc-list {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 8px;
 }
 
 /* ===== 条款内容 ===== */
@@ -1095,6 +1226,9 @@ const scrollToSection = (index: number) => {
 @media (max-width: 1024px) {
   .toc-nav {
     display: none;
+  }
+  .mobile-toc {
+    display: block;
   }
 }
 

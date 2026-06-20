@@ -87,10 +87,10 @@ myAxios.interceptors.response.use(
     if (data.code === 20004) {
       if (
         !response.request.responseURL.includes("/account/v1/detail") &&
-        !window.location.pathname.includes("/account/v1/login")
+        !window.location.pathname.includes("/user/login")
       ) {
         ElMessage.warning("请先登录");
-        window.location.href = `/account/v1/login?redirect=${window.location.href}`;
+        window.location.href = `/user/login?redirect=${window.location.href}`;
       }
     }
 

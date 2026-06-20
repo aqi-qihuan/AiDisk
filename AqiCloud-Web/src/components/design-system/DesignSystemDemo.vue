@@ -225,7 +225,7 @@ const functionalColors = [
 /* Container */
 .design-system-demo {
   min-height: 100vh;
-  background-color: #f5f3ff;
+  background-color: rgba(219, 39, 119, 0.04);
   padding: 24px;
   box-sizing: border-box;
   overflow-y: auto;
@@ -390,7 +390,7 @@ const functionalColors = [
 }
 
 .ds-btn-primary {
-  background-color: #6366f1;
+  background-color: #DB2777;
   color: white;
 }
 
@@ -406,13 +406,13 @@ const functionalColors = [
 
 .ds-btn-secondary {
   background-color: #ffffff;
-  color: #6366f1;
+  color: #DB2777;
   border: 1px solid #e2e8f0;
 }
 
 .ds-btn-secondary:hover:not(:disabled) {
-  border-color: #6366f1;
-  background-color: #f5f3ff;
+  border-color: #DB2777;
+  background-color: rgba(219, 39, 119, 0.04);
 }
 
 .ds-btn-secondary:disabled {
@@ -469,12 +469,12 @@ const functionalColors = [
 
 .ds-input:focus {
   outline: none;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  border-color: #DB2777;
+  box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
 }
 
 .ds-input:disabled {
-  background-color: #f5f3ff;
+  background-color: rgba(219, 39, 119, 0.04);
   cursor: not-allowed;
 }
 
@@ -535,7 +535,7 @@ const functionalColors = [
   gap: 12px;
   padding: 16px 24px;
   border-top: 1px solid #e2e8f0;
-  background-color: #f5f3ff;
+  background-color: rgba(219, 39, 119, 0.04);
 }
 
 /* Tags */
@@ -554,8 +554,8 @@ const functionalColors = [
 }
 
 .ds-tag-primary {
-  background-color: rgba(99, 102, 241, 0.1);
-  color: #6366f1;
+  background-color: rgba(219, 39, 119, 0.1);
+  color: #DB2777;
 }
 
 .ds-tag-success {
@@ -632,7 +632,7 @@ const functionalColors = [
 .grid-number {
   font-size: 48px;
   font-weight: 700;
-  color: #6366f1;
+  color: #DB2777;
   margin-bottom: 8px;
 }
 
