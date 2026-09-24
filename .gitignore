@@ -41,3 +41,7 @@ Thumbs.db
 
 # Junk
 nul
+
+# Go binaries (no extension, cross-compiled)
+AqiCloud-Agent/AqiCloud-Agent
+AqiCloud-AI/AqiCloud-AI

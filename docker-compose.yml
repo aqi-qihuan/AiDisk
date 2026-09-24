@@ -1,0 +1,151 @@
+# AiDisk - AI 智能云盘系统
+# 部署到广州服务器：134.175.206.158
+# 使用外部网络 aurora-network 连接现有中间件
+
+version: '3.8'
+
+services:
+  # ============================================
+  # AqiCloud-Agent - 云盘后端 API 服务
+  # ============================================
+  agent:
+    image: alpine:3.20
+    container_name: aqicloud-agent
+    environment:
+      TZ: Asia/Shanghai
+      
+      # 服务配置
+      APP_NAME: "AqiCloud-AgentPan API"
+      DEBUG: "true"
+      LISTEN_ADDR: ":9090"
+      
+      # MySQL 配置 (使用 Docker 网络内部服务名)
+      MYSQL_HOST: "aurora-mysql"
+      MYSQL_PORT: "3306"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "aqi1015"
+      MYSQL_DATABASE: "aqi-cloud-pan"
+      MYSQL_MAX_OPEN_CONNS: "20"
+      MYSQL_MAX_IDLE_CONNS: "5"
+      MYSQL_MAX_LIFETIME: "1800"
+      
+      # Redis 配置
+      MINIO_ENDPOINT: "aurora-minio:9000"
+      MINIO_ACCESS_KEY: "aqi125"
+      MINIO_SECRET_KEY: "aqi1015."
+      MINIO_BUCKET: "ai-pan"
+      MINIO_AVATAR_BUCKET: "avatar"
+      
+      # JWT 配置
+      JWT_SECRET: "a4i.icua4i.icua4i.icua4i.icua4i.icua4i.icu"
+      JWT_LOGIN_SUBJECT: "AQI"
+      JWT_SHARE_SUBJECT: "AQI_SHARE"
+      
+      # AI 配置
+      DASHSCOPE_API_KEY: ""
+      DASHSCOPE_BASE: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+      OLLAMA_BASE_URL: "http://192.168.192.24:11434"
+      
+      # App 配置
+      FRONTEND_BASE_URL: "https://pan.aqi125.cn"
+      DEFAULT_STORAGE_SIZE: "10737418240"
+      MAX_UPLOAD_SIZE: "104857600"
+      
+      # MinIO 外部访问 URL (用于生成预签名 URL)
+      MINIO_EXTERNAL_ENDPOINT: "https://pan.aqi125.cn/minio"
+    ports:
+      - "9090:9090"
+    volumes:
+      # 挂载编译好的二进制文件
+      - /opt/aipan-llm/Agent/app/AqiCloud-Agent:/app/AqiCloud-Agent
+      # 时区文件
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      - aurora-network
+    restart: unless-stopped
+    working_dir: /app
+    command: ["./AqiCloud-Agent"]
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9090/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ============================================
+  # AqiCloud-AI - AI 智能体中心
+  # ============================================
+  ai:
+    image: alpine:3.20
+    container_name: aqicloud-ai
+    environment:
+      TZ: Asia/Shanghai
+      
+      # 服务配置
+      APP_NAME: "AI智能体中心API服务"
+      DEBUG: "true"
+      LISTEN_ADDR: ":8000"
+      
+      # Redis 配置
+      REDIS_HOST: "aurora-redis"
+      REDIS_PORT: "6379"
+      REDIS_DB: "0"
+      REDIS_PASSWORD: "aqi1015"
+      REDIS_MAX_CONNECTIONS: "10"
+      REDIS_CHAT_HISTORY_TTL: "86400"
+      
+      # MySQL 配置
+      MYSQL_HOST: "aurora-mysql"
+      MYSQL_PORT: "3306"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "aqi1015"
+      MYSQL_DATABASE: "aqi-cloud-pan"
+      
+      # JWT 配置 (需与 AqiCloud-Agent 保持一致)
+      JWT_SECRET_KEY: "a4i.icua4i.icua4i.icua4i.icua4i.icua4i.icu"
+      JWT_ALGORITHM: "HS256"
+      JWT_ACCESS_TOKEN_EXPIRE_MINUTES: "30"
+      JWT_LOGIN_SUBJECT: "AQI"
+      
+      # LLM 配置
+      LLM_PROVIDER: "ollama"
+      LLM_MODEL_NAME: "qwen3.5:9b"
+      LLM_OLLAMA_BASE_URL: "http://192.168.192.24:11434"
+      LLM_BASE_URL: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+      LLM_API_KEY: ""
+      LLM_TEMPERATURE: "0.7"
+      LLM_STREAMING: "true"
+      
+      # App 配置
+      FRONTEND_BASE_URL: "https://pan.aqi125.cn"
+      
+      # Token Limits
+      TOKEN_DAILY_LIMIT: "100000"
+      TOKEN_HOURLY_LIMIT: "10000"
+      MAX_CHAT_HISTORY_MESSAGES: "20"
+      MAX_SUMMARY_LENGTH: "500"
+      SUMMARY_TRIGGER_THRESHOLD: "10"
+    ports:
+      - "8000:8000"
+    volumes:
+      # 挂载编译好的二进制文件
+      - /opt/aipan-llm/Ai/app/AqiCloud-AI:/app/AqiCloud-AI
+      # 时区文件
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      - aurora-network
+    restart: unless-stopped
+    working_dir: /app
+    command: ["./AqiCloud-AI"]
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  aurora-network:
+    external: true
