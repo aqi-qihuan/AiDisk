@@ -18,9 +18,9 @@ build-frontend:
 
 deps:
 	@echo "Installing dependencies..."
-	cd backend-agent && go mod tidy
-	cd backend-ai && go mod tidy
-	cd frontend && npm install
+	cd AqiCloud-Agent && go mod tidy
+	cd AqiCloud-AI && go mod tidy
+	cd AqiCloud-Web && npm install
 
 clean:
 	rm -rf $(BIN_DIR)/*

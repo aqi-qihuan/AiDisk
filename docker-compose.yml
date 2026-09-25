@@ -9,7 +9,7 @@ services:
   # AqiCloud-Agent - 云盘后端 API 服务
   # ============================================
   agent:
-    image: alpine:3.20
+    image: alpine:3.22
     container_name: aqicloud-agent
     environment:
       TZ: Asia/Shanghai
@@ -30,7 +30,7 @@ services:
       MYSQL_MAX_LIFETIME: "1800"
       
       # Redis 配置
-      MINIO_ENDPOINT: "aurora-minio:9000"
+      MINIO_ENDPOINT: "aurora-minio:9000"  # 注意：实际由 aurora-rustfs (RustFS 1.0.0, S3 兼容) 承载，网络别名保留 aurora-minio
       MINIO_ACCESS_KEY: "aqi125"
       MINIO_SECRET_KEY: "aqi1015."
       MINIO_BUCKET: "ai-pan"
@@ -77,7 +77,7 @@ services:
   # AqiCloud-AI - AI 智能体中心
   # ============================================
   ai:
-    image: alpine:3.20
+    image: alpine:3.22
     container_name: aqicloud-ai
     environment:
       TZ: Asia/Shanghai
@@ -103,7 +103,7 @@ services:
       MYSQL_DATABASE: "aqi-cloud-pan"
       
       # JWT 配置 (需与 AqiCloud-Agent 保持一致)
-      JWT_SECRET_KEY: "a4i.icua4i.icua4i.icua4i.icua4i.icua4i.icu"
+      JWT_SECRET: "a4i.icua4i.icua4i.icua4i.icua4i.icua4i.icu"
       JWT_ALGORITHM: "HS256"
       JWT_ACCESS_TOKEN_EXPIRE_MINUTES: "30"
       JWT_LOGIN_SUBJECT: "AQI"
