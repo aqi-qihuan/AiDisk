@@ -441,11 +441,21 @@ func docStream(c *gin.Context) {
 	for i := 0; i < len(chunks); i++ {
 		r := <-resultCh
 		if i > 0 {
-			fmt.Fprintf(c.Writer, "data: %s\n\n", models.StreamData("\n\n--- 下一部分 ---\n\n"))
+			data, _ := json.Marshal(models.StreamData("\n\n--- 下一部分 ---\n\n"))
+			fmt.Fprintf(c.Writer, "data: %s\n\n", data)
 			c.Writer.Flush()
 		}
-		for _, ch := range r.text {
-			fmt.Fprintf(c.Writer, "data: %s\n\n", models.StreamData(string(ch)))
+		// 按 rune 块切分输出（与单 chunk 路径保持相同的 SSE JSON 格式），
+		// 避免逐字符 json.Marshal 的开销
+		runes := []rune(r.text)
+		const blockSize = 256
+		for start := 0; start < len(runes); start += blockSize {
+			end := start + blockSize
+			if end > len(runes) {
+				end = len(runes)
+			}
+			data, _ := json.Marshal(models.StreamData(string(runes[start:end])))
+			fmt.Fprintf(c.Writer, "data: %s\n\n", data)
 		}
 		c.Writer.Flush()
 	}

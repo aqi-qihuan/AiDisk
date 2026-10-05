@@ -130,7 +130,7 @@ func (s *FileService) UploadFile(ctx context.Context, accountID, parentID int64,
 
 	ext := strings.TrimPrefix(filepath.Ext(fileName), ".")
 	fileType := util.DetectFileType(ext)
-	objectKey := fmt.Sprintf("%d/%d/%d/%s.%s",
+	objectKey := fmt.Sprintf("%d/%d/%d/%d.%s",
 		time.Now().Year(), time.Now().Month(), time.Now().Day(),
 		util.NextID(), ext)
 
