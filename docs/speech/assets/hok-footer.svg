@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="24" viewBox="0 0 1280 24">
+  <defs>
+    <linearGradient id="goldLineF" x1="0" x2="1">
+      <stop offset="0" stop-color="#D97706" stop-opacity="0"/>
+      <stop offset="0.25" stop-color="#D97706" stop-opacity="0.5"/>
+      <stop offset="0.5" stop-color="#fbbf24"/>
+      <stop offset="0.75" stop-color="#D97706" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#D97706" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="goldLine2F" x1="0" x2="1">
+      <stop offset="0" stop-color="#fbbf24" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#fbbf24" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="11" width="1280" height="2" fill="url(#goldLineF)"/>
+  <rect x="0" y="15" width="1280" height="0.5" fill="url(#goldLine2F)"/>
+  <rect x="0" y="8.5" width="1280" height="0.5" fill="url(#goldLine2F)"/>
+  <polygon points="640,4 648,12 640,20 632,12" fill="#fbbf24" stroke="#D97706" stroke-width="0.8"/>
+  <polygon points="640,7 645,12 640,17 635,12" fill="#D97706" opacity="0.6"/>
+  <polygon points="580,8 586,12 580,16 574,12" fill="#D97706" opacity="0.8"/>
+  <polygon points="700,8 706,12 700,16 694,12" fill="#D97706" opacity="0.8"/>
+  <polygon points="520,9 524,12 520,15 516,12" fill="#fbbf24" opacity="0.6"/>
+  <polygon points="760,9 764,12 760,15 756,12" fill="#fbbf24" opacity="0.6"/>
+  <polygon points="460,10 463,12 460,14 457,12" fill="#D97706" opacity="0.4"/>
+  <polygon points="820,10 823,12 820,14 817,12" fill="#D97706" opacity="0.4"/>
+  <line x1="540" y1="12" x2="570" y2="12" stroke="#fbbf24" stroke-width="0.6" opacity="0.5"/>
+  <line x1="710" y1="12" x2="740" y2="12" stroke="#fbbf24" stroke-width="0.6" opacity="0.5"/>
+</svg>

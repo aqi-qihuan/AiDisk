@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- 暗金渐变底 -->
+    <radialGradient id="vignette" cx="0.5" cy="0.5" r="0.9">
+      <stop offset="0" stop-color="#1a1410"/>
+      <stop offset="0.55" stop-color="#0d0a07"/>
+      <stop offset="1" stop-color="#000000"/>
+    </radialGradient>
+    <!-- 金属拉丝纹理 -->
+    <pattern id="brushed" x="0" y="0" width="240" height="240" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="14" x2="240" y2="14" stroke="#D97706" stroke-width="0.5" opacity="0.22"/>
+      <line x1="0" y1="32" x2="240" y2="32" stroke="#fbbf24" stroke-width="0.3" opacity="0.14"/>
+      <line x1="0" y1="51" x2="240" y2="51" stroke="#D97706" stroke-width="0.6" opacity="0.25"/>
+      <line x1="0" y1="70" x2="240" y2="70" stroke="#fbbf24" stroke-width="0.3" opacity="0.12"/>
+      <line x1="0" y1="89" x2="240" y2="89" stroke="#D97706" stroke-width="0.4" opacity="0.18"/>
+      <line x1="0" y1="108" x2="240" y2="108" stroke="#fbbf24" stroke-width="0.4" opacity="0.16"/>
+      <line x1="0" y1="127" x2="240" y2="127" stroke="#D97706" stroke-width="0.5" opacity="0.22"/>
+      <line x1="0" y1="146" x2="240" y2="146" stroke="#fbbf24" stroke-width="0.3" opacity="0.1"/>
+      <line x1="0" y1="165" x2="240" y2="165" stroke="#D97706" stroke-width="0.6" opacity="0.24"/>
+      <line x1="0" y1="184" x2="240" y2="184" stroke="#fbbf24" stroke-width="0.3" opacity="0.14"/>
+      <line x1="0" y1="203" x2="240" y2="203" stroke="#D97706" stroke-width="0.5" opacity="0.2"/>
+      <line x1="0" y1="222" x2="240" y2="222" stroke="#fbbf24" stroke-width="0.4" opacity="0.16"/>
+    </pattern>
+    <!-- 暗角 -->
+    <radialGradient id="cornerShadow" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0.6" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.6"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#vignette)"/>
+  <rect width="1280" height="720" fill="url(#brushed)"/>
+  <rect width="1280" height="720" fill="url(#cornerShadow)"/>
+</svg>
